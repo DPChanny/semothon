@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+
+  spring_server:
+    build:
+      context: ./spring_server
+      dockerfile: Dockerfile
+    container_name: spring_server
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      SPRING_DATASOURCE_URL: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+
+  fastapi_server:
+    build:
+      context: ./fastapi_server
+      dockerfile: Dockerfile
+    container_name: fastapi_server
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fastapi_server/app:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - .env
+    environment:
+      ENV: ${ENV}
+      

@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Backend Up (dev)",
+      "type": "shell",
+      "command": "cp .env.dev .env ; docker compose up --build -d",
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend Up (prod)",
+      "type": "shell",
+      "command": "cp .env.prod .env ; docker compose up --build -d",
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend Down",
+      "type": "shell",
+      "command": "docker compose down",
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend Restart",
+      "type": "shell",
+      "command": "docker compose down ; docker compose up --build -d",
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter Run (dev)",
+      "type": "shell",
+      "command": "flutter run -d chrome --web-port=3000 --dart-define=ENV=dev",
+      "options": {
+        "cwd": "${workspaceFolder}/flutter_app"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter Build (prod)",
+      "type": "shell",
+      "command": "flutter build web --dart-define=ENV=prod",
+      "options": {
+        "cwd": "${workspaceFolder}/flutter_app"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
