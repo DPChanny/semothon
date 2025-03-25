@@ -1,14 +1,15 @@
 import json
 import os.path
+import random
 
 import openai
 
 client = openai.OpenAI(api_key="")
 
-def query(user_input):
+def query(user_input, model, temperature):
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        temperature=1,
+        model=model,
+        temperature=temperature,
         messages=[
             {"role": "system", "content": "be creative but rational"},
             {"role": "user", "content": user_input}
@@ -19,31 +20,54 @@ def query(user_input):
 
 create_user_query  = '''
 task: 유저 데이터 1개 생성
-template(follow the rule of json, only print { to }):
+template(follow the rule of json, only print { to }, * is example):
 {
-    "intro": "저는 인공지능과 추천 시스템에 관심이 많습니다.",
-    "departments": ["컴퓨터공학과", "AI융합학부"],
-    "yob": 2002,
-    "student_id": 2021,
-    "gender": "남자" 
+    "intro": "**********",
+    "departments": ["****학과", ...],
+    "yob": ****,
+    "student_id":  ****,
+    "gender": "**" 
 }
 comment:
-    위의 데이터는 예시일 뿐이고 자유롭게 전공이나 관심사를 생각해봐
-    intro: 관심사, 취미, 대회, 운동, 야구, 축구, 배드민턴, 스터디, 선후배 만남 등 자유롭게 1문장 ~ 3문장
+    intro: 1문장 ~ 3문장, 관심사, 취미, 하고 싶은 것 등 유저 소개 자유롭게
     departments: intro와 관련있거나 관련 없어도 됨, 1개 ~ 3개
-    yob, student_id, gender 자연스로운 데이터 생성
+    yob: 1990 부터 2006
+    student_id: 2010 부터 2025
+    gender: 남자 또는 여자
+    yob student_id gender는 자연스럽게 생성
 '''
 
 create_group_query = '''
 task: 그룹 데이터 1개 생성
-template(follow the rule of json, only print { to }):
+template(follow the rule of json, only print { to }, * is example):
 {
-  "description": "AI 기술에 관심 있는 사람들과 자유롭게 토론하는 모임입니다.",
+  "description": "********"
 }
 
 comment:
-    위의 데이터는 예시일 뿐이고 자유롭게 전공이나 관심사를 생각해봐
-    description: 관심사, 취미, 대회 등 자유롭게 1문장 ~ 3문장
+    description: 1문장 ~ 3문장, (특정 학술 분야의 학술적 목적)이나 (대중적으로 단순한 취미 또는 운동)를 위한 그룹의 목적 자유롭게
+'''
+
+create_interaction_query = '''
+task: 추천 만족도 데이터 1개 생성
+template(only print single number from -1 ~ 1 which means dissatisfaction to satisfaction):
+0.25
+comment:
+아래 유저와 그룹 정보가 입력된다.
+
+아래 두개 정보에 집중하기
+    user -> intro 는 유저의 관심사 정보
+    group -> description 은 그룹의 목적
+
+유저의 관심사와 그룹의 소개가
+    매우 밀접한 관련이 있음 -> 1
+    밀접한 관련이 있음 -> 0.5
+    관련이 있음 -> 0.25
+    관련이 있는지 애매하지만 그룹의 예상 활동이 대중적임 -> 0
+    관련이 거의 없고 그룹의 예상 활동이 대중적이지 않음 -> -0.5
+    관련이 거의 없고 그룹의 예상 활동이 대중적으로 부정적임 -> -1
+
+input:
 '''
 
 def generate_user(count, file):
@@ -56,16 +80,14 @@ def generate_user(count, file):
             json.dump(users, json_file, indent=4, ensure_ascii=False)
 
     for user_id in range(len(users), len(users) + count):
-        created_user_str = query(create_user_query)
+        created_user_str = query(create_user_query, "gpt-4o-mini", 1)
         print(created_user_str)
         created_user_dict: dict = json.loads(created_user_str)
-        created_user_dict['id'] = user_id
+        created_user_dict['user_id'] = str(user_id)
         users.append(created_user_dict)
 
     with open(file, 'w', encoding='utf-8') as json_file:
         json.dump(users, json_file, indent=4, ensure_ascii=False)
-
-# generate_user(5, '../datas/users.json')
 
 def generate_group(count, file):
     groups = []
@@ -77,13 +99,55 @@ def generate_group(count, file):
             json.dump(groups, json_file, indent=4, ensure_ascii=False)
 
     for group_id in range(len(groups), len(groups) + count):
-        created_group_str = query(create_group_query)
+        created_group_str = query(create_group_query, "gpt-4o-mini", 1)
         print(created_group_str)
         created_group_dict: dict = json.loads(created_group_str)
-        created_group_dict['id'] = group_id
+        created_group_dict['group_id'] = str(group_id)
         groups.append(created_group_dict)
 
     with open(file, 'w', encoding='utf-8') as json_file:
         json.dump(groups, json_file, indent=4, ensure_ascii=False)
 
-# generate_group(25, '../datas/groups.json')
+def generate_interaction(count, user_file, group_file, interaction_file):
+    if os.path.isfile(group_file):
+        with open(group_file, 'r', encoding='utf-8') as json_file:
+            groups = json.load(json_file)
+    else:
+        return
+
+    if os.path.isfile(user_file):
+        with open(user_file, 'r', encoding='utf-8') as json_file:
+            users = json.load(json_file)
+    else:
+        return
+
+    interactions = []
+    if os.path.isfile(interaction_file):
+        with open(interaction_file, 'r', encoding='utf-8') as json_file:
+            interactions = json.load(json_file)
+
+        with open(interaction_file + ".old", 'w', encoding='utf-8') as json_file:
+            json.dump(interactions, json_file, indent=4, ensure_ascii=False)
+
+    for _ in range(len(interactions), len(interactions) + count):
+        rand_user = users[random.randint(0, len(users) - 1)]
+        rand_group = groups[random.randint(0, len(groups) - 1)]
+
+        print("user info\n" + rand_user['intro'] +
+              "\ngroup info\n" + rand_group['description'])
+
+        created_interaction = float(query(create_interaction_query +
+                                          "user info" + json.dumps(rand_user) +
+                                          "group info" + json.dumps(rand_group),
+                                          "gpt-4o", 0.25))
+
+        print(str(created_interaction) + "\n")
+
+        interactions.append({'user_id': rand_user['user_id'], 'group_id': rand_group['group_id'], 'score': created_interaction})
+
+    with open(interaction_file, 'w', encoding='utf-8') as json_file:
+        json.dump(interactions, json_file, indent=4, ensure_ascii=False)
+
+# generate_group(50, '../datas/groups.json')
+# generate_user(50, '../datas/users.json')
+generate_interaction(225, '../datas/users.json', '../datas/groups.json', '../datas/interactions.json')

@@ -1,0 +1,127 @@
+[
+    {
+        "user_id": "49",
+        "group_id": "29",
+        "score": -0.5
+    },
+    {
+        "user_id": "40",
+        "group_id": "1",
+        "score": -0.5
+    },
+    {
+        "user_id": "23",
+        "group_id": "48",
+        "score": -0.5
+    },
+    {
+        "user_id": "29",
+        "group_id": "13",
+        "score": -0.5
+    },
+    {
+        "user_id": "7",
+        "group_id": "35",
+        "score": -0.5
+    },
+    {
+        "user_id": "19",
+        "group_id": "3",
+        "score": -0.5
+    },
+    {
+        "user_id": "45",
+        "group_id": "15",
+        "score": -0.5
+    },
+    {
+        "user_id": "18",
+        "group_id": "45",
+        "score": -0.5
+    },
+    {
+        "user_id": "10",
+        "group_id": "5",
+        "score": 0.25
+    },
+    {
+        "user_id": "25",
+        "group_id": "17",
+        "score": -0.5
+    },
+    {
+        "user_id": "7",
+        "group_id": "0",
+        "score": -0.5
+    },
+    {
+        "user_id": "45",
+        "group_id": "48",
+        "score": -0.5
+    },
+    {
+        "user_id": "30",
+        "group_id": "14",
+        "score": -0.5
+    },
+    {
+        "user_id": "18",
+        "group_id": "41",
+        "score": -0.5
+    },
+    {
+        "user_id": "9",
+        "group_id": "49",
+        "score": 1.0
+    },
+    {
+        "user_id": "37",
+        "group_id": "48",
+        "score": 1.0
+    },
+    {
+        "user_id": "18",
+        "group_id": "37",
+        "score": -0.5
+    },
+    {
+        "user_id": "2",
+        "group_id": "3",
+        "score": -0.5
+    },
+    {
+        "user_id": "49",
+        "group_id": "38",
+        "score": -0.5
+    },
+    {
+        "user_id": "8",
+        "group_id": "45",
+        "score": -0.5
+    },
+    {
+        "user_id": "37",
+        "group_id": "48",
+        "score": 1.0
+    },
+    {
+        "user_id": "19",
+        "group_id": "24",
+        "score": -0.5
+    },
+    {
+        "user_id": "44",
+        "group_id": "10",
+        "score": -0.5
+    },
+    {
+        "user_id": "44",
+        "group_id": "34",
+        "score": 0.5
+    },
+    {
+        "user_id": "38",
+        "group_id": "0",
+        "score": 0.0
+    }
+]
