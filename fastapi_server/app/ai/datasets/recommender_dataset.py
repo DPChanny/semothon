@@ -1,0 +1,18 @@
+import torch
+from torch.utils.data import Dataset
+
+class RecommenderDataset(Dataset):
+    def __init__(self, users, groups, interactions, user_encoder, group_encoder):
+        self.interactions = interactions
+
+        self.encoded_users = {user['id']: user_encoder.encode(user) for user in users}
+        self.encoded_groups = {group['id']: group_encoder.encode(group) for group in groups}
+
+    def __len__(self):
+        return len(self.interactions)
+
+    def __getitem__(self, idx):
+        item = self.interactions[idx]
+        input_vec = torch.cat([self.encoded_users[item['user_id']], self.encoded_groups[item['group_id']]])
+        label = torch.tensor(item["score"], dtype=torch.float32)
+        return input_vec, label

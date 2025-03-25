@@ -1,0 +1,18 @@
+from torch import nn
+import torch
+
+class RecommenderMLP(nn.Module):
+    def __init__(self, input_dim):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(input_dim, 512),
+            nn.ReLU(),
+            nn.Linear(512, 256),
+            nn.ReLU(),
+            nn.Linear(256, 1),
+            nn.Tanh()
+        )
+
+    def forward(self, user_vec, group_vec):
+        x = torch.cat([user_vec, group_vec], dim=1)
+        return self.net(x).squeeze(1)
