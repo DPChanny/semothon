@@ -1,5 +1,7 @@
 package com.semothon.spring_server.user.service;
 
+import com.semothon.spring_server.common.exception.InvalidInputException;
+import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,4 +31,23 @@ public class UserService {
         });
     }
 
+    @Transactional(readOnly = true)
+    public boolean checkNickname(String nickname) {
+        return !userRepository.existsByNickname(nickname);
+    }
+
+
+    public User updateUser(String userId, UpdateUserProfileRequestDto dto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("user not found"));
+
+        if (dto.getNickname() != null &&
+                !dto.getNickname().equals(user.getNickname()) &&
+                userRepository.existsByNickname(dto.getNickname())) {
+            throw new InvalidInputException("Nickname already in use");
+        }
+
+        user.updateProfile(dto);
+        return user;
+    }
 }

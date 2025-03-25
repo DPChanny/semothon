@@ -1,5 +1,6 @@
 package com.semothon.spring_server.user.entity;
 
+import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -58,4 +59,13 @@ public class User {
     @CreationTimestamp
     @Column(updatable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
+
+    public void updateProfile(UpdateUserProfileRequestDto dto) {
+        if (dto.getNickname() != null) this.nickname = dto.getNickname();
+        if (dto.getDepartment() != null) this.department = dto.getDepartment();
+        if (dto.getStudentId() != null) this.studentId = dto.getStudentId();
+        if (dto.getBirthdate() != null) this.birthdate = dto.getBirthdate();
+        if (dto.getGender() != null) this.gender = dto.getGender();
+        if (dto.getIntroText() != null) this.introText = dto.getIntroText();
+    }
 }

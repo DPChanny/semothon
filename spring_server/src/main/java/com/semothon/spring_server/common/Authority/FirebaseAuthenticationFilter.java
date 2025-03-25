@@ -48,16 +48,10 @@ public class FirebaseAuthenticationFilter  extends OncePerRequestFilter {
 
                 User user = userService.findOrCreateUser(uid, socialId, profileImageUrl, socialProvider);
 
-                log.info("user {}", user);
-
                 // Authentication 객체 생성 (기본 권한만 설정)
                 List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
                 Authentication authentication = new FirebaseAuthenticationToken(user, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
-                log.info("SecurityContext user: {}", SecurityContextHolder.getContext().getAuthentication());
-                log.info("Authorities: {}", SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-
             } catch (FirebaseAuthException e) {
                 log.warn("Firebase token invalid: {}", e.getMessage());
                 throw new InsufficientAuthenticationException("Invalid Firebase ID Token", e);

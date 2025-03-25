@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/public/**"
+                                "/api/users/check-nickname"
                         ).permitAll() // 인즈없이 접근 가능한 api 목록
                         .requestMatchers(
                                 "/api/private/**"
