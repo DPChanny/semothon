@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 //추후 기능 및 DB가 확정이 되면 각 DB마다 Index 추가 설정
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@ToString(of = {"userId", "nickname", "department", "studentId", "age", "gender", "profileImageUrl", "socialProvider", "socialId", "introText", "createdAt"})
+@ToString(of = {"userId", "nickname", "department", "studentId", "birthdate", "gender", "profileImageUrl", "socialProvider", "socialId", "introText", "createdAt"})
 @Table(name = "users",
         indexes = {
         },
@@ -22,21 +23,21 @@ import java.time.LocalDateTime;
         }
 )
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
 
-    @Column(nullable = false, length = 50 ,unique = true)
+    @Id
+    private String userId;
+
+    @Column(length = 50 ,unique = true)
     private String nickname;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String department;
 
-    @Column(nullable = false, length = 30)
+    @Column(length = 30)
     private String studentId;
 
-    @Column(nullable = false)
-    private Integer age;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDate birthdate;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 10)

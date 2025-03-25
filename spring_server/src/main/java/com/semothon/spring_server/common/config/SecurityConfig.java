@@ -45,7 +45,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/private/**"
                         ).authenticated() //인증이 필요한 api 목록
-                        .anyRequest().authenticated() // 지정하지 않은 api: 모두 인증 필요
+                        .anyRequest().authenticated() // 모든 api에 대해 인증 필요
                 )
                 .addFilterBefore(firebaseAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(ex -> ex // 예외 핸들링
