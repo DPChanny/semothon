@@ -150,4 +150,5 @@ def generate_interaction(count, user_file, group_file, interaction_file):
 
 # generate_group(50, '../datas/groups.json')
 # generate_user(50, '../datas/users.json')
-generate_interaction(225, '../datas/users.json', '../datas/groups.json', '../datas/interactions.json')
+for _ in range(10):
+    generate_interaction(25, '../datas/users.json', '../datas/groups.json', '../datas/interactions.json')
