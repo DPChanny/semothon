@@ -1,11 +1,9 @@
 spring:
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}  # 기본값 dev
-
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/main
+    username: user
+    password: user_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -24,7 +22,7 @@ spring:
 
 external:
   fastapi:
-    url: ${FASTAPI_BASE_URL}
+    url: http://localhost:8000
 
 logging:
   level:

@@ -5,6 +5,11 @@ services:
     image: mysql:8.0
     container_name: mysql
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -12,6 +17,9 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "${DB_PORT}:${DB_PORT}"
+    env_file:
+      - .env
+      
 
   spring_server:
     build:
@@ -20,7 +28,8 @@ services:
     container_name: spring_server
     restart: unless-stopped
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
       SPRING_DATASOURCE_URL: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
