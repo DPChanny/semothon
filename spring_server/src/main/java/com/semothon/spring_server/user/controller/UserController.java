@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -60,6 +61,37 @@ public class UserController {
         User updatedUser = userService.updateUser(user.getUserId(), profileRequestDto);
 
         return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(updatedUser)), "User profile updated successfully");
+    }
+
+    @GetMapping("/profile-image")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse getProfileImage(
+            @AuthenticationPrincipal User user
+    ){
+        String imageUrl =  user.getProfileImageUrl();
+
+        return BaseResponse.success(Map.of("code", 200, "image_url", imageUrl), "Profile image retrieved successfully.");
+    }
+
+    @PostMapping("/profile-image")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse updateProfileImage(
+            @AuthenticationPrincipal User user,
+            @RequestParam("profileImage") MultipartFile profileImage
+    ){
+        String imageUrl =  userService.uploadProfileImage(user.getUserId(), profileImage);
+
+        return BaseResponse.success(Map.of("code", 200, "image_url", imageUrl), "Profile image uploaded successfully.");
+    }
+
+    @DeleteMapping("/profile-image")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse deleteProfileImage(
+            @AuthenticationPrincipal User user
+    ){
+        String imageUrl =  userService.deleteProfileImage(user.getUserId());
+
+        return BaseResponse.success(Map.of("code", 200, "image_url", imageUrl), "Profile image deleted successfully.");
     }
 
 }

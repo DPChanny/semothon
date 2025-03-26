@@ -50,8 +50,8 @@ public class User {
     @Column(length = 10)
     private Gender gender;
 
-    @Column(length = 255)
-    private String profileImageUrl;
+    @Builder.Default
+    private String profileImageUrl = "https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png";
 
     @Column(nullable = false, length = 50)
     private String socialProvider;
@@ -102,5 +102,9 @@ public class User {
         if (dto.getBirthdate() != null) this.birthdate = dto.getBirthdate();
         if (dto.getGender() != null) this.gender = dto.getGender();
         if (dto.getIntroText() != null) this.introText = dto.getIntroText();
+    }
+
+    public void updateProfileImage(String profileImageUrl){
+        this.profileImageUrl = profileImageUrl;
     }
 }
