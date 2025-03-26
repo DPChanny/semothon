@@ -38,3 +38,6 @@ out/
 
 ### FireBase setting ###
 firebase-service-account.json
+
+### env ###
+.env

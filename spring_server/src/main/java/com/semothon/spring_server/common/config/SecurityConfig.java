@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/users/check-nickname"
-                        ).permitAll() // 인즈없이 접근 가능한 api 목록
+                        ).permitAll() // 인증없이 접근 가능한 api 목록
                         .requestMatchers(
                                 "/api/private/**"
                         ).authenticated() //인증이 필요한 api 목록

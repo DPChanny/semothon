@@ -26,6 +26,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'io.github.cdimascio:java-dotenv:5.2.2' //.env 파일 로드
 	implementation 'com.google.firebase:firebase-admin:9.2.0' //firebase 인증
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE' // S3 사용을 위해 추가
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
