@@ -148,7 +148,7 @@ def generate_interaction(count, user_file, group_file, interaction_file):
     with open(interaction_file, 'w', encoding='utf-8') as json_file:
         json.dump(interactions, json_file, indent=4, ensure_ascii=False)
 
-# generate_group(50, '../datas/groups.json')
-# generate_user(50, '../datas/users.json')
+# generate_group(50, '../data/groups.json')
+# generate_user(50, '../data/users.json')
 for _ in range(10):
-    generate_interaction(25, '../datas/users.json', '../datas/groups.json', '../datas/interactions.json')
+    generate_interaction(25, '../data/users.json', '../data/groups.json', '../data/interactions.json')

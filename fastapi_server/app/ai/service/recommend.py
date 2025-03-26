@@ -3,16 +3,15 @@ from models.recommender import RecommenderMLP
 from preprocessors.encoder import UserEncoder, GroupEncoder
 
 
-def recommend(user, groups):
+def recommend(user, groups, path):
     user_encoder = UserEncoder()
     group_encoder = GroupEncoder()
 
     user_vec = user_encoder.encode(user)
-    user_tensor = torch.tensor(user_vec, dtype=torch.float32)
 
-    input_dim = len(user_vec) + 384
+    input_dim = len(user_vec) + len(group_encoder.encode(groups[0]))
     model = RecommenderMLP(input_dim)
-    model.load_state_dict(torch.load("recommender_model.pt", map_location="cpu"))
+    model.load_state_dict(torch.load(path, map_location="cpu"))
     model.eval()
 
     results = []
@@ -20,15 +19,16 @@ def recommend(user, groups):
     with torch.no_grad():
         for group in groups:
             group_vec = group_encoder.encode(group)
-            group_tensor = torch.tensor(group_vec, dtype=torch.float32)
 
-            input_tensor = torch.cat([user_tensor, group_tensor]).unsqueeze(0)  # shape: (1, dim)
+            input_tensor = torch.cat([user_vec, group_vec]).unsqueeze(0)  # shape: (1, dim)
             similarity = model(input_tensor).item()
 
             results.append({
-                "group_id": group["id"],
-                "group_desc": group["description"],
-                "similarity": similarity
+                "group_id": group["group_id"],
+                "description": group["description"],
+                "score": similarity
             })
 
-    return results.sort(key=lambda x: x["similarity"], reverse=True)
+    results.sort(key=lambda x: x["score"], reverse=True)
+
+    return results

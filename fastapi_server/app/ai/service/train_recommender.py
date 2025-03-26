@@ -1,4 +1,5 @@
-import json
+import os
+
 import torch
 from torch.utils.data import DataLoader
 from models.recommender import RecommenderMLP
@@ -7,8 +8,8 @@ from preprocessors.encoder import UserEncoder, GroupEncoder
 import random
 
 BATCH_SIZE = 32
-EPOCHS = 10
-LR = 1e-3
+EPOCHS = 100
+LR = 0.000025
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -27,7 +28,7 @@ def train_one_epoch(model, dataloader, optimizer, loss_fn):
         total_loss += loss.item()
     return total_loss / len(dataloader)
 
-def train_recommender(users, groups, interactions):
+def train_recommender(users, groups, interactions, path):
     random.shuffle(interactions)
 
     user_encoder = UserEncoder()
@@ -40,6 +41,8 @@ def train_recommender(users, groups, interactions):
     dataloader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
     model = RecommenderMLP(input_dim).to(device)
+    if os.path.isfile(path):
+        model.load_state_dict(torch.load(path, map_location="cpu"))
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
     loss_fn = torch.nn.MSELoss()
 
@@ -47,5 +50,4 @@ def train_recommender(users, groups, interactions):
         loss = train_one_epoch(model, dataloader, optimizer, loss_fn)
         print(f"Epoch {epoch+1}/{EPOCHS} - Loss: {loss:.4f}")
 
-    torch.save(model.state_dict(), "recommender_model.pt")
-    print("모델이 recommender_model.pt로 저장되었습니다.")
+    torch.save(model.state_dict(), path)

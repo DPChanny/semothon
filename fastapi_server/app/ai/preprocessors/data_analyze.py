@@ -1,6 +1,6 @@
 import json
 
-with open("../datas/interactions.json", 'r', encoding='utf-8') as file:
+with open("../data/interactions.json", 'r', encoding='utf-8') as file:
     interactions = json.load(file)
 
 result = {}

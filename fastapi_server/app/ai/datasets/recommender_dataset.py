@@ -5,8 +5,8 @@ class RecommenderDataset(Dataset):
     def __init__(self, users, groups, interactions, user_encoder, group_encoder):
         self.interactions = interactions
 
-        self.encoded_users = {user['id']: user_encoder.encode(user) for user in users}
-        self.encoded_groups = {group['id']: group_encoder.encode(group) for group in groups}
+        self.encoded_users = {user['user_id']: user_encoder.encode(user) for user in users}
+        self.encoded_groups = {group['group_id']: group_encoder.encode(group) for group in groups}
 
     def __len__(self):
         return len(self.interactions)

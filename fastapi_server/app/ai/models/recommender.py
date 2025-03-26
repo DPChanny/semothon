@@ -9,10 +9,11 @@ class RecommenderMLP(nn.Module):
             nn.ReLU(),
             nn.Linear(512, 256),
             nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
             nn.Linear(256, 1),
             nn.Tanh()
         )
 
-    def forward(self, user_vec, group_vec):
-        x = torch.cat([user_vec, group_vec], dim=1)
-        return self.net(x).squeeze(1)
+    def forward(self, input_vec):
+        return self.net(input_vec).squeeze(1)
