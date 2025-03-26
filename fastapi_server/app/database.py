@@ -24,6 +24,7 @@ def get_engine():
             )
     with engine.connect() as conn:
         logger.info("connect success")
+    return engine
 
 engine = None
 SessionLocal = None
@@ -33,4 +34,10 @@ def init_engine():
     global engine, SessionLocal
     engine = get_engine()
     SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, future=True)
-    
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

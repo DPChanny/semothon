@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from routers.test_router import router
+from routers.recommender_router import router
 import database
+import models
 
 app = FastAPI()
 
