@@ -2,9 +2,9 @@ import os
 
 import torch
 from torch.utils.data import DataLoader
-from models.recommender import RecommenderMLP
-from datasets.recommender_dataset import RecommenderDataset
-from preprocessors.encoder import UserEncoder, GroupEncoder
+from ai.models.recommender import RecommenderMLP
+from ai.datasets.recommender_dataset import RecommenderDataset
+from ai.preprocessors.encoder import UserEncoder, GroupEncoder
 import random
 
 BATCH_SIZE = 32

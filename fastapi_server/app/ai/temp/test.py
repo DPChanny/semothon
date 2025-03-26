@@ -1,8 +1,8 @@
 import json
 import random
 
-from service.recommend import recommend
-from service.train_recommender import train_recommender
+from ai.service.recommend import recommend
+from ai.service.train_recommender import train_recommender
 
 with open('data/groups.json', 'r', encoding='utf-8') as json_file:
     groups = json.load(json_file)

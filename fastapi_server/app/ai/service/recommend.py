@@ -1,6 +1,6 @@
 import torch
-from models.recommender import RecommenderMLP
-from preprocessors.encoder import UserEncoder, GroupEncoder
+from ai.models.recommender import RecommenderMLP
+from ai.preprocessors.encoder import UserEncoder, GroupEncoder
 
 
 def recommend(user, groups, path):
