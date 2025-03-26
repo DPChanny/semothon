@@ -43,8 +43,15 @@ public class FirebaseAuthenticationFilter  extends OncePerRequestFilter {
                 String socialId = decodedToken.getEmail();
                 String profileImageUrl = decodedToken.getPicture(); // 프로필 이미지 URL
 
-                Map<String, Object> firebaseMap = (Map<String, Object>) decodedToken.getClaims().get("firebase");
-                String socialProvider = firebaseMap != null ? (String) firebaseMap.get("sign_in_provider") : null; //로그인 제공자 정보
+                Object firebaseClaim = decodedToken.getClaims().get("firebase");
+                String socialProvider = null;
+
+                if (firebaseClaim instanceof Map<?, ?> map) {
+                    Object provider = map.get("sign_in_provider");
+                    if (provider instanceof String) {
+                        socialProvider = (String) provider;
+                    }
+                }
 
                 User user = userService.findOrCreateUser(uid, socialId, profileImageUrl, socialProvider);
 

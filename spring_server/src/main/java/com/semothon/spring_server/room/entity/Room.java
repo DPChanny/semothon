@@ -1,0 +1,69 @@
+package com.semothon.spring_server.room.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.semothon.spring_server.user.entity.User;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+@ToString(of = {"roomId", "title", "description", "createdAt"})
+@Table(name = "rooms",
+        indexes = {
+        },
+        uniqueConstraints = {
+        }
+)
+public class Room {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long roomId;
+
+    @Column(nullable = false, length = 100)
+    private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "host_user_id", nullable = false)
+    private User host;
+
+    @CreationTimestamp
+    @Column(updatable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime createdAt;
+
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RoomUser> roomUsers = new ArrayList<>();
+
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserRoomRecommendation> userRoomRecommendations = new ArrayList<>();
+
+    protected void addRoomUser(RoomUser roomUser){
+        this.roomUsers.add(roomUser);
+    }
+
+    protected void addUserRoomRecommendation(UserRoomRecommendation userRoomRecommendation){
+        this.userRoomRecommendations.add(userRoomRecommendation);
+    }
+
+
+    //연관관계 편의 메서드
+    public void updateHost(User user){
+        this.host = user;
+        user.addHostedRooms(this);
+    }
+}
