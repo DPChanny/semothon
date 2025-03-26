@@ -38,6 +38,11 @@ public class Room {
     @JoinColumn(name = "host_user_id", nullable = false)
     private User host;
 
+    @Column(nullable = false)
+    @Builder.Default //기본값 30명
+    private int capacity = 30;
+
+
     @CreationTimestamp
     @Column(updatable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
