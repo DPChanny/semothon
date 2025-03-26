@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -20,6 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -28,7 +31,7 @@ public class FirebaseAuthenticationFilter  extends OncePerRequestFilter {
 
     private final FirebaseAuth firebaseAuth;
     private final UserService userService;
-    
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String idToken = resolveToken(request);
@@ -38,16 +41,17 @@ public class FirebaseAuthenticationFilter  extends OncePerRequestFilter {
                 FirebaseToken decodedToken = firebaseAuth.verifyIdToken(idToken);
                 String uid = decodedToken.getUid();
                 String socialId = decodedToken.getEmail();
+                String profileImageUrl = decodedToken.getPicture(); // 프로필 이미지 URL
 
-                log.info("Firebase Token verified - FirebaseToken {}", decodedToken);
+                Map<String, Object> firebaseMap = (Map<String, Object>) decodedToken.getClaims().get("firebase");
+                String socialProvider = firebaseMap != null ? (String) firebaseMap.get("sign_in_provider") : null; //로그인 제공자 정보
 
-                // 유저 조회 or 최초 로그인 등록 <- decodedToken에 포함된 정보 확인 후 파라미터 추가
-                User user = userService.findOrCreateUser(uid, socialId);
+                User user = userService.findOrCreateUser(uid, socialId, profileImageUrl, socialProvider);
 
-                // Authentication 객체 생성 (권한 없이 기본 설정)
-                Authentication authentication = new FirebaseAuthenticationToken(user, null, List.of());
+                // Authentication 객체 생성 (기본 권한만 설정)
+                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+                Authentication authentication = new FirebaseAuthenticationToken(user, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
             } catch (FirebaseAuthException e) {
                 log.warn("Firebase token invalid: {}", e.getMessage());
                 throw new InsufficientAuthenticationException("Invalid Firebase ID Token", e);
