@@ -2,16 +2,14 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from dto.recommender_dto import RecommendRequestDTO
 from database import get_db
+from ai.service.train_recommender import train_recommender
 from models.user import User
 from models.group import Group
 from ai.service.recommend import recommend
-import logging
 
-logger = logging.getLogger(__name__)
 router = APIRouter()
 
 def user_to_dict(user):
-    # 성별 매핑
     gender_map = {
         "MALE": "남자",
         "FEMALE": "여자"
@@ -33,11 +31,9 @@ def group_to_dict(group: Group) -> dict:
     }
 
 @router.post("/ai/recommend")
-def recommend_groups(
+def recommend_route(
     request: RecommendRequestDTO,
     db: Session = Depends(get_db)):
-
-    logger.info(f"Received user_id: {request.user_id}")
 
     user = db.query(User).filter(User.user_id == request.user_id).first()
     groups = db.query(Group).all()
@@ -45,6 +41,16 @@ def recommend_groups(
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    return recommend(user_to_dict(user), 
-                   [group_to_dict(group) for group in groups],
-                    './ai/temp/model.plt')
+    return recommend(user_to_dict(user), [group_to_dict(group) for group in groups])
+
+# @router.post("/ai/train_recommender")
+# def train_recommender_route(db: Session = Depends(get_db)):
+#     user = db.query(User).filter(User.user_id == request.user_id).first()
+#     groups = db.query(Group).all()
+
+#     if not user:
+#         raise HTTPException(status_code=404, detail="User not found")
+
+#     train_recommender(user_to_dict(user), [group_to_dict(group) for group in groups], )
+
+# not used currently

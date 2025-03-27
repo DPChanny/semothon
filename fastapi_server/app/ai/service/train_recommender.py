@@ -1,11 +1,10 @@
 import os
-
 import torch
 from torch.utils.data import DataLoader
-from ai.models.recommender import RecommenderMLP
 from ai.datasets.recommender_dataset import RecommenderDataset
-from ai.preprocessors.encoder import UserEncoder, GroupEncoder
+from ai import user_encoder, group_encoder, model, MODEL_PATH, MODEL_HISTORY_PATH
 import random
+from datetime import datetime
 
 BATCH_SIZE = 32
 EPOCHS = 100
@@ -28,21 +27,15 @@ def train_one_epoch(model, dataloader, optimizer, loss_fn):
         total_loss += loss.item()
     return total_loss / len(dataloader)
 
-def train_recommender(users, groups, interactions, path):
+def train_recommender(users, groups, interactions):
+    torch.save(model.state_dict(), os.path.join(MODEL_HISTORY_PATH, datetime.now() + ".plt"))
+
     random.shuffle(interactions)
 
-    user_encoder = UserEncoder()
-    group_encoder = GroupEncoder()
-
     dataset = RecommenderDataset(users, groups, interactions, user_encoder, group_encoder)
-    sample_input, _ = dataset[0]
-    input_dim = sample_input.shape[0]
 
     dataloader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
-    model = RecommenderMLP(input_dim).to(device)
-    if os.path.isfile(path):
-        model.load_state_dict(torch.load(path, map_location="cpu"))
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
     loss_fn = torch.nn.MSELoss()
 
@@ -50,4 +43,4 @@ def train_recommender(users, groups, interactions, path):
         loss = train_one_epoch(model, dataloader, optimizer, loss_fn)
         print(f"Epoch {epoch+1}/{EPOCHS} - Loss: {loss:.4f}")
 
-    torch.save(model.state_dict(), path)
+    torch.save(model.state_dict(), MODEL_PATH)

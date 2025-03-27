@@ -1,30 +1,30 @@
-from bertopic import BERTopic
-from hdbscan import HDBSCAN
-from sentence_transformers import SentenceTransformer
-import pickle
+# from bertopic import BERTopic
+# from hdbscan import HDBSCAN
+# from sentence_transformers import SentenceTransformer
+# import pickle
+# from umap import UMAP
 
-from umap import UMAP
+# def train_set_topic(users, groups, path):
+#     embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+#     data = [user['intro'] for user in users]
+#     data += [group['description'] for group in groups]
 
+#     print(2)
 
-def train_set_topic(users, groups, path):
-    embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-    data = [user['intro'] for user in users]
-    data += [group['description'] for group in groups]
+#     umap_model = UMAP(n_neighbors=5, n_components=10, min_dist=0.5, metric='cosine')
+#     hdbscan_model = HDBSCAN(min_cluster_size=5, min_samples=1, metric='euclidean')
 
-    print(2)
+#     topic_model = BERTopic(embedding_model=embedding_model,
+#                            umap_model=umap_model,
+#                            hdbscan_model=hdbscan_model,
+#                            verbose=True)
+#     topic_model.fit(data)
 
-    umap_model = UMAP(n_neighbors=5, n_components=10, min_dist=0.5, metric='cosine')
-    hdbscan_model = HDBSCAN(min_cluster_size=5, min_samples=1, metric='euclidean')
+#     print(3)
 
-    topic_model = BERTopic(embedding_model=embedding_model,
-                           umap_model=umap_model,
-                           hdbscan_model=hdbscan_model,
-                           verbose=True)
-    topic_model.fit(data)
+#     topic_model.get_topic_info().to_json('result.json', orient='index', indent=4, force_ascii=False)
 
-    print(3)
+#     with open(path, "wb") as f:
+#         pickle.dump(topic_model, f)
 
-    topic_model.get_topic_info().to_json('result.json', orient='index', indent=4, force_ascii=False)
-
-    with open(path, "wb") as f:
-        pickle.dump(topic_model, f)
+# not used currently

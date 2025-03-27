@@ -1,17 +1,9 @@
 import torch
-from ai.models.recommender import RecommenderMLP
-from ai.preprocessors.encoder import UserEncoder, GroupEncoder
+from ai import model, user_encoder, group_encoder
 
-
-def recommend(user, groups, path):
-    user_encoder = UserEncoder()
-    group_encoder = GroupEncoder()
-
+def recommend(user, groups):
     user_vec = user_encoder.encode(user)
 
-    input_dim = len(user_vec) + len(group_encoder.encode(groups[0]))
-    model = RecommenderMLP(input_dim)
-    model.load_state_dict(torch.load(path, map_location="cpu"))
     model.eval()
 
     results = []
