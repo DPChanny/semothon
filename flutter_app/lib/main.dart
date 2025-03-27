@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: AppRoutes.routes,
+      
     );
   }
 }

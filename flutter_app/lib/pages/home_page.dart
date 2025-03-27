@@ -14,6 +14,24 @@ class HomePage extends StatelessWidget {
     );
   }
 
+Widget bottomNavigationBarwidget() {
+  return BottomNavigationBar(
+    items:[
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: '홈',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.business),
+      label: '채팅',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.school),
+      label: '공모전',
+    ),
+  ],);
+
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +42,7 @@ class HomePage extends StatelessWidget {
           child: const Text("request test"),
         ),
       ),
+      bottomNavigationBar: bottomNavigationBarwidget(),
     );
   }
 }
