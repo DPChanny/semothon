@@ -486,7 +486,7 @@
 		};
 		331C8088294A63A400263BE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFDB60603B2A5B9EB82D1E4A /* Pods-Runner.debug.xcconfig */;
+			baseConfigurationReference = DBF172E834C8E000D7A44261 /* Pods-RunnerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -504,7 +504,7 @@
 		};
 		331C8089294A63A400263BE5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 066701F8CD4AC50AFCAF778F /* Pods-Runner.release.xcconfig */;
+			baseConfigurationReference = DD85CB6CF0FE15C1F95233AF /* Pods-RunnerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -520,7 +520,7 @@
 		};
 		331C808A294A63A400263BE5 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0D1A55723F31253CD79F24C /* Pods-Runner.profile.xcconfig */;
+			baseConfigurationReference = 30EA85B6071BCBA25FA47BEC /* Pods-RunnerTests.profile.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
