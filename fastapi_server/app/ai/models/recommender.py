@@ -1,5 +1,4 @@
 from torch import nn
-import torch
 
 class RecommenderMLP(nn.Module):
     def __init__(self, input_dim):

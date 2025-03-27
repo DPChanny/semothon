@@ -29,3 +29,18 @@ class User(Base):
         UniqueConstraint('nickname'),
         UniqueConstraint('social_provider', 'social_id'),
     )
+
+def user_to_dict(user):
+    gender_map = {
+        "MALE": "남자",
+        "FEMALE": "여자"
+    }
+
+    return {
+        "intro": user.intro_text,
+        "departments": user.department.split(",") if user.department else [],
+        "yob": user.birthdate.year if user.birthdate else None,
+        "student_id": int(user.student_id[:4]) if user.student_id and len(user.student_id) >= 4 else None,
+        "gender": gender_map.get(user.gender.value if user.gender else None),
+        "user_id": user.user_id
+    }

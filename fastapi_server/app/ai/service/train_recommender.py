@@ -1,10 +1,11 @@
 import os
 import torch
 from torch.utils.data import DataLoader
-from ai.datasets.recommender_dataset import RecommenderDataset
-from ai import user_encoder, group_encoder, model, MODEL_PATH, MODEL_HISTORY_PATH
 import random
 from datetime import datetime
+
+from ai.datasets.recommender_dataset import RecommenderDataset
+from ai import user_encoder, group_encoder, model, MODEL_PATH, MODEL_HISTORY_PATH
 
 BATCH_SIZE = 32
 EPOCHS = 100

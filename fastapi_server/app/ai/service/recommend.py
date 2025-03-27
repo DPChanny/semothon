@@ -1,4 +1,5 @@
 import torch
+
 from ai import model, user_encoder, group_encoder
 
 def recommend(user, groups):

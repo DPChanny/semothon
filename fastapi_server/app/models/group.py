@@ -15,3 +15,9 @@ class Group(Base):
 
     capacity = Column(Integer, nullable=False, default=30)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+def group_to_dict(group: Group) -> dict:
+    return {
+        "group_id": str(group.room_id),
+        "description": group.description
+    }
