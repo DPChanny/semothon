@@ -1,5 +1,5 @@
 ### 추천 요청 테스트
-POST http://localhost:8000/api/ai/recommend
+POST http://localhost:8000/api/ai/recommend/room/by-user
 Content-Type: application/json
 
 {

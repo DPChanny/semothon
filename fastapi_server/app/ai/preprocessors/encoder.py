@@ -2,8 +2,8 @@ import torch
 from sentence_transformers import SentenceTransformer
 
 class UserEncoder:
-    def __init__(self, sbert_model_name='all-MiniLM-L12-v2'):
-        self.sbert = SentenceTransformer(sbert_model_name)
+    def __init__(self, sbert):
+        self.sbert = sbert
 
     def encode_only_intro(self, user: dict) -> torch.Tensor:
         return self.sbert.encode(user["intro"], convert_to_tensor=True)
@@ -22,9 +22,9 @@ class UserEncoder:
 
         return torch.cat([intro_vec, dept_vec, metadata])
 
-class RoomEncoder:
-    def __init__(self, sbert_model_name='all-MiniLM-L12-v2'):
-        self.sbert = SentenceTransformer(sbert_model_name)
+class DescriptionObjectEncoder:
+    def __init__(self, sbert):
+        self.sbert = sbert
 
-    def encode(self, room: dict) -> torch.Tensor:
-        return self.sbert.encode(room["description"], convert_to_tensor=True)
+    def encode(self, description_object: dict) -> torch.Tensor:
+        return self.sbert.encode(description_object["description"], convert_to_tensor=True)

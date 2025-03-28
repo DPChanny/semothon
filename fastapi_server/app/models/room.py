@@ -14,7 +14,7 @@ class Room(Base):
     host = relationship("User", back_populates="hosted_rooms")
 
     capacity = Column(Integer, nullable=False, default=30)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime, default=datetime.now, nullable=False)
 
 def room_to_dict(room: Room) -> dict:
     return {
