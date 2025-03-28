@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
 
-class Group(Base):
+class Room(Base):
     __tablename__ = "rooms"
 
     room_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
@@ -11,13 +11,13 @@ class Group(Base):
     description = Column(Text)
 
     host_user_id = Column(String, ForeignKey("users.user_id"), nullable=False)
-    host = relationship("User", back_populates="hosted_groups")
+    host = relationship("User", back_populates="hosted_rooms")
 
     capacity = Column(Integer, nullable=False, default=30)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
-def group_to_dict(group: Group) -> dict:
+def room_to_dict(room: Room) -> dict:
     return {
-        "group_id": str(group.room_id),
-        "description": group.description
+        "room_id": str(room.room_id),
+        "description": room.description
     }

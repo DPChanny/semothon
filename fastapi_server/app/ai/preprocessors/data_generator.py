@@ -37,7 +37,7 @@ comment:
     yob student_id gender는 자연스럽게 생성
 '''
 
-create_group_query = '''
+create_room_query = '''
 task: 그룹 데이터 1개 생성
 template(follow the rule of json, only print { to }, * is example):
 {
@@ -57,7 +57,7 @@ comment:
 
 아래 두개 정보에 집중하기
     user -> intro 는 유저의 관심사 정보
-    group -> description 은 그룹의 목적
+    room -> description 은 그룹의 목적
 
 유저의 관심사와 그룹의 소개가
     매우 밀접한 관련이 있음 -> 1
@@ -89,29 +89,29 @@ def generate_user(count, file):
     with open(file, 'w', encoding='utf-8') as json_file:
         json.dump(users, json_file, indent=4, ensure_ascii=False)
 
-def generate_group(count, file):
-    groups = []
+def generate_room(count, file):
+    rooms = []
     if os.path.isfile(file):
         with open(file, 'r', encoding='utf-8') as json_file:
-            groups = json.load(json_file)
+            rooms = json.load(json_file)
 
         with open(file + ".old", 'w', encoding='utf-8') as json_file:
-            json.dump(groups, json_file, indent=4, ensure_ascii=False)
+            json.dump(rooms, json_file, indent=4, ensure_ascii=False)
 
-    for group_id in range(len(groups), len(groups) + count):
-        created_group_str = query(create_group_query, "gpt-4o-mini", 1)
-        print(created_group_str)
-        created_group_dict: dict = json.loads(created_group_str)
-        created_group_dict['group_id'] = str(group_id)
-        groups.append(created_group_dict)
+    for room_id in range(len(rooms), len(rooms) + count):
+        created_room_str = query(create_room_query, "gpt-4o-mini", 1)
+        print(created_room_str)
+        created_room_dict: dict = json.loads(created_room_str)
+        created_room_dict['room_id'] = str(room_id)
+        rooms.append(created_room_dict)
 
     with open(file, 'w', encoding='utf-8') as json_file:
-        json.dump(groups, json_file, indent=4, ensure_ascii=False)
+        json.dump(rooms, json_file, indent=4, ensure_ascii=False)
 
-def generate_interaction(count, user_file, group_file, interaction_file):
-    if os.path.isfile(group_file):
-        with open(group_file, 'r', encoding='utf-8') as json_file:
-            groups = json.load(json_file)
+def generate_interaction(count, user_file, room_file, interaction_file):
+    if os.path.isfile(room_file):
+        with open(room_file, 'r', encoding='utf-8') as json_file:
+            rooms = json.load(json_file)
     else:
         return
 
@@ -131,24 +131,24 @@ def generate_interaction(count, user_file, group_file, interaction_file):
 
     for _ in range(len(interactions), len(interactions) + count):
         rand_user = users[random.randint(0, len(users) - 1)]
-        rand_group = groups[random.randint(0, len(groups) - 1)]
+        rand_room = rooms[random.randint(0, len(rooms) - 1)]
 
         print("user info\n" + rand_user['intro'] +
-              "\ngroup info\n" + rand_group['description'])
+              "\nroom info\n" + rand_room['description'])
 
         created_interaction = float(query(create_interaction_query +
                                           "user info" + json.dumps(rand_user) +
-                                          "group info" + json.dumps(rand_group),
+                                          "room info" + json.dumps(rand_room),
                                           "gpt-4o", 0.25))
 
         print(str(created_interaction) + "\n")
 
-        interactions.append({'user_id': rand_user['user_id'], 'group_id': rand_group['group_id'], 'score': created_interaction})
+        interactions.append({'user_id': rand_user['user_id'], 'room_id': rand_room['room_id'], 'score': created_interaction})
 
     with open(interaction_file, 'w', encoding='utf-8') as json_file:
         json.dump(interactions, json_file, indent=4, ensure_ascii=False)
 
-# generate_group(50, '../data/groups.json')
+# generate_room(50, '../data/rooms.json')
 # generate_user(50, '../data/users.json')
 for _ in range(10):
-    generate_interaction(25, '../data/users.json', '../data/groups.json', '../data/interactions.json')
+    generate_interaction(25, '../data/users.json', '../data/rooms.json', '../data/interactions.json')

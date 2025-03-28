@@ -1,4 +1,4 @@
 from pydantic import BaseModel
 
-class RecommendRequestDTO(BaseModel):
+class RecommendRoomRequestDTO(BaseModel):
     user_id: str

@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # 파일 경로
 USER_PATH = "../data/users.json"
-GROUP_PATH = "../data/groups.json"
+GROUP_PATH = "../data/rooms.json"
 OUTPUT_PATH = "../data/interactions_generated.json"
 
 # 로드
@@ -13,27 +13,27 @@ with open(USER_PATH, "r", encoding="utf-8") as f:
     users = json.load(f)
 
 with open(GROUP_PATH, "r", encoding="utf-8") as f:
-    groups = json.load(f)
+    rooms = json.load(f)
 
 # 텍스트 추출
 user_texts = [(u["user_id"], u["intro"]) for u in users if "intro" in u]
-group_texts = [(g["group_id"], g["description"]) for g in groups if "description" in g]
+room_texts = [(g["room_id"], g["description"]) for g in rooms if "description" in g]
 
 user_ids, user_intros = zip(*user_texts)
-group_ids, group_descs = zip(*group_texts)
+room_ids, room_descs = zip(*room_texts)
 
 # SBERT 임베딩
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L12-v2")
 user_embeddings = model.encode(user_intros, convert_to_tensor=False, show_progress_bar=True)
-group_embeddings = model.encode(group_descs, convert_to_tensor=False, show_progress_bar=True)
+room_embeddings = model.encode(room_descs, convert_to_tensor=False, show_progress_bar=True)
 
 # 유사도 계산
-sims = cosine_similarity(user_embeddings, group_embeddings)
+sims = cosine_similarity(user_embeddings, room_embeddings)
 
-# 쌍 생성 (user_id, group_id, similarity)
+# 쌍 생성 (user_id, room_id, similarity)
 pairs = []
 for i, uid in enumerate(user_ids):
-    for j, gid in enumerate(group_ids):
+    for j, gid in enumerate(room_ids):
         pairs.append((uid, gid, sims[i][j]))
 
 # 유사도 기준 상위 2000개 중복 없이
@@ -65,7 +65,7 @@ generated = []
 for u, g, sim in unique_pairs:
     generated.append({
         "user_id": u,
-        "group_id": g,
+        "room_id": g,
         "score": round(similarity_to_score(sim), 2)
     })
 

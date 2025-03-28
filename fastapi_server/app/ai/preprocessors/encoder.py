@@ -22,9 +22,9 @@ class UserEncoder:
 
         return torch.cat([intro_vec, dept_vec, metadata])
 
-class GroupEncoder:
+class RoomEncoder:
     def __init__(self, sbert_model_name='all-MiniLM-L12-v2'):
         self.sbert = SentenceTransformer(sbert_model_name)
 
-    def encode(self, group: dict) -> torch.Tensor:
-        return self.sbert.encode(group["description"], convert_to_tensor=True)
+    def encode(self, room: dict) -> torch.Tensor:
+        return self.sbert.encode(room["description"], convert_to_tensor=True)

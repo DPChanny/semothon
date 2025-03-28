@@ -14,17 +14,17 @@ for interaction in interactions:
     else:
         result[interaction['score']] += 1
 
-    if ugmap.get(interaction['group_id']) is None:
-        ugmap[interaction['group_id']] = []
-        ugmap[interaction['group_id']].append(interaction['user_id'])
+    if ugmap.get(interaction['room_id']) is None:
+        ugmap[interaction['room_id']] = []
+        ugmap[interaction['room_id']].append(interaction['user_id'])
     else:
-        if ugmap[interaction['group_id']].__contains__(interaction['user_id']):
+        if ugmap[interaction['room_id']].__contains__(interaction['user_id']):
             if same.get(interaction['score']) is None:
                 same[interaction['score']] = 1
             else:
                 same[interaction['score']] += 1
         else:
-            ugmap[interaction['group_id']].append(interaction['user_id'])
+            ugmap[interaction['room_id']].append(interaction['user_id'])
 
 print(len(interactions))
 print(result)

@@ -23,7 +23,7 @@ class User(Base):
     intro_text = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
-    hosted_groups = relationship("Group", back_populates="host", cascade="all, delete-orphan")
+    hosted_rooms = relationship("Room", back_populates="host", cascade="all, delete-orphan")
 
     __table_args__ = (
         UniqueConstraint('nickname'),

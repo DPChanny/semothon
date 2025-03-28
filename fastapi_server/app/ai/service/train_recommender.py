@@ -5,7 +5,7 @@ import random
 from datetime import datetime
 
 from ai.datasets.recommender_dataset import RecommenderDataset
-from ai import user_encoder, group_encoder, model, MODEL_PATH, MODEL_HISTORY_PATH
+from ai import user_encoder, room_encoder, model, MODEL_PATH, MODEL_HISTORY_PATH
 
 BATCH_SIZE = 32
 EPOCHS = 100
@@ -28,12 +28,12 @@ def train_one_epoch(model, dataloader, optimizer, loss_fn):
         total_loss += loss.item()
     return total_loss / len(dataloader)
 
-def train_recommender(users, groups, interactions):
+def train_recommender(users, rooms, interactions):
     torch.save(model.state_dict(), os.path.join(MODEL_HISTORY_PATH, datetime.now() + ".plt"))
 
     random.shuffle(interactions)
 
-    dataset = RecommenderDataset(users, groups, interactions, user_encoder, group_encoder)
+    dataset = RecommenderDataset(users, rooms, interactions, user_encoder, room_encoder)
 
     dataloader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 

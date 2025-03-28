@@ -4,10 +4,10 @@
 # import pickle
 # from umap import UMAP
 
-# def train_set_topic(users, groups, path):
+# def train_set_topic(users, rooms, path):
 #     embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 #     data = [user['intro'] for user in users]
-#     data += [group['description'] for group in groups]
+#     data += [room['description'] for room in rooms]
 
 #     print(2)
 
