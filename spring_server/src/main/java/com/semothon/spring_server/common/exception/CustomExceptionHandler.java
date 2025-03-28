@@ -44,4 +44,17 @@ public class CustomExceptionHandler {
 
         return BaseResponse.failure(data, "Invalid input");
     }
+
+    //권한 부족인 경우
+    @ExceptionHandler(ForbiddenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public BaseResponse unauthorizedException(ForbiddenException ex){
+        log.warn("unauthorized error {}", ex.getMessage());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("code", 403);
+        data.put("errors", ex.getMessage());
+
+        return BaseResponse.failure(data, "Forbidden task");
+    }
 }
