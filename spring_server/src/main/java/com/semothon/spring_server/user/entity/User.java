@@ -1,6 +1,8 @@
 package com.semothon.spring_server.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.semothon.spring_server.chat.entity.ChatMessage;
+import com.semothon.spring_server.crawling.entity.UserCrawlingRecommendation;
 import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.room.entity.RoomUser;
 import com.semothon.spring_server.room.entity.UserRoomRecommendation;
@@ -81,6 +83,22 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserRoomRecommendation> userRoomRecommendations = new ArrayList<>();
 
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserInterest> userInterests = new ArrayList<>();
+
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserCrawlingRecommendation> userCrawlingRecommendations = new ArrayList<>();
+
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChatMessage> chatMessages = new ArrayList<>();
+
+
     public void addHostedRooms(Room room){ //사용 x 연관계 편의 메서드 구성을 위한 메서드 <- hostRoom 추가는 연관관계 편의 메서드를 이용
         this.hostedRooms.add(room);
     }
@@ -93,6 +111,17 @@ public class User {
         this.userRoomRecommendations.add(userRoomRecommendation);
     }
 
+    protected void addUserInterest(UserInterest userInterest){
+        this.userInterests.add(userInterest);
+    }
+
+    public void addUserCrawlingRecommendation(UserCrawlingRecommendation userCrawlingRecommendation){
+        this.userCrawlingRecommendations.add(userCrawlingRecommendation);
+    }
+
+    public void addChatMessage(ChatMessage chatMessage){
+        this.chatMessages.add(chatMessage);
+    }
 
 
     public void updateProfile(UpdateUserProfileRequestDto dto) {
