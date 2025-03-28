@@ -106,4 +106,20 @@ public class RoomService {
 
         return RoomUserInfoDto.from(roomUser);
     }
+
+    public void leaveRoom(String userId, Long roomId) {
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new InvalidInputException("room not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("user not found"));
+
+        RoomUser roomUser = roomUserRepository.findByRoomAndUser(room, user)
+                .orElseThrow(() -> new InvalidInputException("User not in the room."));
+
+        if (roomUser.getRole() == RoomUserRole.ADMIN) {
+            throw new ForbiddenException("Host cannot leave the room. Try deleting instead.");
+        }
+
+        roomUserRepository.delete(roomUser);
+    }
 }

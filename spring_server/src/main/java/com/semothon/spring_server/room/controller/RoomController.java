@@ -67,4 +67,15 @@ public class RoomController {
         return BaseResponse.success(Map.of("code", 200, "roomUser", roomUserInfoDto), "joined room successfully");
     }
 
+    @PostMapping("/{roomId}/leave")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse leaveRoom(
+            @AuthenticationPrincipal User user,
+            @PathVariable Long roomId
+    ){
+        roomService.leaveRoom(user.getUserId(), roomId);
+
+        return BaseResponse.success(Map.of("code", 200), "left room successfully");
+    }
+
 }
