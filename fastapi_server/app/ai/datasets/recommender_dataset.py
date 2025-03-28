@@ -1,18 +1,20 @@
 import torch
 from torch.utils.data import Dataset
 
-class RecommenderDataset(Dataset):
-    def __init__(self, users, rooms, interactions, user_encoder, room_encoder):
-        self.interactions = interactions
+from ai import user_encoder, description_object_encoder
 
-        self.encoded_users = {user['user_id']: user_encoder.encode(user) for user in users}
-        self.encoded_rooms = {room['room_id']: room_encoder.encode(room) for room in rooms}
+class RecommenderDataset(Dataset):
+    def __init__(self, users, description_objects, interactions):
+        self.interactions = interactions
+        self.users = users
+        self.description_objects = description_objects
 
     def __len__(self):
         return len(self.interactions)
 
     def __getitem__(self, idx):
-        item = self.interactions[idx]
-        input_vec = torch.cat([self.encoded_users[item['user_id']], self.encoded_rooms[item['room_id']]])
-        label = torch.tensor(item["score"], dtype=torch.float32)
+        user_vec = user_encoder.encode(self.users[idx])
+        description_object_vec = description_object_encoder.encode(self.description_objects[idx])
+        input_vec = torch.cat([user_vec, description_object_vec])
+        label = torch.tensor(self.interactions[idx]["score"], dtype=torch.float32)
         return input_vec, label
