@@ -42,6 +42,8 @@ public class RoomUser {
     @Column(updatable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime joinedAt;
 
+    private Double satisfactionScore;
+
     //연관관계 편의 메서드
     public void updateUser(User user){
         this.user = user;
@@ -51,5 +53,9 @@ public class RoomUser {
     public void updateRoom(Room room){
         this.room = room;
         room.addRoomUser(this);
+    }
+
+    public void updateSatisfactionScore(Double score) {
+        this.satisfactionScore = score;
     }
 }

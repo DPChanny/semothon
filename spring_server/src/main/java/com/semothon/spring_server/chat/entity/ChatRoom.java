@@ -21,6 +21,7 @@ import java.util.List;
         indexes = {
         },
         uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"room_id"})
         }
 )
 public class ChatRoom {
@@ -34,7 +35,7 @@ public class ChatRoom {
     private ChatRoomType type;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", unique = true)
     private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY)
