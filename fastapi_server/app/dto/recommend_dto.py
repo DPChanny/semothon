@@ -10,7 +10,7 @@ class RecommendCrawlingByUserRequestDTO(BaseModel):
     user_id: str
 
 class RecommendCrawlingByCrawlingRequestDTO(BaseModel):
-    room_id: str
+    crawling_id: str
 
 class RecommendResponseDTO(BaseModel):
     success: bool
