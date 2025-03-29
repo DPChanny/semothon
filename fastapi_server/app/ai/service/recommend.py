@@ -1,27 +1,24 @@
 import torch
 
-from ai import model, user_encoder, description_object_encoder
+from ai import model, descriptable_encoder
 
-def recommend(users, description_objects):
+def recommend(target_descriptables, descriptables,
+              target_desscriptable_encoder=descriptable_encoder, 
+              descriptable_encoder = descriptable_encoder):
     model.eval()
 
     results = []
 
     with torch.no_grad():
-        for description_object in description_objects:
-            for user in users:
-                description_vec = description_object_encoder.encode(description_object)
-                user_vec = user_encoder.encode(user)
+        for target_descriptable in target_descriptables:
+            for descriptable in descriptables:
+                descriptable_vec = descriptable_encoder.encode(descriptable)
+                target_discriptable_vec = target_desscriptable_encoder.encode(target_descriptable)
 
-                input_tensor = torch.cat([user_vec, description_vec]).unsqueeze(0)  # shape: (1, dim)
-                similarity = model(input_tensor).item()
+                input_tensor = torch.cat([target_discriptable_vec, descriptable_vec]).unsqueeze(0)
 
-                results.append({
-                    "user_id": user["user_id"],
-                    "score": similarity,
-                    **description_object
-                })
-
-    results.sort(key=lambda x: x["score"], reverse=True)
+                results.append({"target_descriptable": target_descriptable,
+                                "descriptable": descriptable,
+                                "score": model(input_tensor).item()})
 
     return results

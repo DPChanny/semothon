@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, Date, DateTime, Enum, Text, UniqueConstraint
+from sqlalchemy import Column, String, Date, DateTime, Enum, Text
 from sqlalchemy.orm import relationship
 from datetime import datetime
 import enum
 from database import Base
+from custom_descriptable import UserDescriptable
 
 class GenderEnum(str, enum.Enum):
     MALE = "MALE"
@@ -20,17 +21,15 @@ class User(Base):
 
     user_interests = relationship("UserInterest", cascade="all, delete-orphan")
 
-def user_to_dict(user):
+def user_to_descriptable(user):
     gender_map = {
         "MALE": "남자",
         "FEMALE": "여자"
     }
 
-    return {
-        "intro": user.intro_text,
-        "departments": user.department.split(",") if user.department else [],
-        "yob": user.birthdate.year if user.birthdate else None,
-        "student_id": int(user.student_id[:4]) if user.student_id and len(user.student_id) >= 4 else None,
-        "gender": gender_map.get(user.gender.value if user.gender else None),
-        "user_id": user.user_id
-    }
+    return UserDescriptable(user.intro_text, 
+                         user.department.split(",") if user.department else [], 
+                         user.birthdate.year if user.birthdate else None, 
+                         int(user.student_id[:4]) if user.student_id and len(user.student_id) >= 4 else None,
+                         gender_map.get(user.gender.value if user.gender else None),
+                         user.user_id)

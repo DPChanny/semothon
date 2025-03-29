@@ -1,10 +1,14 @@
+# not used but neccesary
+import ai
+import custom_descripable_encoder
+
+import models 
+
 from fastapi import FastAPI
 from routers.interest_router import interest_router 
 from routers.intro_router import intro_router
 from routers.recommend_router import recommend_router
 import database
-import models #database model init
-import ai #ai model init
 
 app = FastAPI()
 

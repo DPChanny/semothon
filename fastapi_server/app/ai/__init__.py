@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 import torch
 import os
-from ai.preprocessors.encoder import DescriptionObjectEncoder, UserEncoder
+from ai.preprocessors.descriptable_encoder import DescriptableEncoder
 from ai.models.recommender import RecommenderMLP
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -11,8 +11,7 @@ MODEL_HISTORY_PATH = os.path.join(BASE_DIR, "history")
 
 sbert = SentenceTransformer('all-MiniLM-L12-v2')
 
-user_encoder = UserEncoder(sbert)
-description_object_encoder = DescriptionObjectEncoder(sbert)
+descriptable_encoder = DescriptableEncoder(sbert)
 
 model = RecommenderMLP(1155)
 if os.path.isfile(MODEL_PATH):

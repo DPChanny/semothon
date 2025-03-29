@@ -6,6 +6,7 @@ from datetime import datetime
 
 from ai.datasets.recommender_dataset import RecommenderDataset
 from ai import model, MODEL_PATH, MODEL_HISTORY_PATH
+from ai import descriptable_encoder
 
 BATCH_SIZE = 32
 EPOCHS = 100
@@ -28,14 +29,18 @@ def train_one_epoch(model, dataloader, optimizer, loss_fn):
         total_loss += loss.item()
     return total_loss / len(dataloader)
 
-def train_recommender(users, description_objects, interactions, 
+def train_recommender(target_descriptables, descriptables, interactions,
+                      target_descriptable_encoder=descriptable_encoder, 
+                      descriptable_encoder=descriptable_encoder,
                       history = True, model_path = MODEL_PATH, model_history_path = MODEL_HISTORY_PATH):
     if history:
         torch.save(model.state_dict(), os.path.join(model_history_path, datetime.now() + ".plt"))
 
     random.shuffle(interactions)
 
-    dataset = RecommenderDataset(users, description_objects, interactions)
+    dataset = RecommenderDataset(target_descriptables, descriptables, interactions,
+                                 target_descriptable_encoder=target_descriptable_encoder,
+                                 descriptable_encoder=descriptable_encoder)
 
     dataloader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
