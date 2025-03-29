@@ -1,6 +1,7 @@
-package com.semothon.spring_server.user.entity;
+package com.semothon.spring_server.room.entity;
 
 import com.semothon.spring_server.interest.entity.Interest;
+import com.semothon.spring_server.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,34 +10,34 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@ToString(of = {"userInterestId"})
-@Table(name = "user_interests",
+@ToString(of = {"roomInterestId"})
+@Table(name = "room_interests",
         indexes = {
         },
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"user_id", "interest_id"})
+                @UniqueConstraint(columnNames = {"room_id", "interest_id"})
         }
 )
-public class UserInterest {
+public class RoomInterest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userInterestId;
+    private Long roomInterestId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interest_id", nullable = false)
     private Interest interest;
 
-    public void updateUser(User user){
-        this.user = user;
-        user.addUserInterest(this);
+    public void updateRoom(Room room){
+        this.room = room;
+        room.addRoomInterest(this);
     }
 
     public void updateInterest(Interest interest){
         this.interest = interest;
-        interest.addUserInterest(this);
+        interest.addRoomInterest(this);
     }
 }

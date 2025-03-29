@@ -2,7 +2,9 @@ package com.semothon.spring_server.room.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.semothon.spring_server.chat.entity.ChatRoom;
+import com.semothon.spring_server.interest.entity.Interest;
 import com.semothon.spring_server.user.entity.User;
+import com.semothon.spring_server.user.entity.UserInterest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -62,6 +64,11 @@ public class Room {
     @OneToOne(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private ChatRoom chatRoom;
 
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RoomInterest> roomInterests = new ArrayList<>();
+
     protected void addRoomUser(RoomUser roomUser){
         this.roomUsers.add(roomUser);
     }
@@ -72,6 +79,10 @@ public class Room {
 
     public void setChatRoom(ChatRoom chatRoom){
         this.chatRoom = chatRoom;
+    }
+
+    protected void addRoomInterest(RoomInterest roomInterest){
+        this.roomInterests.add(roomInterest);
     }
 
 

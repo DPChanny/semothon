@@ -1,5 +1,5 @@
 package com.semothon.spring_server.chat.entity;
 
 public enum ChatRoomType {
-    GROUP, COMPETITION
+    GROUP, COMPETITION, OPEN
 }

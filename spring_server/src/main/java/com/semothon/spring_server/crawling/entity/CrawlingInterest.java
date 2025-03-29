@@ -1,4 +1,4 @@
-package com.semothon.spring_server.user.entity;
+package com.semothon.spring_server.crawling.entity;
 
 import com.semothon.spring_server.interest.entity.Interest;
 import jakarta.persistence.*;
@@ -9,34 +9,34 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@ToString(of = {"userInterestId"})
-@Table(name = "user_interests",
+@ToString(of = {"crawlingInterestId"})
+@Table(name = "crawling_interests",
         indexes = {
         },
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"user_id", "interest_id"})
+                @UniqueConstraint(columnNames = {"crawling_id", "interest_id"})
         }
 )
-public class UserInterest {
+public class CrawlingInterest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userInterestId;
+    private Long crawlingInterestId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "crawling_id", nullable = false)
+    private CrawlingData crawlingData;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interest_id", nullable = false)
     private Interest interest;
 
-    public void updateUser(User user){
-        this.user = user;
-        user.addUserInterest(this);
+    public void updateCrawling(CrawlingData crawlingData){
+        this.crawlingData = crawlingData;
+        crawlingData.addCrawlingInterest(this);
     }
 
     public void updateInterest(Interest interest){
         this.interest = interest;
-        interest.addUserInterest(this);
+        interest.addCrawlingInterest(this);
     }
 }
