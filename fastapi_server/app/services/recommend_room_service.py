@@ -50,7 +50,7 @@ def recommend_room_by_room_service(request, db: Session):
         raise HTTPException(status_code=404, detail="Room not found")
     
     process_db(db, recommend([user_to_dict(user) for user in users], 
-                                  [room_to_dict(room)]))
+                             [room_to_dict(room)]))
 
     return {
         "success": True,

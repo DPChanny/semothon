@@ -1,24 +1,43 @@
-# import pickle
-# from bertopic import BERTopic
+from sentence_transformers import SentenceTransformer, util
+import torch
 
-# MODEL_PATH = "saved_model/bertopic_model.pkl"
+from ai import sbert, description_object_encoder
 
-# # 모델 로드
-# with open(MODEL_PATH, "rb") as f:
-#     topic_model: BERTopic = pickle.load(f)
+def interest(user, description_objects, interests, top_k=10):
+    encoded_interests = sbert.encode(interests, convert_to_tensor=True)
 
-# def set_user_topic(users):
-#     topics, probs = topic_model.transform([user['intro'] for user in users])
+    recommended = []
+    
+    if user is not None:
+        encoded_user = sbert.encode(user["intro"], convert_to_tensor=True)
 
-#     for i in range(len(users)):
-#         users[i]['topics'] = []
-#         print(f"\n📘 {users[i]}")
-#         print(f"  → Topic: {topics[i]}, 확률: {probs[i]:.2f}")
-#         if probs[i] > 0.5:
-#             users[i]['topics'].append(topics[i])
-#         if topics[i] == -1 or probs[i] < 0.3:
-#             print("  ⚠️ 이 문장은 이상치로 간주됨 (low confidence or outlier)")
+        cosine_scores = util.cos_sim(encoded_user, encoded_interests)[0]
 
-#     return users
+        top_results = torch.topk(cosine_scores, k=top_k)
 
-# not used currently
+        for score, idx in zip(top_results.values, top_results.indices):
+            recommended.append({
+                'user_id': user['user_id'],
+                'interest_id': interests[idx]["interest_id"],
+                'name': interests[idx]["name"],
+                'score': round(score.item(), 4)
+            })
+
+    if description_objects is not None:
+        encoded_description_objects = [description_object_encoder.encode(description_object) 
+                                       for description_object in description_objects]
+
+        for encoded_description_object in encoded_description_objects:
+            cosine_scores = util.cos_sim(encoded_description_object, encoded_interests)[0]
+
+            top_results = torch.topk(cosine_scores, k=top_k)
+
+            for score, idx, description_object in zip(top_results.values, top_results.indices, description_objects):
+                recommended.append({
+                    **description_object,
+                    'interest_id': interests[idx]["interest_id"],
+                    'name': interests[idx]["name"],
+                    'score': round(score.item(), 4)
+                })
+            
+    return recommended

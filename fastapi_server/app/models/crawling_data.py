@@ -15,6 +15,6 @@ class CrawlingData(Base):
 
 def crawling_to_dict(crawling: CrawlingData) -> dict:
     return {
-        "room_id": str(crawling.crawling_id),
+        "crawling_id": str(crawling.crawling_id),
         "description": crawling.description
     }

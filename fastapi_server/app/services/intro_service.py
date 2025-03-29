@@ -6,8 +6,7 @@ from ai.service.intro import intro
 def intro_service(request, db: Session):
     user = db.query(User).filter(User.user_id == request.user_id).first()
 
-
-    interests = ["디자인학과", "강아지", "해커톤"]
+    interests = [user_interest.name for user_interest in user.user_interests]
 
     return {
         "success": True,
