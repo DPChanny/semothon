@@ -7,14 +7,9 @@ class Room(Base):
     __tablename__ = "rooms"
 
     room_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    title = Column(String(100), nullable=False)
     description = Column(Text)
 
-    host_user_id = Column(String, ForeignKey("users.user_id"), nullable=False)
-    host = relationship("User", back_populates="hosted_rooms")
-
-    capacity = Column(Integer, nullable=False, default=30)
-    created_at = Column(DateTime, default=datetime.now, nullable=False)
+    room_interests = relationship("RoomInterest", cascade="all, delete-orphan")
 
 def room_to_dict(room: Room) -> dict:
     return {

@@ -9,14 +9,9 @@ class CrawlingData(Base):
     )
 
     crawling_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    title = Column(String(255), nullable=False)
-    url = Column(String(500), nullable=False)
-    image_url = Column(String, nullable=True)
     description = Column(Text, nullable=False)
-    published_at = Column(DateTime, nullable=True)
-    crawled_at = Column(DateTime, nullable=True)
 
-    user_crawling_recommendations = relationship("UserCrawlingRecommendation")
+    user_crawling_recommendations = relationship("UserCrawlingRecommendation", cascade="all, delete-orphan")
 
 def crawling_to_dict(crawling: CrawlingData) -> dict:
     return {
