@@ -3,8 +3,9 @@ import os.path
 import random
 
 import openai
+from ai.config import OPEN_AI_API_KEY
 
-client = openai.OpenAI(api_key="")
+client = openai.OpenAI(api_key=OPEN_AI_API_KEY)
 
 def query(user_input, model, temperature):
     response = client.chat.completions.create(

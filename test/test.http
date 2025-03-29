@@ -5,3 +5,11 @@ Content-Type: application/json
 {
   "user_id": "test-user-2"
 }
+
+### 추천 요청 테스트
+POST http://localhost:8000/api/ai/intro
+Content-Type: application/json
+
+{
+  "user_id": "test-user-2"
+}
