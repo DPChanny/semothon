@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import interest_router
+from routers.interest_router import interest_router 
 from routers.intro_router import intro_router
 from routers.recommend_router import recommend_router
 import database
@@ -14,4 +14,4 @@ def on_startup():
 
 app.include_router(recommend_router, prefix="/api")
 app.include_router(intro_router, prefix="/api")
-app.include_router(interest_router, prefix="/app")
+app.include_router(interest_router, prefix="/api")

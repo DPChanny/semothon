@@ -6,20 +6,20 @@ from services.interest_service import user_interest_service, room_interest_servi
 
 interest_router = APIRouter()
 
-@interest_router.post("/ai/interest/user", response_model=InterestUserRequestDTO)
+@interest_router.post("/ai/interest/user", response_model=InterestResponseDTO)
 def recommend_room_by_room_route(
-    request: InterestResponseDTO,
+    request: InterestUserRequestDTO,
     db: Session = Depends(get_db)):
         return user_interest_service(request, db)
 
-@interest_router.post("/ai/interest/room", response_model=InterestRoomRequestDTO)
+@interest_router.post("/ai/interest/room", response_model=InterestResponseDTO)
 def recommend_room_by_user_route(
-    request: InterestResponseDTO,
+    request: InterestRoomRequestDTO,
     db: Session = Depends(get_db)):
         return room_interest_service(request, db)
 
-@interest_router.post("/ai/interest/crawling", response_model=InterestCrawlingRequestDTO)
+@interest_router.post("/ai/interest/crawling", response_model=InterestResponseDTO)
 def recommend_crawling_by_user_route(
-    request: InterestResponseDTO,
+    request: InterestCrawlingRequestDTO,
     db: Session = Depends(get_db)):
         return crawling_interest_service(request, db)

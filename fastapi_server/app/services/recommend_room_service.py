@@ -20,7 +20,8 @@ def process_db(db: Session, recommendations):
             new_entry = UserRoomRecommendation(
                 user_id=recommend["user_id"],
                 room_id=recommend["room_id"],
-                score=recommend["score"]
+                score=recommend["score"],
+                activity_score=recommend["score"]
             )
             db.add(new_entry)
 

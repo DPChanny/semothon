@@ -1,4 +1,4 @@
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import util
 import torch
 
 from ai import sbert, description_object_encoder

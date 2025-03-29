@@ -20,7 +20,8 @@ def process_db(db: Session, recommendations):
             new_entry = UserCrawlingRecommendation(
                 user_id=recommend["user_id"],
                 crawling_id=recommend["crawling_id"],
-                score=recommend["score"]
+                score=recommend["score"],
+                activity_score=recommend["score"]
             )
             db.add(new_entry)
 
