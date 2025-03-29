@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@ToString(of = {"userCrawlingRecId", "score"})
+@ToString(of = {"userCrawlingRecId", "score", "activityScore"})
 @Table(name = "user_crawling_recommendations",
         indexes = {
         },
@@ -33,6 +33,9 @@ public class UserCrawlingRecommendation {
     @Column(nullable = false)
     private float score;
 
+    @Column(nullable = false)
+    private Double activityScore;
+
     public void updateUser(User user){
         this.user = user;
         user.addUserCrawlingRecommendation(this);
@@ -42,5 +45,10 @@ public class UserCrawlingRecommendation {
         this.crawlingData = crawlingData;
         crawlingData.addUserCrawlingRecommendation(this);
     }
+
+    public void updateActivityScore(Double score) {
+        this.activityScore = score;
+    }
+
 }
 

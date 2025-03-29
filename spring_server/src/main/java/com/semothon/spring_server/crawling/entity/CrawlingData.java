@@ -2,6 +2,7 @@ package com.semothon.spring_server.crawling.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.semothon.spring_server.chat.entity.ChatRoom;
+import com.semothon.spring_server.room.entity.RoomInterest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -54,8 +55,17 @@ public class CrawlingData {
     @OneToMany(mappedBy = "crawlingData", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatRoom> chatRooms = new ArrayList<>();
 
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "crawlingData", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CrawlingInterest> crawlingInterests = new ArrayList<>();
+
     protected void addUserCrawlingRecommendation(UserCrawlingRecommendation userCrawlingRecommendation){
         this.userCrawlingRecommendations.add(userCrawlingRecommendation);
+    }
+
+    protected void addCrawlingInterest(CrawlingInterest crawlingInterest){
+        this.crawlingInterests.add(crawlingInterest);
     }
 
     public void addChatRoom(ChatRoom chatRoom){
