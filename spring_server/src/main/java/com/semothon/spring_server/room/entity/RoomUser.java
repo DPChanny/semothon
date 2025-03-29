@@ -42,7 +42,7 @@ public class RoomUser {
     @Column(updatable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime joinedAt;
 
-    private Double activityScore;
+
 
     //연관관계 편의 메서드
     public void updateUser(User user){
@@ -55,7 +55,4 @@ public class RoomUser {
         room.addRoomUser(this);
     }
 
-    public void updateActivityScore(Double score) {
-        this.activityScore = score;
-    }
 }
