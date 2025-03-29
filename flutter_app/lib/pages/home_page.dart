@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/recommended_activity.dart';
 
+
+//상단 AppBar 생성
 AppBar buildAppBar() {
   return AppBar(
     backgroundColor: Colors.grey[300], // 회색 배경
@@ -23,6 +26,8 @@ AppBar buildAppBar() {
     ],
   );
 }
+
+//관심분야 카드 생성
 Widget interestCard(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double imageSize = screenWidth * 0.2;
@@ -140,6 +145,7 @@ Widget interestCard(BuildContext context) {
   );
 }
 
+//관심분야 박스
 class KeywordChip extends StatelessWidget {
   final String text;
 
@@ -165,6 +171,7 @@ class KeywordChip extends StatelessWidget {
   }
 }
 
+//추천 멘토리스트 생성
 Widget recommendedMentorList() {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -288,9 +295,10 @@ class HomePage extends StatelessWidget {
           label: '채팅',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.school),
-          label: '공모전',
+          icon: Icon(Icons.person),
+          label: '멘토링',
         ),
+
       ],
     );
   }
@@ -299,27 +307,25 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color(0xFFFFFFFF),
         appBar: buildAppBar(),
         body: Stack(
           children: [
-            // 📦 전체 스크롤 가능한 본문
             SingleChildScrollView(
               child: Column(
                 children: [
                   interestCard(context),
-                  const SizedBox(height: 100), // 아래 내용 간격 확보
-                  const SizedBox(height: 200), // 이후 콘텐츠 자리
+                  recommendedMentorList(),
+                  const SizedBox(height: 10),
+                  
+                  const RecommendedActivityWidget(),
+                   // 이후 콘텐츠 자리
                 ],
               ),
             ),
 
             // 🌟 파란 카드에 겹쳐서 보일 추천 멘토 리스트
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.27,
-              left: 0,
-              right: 0,
-              child: recommendedMentorList(),
-            ),
+           
           ],
         ),
         bottomNavigationBar: bottomNavigationBarWidget(),
