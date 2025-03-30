@@ -1,5 +1,5 @@
 # models/__init__.py
-from .crawling_data import CrawlingData
+from .crawling import Crawling
 from .crawling_interest import CrawlingInterest
 from .interest import Interest
 from .room_interest import RoomInterest

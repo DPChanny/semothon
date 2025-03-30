@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.crawling_data import CrawlingData, crawling_to_descriptable
+from models.crawling import Crawling, crawling_to_descriptable
 from models.crawling_interest import CrawlingInterest
 from models.room import Room, room_to_descriptable
 from models.room_interest import RoomInterest
@@ -47,8 +47,8 @@ def room_interest_service(request, db: Session):
     return {"success": True, "message": "Interests successfully generated"}
 
 def crawling_interest_service(request, db: Session):
-    crawling: CrawlingData = db.query(CrawlingData).filter(
-        CrawlingData.crawling_id == request.crawling_id
+    crawling: Crawling = db.query(Crawling).filter(
+        Crawling.crawling_id == request.crawling_id
     ).first()
     if not crawling:
         return {"success": False, "message": "Crawling data not found"}

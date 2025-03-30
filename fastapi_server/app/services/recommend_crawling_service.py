@@ -1,5 +1,5 @@
 from models.user import User, user_to_descriptable
-from models.crawling_data import CrawlingData, crawling_to_descriptable
+from models.crawling import Crawling, crawling_to_descriptable
 
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
@@ -30,7 +30,7 @@ def process_db(db: Session, results):
 
 def recommend_crawling_by_user_service(request, db: Session):
     user = db.query(User).filter(User.user_id == request.user_id).first()
-    crawlings = db.query(CrawlingData).all()
+    crawlings = db.query(Crawling).all()
 
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -47,7 +47,7 @@ def recommend_crawling_by_user_service(request, db: Session):
 
 def recommend_crawling_by_crawling_service(request, db: Session):
     users = db.query(User).all()
-    crawling = db.query(CrawlingData).filter(CrawlingData.crawling_id == request.crawling_id).first()
+    crawling = db.query(Crawling).filter(Crawling.crawling_id == request.crawling_id).first()
 
     if not crawling:
         raise HTTPException(status_code=404, detail="Crawling not found")
