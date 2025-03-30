@@ -24,15 +24,15 @@ public class CrawlingInterest {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "crawling_id", nullable = false)
-    private CrawlingData crawlingData;
+    private Crawling crawling;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interest_id", nullable = false)
     private Interest interest;
 
-    public void updateCrawling(CrawlingData crawlingData){
-        this.crawlingData = crawlingData;
-        crawlingData.addCrawlingInterest(this);
+    public void updateCrawling(Crawling crawling){
+        this.crawling = crawling;
+        crawling.addCrawlingInterest(this);
     }
 
     public void updateInterest(Interest interest){

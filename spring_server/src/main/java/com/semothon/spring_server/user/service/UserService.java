@@ -34,9 +34,6 @@ public class UserService {
     private static final String PROFILE_IMAGE_FOLDER_NAME = "profile-images/";
     private static final String DEFAULT_PROFILE_IMAGE_URL = "https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png"; //기본 프로필 이미지 URL
 
-
-
-
     public User findOrCreateUser(String uid, String email, String profileImageUrl, String socialProvider) {
         return userRepository.findById(uid).orElseGet(() -> {
             User newUser = User.builder()

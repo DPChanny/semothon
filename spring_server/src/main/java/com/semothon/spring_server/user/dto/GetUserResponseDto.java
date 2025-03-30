@@ -24,6 +24,7 @@ public class GetUserResponseDto {
     private String socialProvider;
     private String socialId;
     private String introText;
+    private String shortIntro;
     private LocalDateTime createdAt;
 
     public static GetUserResponseDto from(User user) {
@@ -38,6 +39,7 @@ public class GetUserResponseDto {
                 .socialProvider(user.getSocialProvider())
                 .socialId(user.getSocialId())
                 .introText(user.getIntroText())
+                .shortIntro(user.getShortIntro())
                 .createdAt(DateTimeUtil.convertUTCToKST(user.getCreatedAt()))
                 .build();
     }

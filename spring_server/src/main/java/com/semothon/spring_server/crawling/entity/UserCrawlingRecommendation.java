@@ -28,10 +28,10 @@ public class UserCrawlingRecommendation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "crawling_id", nullable = false)
-    private CrawlingData crawlingData;
+    private Crawling crawling;
 
     @Column(nullable = false)
-    private float score;
+    private Double score;
 
     @Column(nullable = false)
     private Double activityScore;
@@ -41,9 +41,9 @@ public class UserCrawlingRecommendation {
         user.addUserCrawlingRecommendation(this);
     }
 
-    public void updateCrawlingData(CrawlingData crawlingData){
-        this.crawlingData = crawlingData;
-        crawlingData.addUserCrawlingRecommendation(this);
+    public void updateCrawlingData(Crawling crawling){
+        this.crawling = crawling;
+        crawling.addUserCrawlingRecommendation(this);
     }
 
     public void updateActivityScore(Double score) {

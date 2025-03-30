@@ -7,6 +7,7 @@ import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.common.exception.ForbiddenException;
 import com.semothon.spring_server.room.dto.CreateRoomRequestDto;
 import com.semothon.spring_server.room.dto.GetRoomResponseDto;
+import com.semothon.spring_server.room.dto.RoomSearchCondition;
 import com.semothon.spring_server.room.dto.RoomUserInfoDto;
 import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.room.entity.RoomUser;
@@ -19,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -121,5 +124,9 @@ public class RoomService {
         }
 
         roomUserRepository.delete(roomUser);
+    }
+
+    public List<Room> getRoomList(String userId, RoomSearchCondition condition) {
+        return roomRepository.searchRoomList(condition, userId);
     }
 }

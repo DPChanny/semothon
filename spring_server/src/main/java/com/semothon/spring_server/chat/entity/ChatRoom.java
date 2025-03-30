@@ -1,7 +1,7 @@
 package com.semothon.spring_server.chat.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.semothon.spring_server.crawling.entity.CrawlingData;
+import com.semothon.spring_server.crawling.entity.Crawling;
 import com.semothon.spring_server.room.entity.Room;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,7 +40,7 @@ public class ChatRoom {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "crawling_id")
-    private CrawlingData crawlingData;
+    private Crawling crawling;
 
     @CreationTimestamp
     @Column(updatable = false, columnDefinition = "TIMESTAMP")
@@ -56,9 +56,9 @@ public class ChatRoom {
         room.setChatRoom(this);
     }
 
-    public void updateCrawlingData(CrawlingData crawlingData){
-        this.crawlingData = crawlingData;
-        crawlingData.addChatRoom(this);
+    public void updateCrawling(Crawling crawling){
+        this.crawling = crawling;
+        crawling.addChatRoom(this);
     }
 
     protected void addChatMessage(ChatMessage chatMessage){

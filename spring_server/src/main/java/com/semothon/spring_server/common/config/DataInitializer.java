@@ -47,6 +47,7 @@ public class DataInitializer {
                         .socialProvider("google")
                         .socialId("tester1@example.com")
                         .introText("안녕하세요! 저는 최신 기술과 인공지능에 큰 관심을 가지고 있습니다. 주말에는 가끔 게임을 하며 스트레스를 풀고, 새로운 프로그래밍 언어를 배우는 것을 즐깁니다.")
+                        .shortIntro("AI와 신기술을 사랑하는 개발자 지망생입니다.")
                         .build();
                 userRepository.save(user1);
 
@@ -61,6 +62,7 @@ public class DataInitializer {
                         .socialProvider("google")
                         .socialId("tester2@example.com")
                         .introText("안녕하세요! 저는 여행과 사진 찍는 것을 좋아하는 대학생입니다. 항상 새로운 경험을 찾아 다니며 다양한 사람들과 소통하고 싶습니다.")
+                        .shortIntro("여행과 사진을 사랑하는 자유로운 영혼입니다.")
                         .build();
                 userRepository.save(user2);
 
@@ -75,6 +77,7 @@ public class DataInitializer {
                         .socialProvider("google")
                         .socialId("tester3@example.com")
                         .introText("저는 영화 감상과 소설 읽기를 좋아하는 대학생입니다. 특히 판타지 장르에 깊은 관심이 있으며, 언젠가는 나만의 이야기를 써보고 싶습니다.")
+                        .shortIntro("판타지에 빠진 이야기꾼입니다.")
                         .build();
                 userRepository.save(user3);
 
@@ -89,6 +92,7 @@ public class DataInitializer {
                         .socialProvider("google")
                         .socialId("tester4@example.com")
                         .introText("안녕하세요! 저는 기술과 인문학에 대한 깊은 관심을 가지고 있는 대학생입니다. 주말마다 독서를 즐기고, 가끔은 트레킹을 하면서 자연을 만끽하는 것을 좋아해요.")
+                        .shortIntro("책과 자연을 사랑하는 인문학도입니다.")
                         .build();
                 userRepository.save(user4);
 
@@ -103,6 +107,7 @@ public class DataInitializer {
                         .socialProvider("google")
                         .socialId("tester5@example.com")
                         .introText("안녕하세요! 저는 다양한 문화와 언어에 관심이 많은 학생입니다. 여행과 요리를 즐기며, 새로운 사람들을 만나 이야기하는 것을 좋아해요.")
+                        .shortIntro("언어와 문화에 진심인 글로벌 여행러입니다.")
                         .build();
                 userRepository.save(user5);
 
@@ -311,7 +316,7 @@ public class DataInitializer {
                         "역학", "건강증진", "감염병관리", "환경보건", "직업보건", "보건통계", "건강정책", "공공보건", "보건교육", "질병예방",
 
                         // 예체능계열
-                        "시각디자인", "UX/UI디자인", "제품디자인", "패션디자인", "공간디자인", "브랜딩", "디자인이론", "포스터제작", "디자인툴", "디자인트렌드",
+                        "시각디자인", "UXUI디자인", "제품디자인", "패션디자인", "공간디자인", "브랜딩", "디자인이론", "포스터제작", "디자인툴", "디자인트렌드",
                         "작곡", "연주", "성악", "음악이론", "실용음악", "음악치료", "음악감상", "DAW제작", "악기연주", "음악교육",
                         "회화", "조소", "판화", "설치미술", "미술사", "색채학", "드로잉", "아트워크", "미술비평", "전시기획",
                         "현대무용", "한국무용", "발레", "안무", "무용치료", "무용공연", "신체훈련", "무대동작", "무용교육", "무용역사",

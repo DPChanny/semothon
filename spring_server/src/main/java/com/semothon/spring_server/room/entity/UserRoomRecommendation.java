@@ -31,7 +31,7 @@ public class UserRoomRecommendation {
     private Room room;
 
     @Column(nullable = false)
-    private float score;
+    private Double score;
 
     @Column(nullable = false)
     private Double activityScore;

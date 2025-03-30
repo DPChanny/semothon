@@ -2,7 +2,6 @@ package com.semothon.spring_server.crawling.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.semothon.spring_server.chat.entity.ChatRoom;
-import com.semothon.spring_server.room.entity.RoomInterest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,14 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @ToString(of = {"crawlingId", "title", "url", "publishedAt", "crawledAt"})
-@Table(name = "crawling_data",
+@Table(name = "crawling",
         indexes = {
         },
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"url"})
         }
 )
-public class CrawlingData {
+public class Crawling {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long crawlingId;
@@ -47,17 +46,17 @@ public class CrawlingData {
 
     @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "crawlingData", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "crawling", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserCrawlingRecommendation> userCrawlingRecommendations = new ArrayList<>();
 
     @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "crawlingData", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "crawling", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatRoom> chatRooms = new ArrayList<>();
 
     @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "crawlingData", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "crawling", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CrawlingInterest> crawlingInterests = new ArrayList<>();
 
     protected void addUserCrawlingRecommendation(UserCrawlingRecommendation userCrawlingRecommendation){

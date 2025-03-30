@@ -26,4 +26,6 @@ public class UpdateUserProfileRequestDto {
     private Gender gender;
 
     private String introText;
+
+    private String shortIntro;
 }

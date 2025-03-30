@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@ToString(of = {"userId", "nickname", "department", "studentId", "birthdate", "gender", "profileImageUrl", "socialProvider", "socialId", "introText", "createdAt"})
+@ToString(of = {"userId", "nickname", "department", "studentId", "birthdate", "gender", "profileImageUrl", "socialProvider", "socialId", "introText", "shortIntro", "createdAt"})
 @Table(name = "users",
         indexes = {
         },
@@ -64,6 +64,9 @@ public class User {
     @Column(columnDefinition = "TEXT")
     private String introText;
 
+    @Column(columnDefinition = "TEXT")
+    private String shortIntro;
+
     @CreationTimestamp
     @Column(updatable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
@@ -98,7 +101,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatMessage> chatMessages = new ArrayList<>();
 
-
     public void addHostedRooms(Room room){ //사용 x 연관계 편의 메서드 구성을 위한 메서드 <- hostRoom 추가는 연관관계 편의 메서드를 이용
         this.hostedRooms.add(room);
     }
@@ -131,6 +133,7 @@ public class User {
         if (dto.getBirthdate() != null) this.birthdate = dto.getBirthdate();
         if (dto.getGender() != null) this.gender = dto.getGender();
         if (dto.getIntroText() != null) this.introText = dto.getIntroText();
+        if (dto.getShortIntro() != null) this.shortIntro = dto.getShortIntro();
     }
 
     public void updateProfileImage(String profileImageUrl){

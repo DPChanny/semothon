@@ -2,7 +2,6 @@ package com.semothon.spring_server.interest.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.semothon.spring_server.crawling.entity.CrawlingData;
 import com.semothon.spring_server.crawling.entity.CrawlingInterest;
 import com.semothon.spring_server.room.entity.RoomInterest;
 import com.semothon.spring_server.user.entity.UserInterest;
