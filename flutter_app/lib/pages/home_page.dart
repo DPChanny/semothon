@@ -239,7 +239,7 @@ Widget mentorItem() {
               Text(
                 '전자정보학과 4학년입니다.',
                 style: TextStyle(
-                  color: const Color(0xFF888888),
+                  color: Color(0xFF888888),
                   fontSize: 12,
                   fontFamily: 'Noto Sans KR',
                   fontWeight: FontWeight.w400,
@@ -318,7 +318,7 @@ class HomePage extends StatelessWidget {
                   recommendedMentorList(),
                   const SizedBox(height: 10),
                   
-                  const RecommendedActivityWidget(),
+                  RecommendCardSlider(),
                    // 이후 콘텐츠 자리
                 ],
               ),
