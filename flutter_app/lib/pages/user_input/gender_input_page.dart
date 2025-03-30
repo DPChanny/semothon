@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_info.dart';
-import 'package:flutter_app/pages/user_input/register_complete_page.dart';
 
 class GenderInputPage extends StatefulWidget {
-  final UserInfo userInfo;
-
-  const GenderInputPage({super.key, required this.userInfo});
+  const GenderInputPage({super.key});
 
   @override
   State<GenderInputPage> createState() => _GenderInputPageState();
@@ -69,14 +66,8 @@ class _GenderInputPageState extends State<GenderInputPage> {
                 child: ElevatedButton(
                   onPressed: _selectedGender != null
                       ? () {
-                    final updatedUserInfo = widget.userInfo;
-                    updatedUserInfo.gender = _selectedGender!;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegisterCompletePage(userInfo: updatedUserInfo),
-                      ),
-                    );
+                    UserInfo.gender = _selectedGender!;
+                    Navigator.pushNamed(context, "/user_input/register_complete_page");
                   }
                       : null,
                   style: ElevatedButton.styleFrom(

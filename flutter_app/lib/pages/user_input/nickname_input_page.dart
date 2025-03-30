@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/pages/user_input/department_input_page.dart';
 import 'package:flutter_app/dto/user_info.dart';
 
 class NicknameInputPage extends StatefulWidget {
-  final UserInfo userInfo;
-
-  const NicknameInputPage({super.key, required this.userInfo});
+  const NicknameInputPage({super.key});
 
   @override
   State<NicknameInputPage> createState() => _NicknameInputPageState();
@@ -119,15 +116,8 @@ class _NicknameInputPageState extends State<NicknameInputPage> {
                 height: 47,
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled ? () {
-                    final updatedUserInfo = widget.userInfo;
-                    updatedUserInfo.nickname = _controller.text;
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DepartmentInputPage(userInfo: updatedUserInfo),
-                      ),
-                    );// 다음 페이지로 이동
+                    UserInfo.nickname = _controller.text;
+                    Navigator.pushNamed(context, "/user_input/department_input_page");
                   } : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _isButtonEnabled ? const Color(0xFF008CFF) : const Color(0xFFE4E4E4),

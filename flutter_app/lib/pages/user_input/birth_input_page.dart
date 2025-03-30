@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_info.dart';
-import 'package:flutter_app/pages/user_input/gender_input_page.dart';
 
 class BirthInputPage extends StatefulWidget {
-  final UserInfo userInfo;
-
-  const BirthInputPage({super.key, required this.userInfo});
+  const BirthInputPage({super.key});
 
   @override
   State<BirthInputPage> createState() => _BirthInputPageState();
@@ -130,14 +127,8 @@ class _BirthInputPageState extends State<BirthInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    final updatedUserInfo = widget.userInfo;
-                    updatedUserInfo.birth = _controller.text;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GenderInputPage(userInfo: updatedUserInfo),
-                      ),
-                    );
+                    UserInfo.birth = _controller.text;
+                    Navigator.pushNamed(context, "/user_input/gender_input_page");
                   }
                       : null,
                   style: ElevatedButton.styleFrom(

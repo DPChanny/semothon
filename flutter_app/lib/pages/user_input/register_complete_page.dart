@@ -3,9 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_info.dart';
 
 class RegisterCompletePage extends StatelessWidget {
-  final UserInfo userInfo;
-
-  const RegisterCompletePage({super.key, required this.userInfo});
+  const RegisterCompletePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class RegisterCompletePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               Text(
-                '${userInfo.name} 님\n정보 입력이 완료되었습니다.',
+                '${UserInfo.name} 님\n정보 입력이 완료되었습니다.',
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -58,7 +56,11 @@ class RegisterCompletePage extends StatelessWidget {
                   height: 47,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.popUntil(context, (route) => route.isFirst);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/home_page',
+                            (Route<dynamic> route) => false,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF008CFF),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/dto/user_info.dart'; // ✅ UserInfo 모델 import
-import 'package:flutter_app/pages/user_input/nickname_input_page.dart';
+import 'package:flutter_app/dto/user_info.dart';
 
 class NameInputPage extends StatefulWidget {
   const NameInputPage({super.key});
@@ -117,21 +116,8 @@ class _NameInputPageState extends State<NameInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NicknameInputPage(
-                          userInfo: UserInfo(
-                            name: _controller.text,
-                            nickname: '',
-                            department: '',
-                            studentId: '',
-                            birth: '',
-                            gender: '',
-                          ),
-                        ),
-                      ),
-                    );
+                    UserInfo.name = _controller.text;
+                    Navigator.pushNamed(context, "/user_input/nickname_input_page");
                   }
                       : null,
                   style: ElevatedButton.styleFrom(

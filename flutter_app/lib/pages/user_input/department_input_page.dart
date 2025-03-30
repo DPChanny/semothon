@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_info.dart';
-import 'package:flutter_app/pages/user_input/studentid_input_page.dart';
 
 class DepartmentInputPage extends StatefulWidget {
-  final UserInfo userInfo;
-
-  const DepartmentInputPage({super.key, required this.userInfo});
+  const DepartmentInputPage({super.key});
 
   @override
   State<DepartmentInputPage> createState() => _DepartmentInputPageState();
@@ -119,14 +116,8 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    final updatedUserInfo = widget.userInfo;
-                    updatedUserInfo.department = _controller.text;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StudentIdInputPage(userInfo: updatedUserInfo),
-                      ),
-                    );
+                    UserInfo.department = _controller.text;
+                    Navigator.pushNamed(context, "/user_input/student_id_input_page");
                   }
                       : null,
                   style: ElevatedButton.styleFrom(

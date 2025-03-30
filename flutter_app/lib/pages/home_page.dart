@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:flutter_app/widgets/recommended_activity.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_app/widgets/mentor_item.dart';
 
-//상단 AppBar 생성
 AppBar buildAppBar() {
   return AppBar(
-    backgroundColor: Colors.grey[300], // 회색 배경
-    elevation: 0, // 그림자 제거
-    automaticallyImplyLeading: false, // 자동 뒤로가기 아이콘 제거
+    backgroundColor: Colors.grey[300],
+    elevation: 0,
+    automaticallyImplyLeading: false,
     title: const Text(
       '브랜드 로고',
       style: TextStyle(
@@ -24,19 +20,23 @@ AppBar buildAppBar() {
         onPressed: (){
           //마이페이지로 이동
         },
+      ),
+      IconButton(
+        icon: Icon(Icons.settings, color: Colors.black),
+        onPressed: (){
+          //설정 이동
+        },
       )
     ],
   );
 }
 
-//관심분야 카드 생성
 Widget interestCard(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
-  double imageSize = screenWidth * 0.2;
 
   return Container(
     width: double.infinity,
-    color: const Color(0xFF008CFF), // 💙 진한 파란색 배경
+    color: const Color(0xFF008CFF),
     padding: const EdgeInsets.fromLTRB(20, 24, 20, 60),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,23 +172,8 @@ class KeywordChip extends StatelessWidget {
     );
   }
 }
-/*
-Future<List<Mentor>> fetchMentors({required String major, required String grade}) async {
-  final uri = Uri.https(
-    'https://127.0.0.1:8080',     // 도메인 (스킴은 생략)
-    '/api/rooms',             // 경로
-    {
-      'major': major,
-      'grade': grade,
-    },                      // 쿼리 파라미터
-  );
-*/
-//추천 멘토리스트 생성
+
 Widget recommendedMentorList() {
-
-  //final url = Uri.parse('https://127.0.0.1:8080//api/rooms');
-
-
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     padding: const EdgeInsets.all(16),
