@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 
+import '../../dto/user_register_dto.dart';
+
 class RegisterCompletePage extends StatelessWidget {
   const RegisterCompletePage({super.key});
 
@@ -25,7 +27,7 @@ class RegisterCompletePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               Text(
-                '${UserDTO.name} 님\n정보 입력이 완료되었습니다.',
+                '${UserRegisterDTO.instance.nickname} 님\n정보 입력이 완료되었습니다.',
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 24,

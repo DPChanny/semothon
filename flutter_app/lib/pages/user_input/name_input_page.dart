@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 
+import '../../dto/user_register_dto.dart';
+
 class NameInputPage extends StatefulWidget {
   const NameInputPage({super.key});
 
@@ -116,7 +118,7 @@ class _NameInputPageState extends State<NameInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    UserDTO.name = _controller.text;
+                    UserRegisterDTO.instance.nickname = _controller.text;
                     Navigator.pushNamed(context, "/user_input/nickname_input_page");
                   }
                       : null,

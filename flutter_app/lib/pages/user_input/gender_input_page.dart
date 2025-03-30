@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 
+import '../../dto/user_register_dto.dart';
+
 class GenderInputPage extends StatefulWidget {
   const GenderInputPage({super.key});
 
@@ -66,7 +68,7 @@ class _GenderInputPageState extends State<GenderInputPage> {
                 child: ElevatedButton(
                   onPressed: _selectedGender != null
                       ? () {
-                    UserDTO.gender = _selectedGender!;
+                    UserRegisterDTO.instance.gender = _selectedGender!;
                     Navigator.pushNamed(context, "/user_input/register_complete_page");
                   }
                       : null,

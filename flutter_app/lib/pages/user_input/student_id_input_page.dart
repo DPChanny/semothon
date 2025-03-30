@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 
+import '../../dto/user_register_dto.dart';
+
 class StudentIdInputPage extends StatefulWidget {
   const StudentIdInputPage({super.key});
 
@@ -117,7 +119,7 @@ class _StudentIdInputPageState extends State<StudentIdInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    UserDTO.studentId = _controller.text;
+                    UserRegisterDTO.instance.studentId = _controller.text;
                     Navigator.pushNamed(context, "/user_input/birth_input_page");
                   }
                       : null,

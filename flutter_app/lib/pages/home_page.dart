@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/recommended_activity.dart';
+import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/services/fetch_mentors.dart';
+import 'package:flutter_app/widgets/mentor_item.dart';
+import '../dto/crawling_dto.dart';
+import '../services/fetch_crawlings.dart';
+import '../services/fetch_user.dart';
+import '../widgets/crawling_item.dart';
+import '../widgets/interest_card.dart';
 
 AppBar buildAppBar() {
   return AppBar(
-    backgroundColor: Colors.grey[300],
+    backgroundColor: Colors.white,
     elevation: 0,
     automaticallyImplyLeading: false,
     title: const Text(
@@ -16,13 +23,13 @@ AppBar buildAppBar() {
     ),
     actions: [
       IconButton(
-        icon: Icon(Icons.person, color: Colors.black),
+        icon: Icon(Icons.person, color: Colors.grey),
         onPressed: (){
           //마이페이지로 이동
         },
       ),
       IconButton(
-        icon: Icon(Icons.settings, color: Colors.black),
+        icon: Icon(Icons.settings, color: Colors.grey),
         onPressed: (){
           //설정 이동
         },
@@ -31,262 +38,230 @@ AppBar buildAppBar() {
   );
 }
 
-Widget interestCard(BuildContext context) {
-  double screenWidth = MediaQuery.of(context).size.width;
+Widget buildInterestCard() {
+  return FutureBuilder<(UserDTO, List<String>)>(
+    future: fetchUser(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Padding(
+          padding: EdgeInsets.all(32.0),
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
 
-  return Container(
-    width: double.infinity,
-    color: const Color(0xFF008CFF),
-    padding: const EdgeInsets.fromLTRB(20, 24, 20, 60),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // 상단 텍스트와 프로필
-        Row(
+      if (!snapshot.hasData) {
+        return const Padding(
+          padding: EdgeInsets.all(32.0),
+          child: Center(child: Text('데이터를 불러오는 데 실패했습니다.')),
+        );
+      }
+
+      final (user, keywords) = snapshot.data!;
+      return interestCard(context, user, keywords);
+    },
+  );
+}
+
+Widget buildMentorsCard() {
+  return FutureBuilder<List<UserDTO>>(
+    future: fetchMentors(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const SizedBox(
+          height: 500, // 공간 확보 (optional)
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
+
+      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return const SizedBox(
+          height: 500, // 공간 확보 (optional)
+          child: Center(child: Text('데이터를 불러오는 데 실패했습니다.')),
+        );
+      }
+
+      final mentors = snapshot.data!;
+
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4,
+              offset: Offset(0, 0),
+              spreadRadius: 2,
+            )
+          ],
+        ),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 텍스트
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    '나의 관심분야는?',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white, // 🔥 흰색
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    '나의 현재 관심사를 확인하고\n수정해 보세요.',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+            Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // 텍스트 부분
+              Expanded(
+                child: Text(
+                      '추천 멘토 List',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'Noto Sans KR',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    )
               ),
-            ),
-            const SizedBox(width: 16),
-            // 프로필 이미지
-            Container(
-              width: 80,
-              height: 80,
-              margin: const EdgeInsets.only(top: 24),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: NetworkImage('https://randomuser.me/api/portraits/women/75.jpg'),
-                  fit: BoxFit.cover,
-                ),
+
+              // 아이콘 부분
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 20,
+                color: Colors.blue, // 🔹 파란색
               ),
+            ],
+          ),
+            const SizedBox(height: 16),
+            Column(
+              children: mentors.map((mentor) => mentorItem(mentor)).toList(),
             ),
           ],
         ),
-        const SizedBox(height: 24),
-        
-  
-        // 키워드 태그들
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 🔹 Chip 리스트
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: const [
-                  KeywordChip(text: '개발'),
-                  KeywordChip(text: 'UX'),
-                  KeywordChip(text: '프론트'),
-                  KeywordChip(text: '프론트'),
-                  KeywordChip(text: '그래픽 디자인'),
-                  KeywordChip(text: 'UI'),
-                ],
-              ),
-
-          
-
-              // 🔹 화살표 아이콘을 오른쪽 하단에
-              Align(
-                alignment: Alignment.centerRight,
-                child: GestureDetector(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text('관심분야 수정'),
-                          content: const Text('관심분야를 수정하시겠습니까?'),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('취소'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                // TODO: 수정 로직
-                              },
-                              child: const Text('확인'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
-              ),
-            ],
-          )
-      ],
-    ),
+      );
+    },
   );
 }
 
-//관심분야 박스
-class KeywordChip extends StatelessWidget {
-  final String text;
+Widget buildCrawlingsCard() {
+  return FutureBuilder<List<CrawlingDto>>(
+    future: fetchCrawlingItems(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const SizedBox(
+          height: 180,
+          child: Center(child: CircularProgressIndicator()),
+        );
+      }
 
-  const KeywordChip({super.key, required this.text});
+      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return const SizedBox(
+          height: 180,
+          child: Center(child: Text('추천 활동이 없습니다.')),
+        );
+      }
+
+      final items = snapshot.data!;
+      final PageController pageController = PageController(
+          viewportFraction: 0.85);
+
+      return SizedBox(
+        height: 200,
+        child: PageView.builder(
+          controller: pageController,
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return crawlingItem(context, items[index]);
+          },
+        ),
+      );
+    },
+  );
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(20),
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  // 탭별 화면 위젯들
+  final List<Widget> _pages = [
+    // 홈 탭
+    SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildInterestCard(), // 관심 카드
+          Transform.translate(
+            offset: Offset(0, -90),
+            child: Column(
+              children: [
+                buildMentorsCard(),         // 멘토 리스트
+
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // 텍스트 부분
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              '추천 활동',
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              '관심사 분석을 통해 세모님의 맞춤형 활동을 추천합니다.',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // 아이콘 부분
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                        color: Colors.blue, // 🔹 파란색
+                      ),
+                    ],
+                  ),
+                ),
+
+                buildCrawlingsCard(),
+              ],
+            ),
+          ),
+        ],
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: Colors.white, // 💡 글자색 확실하게 지정!
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
+    ),
+
+    // 채팅 탭
+    Center(child: Text('채팅 페이지')),
+
+    // 멘토링 탭
+    Center(child: Text('멘토링 페이지')),
+
+    // 추천 활동 탭
+    Center(child: Text('추천 활동 페이지')),
+  ];
+
+  void _onTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
-}
-
-Widget recommendedMentorList() {
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(18),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black12,
-          blurRadius: 4,
-          offset: Offset(0, 0),
-          spreadRadius: 2
-        )
-      ],
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          '추천 멘토 List',
-          style: TextStyle(
-            fontSize: 24,
-            fontFamily: 'Noto Sans KR',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // 🔽 멘토 리스트 반복
-        Column(
-          children: List.generate(3, (index) => mentorItem()),
-        )
-      ],
-    ),
-  );
-}
-Widget mentorItem() {
-  return Container(
-    margin: const EdgeInsets.only(bottom: 12),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // 🖼 프로필 이미지
-        const CircleAvatar(
-          radius: 24,
-          backgroundImage: NetworkImage('https://randomuser.me/api/portraits/women/75.jpg'),
-        ),
-        const SizedBox(width: 12),
-
-        // 👤 이름 + 전공
-        const Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '날라다니는 전자맨',
-                style: TextStyle(
-                  fontFamily: 'Noto Sans KR',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: -0.29,
-                  fontSize: 17,
-                ),
-              ),
-              Text(
-                '전자정보학과 4학년입니다.',
-                style: TextStyle(
-                  color: Color(0xFF888888),
-                  fontSize: 12,
-                  fontFamily: 'Noto Sans KR',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: -0.20,
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        // 📦 버튼
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFE4E4E4),
-            foregroundColor: Colors.black,
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 2),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
-            ),
-            
-            elevation: 4,
-          ),
-          child: const Text(
-            '알아보기',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 13,
-              fontFamily: 'Noto Sans KR',
-              fontWeight: FontWeight.w400,
-              letterSpacing: -0.22,
-            ),
-          ),
-        )
-      ],
-    ),
-  );
-}
-
-
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
 
   Widget bottomNavigationBarWidget() {
     return BottomNavigationBar(
+      currentIndex: _selectedIndex,
+      onTap: _onTap,
+      type: BottomNavigationBarType.fixed,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -297,10 +272,13 @@ class HomePage extends StatelessWidget {
           label: '채팅',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.school),
           label: '멘토링',
         ),
-
+        BottomNavigationBarItem(
+          icon: Icon(Icons.star),
+          label: '추천 활동',
+        ),
       ],
     );
   }
@@ -309,30 +287,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: Colors.white,
         appBar: buildAppBar(),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  interestCard(context),
-                  recommendedMentorList(),
-                  const SizedBox(height: 10),
-                  
-                  RecommendCardSlider(),
-                   // 이후 콘텐츠 자리
-                ],
-              ),
-            ),
-
-            // 🌟 파란 카드에 겹쳐서 보일 추천 멘토 리스트
-           
-          ],
-        ),
+        body: _pages[_selectedIndex], // 현재 탭의 화면
         bottomNavigationBar: bottomNavigationBarWidget(),
       ),
     );
   }
-
 }
+

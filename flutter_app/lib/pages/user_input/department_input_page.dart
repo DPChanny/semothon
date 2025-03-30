@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/user_register_dto.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 
@@ -116,7 +117,7 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    UserDTO.department = _controller.text;
+                    UserRegisterDTO.instance.department = _controller.text;
                     Navigator.pushNamed(context, "/user_input/student_id_input_page");
                   }
                       : null,
