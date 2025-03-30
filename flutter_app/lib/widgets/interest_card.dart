@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../dto/user_dto.dart';
-import 'keyword_chip.dart';
+
+import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/widgets/keyword_chip.dart';
 
 Widget interestCard(BuildContext context, UserDTO user, List<String> keywords) {
   return Container(
@@ -35,21 +36,24 @@ Widget interestCard(BuildContext context, UserDTO user, List<String> keywords) {
                 ],
               ),
             ),
-            const SizedBox(width: 50,),
-            Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0), child:
-            Container(
-              width: 75,
-              height: 75,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: NetworkImage(user.profileImageUrl ??
-                      'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png'),
-                  fit: BoxFit.cover,
+            const SizedBox(width: 50),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Container(
+                width: 75,
+                height: 75,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      user.profileImageUrl ??
+                          'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-              )
           ],
         ),
         const SizedBox(height: 20),
@@ -62,7 +66,10 @@ Widget interestCard(BuildContext context, UserDTO user, List<String> keywords) {
               child: Wrap(
                 spacing: 4,
                 runSpacing: 4,
-                children: keywords.map((keyword) => KeywordChip(text: keyword)).toList(),
+                children:
+                    keywords
+                        .map((keyword) => KeywordChip(text: keyword))
+                        .toList(),
               ),
             ),
             // ✅ 아이콘을 오른쪽 끝으로 보내기
@@ -103,8 +110,7 @@ Widget interestCard(BuildContext context, UserDTO user, List<String> keywords) {
               ),
             ),
           ],
-        )
-
+        ),
       ],
     ),
   );

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 import 'package:flutter_app/services/fetch_mentors.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
-import '../dto/crawling_dto.dart';
-import '../services/fetch_crawlings.dart';
-import '../services/fetch_user.dart';
-import '../widgets/crawling_item.dart';
-import '../widgets/interest_card.dart';
+
+import 'package:flutter_app/dto/crawling_dto.dart';
+import 'package:flutter_app/services/fetch_crawlings.dart';
+import 'package:flutter_app/services/fetch_user.dart';
+import 'package:flutter_app/widgets/crawling_item.dart';
+import 'package:flutter_app/widgets/interest_card.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -24,16 +25,16 @@ AppBar buildAppBar() {
     actions: [
       IconButton(
         icon: Icon(Icons.person, color: Colors.grey),
-        onPressed: (){
+        onPressed: () {
           //마이페이지로 이동
         },
       ),
       IconButton(
         icon: Icon(Icons.settings, color: Colors.grey),
-        onPressed: (){
+        onPressed: () {
           //설정 이동
         },
-      )
+      ),
     ],
   );
 }
@@ -94,35 +95,35 @@ Widget buildMentorsCard() {
               blurRadius: 4,
               offset: Offset(0, 0),
               spreadRadius: 2,
-            )
+            ),
           ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // 텍스트 부분
-              Expanded(
-                child: Text(
-                      '추천 멘토 List',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Noto Sans KR',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    )
-              ),
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // 텍스트 부분
+                Expanded(
+                  child: Text(
+                    '추천 멘토 List',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'Noto Sans KR',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
 
-              // 아이콘 부분
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 20,
-                color: Colors.blue, // 🔹 파란색
-              ),
-            ],
-          ),
+                // 아이콘 부분
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 20,
+                  color: Colors.blue, // 🔹 파란색
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             Column(
               children: mentors.map((mentor) => mentorItem(mentor)).toList(),
@@ -154,7 +155,8 @@ Widget buildCrawlingsCard() {
 
       final items = snapshot.data!;
       final PageController pageController = PageController(
-          viewportFraction: 0.85);
+        viewportFraction: 0.85,
+      );
 
       return SizedBox(
         height: 200,
@@ -192,7 +194,7 @@ class _HomePageState extends State<HomePage> {
             offset: Offset(0, -90),
             child: Column(
               children: [
-                buildMentorsCard(),         // 멘토 리스트
+                buildMentorsCard(), // 멘토 리스트
 
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -263,22 +265,10 @@ class _HomePageState extends State<HomePage> {
       onTap: _onTap,
       type: BottomNavigationBarType.fixed,
       items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: '홈',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat),
-          label: '채팅',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.school),
-          label: '멘토링',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.star),
-          label: '추천 활동',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+        BottomNavigationBarItem(icon: Icon(Icons.chat), label: '채팅'),
+        BottomNavigationBarItem(icon: Icon(Icons.school), label: '멘토링'),
+        BottomNavigationBarItem(icon: Icon(Icons.star), label: '추천 활동'),
       ],
     );
   }
@@ -295,4 +285,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

@@ -1,5 +1,5 @@
-import '../dto/user_dto.dart';
-import 'dummy_users.dart';
+import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/services/dummy_users.dart';
 
 Future<List<UserDTO>> fetchMentors() async {
   await Future.delayed(Duration(seconds: 1));

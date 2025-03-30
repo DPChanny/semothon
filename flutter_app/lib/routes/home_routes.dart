@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../pages/home_page.dart';
+
+import 'package:flutter_app/pages/home_page.dart';
 
 final Map<String, WidgetBuilder> homeRoutes = {
   '/home_page': (context) => const HomePage(),

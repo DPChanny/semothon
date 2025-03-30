@@ -24,12 +24,12 @@ class CrawlingDto {
       url: json['url'],
       imageUrl: json['imageUrl'],
       description: json['description'],
-      publishedAt: json['publishedAt'] != null
-          ? DateTime.parse(json['publishedAt'])
-          : null,
-      crawledAt: json['crawledAt'] != null
-          ? DateTime.parse(json['crawledAt'])
-          : null,
+      publishedAt:
+          json['publishedAt'] != null
+              ? DateTime.parse(json['publishedAt'])
+              : null,
+      crawledAt:
+          json['crawledAt'] != null ? DateTime.parse(json['crawledAt']) : null,
     );
   }
 

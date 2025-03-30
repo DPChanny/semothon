@@ -9,8 +9,10 @@ Widget mentorItem(UserDTO mentor) {
       children: [
         CircleAvatar(
           radius: 30,
-          backgroundImage: NetworkImage(mentor.profileImageUrl ??
-              'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png'),
+          backgroundImage: NetworkImage(
+            mentor.profileImageUrl ??
+                'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
+          ),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -62,8 +64,7 @@ Widget mentorItem(UserDTO mentor) {
             minimumSize: const Size(75, 10), // 버튼 최소 크기
           ),
           child: const Text('알아보기'),
-        )
-
+        ),
       ],
     ),
   );

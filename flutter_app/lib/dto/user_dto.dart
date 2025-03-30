@@ -33,9 +33,12 @@ class UserDTO {
       nickname: json['nickname'],
       department: json['department'],
       studentId: json['studentId'],
-      birthdate: json['birthdate'] != null ? DateTime.parse(json['birthdate']) : null,
+      birthdate:
+          json['birthdate'] != null ? DateTime.parse(json['birthdate']) : null,
       gender: json['gender'],
-      profileImageUrl: json['profileImageUrl'] ?? 'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
+      profileImageUrl:
+          json['profileImageUrl'] ??
+          'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
       socialProvider: json['socialProvider'],
       socialId: json['socialId'],
       introText: json['introText'],

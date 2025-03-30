@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../dto/crawling_dto.dart';
+import 'package:flutter_app/dto/crawling_dto.dart';
 
 Widget crawlingItem(BuildContext context, CrawlingDto item) {
   return Container(
@@ -10,11 +10,7 @@ Widget crawlingItem(BuildContext context, CrawlingDto item) {
       color: Colors.white,
       borderRadius: BorderRadius.circular(20),
       boxShadow: const [
-        BoxShadow(
-          color: Colors.black26,
-          blurRadius: 10,
-          offset: Offset(0, 6),
-        )
+        BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 6)),
       ],
     ),
     child: Row(
@@ -22,16 +18,10 @@ Widget crawlingItem(BuildContext context, CrawlingDto item) {
         ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: 100,
-              maxHeight: 150,
-            ),
+            constraints: const BoxConstraints(maxWidth: 100, maxHeight: 150),
             child: AspectRatio(
               aspectRatio: 3.25 / 5, // 너비:높이 = 4:5
-              child: Image.network(
-                item.imageUrl ?? '',
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(item.imageUrl ?? '', fit: BoxFit.cover),
             ),
           ),
         ),
@@ -50,15 +40,19 @@ Widget crawlingItem(BuildContext context, CrawlingDto item) {
                 overflow: TextOverflow.ellipsis,
               ),
               Spacer(),
-              Text('마감일: ${item.publishedAt?.toString().split(' ').first ?? '미정'}',
-                  style: TextStyle(color: Colors.grey[700])),
-              Text(item.description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.grey[700])),
+              Text(
+                '마감일: ${item.publishedAt?.toString().split(' ').first ?? '미정'}',
+                style: TextStyle(color: Colors.grey[700]),
+              ),
+              Text(
+                item.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.grey[700]),
+              ),
             ],
           ),
-        )
+        ),
       ],
     ),
   );

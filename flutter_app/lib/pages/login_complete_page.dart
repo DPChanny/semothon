@@ -13,11 +13,7 @@ class LoginCompletePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/check_icon.svg',
-                width: 60,
-                height: 60,
-              ),
+              SvgPicture.asset('assets/check_icon.svg', width: 60, height: 60),
               const SizedBox(height: 20),
               const Text(
                 '회원가입이 완료되었습니다.',
@@ -31,10 +27,7 @@ class LoginCompletePage extends StatelessWidget {
               const Text(
                 '당신의 진로를 Pathagora와 함께 시작해보세요!',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Noto Sans KR',
-                ),
+                style: TextStyle(fontSize: 16, fontFamily: 'Noto Sans KR'),
               ),
               const SizedBox(height: 40),
               SizedBox(

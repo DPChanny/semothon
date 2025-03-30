@@ -17,6 +17,7 @@ final Map<String, WidgetBuilder> loginRoutes = {
   '/user_input/gender_input_page': (context) => const GenderInputPage(),
   '/user_input/name_input_page': (context) => const NameInputPage(),
   '/user_input/nickname_input_page': (context) => const NicknameInputPage(),
-  '/user_input/register_complete_page': (context) => const RegisterCompletePage(),
+  '/user_input/register_complete_page':
+      (context) => const RegisterCompletePage(),
   '/user_input/student_id_input_page': (context) => const StudentIdInputPage(),
 };

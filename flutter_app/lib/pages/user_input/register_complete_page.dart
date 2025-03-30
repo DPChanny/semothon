@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/dto/user_dto.dart';
 
-import '../../dto/user_register_dto.dart';
+import 'package:flutter_app/dto/user_register_dto.dart';
 
 class RegisterCompletePage extends StatelessWidget {
   const RegisterCompletePage({super.key});
@@ -61,7 +60,7 @@ class RegisterCompletePage extends StatelessWidget {
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         '/home_page',
-                            (Route<dynamic> route) => false,
+                        (Route<dynamic> route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(

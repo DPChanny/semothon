@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatelessWidget {
@@ -10,8 +10,8 @@ class LoginPage extends StatelessWidget {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser == null) return false;
 
-      final GoogleSignInAuthentication googleAuth = await googleUser
-          .authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -87,9 +87,9 @@ class LoginPage extends StatelessWidget {
                   if (await signInWithGoogle(context)) {
                     Navigator.pushNamed(context, '/login_complete_page');
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('로그인 실패')),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text('로그인 실패')));
                   }
                 },
                 child: Ink(
@@ -128,7 +128,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),

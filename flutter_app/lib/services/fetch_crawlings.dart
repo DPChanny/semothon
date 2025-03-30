@@ -1,4 +1,4 @@
-import '../dto/crawling_dto.dart';
+import 'package:flutter_app/dto/crawling_dto.dart';
 
 Future<List<CrawlingDto>> fetchCrawlingItems() async {
   await Future.delayed(const Duration(seconds: 1));
@@ -21,6 +21,5 @@ Future<List<CrawlingDto>> fetchCrawlingItems() async {
       publishedAt: DateTime.now().add(const Duration(days: 18)),
       crawledAt: DateTime.now(),
     ),
-
   ];
 }

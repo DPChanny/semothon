@@ -96,12 +96,13 @@ class _BirthInputPageState extends State<BirthInputPage> {
               onTap: _pickDate,
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 14,
+                  horizontal: 12,
+                ),
                 margin: const EdgeInsets.only(top: 8),
                 decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Color(0xFF008CFF)),
-                  ),
+                  border: Border(bottom: BorderSide(color: Color(0xFF008CFF))),
                 ),
                 child: Text(
                   formattedDate,
@@ -123,9 +124,10 @@ class _BirthInputPageState extends State<BirthInputPage> {
                 child: ElevatedButton(
                   onPressed: isButtonEnabled ? _submit : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isButtonEnabled
-                        ? const Color(0xFF008CFF)
-                        : const Color(0xFFE4E4E4),
+                    backgroundColor:
+                        isButtonEnabled
+                            ? const Color(0xFF008CFF)
+                            : const Color(0xFFE4E4E4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(23.50),
                     ),
@@ -133,7 +135,10 @@ class _BirthInputPageState extends State<BirthInputPage> {
                   child: Text(
                     '완료',
                     style: TextStyle(
-                      color: isButtonEnabled ? Colors.white : const Color(0xFFB1B1B1),
+                      color:
+                          isButtonEnabled
+                              ? Colors.white
+                              : const Color(0xFFB1B1B1),
                       fontSize: 17,
                       fontFamily: 'Noto Sans KR',
                       fontWeight: FontWeight.w700,

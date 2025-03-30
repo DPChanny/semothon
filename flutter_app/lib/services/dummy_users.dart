@@ -72,7 +72,8 @@ List<UserDTO> dummyUsers = [
     socialProvider: '',
     socialId: '',
     createdAt: DateTime(2023, 4, 1),
-  ),UserDTO(
+  ),
+  UserDTO(
     userId: 'm2l4kj8x',
     nickname: '백엔드 마스터',
     department: '컴퓨터공학과',
