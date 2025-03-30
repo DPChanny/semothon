@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:flutter_app/widgets/recommended_activity.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:flutter_app/widgets/mentor_item.dart';
 
 //상단 AppBar 생성
 AppBar buildAppBar() {
@@ -170,9 +172,23 @@ class KeywordChip extends StatelessWidget {
     );
   }
 }
-
+/*
+Future<List<Mentor>> fetchMentors({required String major, required String grade}) async {
+  final uri = Uri.https(
+    'https://127.0.0.1:8080',     // 도메인 (스킴은 생략)
+    '/api/rooms',             // 경로
+    {
+      'major': major,
+      'grade': grade,
+    },                      // 쿼리 파라미터
+  );
+*/
 //추천 멘토리스트 생성
 Widget recommendedMentorList() {
+
+  //final url = Uri.parse('https://127.0.0.1:8080//api/rooms');
+
+
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     padding: const EdgeInsets.all(16),
@@ -239,7 +255,7 @@ Widget mentorItem() {
               Text(
                 '전자정보학과 4학년입니다.',
                 style: TextStyle(
-                  color: const Color(0xFF888888),
+                  color: Color(0xFF888888),
                   fontSize: 12,
                   fontFamily: 'Noto Sans KR',
                   fontWeight: FontWeight.w400,
@@ -280,6 +296,7 @@ Widget mentorItem() {
 }
 
 
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -318,7 +335,7 @@ class HomePage extends StatelessWidget {
                   recommendedMentorList(),
                   const SizedBox(height: 10),
                   
-                  const RecommendedActivityWidget(),
+                  RecommendCardSlider(),
                    // 이후 콘텐츠 자리
                 ],
               ),
