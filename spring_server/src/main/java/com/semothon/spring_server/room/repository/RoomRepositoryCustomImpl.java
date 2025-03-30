@@ -2,10 +2,12 @@ package com.semothon.spring_server.room.repository;
 
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.semothon.spring_server.room.dto.RoomSearchCondition;
 import com.semothon.spring_server.room.dto.RoomSortBy;
 import com.semothon.spring_server.room.dto.RoomSortDirection;
+import com.semothon.spring_server.room.entity.QRoomUser;
 import com.semothon.spring_server.room.entity.Room;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +36,7 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
                 .leftJoin(room.roomUsers, roomUser)
                 .leftJoin(room.roomInterests, roomInterest)
                 .leftJoin(roomInterest.interest, interest)
-                .leftJoin(room.userRoomRecommendations).on(userRoomRecommendation.room.eq(room).and(userRoomRecommendation.user.userId.eq(currentUserId)))
+                .leftJoin(userRoomRecommendation).on(userRoomRecommendation.room.eq(room).and(userRoomRecommendation.user.userId.eq(currentUserId)))
                 .where(
                         titleKeywordIn(condition.getTitleKeyword()),
                         descriptionKeywordIn(condition.getDescriptionKeyword()),
@@ -44,14 +46,14 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
                         interestIn(condition.getInterestNames()),
                         capacityBetween(condition.getMinCapacity(), condition.getMaxCapacity()),
                         recommendationScoreBetween(condition.getMinRecommendationScore(), condition.getMaxRecommendationScore()),
-                        joinedOnly(condition.isJoinedOnly(), currentUserId),
-                        excludeJoined(condition.isExcludeJoined(), currentUserId),
+                        joinedOnly(condition.getJoinedOnly(), currentUserId),
+                        excludeJoined(condition.getExcludeJoined(), currentUserId),
                         createdAtBetween(condition.getCreatedAfter(), condition.getCreatedBefore())
                 )
                 .distinct()
                 .orderBy(getOrderSpecifier(condition.getSortBy(), condition.getSortDirection()))
-                .offset((long) condition.getPage() * condition.getSize())
-                .limit(condition.getSize())
+                .offset((long) condition.getPage() * condition.getLimit())
+                .limit(condition.getLimit())
                 .fetch();
     }
 
@@ -95,6 +97,7 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
         return null;
     }
 
+    //추후 운영 과정 검증 필요
     private BooleanExpression recommendationScoreBetween(Double min, Double max) {
         if (min != null && max != null) return userRoomRecommendation.score.between(min, max);
         else if (min != null) return userRoomRecommendation.score.goe(min);
@@ -107,9 +110,20 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
     }
 
     private BooleanExpression excludeJoined(boolean exclude, String userId) {
-        return exclude ? roomUser.user.userId.ne(userId).or(roomUser.user.isNull()) : null;
+        if (!exclude) return null;
+
+        QRoomUser subRoomUser = new QRoomUser("subRoomUser");
+
+        return JPAExpressions.selectOne()
+                .from(subRoomUser)
+                .where(
+                        subRoomUser.room.eq(room),
+                        subRoomUser.user.userId.eq(userId)
+                )
+                .notExists();
     }
 
+    //추후 운영 검증 필요
     private BooleanExpression createdAtBetween(LocalDateTime start, LocalDateTime end) {
         if (start != null && end != null) return room.createdAt.between(start, end);
         else if (start != null) return room.createdAt.goe(start);

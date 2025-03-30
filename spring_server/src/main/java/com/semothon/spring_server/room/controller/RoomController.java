@@ -51,8 +51,14 @@ public class RoomController {
         if (condition.getPage() == null) {
             condition.setPage(0);
         }
-        if (condition.getSize() == null) {
-            condition.setSize(10);
+        if (condition.getLimit() == null) {
+            condition.setLimit(10);
+        }
+        if (condition.getJoinedOnly() == null){
+            condition.setJoinedOnly(false);
+        }
+        if(condition.getExcludeJoined() == null){
+            condition.setExcludeJoined(false);
         }
 
         //KST 시간을 UTC로 변환

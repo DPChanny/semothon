@@ -37,9 +37,9 @@ public class RoomSearchCondition {
     private Double maxRecommendationScore;
 
     @Builder.Default
-    private boolean joinedOnly = false;     // 내가 참여 중인 그룹만
+    private Boolean joinedOnly = false;     // 내가 참여 중인 그룹만
     @Builder.Default
-    private boolean excludeJoined = false;  // 내가 참여하지 않은 그룹만
+    private Boolean excludeJoined = false;  // 내가 참여하지 않은 그룹만
 
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -61,7 +61,7 @@ public class RoomSearchCondition {
     @Min(value = 1, message = "Page size must be at least 1")
     @Max(value = 100, message = "Page size must be at most 100")
     @Builder.Default
-    private Integer size = 10;
+    private Integer limit = 10;
 
     @AssertTrue(message = "Start date cannot be after end date")
     public boolean isDateRangeValid() {
@@ -70,6 +70,6 @@ public class RoomSearchCondition {
 
     @AssertTrue(message = "'joinedOnly' and 'excludeJoined' cannot be both true")
     public boolean isJoinedConditionValid() {
-        return !(joinedOnly && excludeJoined);
+        return !(Boolean.TRUE.equals(joinedOnly) && Boolean.TRUE.equals(excludeJoined));
     }
 }
