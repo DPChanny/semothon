@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/dto/user_info.dart';
+import 'package:flutter_app/dto/user_dto.dart';
 
 class DepartmentInputPage extends StatefulWidget {
   const DepartmentInputPage({super.key});
@@ -116,7 +116,7 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    UserInfo.department = _controller.text;
+                    UserDTO.department = _controller.text;
                     Navigator.pushNamed(context, "/user_input/student_id_input_page");
                   }
                       : null,

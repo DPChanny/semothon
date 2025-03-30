@@ -79,33 +79,33 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 36),
 
             // ✅ Google 버튼 (팝업 띄움)
-            Container(
-              width: 263,
-              height: 38,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    width: 1,
-                    color: Color(0xFFB1B1B1),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(19),
+                onTap: () async {
+                  if (await signInWithGoogle(context)) {
+                    Navigator.pushNamed(context, '/login_complete_page');
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('로그인 실패')),
+                    );
+                  }
+                },
+                child: Ink(
+                  width: 263,
+                  height: 38,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                        width: 1,
+                        color: Color(0xFFB1B1B1),
+                      ),
+                      borderRadius: BorderRadius.circular(19),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(19),
-                ),
-              ),
-
-              child: Material(
-                color: Colors.transparent, // 배경 없앰 (필요에 따라 설정 가능)
-                child: InkWell(
-                  onTap: () async {
-                    if (await signInWithGoogle(context)) {
-                      Navigator.pushNamed(context, '/login_complete_page');
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('로그인 실패')),
-                      );
-                    }
-                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -129,7 +129,6 @@ class LoginPage extends StatelessWidget {
               ),
             ),
 
-            const Spacer(),
           ],
         ),
       ),

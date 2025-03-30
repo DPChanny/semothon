@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/dto/user_info.dart';
+import 'package:flutter_app/dto/user_dto.dart';
 
 class BirthInputPage extends StatefulWidget {
   const BirthInputPage({super.key});
@@ -127,7 +127,7 @@ class _BirthInputPageState extends State<BirthInputPage> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                    UserInfo.birth = _controller.text;
+                    UserDTO.birth = _controller.text;
                     Navigator.pushNamed(context, "/user_input/gender_input_page");
                   }
                       : null,

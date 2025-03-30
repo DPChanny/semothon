@@ -1,4 +1,4 @@
-class UserInfo {
+class UserDTO {
   static String? name;
   static String? nickname;
   static String? department;
