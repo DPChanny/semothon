@@ -22,14 +22,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AiService {
     private final WebClient webClient;
-    private final UserRepository userRepository;
-    private final UserInterestRepository userInterestRepository;
 
     @Value("${external.fastapi.url}")
     private String fastApiBaseUrl;
 
     @Transactional(readOnly = true)
-    public String generateIntroAfterCommit(String userId) {
+    public String generateIntro(String userId) {
         String apiUrl = fastApiBaseUrl + "/api/ai/intro";
 
         try {
@@ -47,6 +45,72 @@ public class AiService {
             }
         } catch (Exception e) {
             throw new RuntimeException("FastAPI intro request failed", e);
+        }
+    }
+
+    @Transactional
+    public String updateInterestByIntroText(String userId) {
+        String apiUrl = fastApiBaseUrl + "/api/ai/interest/user";
+
+        try {
+            FastApiIntroResponse response = webClient.post()
+                    .uri(apiUrl)
+                    .bodyValue(Map.of("user_id", userId))
+                    .retrieve()
+                    .bodyToMono(FastApiIntroResponse.class)
+                    .block();
+
+            if (response != null && response.isSuccess()) {
+                return response.getMessage();
+            } else {
+                throw new RuntimeException("FastAPI update interests failed: " + (response != null ? response.getMessage() : "unknown error"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("FastAPI interest/user request failed", e);
+        }
+    }
+
+    @Transactional
+    public String updateUserRoomRecommendation(String userId) {
+        String apiUrl = fastApiBaseUrl + "/api/ai/recommend/room/by-user";
+
+        try {
+            FastApiIntroResponse response = webClient.post()
+                    .uri(apiUrl)
+                    .bodyValue(Map.of("user_id", userId))
+                    .retrieve()
+                    .bodyToMono(FastApiIntroResponse.class)
+                    .block();
+
+            if (response != null && response.isSuccess()) {
+                return response.getMessage();
+            } else {
+                throw new RuntimeException("FastAPI update UserRoomRecommendation failed: " + (response != null ? response.getMessage() : "unknown error"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("FastAPI interest/user request failed", e);
+        }
+    }
+
+    @Transactional
+    public String updateUserCrawlingRecommendation(String userId) {
+        String apiUrl = fastApiBaseUrl + "/api/ai/recommend/crawling/by-user";
+
+        try {
+            FastApiIntroResponse response = webClient.post()
+                    .uri(apiUrl)
+                    .bodyValue(Map.of("user_id", userId))
+                    .retrieve()
+                    .bodyToMono(FastApiIntroResponse.class)
+                    .block();
+
+            if (response != null && response.isSuccess()) {
+                return response.getMessage();
+            } else {
+                throw new RuntimeException("FastAPI update UserCrawlingRecommendation failed: " + (response != null ? response.getMessage() : "unknown error"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("FastAPI interest/user request failed", e);
         }
     }
 }

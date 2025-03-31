@@ -142,4 +142,8 @@ public class User {
     public void updateProfileImage(String profileImageUrl){
         this.profileImageUrl = profileImageUrl;
     }
+
+    public void updateIntroText(String introText){
+        this.introText = introText;
+    }
 }

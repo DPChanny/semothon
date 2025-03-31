@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -119,9 +120,33 @@ public class UserController {
             @RequestBody @Valid UpdateUserInterestRequestDto updateUserInterestRequestDto
     ){
         userService.updateUserInterest(user.getUserId(), updateUserInterestRequestDto);
-        String generatedIntroText = aiService.generateIntroAfterCommit(user.getUserId());
+        String generatedIntroText = aiService.generateIntro(user.getUserId());
 
         return BaseResponse.success(Map.of("code", 200, "generatedIntroText", generatedIntroText), "Intro text generated successfully");
+    }
+
+    @PutMapping("/intro")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse updateUserIntro(
+            @AuthenticationPrincipal User user,
+            @RequestBody String intro
+    ){
+        User findUser = userService.getUser(user.getUserId());
+
+        if(StringUtils.hasText(intro)){
+            userService.updateUserIntro(findUser.getUserId(), intro);
+            aiService.updateInterestByIntroText(findUser.getUserId());
+        }
+        String finalIntro = aiService.generateIntro(findUser.getUserId());
+
+        userService.updateUserIntro(findUser.getUserId(), finalIntro);
+
+        aiService.updateUserRoomRecommendation(findUser.getUserId());
+        aiService.updateUserCrawlingRecommendation(findUser.getUserId());
+
+        GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
+
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User intro updated successfully");
     }
 
     @GetMapping("/profile-image")

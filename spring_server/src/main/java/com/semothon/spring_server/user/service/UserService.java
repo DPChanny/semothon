@@ -188,4 +188,12 @@ public class UserService {
 
         userInterestRepository.saveAll(userInterests);
     }
+
+    public void updateUserIntro(String userId, String intro) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("User not found"));
+
+        user.updateIntroText(intro);
+    }
+
 }
