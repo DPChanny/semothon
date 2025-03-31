@@ -20,6 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -157,6 +159,7 @@ public class UserService {
         return user.getProfileImageUrl();
     }
 
+    @Transactional(readOnly = true)
     public List<User> getUserList(String userId, UserSearchCondition condition) {
         return userRepository.searchUserList(condition, userId);
     }
@@ -184,6 +187,20 @@ public class UserService {
                 .collect(Collectors.toList());
 
         userInterestRepository.saveAll(userInterests);
+        userInterestRepository.flush();
+
+
+        //트랜잭션 처리 후 fast api 호출
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCommit() {
+                try {
+                    aiService.generateIntroAfterCommit(userId);
+                } catch (Exception e) {
+                    log.error("FastAPI 호출 실패", e);
+                }
+            }
+        });
 
         return aiService.generateIntroAfterCommit(userId);
     }

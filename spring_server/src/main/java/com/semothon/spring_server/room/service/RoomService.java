@@ -126,6 +126,7 @@ public class RoomService {
         roomUserRepository.delete(roomUser);
     }
 
+    @Transactional(readOnly = true)
     public List<Room> getRoomList(String userId, RoomSearchCondition condition) {
         return roomRepository.searchRoomList(condition, userId);
     }
