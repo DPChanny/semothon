@@ -66,7 +66,7 @@ Widget buildInterestCard() {
   );
 }
 
-Widget buildMentorsCard() {
+Widget buildMentorsCard(context) {
   return FutureBuilder<List<UserDTO>>(
     future: fetchMentors(3),
     builder: (context, snapshot) {
@@ -120,10 +120,20 @@ Widget buildMentorsCard() {
                 ),
 
                 // 아이콘 부분
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: Colors.blue, // 🔹 파란색
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MentoringPage(initialTab: 0),
+                      ),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                    color: Colors.blue,
+                  ),
                 ),
               ],
             ),
@@ -186,7 +196,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   // 탭별 화면 위젯들
-  final List<Widget> _pages = [
+  List<Widget> get _pages => [
     // 홈 탭
     SingleChildScrollView(
       child: Column(
@@ -197,7 +207,7 @@ class _HomePageState extends State<HomePage> {
             offset: Offset(0, -90),
             child: Column(
               children: [
-                buildMentorsCard(), // 멘토 리스트
+                buildMentorsCard(context), // 멘토 리스트
 
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -263,17 +273,15 @@ class _HomePageState extends State<HomePage> {
   });
 }
 
-  @override
+    @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: buildAppBar("브랜드이름"),
-        body: _pages[_selectedIndex], // 현재 탭의 화면
-        bottomNavigationBar: BottomNavigationBarWidget(
-          currentIndex: _selectedIndex,
-          onTap: _onTap,
-        ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: buildAppBar("브랜드이름"),
+      body: _pages[_selectedIndex], // ✅ SafeArea 제거
+      bottomNavigationBar: BottomNavigationBarWidget(
+        currentIndex: _selectedIndex,
+        onTap: _onTap,
       ),
     );
   }

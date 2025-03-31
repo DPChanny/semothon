@@ -5,16 +5,27 @@ import 'package:flutter_app/widgets/bottom_navigation.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 import 'package:flutter_app/services/fetch_mentors.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
+import 'package:flutter_app/widgets/recommended_chatroom.dart';
+import 'package:flutter_app/services/dummy_rooms.dart';
+
 
 class MentoringPage extends StatefulWidget {
-  const MentoringPage({super.key});
+  final int initialTab;
+
+  const MentoringPage({super.key, this.initialTab = 0}); //기본값 0 ->추천멘토
 
   @override
   State<MentoringPage> createState() => _MentoringPageState();
 }
 
 class _MentoringPageState extends State<MentoringPage> {
-  int _selectedTabIndex = 0;
+  late int _selectedTabIndex;
+    @override
+  void initState() {
+    super.initState();
+    _selectedTabIndex = widget.initialTab; // 전달된 탭 인덱스 받기
+  }
+
 
   void _onTabSelected(int index) {
     setState(() {
@@ -49,8 +60,11 @@ class _MentoringPageState extends State<MentoringPage> {
               decoration: InputDecoration(
                 hintText: '멘토 검색',
                 prefixIcon: Icon(Icons.search),
+                  filled: true, // ✅ 배경색 적용하려면 반드시 필요!
+                  fillColor: Color(0xFFE4E4E4),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
               ),
@@ -113,6 +127,8 @@ class TabBarSection extends StatelessWidget {
   }
 }
 
+//추천 멘토 리스트
+
 class MentorListView extends StatelessWidget {
   const MentorListView({super.key});
 
@@ -143,25 +159,20 @@ class MentorListView extends StatelessWidget {
   }
 }
 
+//추천 멘토방 리스트
 class RecommendedRoomListView extends StatelessWidget {
   const RecommendedRoomListView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final rooms = randomRooms(6); // 랜덤으로 6개 선택
+
     return ListView.builder(
-      itemCount: 6, // 예시
-      padding: const EdgeInsets.all(12),
+      itemCount: rooms.length,
       itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            leading: Text('0${index + 1}'),
-            title: const Text('프론트 빡시기'),
-            subtitle: const Text(
-              '현업과 선배들이 이야기하는 코딩\n진로를 위한 여러가지 추천 활동들',
-            ),
-            trailing: const Text('3 / 10', style: TextStyle(color: Colors.grey)),
-            isThreeLine: true,
-          ),
+        return RecommendedChatRoom(
+          room: rooms[index],
+          index: index,
         );
       },
     );
