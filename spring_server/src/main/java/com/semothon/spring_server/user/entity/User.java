@@ -136,7 +136,6 @@ public class User {
         if (dto.getStudentId() != null) this.studentId = dto.getStudentId();
         if (dto.getBirthdate() != null) this.birthdate = dto.getBirthdate();
         if (dto.getGender() != null) this.gender = dto.getGender();
-        if (dto.getIntroText() != null) this.introText = dto.getIntroText();
         if (dto.getShortIntro() != null) this.shortIntro = dto.getShortIntro();
     }
 

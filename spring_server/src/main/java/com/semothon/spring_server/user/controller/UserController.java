@@ -109,6 +109,17 @@ public class UserController {
         return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile updated successfully");
     }
 
+    @PutMapping("/interests")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse updateUserInterest(
+            @AuthenticationPrincipal User user,
+            @RequestBody @Valid UpdateUserInterestRequestDto updateUserInterestRequestDto
+    ){
+        String generatedIntroText =  userService.updateUserInterest(user.getUserId(), updateUserInterestRequestDto);
+
+        return BaseResponse.success(Map.of("code", 200, "generatedIntroText", generatedIntroText), "User profile updated successfully");
+    }
+
     @GetMapping("/profile-image")
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse getProfileImage(

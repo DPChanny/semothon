@@ -5,9 +5,15 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.semothon.spring_server.common.exception.InvalidInputException;
+import com.semothon.spring_server.interest.entity.Interest;
+import com.semothon.spring_server.interest.repository.InterestRepository;
+import com.semothon.spring_server.user.dto.GetUserResponseDto;
+import com.semothon.spring_server.user.dto.UpdateUserInterestRequestDto;
 import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
 import com.semothon.spring_server.user.dto.UserSearchCondition;
 import com.semothon.spring_server.user.entity.User;
+import com.semothon.spring_server.user.entity.UserInterest;
+import com.semothon.spring_server.user.repository.UserInterestRepository;
 import com.semothon.spring_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -28,6 +35,8 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserInterestRepository userInterestRepository;
+    private final InterestRepository interestRepository;
 
 
     private final AmazonS3 amazonS3;
@@ -144,5 +153,30 @@ public class UserService {
 
     public List<User> getUserList(String userId, UserSearchCondition condition) {
         return userRepository.searchUserList(condition, userId);
+    }
+
+    public String updateUserInterest(String userId, UpdateUserInterestRequestDto updateUserInterestRequestDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("User not found"));
+
+        // 기존 관심사 제거
+        userInterestRepository.deleteAllByUser(user);
+
+        List<Interest> interests = interestRepository.findAllByNameIn(updateUserInterestRequestDto.getInterestNames());
+
+        List<UserInterest> userInterests = interests.stream()
+                .map(interest -> {
+                    UserInterest userInterest = UserInterest.builder()
+                            .build();
+
+                    userInterest.updateUser(user);
+                    userInterest.updateInterest(interest);
+                    return userInterest;
+                })
+                .collect(Collectors.toList());
+
+        userInterestRepository.saveAll(userInterests);
+
+
     }
 }
