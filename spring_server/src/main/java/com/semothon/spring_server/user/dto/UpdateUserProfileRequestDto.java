@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class UpdateUserProfileRequestDto {
+    private String name;
 
     @Size(min = 2, max = 20, message = "Nickname must be between 2 and 20 characters")
     @Pattern(regexp = "^[a-zA-Z0-9가-힣-_]+$", message = "Nickname can only contain Korean, English letters, numbers, underscores, and dashes")

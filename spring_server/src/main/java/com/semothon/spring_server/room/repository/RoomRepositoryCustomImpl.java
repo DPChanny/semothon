@@ -83,7 +83,9 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
     }
 
     private BooleanExpression hostNicknameEquals(String nickname) {
-        return (nickname != null) ? user.nickname.eq(nickname) : null;
+        return (nickname != null && !nickname.isBlank())
+                ? user.nickname.containsIgnoreCase(nickname)
+                : null;
     }
 
     private BooleanExpression interestIn(List<String> names) {

@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
+import com.semothon.spring_server.user.dto.UserSearchCondition;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -138,5 +140,9 @@ public class UserService {
         user.updateProfileImage(DEFAULT_PROFILE_IMAGE_URL);
 
         return user.getProfileImageUrl();
+    }
+
+    public List<User> getUserList(String userId, UserSearchCondition condition) {
+        return userRepository.searchUserList(condition, userId);
     }
 }

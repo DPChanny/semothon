@@ -3,7 +3,6 @@ package com.semothon.spring_server.common.config;
 import com.semothon.spring_server.interest.entity.Interest;
 import com.semothon.spring_server.interest.repository.InterestRepository;
 import com.semothon.spring_server.room.entity.Room;
-import com.semothon.spring_server.room.entity.RoomInterest;
 import com.semothon.spring_server.room.entity.RoomUser;
 import com.semothon.spring_server.room.entity.RoomUserRole;
 import com.semothon.spring_server.room.repository.RoomInterestRepository;
@@ -12,7 +11,6 @@ import com.semothon.spring_server.room.repository.RoomUserRepository;
 import com.semothon.spring_server.room.repository.UserRoomRecommendationRepository;
 import com.semothon.spring_server.user.entity.Gender;
 import com.semothon.spring_server.user.entity.User;
-import com.semothon.spring_server.user.entity.UserInterest;
 import com.semothon.spring_server.user.repository.UserInterestRepository;
 import com.semothon.spring_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -349,95 +347,95 @@ public class DataInitializer {
                         .build());
             }
 
-            List<String> room1Tags = List.of("머신러닝", "딥러닝", "데이터구조", "윤리학");
-            for (String name : room1Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow(() -> new IllegalArgumentException("관심사 [" + name + "] 를 찾을 수 없습니다."));
-                RoomInterest ri = RoomInterest.builder().build();
-                ri.updateRoom(room1);
-                ri.updateInterest(interest);
-                roomInterestRepository.save(ri);
-            }
-
-            List<String> room2Tags = List.of("관광지리", "지역분석", "문화교류활동", "윤리학");
-            for (String name : room2Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                RoomInterest ri = RoomInterest.builder().build();
-                ri.updateRoom(room2);
-                ri.updateInterest(interest);
-                roomInterestRepository.save(ri);
-            }
-
-            List<String> room3Tags = List.of("창작", "현대문학", "소설", "윤리학");
-            for (String name : room3Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                RoomInterest ri = RoomInterest.builder().build();
-                ri.updateRoom(room3);
-                ri.updateInterest(interest);
-                roomInterestRepository.save(ri);
-            }
-
-            List<String> room4Tags = List.of("문화비평", "현대문화", "사회철학", "윤리학");
-            for (String name : room4Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                RoomInterest ri = RoomInterest.builder().build();
-                ri.updateRoom(room4);
-                ri.updateInterest(interest);
-                roomInterestRepository.save(ri);
-            }
-
-            List<String> room5Tags = List.of("이중언어교육", "문화다양성", "세계시민교육", "윤리학");
-            for (String name : room5Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                RoomInterest ri = RoomInterest.builder().build();
-                ri.updateRoom(room5);
-                ri.updateInterest(interest);
-                roomInterestRepository.save(ri);
-            }
-
-            List<String> user1Tags = List.of("머신러닝", "딥러닝", "데이터구조", "윤리학");
-            for (String name : user1Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                UserInterest ui = UserInterest.builder().build();
-                ui.updateUser(user1);
-                ui.updateInterest(interest);
-                userInterestRepository.save(ui);
-            }
-
-            List<String> user2Tags = List.of("관광지리", "지역분석", "문화교류활동", "윤리학");
-            for (String name : user2Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                UserInterest ui = UserInterest.builder().build();
-                ui.updateUser(user2);
-                ui.updateInterest(interest);
-                userInterestRepository.save(ui);
-            }
-
-            List<String> user3Tags = List.of("창작", "현대문학", "소설", "윤리학");
-            for (String name : user3Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                UserInterest ui = UserInterest.builder().build();
-                ui.updateUser(user3);
-                ui.updateInterest(interest);
-                userInterestRepository.save(ui);
-            }
-
-            List<String> user4Tags = List.of("문화비평", "현대문화", "사회철학", "윤리학");
-            for (String name : user4Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                UserInterest ui = UserInterest.builder().build();
-                ui.updateUser(user4);
-                ui.updateInterest(interest);
-                userInterestRepository.save(ui);
-            }
-
-            List<String> user5Tags = List.of("이중언어교육", "문화다양성", "세계시민교육", "윤리학");
-            for (String name : user5Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow();
-                UserInterest ui = UserInterest.builder().build();
-                ui.updateUser(user5);
-                ui.updateInterest(interest);
-                userInterestRepository.save(ui);
-            }
+//            List<String> room1Tags = List.of("머신러닝", "딥러닝", "데이터구조", "윤리학");
+//            for (String name : room1Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                RoomInterest ri = RoomInterest.builder().build();
+//                ri.updateRoom(room1);
+//                ri.updateInterest(interest);
+//                roomInterestRepository.save(ri);
+//            }
+//
+//            List<String> room2Tags = List.of("관광지리", "지역분석", "문화교류활동", "윤리학");
+//            for (String name : room2Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                RoomInterest ri = RoomInterest.builder().build();
+//                ri.updateRoom(room2);
+//                ri.updateInterest(interest);
+//                roomInterestRepository.save(ri);
+//            }
+//
+//            List<String> room3Tags = List.of("창작", "현대문학", "소설", "윤리학");
+//            for (String name : room3Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                RoomInterest ri = RoomInterest.builder().build();
+//                ri.updateRoom(room3);
+//                ri.updateInterest(interest);
+//                roomInterestRepository.save(ri);
+//            }
+//
+//            List<String> room4Tags = List.of("문화비평", "현대문화", "사회철학", "윤리학");
+//            for (String name : room4Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                RoomInterest ri = RoomInterest.builder().build();
+//                ri.updateRoom(room4);
+//                ri.updateInterest(interest);
+//                roomInterestRepository.save(ri);
+//            }
+//
+//            List<String> room5Tags = List.of("이중언어교육", "문화다양성", "세계시민교육", "윤리학");
+//            for (String name : room5Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                RoomInterest ri = RoomInterest.builder().build();
+//                ri.updateRoom(room5);
+//                ri.updateInterest(interest);
+//                roomInterestRepository.save(ri);
+//            }
+//
+//            List<String> user1Tags = List.of("머신러닝", "딥러닝", "데이터구조", "윤리학");
+//            for (String name : user1Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                UserInterest ui = UserInterest.builder().build();
+//                ui.updateUser(user1);
+//                ui.updateInterest(interest);
+//                userInterestRepository.save(ui);
+//            }
+//
+//            List<String> user2Tags = List.of("관광지리", "지역분석", "문화교류활동", "윤리학");
+//            for (String name : user2Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                UserInterest ui = UserInterest.builder().build();
+//                ui.updateUser(user2);
+//                ui.updateInterest(interest);
+//                userInterestRepository.save(ui);
+//            }
+//
+//            List<String> user3Tags = List.of("창작", "현대문학", "소설", "윤리학");
+//            for (String name : user3Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                UserInterest ui = UserInterest.builder().build();
+//                ui.updateUser(user3);
+//                ui.updateInterest(interest);
+//                userInterestRepository.save(ui);
+//            }
+//
+//            List<String> user4Tags = List.of("문화비평", "현대문화", "사회철학", "윤리학");
+//            for (String name : user4Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                UserInterest ui = UserInterest.builder().build();
+//                ui.updateUser(user4);
+//                ui.updateInterest(interest);
+//                userInterestRepository.save(ui);
+//            }
+//
+//            List<String> user5Tags = List.of("이중언어교육", "문화다양성", "세계시민교육", "윤리학");
+//            for (String name : user5Tags) {
+//                Interest interest = interestRepository.findByName(name).orElseThrow();
+//                UserInterest ui = UserInterest.builder().build();
+//                ui.updateUser(user5);
+//                ui.updateInterest(interest);
+//                userInterestRepository.save(ui);
+//            }
 
 
         } else {

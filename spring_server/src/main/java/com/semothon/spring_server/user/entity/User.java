@@ -36,6 +36,9 @@ public class User {
     @Id
     private String userId;
 
+    @Column(length = 50)
+    private String name;
+
     @Column(length = 50 ,unique = true)
     private String nickname;
 
@@ -127,6 +130,7 @@ public class User {
 
 
     public void updateProfile(UpdateUserProfileRequestDto dto) {
+        if (dto.getName() != null) this.name = dto.getName();
         if (dto.getNickname() != null) this.nickname = dto.getNickname();
         if (dto.getDepartment() != null) this.department = dto.getDepartment();
         if (dto.getStudentId() != null) this.studentId = dto.getStudentId();
