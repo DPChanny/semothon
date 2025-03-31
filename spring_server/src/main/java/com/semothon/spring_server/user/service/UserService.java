@@ -4,10 +4,10 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.semothon.spring_server.ai.service.AiService;
 import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.interest.entity.Interest;
 import com.semothon.spring_server.interest.repository.InterestRepository;
-import com.semothon.spring_server.user.dto.GetUserResponseDto;
 import com.semothon.spring_server.user.dto.UpdateUserInterestRequestDto;
 import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
 import com.semothon.spring_server.user.dto.UserSearchCondition;
@@ -37,7 +37,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserInterestRepository userInterestRepository;
     private final InterestRepository interestRepository;
-
+    private final AiService aiService;
 
     private final AmazonS3 amazonS3;
     @Value("${cloud.aws.s3.bucket}")
@@ -66,6 +66,12 @@ public class UserService {
         return !userRepository.existsByNickname(nickname);
     }
 
+    @Transactional(readOnly = true)
+    public User getUser(String userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("User not found"));
+
+    }
 
     public User updateUser(String userId, UpdateUserProfileRequestDto dto) {
         User user = userRepository.findById(userId)
@@ -159,6 +165,8 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidInputException("User not found"));
 
+        log.info("updateUserInterestRequestDto.getInterestNames(): {}", updateUserInterestRequestDto.getInterestNames());
+
         // 기존 관심사 제거
         userInterestRepository.deleteAllByUser(user);
 
@@ -177,6 +185,8 @@ public class UserService {
 
         userInterestRepository.saveAll(userInterests);
 
-
+        return aiService.generateIntroAfterCommit(userId);
     }
+
+
 }

@@ -53,7 +53,8 @@ public class UserController {
     public BaseResponse getUserProfile(
             @AuthenticationPrincipal User user
     ){
-        GetUserResponseDto userResponseDto = GetUserResponseDto.from(user);
+        User findUser = userService.getUser(user.getUserId());
+        GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
 
         return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile retrieved successfully");
     }
