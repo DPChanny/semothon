@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/home_page.dart';
+import 'package:flutter_app/widgets/bottom_navigation.dart';
 
-class MentoringPage extends StatelessWidget {
+import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/services/fetch_mentors.dart';
+import 'package:flutter_app/widgets/mentor_item.dart';
+
+class MentoringPage extends StatefulWidget {
   const MentoringPage({super.key});
+
+  @override
+  State<MentoringPage> createState() => _MentoringPageState();
+}
+
+class _MentoringPageState extends State<MentoringPage> {
+  int _selectedTabIndex = 0;
+
+  void _onTabSelected(int index) {
+    setState(() {
+      _selectedTabIndex = index;
+    });
+  }
+
+  Widget _buildTabContent() {
+    switch (_selectedTabIndex) {
+      case 0:
+        return const MentorListView(); // 추천 멘토
+      case 1:
+        return const RecommendedRoomListView(); // 추천 멘토방
+      case 2:
+        return const Center(child: Text('멘토 되기 페이지')); // 멘토 되기
+      default:
+        return const SizedBox();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,53 +58,110 @@ class MentoringPage extends StatelessWidget {
           ),
 
           // 탭
-          const TabBarSection(),
+          TabBarSection(
+            selectedIndex: _selectedTabIndex,
+            onTabSelected: _onTabSelected,
+          ),
 
-          // 멘토 리스트
-          Expanded(child: MentorListView()),
+          // 탭 콘텐츠
+          Expanded(child: _buildTabContent()),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBarWidget(
+        currentIndex: 2,
+        onTap: (index) {
+          // 하단 탭 네비 처리
+        },
       ),
     );
   }
 }
 
+
 // 탭바 위젯 (추천 멘토 / 멘토방 / 멘토 되기)
 class TabBarSection extends StatelessWidget {
-  const TabBarSection({super.key});
+  final int selectedIndex;
+  final Function(int) onTabSelected;
+
+  const TabBarSection({
+    super.key,
+    required this.selectedIndex,
+    required this.onTabSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    const labels = ['추천 멘토', '추천 멘토방', '멘토 되기'];
+
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text('추천 멘토', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
-        Text('추천 멘토방', style: TextStyle(color: Colors.grey)),
-        Text('멘토 되기', style: TextStyle(color: Colors.grey)),
-      ],
+      children: List.generate(labels.length, (index) {
+        final isSelected = index == selectedIndex;
+
+        return GestureDetector(
+          onTap: () => onTabSelected(index),
+          child: Text(
+            labels[index],
+            style: TextStyle(
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              color: isSelected ? Colors.blue : Colors.grey,
+            ),
+          ),
+        );
+      }),
     );
   }
 }
 
-// 멘토 리스트 뷰
 class MentorListView extends StatelessWidget {
   const MentorListView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<UserDTO>>(
+      future: fetchMentors(10), // 🔹 백엔드에서 mentor list 가져옴
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('추천 멘토가 없습니다.'));
+        }
+
+        final mentors = snapshot.data!;
+
+        return ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: mentors.length,
+          itemBuilder: (context, index) {
+            return mentorItem(mentors[index]);
+          },
+        );
+      },
+    );
+  }
+}
+
+class RecommendedRoomListView extends StatelessWidget {
+  const RecommendedRoomListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 8,
+      itemCount: 6, // 예시
+      padding: const EdgeInsets.all(12),
       itemBuilder: (context, index) {
-        return ListTile(
-          leading: const CircleAvatar(
-            backgroundImage: AssetImage('assets/mentor.jpg'), // 이미지 경로는 적절히 변경
+        return Card(
+          child: ListTile(
+            leading: Text('0${index + 1}'),
+            title: const Text('프론트 빡시기'),
+            subtitle: const Text(
+              '현업과 선배들이 이야기하는 코딩\n진로를 위한 여러가지 추천 활동들',
+            ),
+            trailing: const Text('3 / 10', style: TextStyle(color: Colors.grey)),
+            isThreeLine: true,
           ),
-          title: const Text('날라다니는 코딩맨'),
-          subtitle: const Text('컴퓨터공학과 4학년\n프론트쪽으로 취업 예정'),
-          trailing: const Text(
-            '알아보기 >',
-            style: TextStyle(color: Colors.blue),
-          ),
-          isThreeLine: true,
         );
       },
     );

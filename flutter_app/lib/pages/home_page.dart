@@ -9,6 +9,7 @@ import 'package:flutter_app/services/fetch_user.dart';
 import 'package:flutter_app/widgets/crawling_item.dart';
 import 'package:flutter_app/widgets/interest_card.dart';
 import 'package:flutter_app/pages/mentoring_page.dart';
+import 'package:flutter_app/widgets/bottom_navigation.dart';
 
 
 AppBar buildAppBar(String title) {
@@ -67,7 +68,7 @@ Widget buildInterestCard() {
 
 Widget buildMentorsCard() {
   return FutureBuilder<List<UserDTO>>(
-    future: fetchMentors(),
+    future: fetchMentors(3),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const SizedBox(
@@ -245,12 +246,6 @@ class _HomePageState extends State<HomePage> {
       ),
     ),
 
-    // 채팅 탭
-    Center(child: Text('채팅 페이지')),
-
-
-    // 추천 활동 탭
-    Center(child: Text('추천 활동 페이지')),
   ];
 
   void _onTap(int index) {
@@ -268,21 +263,6 @@ class _HomePageState extends State<HomePage> {
   });
 }
 
-
-  Widget bottomNavigationBarWidget() {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: _onTap,
-      type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-        BottomNavigationBarItem(icon: Icon(Icons.chat), label: '채팅'),
-        BottomNavigationBarItem(icon: Icon(Icons.school), label: '멘토링'),
-        BottomNavigationBarItem(icon: Icon(Icons.star), label: '추천 활동'),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -290,7 +270,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         appBar: buildAppBar("브랜드이름"),
         body: _pages[_selectedIndex], // 현재 탭의 화면
-        bottomNavigationBar: bottomNavigationBarWidget(),
+        bottomNavigationBar: BottomNavigationBarWidget(
+          currentIndex: _selectedIndex,
+          onTap: _onTap,
+        ),
       ),
     );
   }

@@ -1,6 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_dto.dart';
 
+class MentorButton extends StatefulWidget {
+  const MentorButton({super.key});
+
+  @override
+  State<MentorButton> createState() => _MentorButtonState();
+}
+
+class _MentorButtonState extends State<MentorButton> {
+  bool _isClicked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          _isClicked = true; // 버튼 클릭 시 상태 변경
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _isClicked ? Colors.blue : Colors.white70,
+        foregroundColor: _isClicked ? Colors.white : Colors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+        minimumSize: const Size(75, 10),
+        elevation: 0,
+      ),
+      child: const Text('알아보기'),
+    );
+  }
+}
+
+
 Widget mentorItem(UserDTO mentor) {
   return Container(
     margin: const EdgeInsets.only(bottom: 12),
@@ -52,19 +86,7 @@ Widget mentorItem(UserDTO mentor) {
           ),
         ),
         const SizedBox(width: 12),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white70,
-            foregroundColor: Colors.grey,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            minimumSize: const Size(75, 10), // 버튼 최소 크기
-          ),
-          child: const Text('알아보기'),
-        ),
+        MentorButton(),
       ],
     ),
   );
