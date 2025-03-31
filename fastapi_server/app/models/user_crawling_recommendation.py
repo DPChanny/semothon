@@ -10,9 +10,9 @@ class UserCrawlingRecommendation(Base):
 
     user_crawling_rec_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
-    crawling_id = Column(Integer, ForeignKey("crawling_data.crawling_id"), nullable=False)
+    crawling_id = Column(Integer, ForeignKey("crawling.crawling_id"), nullable=False)
     score = Column(Float, nullable=False)
     activity_score = Column(Float, nullable=False)
 
     user = relationship("User")
-    crawling_data = relationship("CrawlingData")
+    crawling = relationship("Crawling")

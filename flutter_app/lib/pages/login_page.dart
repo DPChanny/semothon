@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -19,6 +20,17 @@ class LoginPage extends StatelessWidget {
       );
 
       await FirebaseAuth.instance.signInWithCredential(credential);
+      String?  idToken = await FirebaseAuth.instance.currentUser.getIdToken();
+      final Uri url = Uri.parse('http://localhost:8080/api/users/login');
+
+      final response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $idToken',
+        },
+      );
+
+      http.get()
 
       return true;
     } catch (e) {
