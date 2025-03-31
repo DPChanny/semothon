@@ -8,14 +8,16 @@ import 'package:flutter_app/services/fetch_crawlings.dart';
 import 'package:flutter_app/services/fetch_user.dart';
 import 'package:flutter_app/widgets/crawling_item.dart';
 import 'package:flutter_app/widgets/interest_card.dart';
+import 'package:flutter_app/pages/mentoring_page.dart';
 
-AppBar buildAppBar() {
+
+AppBar buildAppBar(String title) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0,
     automaticallyImplyLeading: false,
-    title: const Text(
-      '브랜드 로고',
+    title: Text(
+      title,
       style: TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.bold,
@@ -246,18 +248,26 @@ class _HomePageState extends State<HomePage> {
     // 채팅 탭
     Center(child: Text('채팅 페이지')),
 
-    // 멘토링 탭
-    Center(child: Text('멘토링 페이지')),
 
     // 추천 활동 탭
     Center(child: Text('추천 활동 페이지')),
   ];
 
   void _onTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  if (index == 2) {
+    // 멘토링 탭은 push로 이동
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MentoringPage()),
+    );
+    return; // selectedIndex는 변경하지 않음
   }
+
+  setState(() {
+    _selectedIndex = index;
+  });
+}
+
 
   Widget bottomNavigationBarWidget() {
     return BottomNavigationBar(
@@ -278,7 +288,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: buildAppBar(),
+        appBar: buildAppBar("브랜드이름"),
         body: _pages[_selectedIndex], // 현재 탭의 화면
         bottomNavigationBar: bottomNavigationBarWidget(),
       ),
