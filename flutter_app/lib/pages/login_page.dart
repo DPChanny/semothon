@@ -45,7 +45,7 @@ class LoginPage extends StatelessWidget {
           },
         );
 
-        http.get()
+        // http.get()
 
         return true;
       }

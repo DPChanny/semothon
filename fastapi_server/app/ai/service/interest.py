@@ -3,24 +3,34 @@ import torch
 
 from ai import sbert, descriptable_encoder
 
-def interest(descriptables, interests, top_k=10):
-    encoded_interests = sbert.encode([interest['name'] for interest in interests], convert_to_tensor=True)
+def interest(descriptables, interests, threshold=0.65, max_results=5):
+    encoded_interests = sbert.encode(
+        [interest['name'] for interest in interests],
+        convert_to_tensor=True
+    )
 
     results = []
 
-    encoded_descriptables = [descriptable_encoder.encode(descriptable) 
-                                    for descriptable in descriptables]
+    encoded_descriptables = [
+        descriptable_encoder.encode(descriptable)
+        for descriptable in descriptables
+    ]
 
     for encoded_descriptable in encoded_descriptables:
         cosine_scores = util.cos_sim(encoded_descriptable, encoded_interests)[0]
 
-        top_results = torch.topk(cosine_scores, k=top_k)
-        
-        result = []
+        filtered = []
+        for i, score in enumerate(cosine_scores):
+            score_value = score.item()
+            if score_value >= threshold:
+                filtered.append({
+                    'score': score_value,
+                    'interest_id': interests[i]['interest_id']
+                })
 
-        for score, idx in zip(top_results.values, top_results.indices):
-            result.append({'score': score, 'interest_id': interests[idx]['interest_id']})
+        # 점수 높은 순 정렬 후 상위 max_results개 자르기
+        filtered = sorted(filtered, key=lambda x: -x['score'])[:max_results]
 
-        results.append(result)
+        results.append(filtered)
 
     return results
