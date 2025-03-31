@@ -30,22 +30,6 @@ public class AiService {
 
     @Transactional(readOnly = true)
     public String generateIntroAfterCommit(String userId) {
-
-        // [1] DB에서 유저 조회
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
-
-        // [2] 관심사 - 리포지토리를 통해 DB에서 직접 조회 (영속성 컨텍스트 영향 X)
-        List<UserInterest> persistedUserInterests = userInterestRepository.findAllByUser(user);
-
-        log.info("[FastAPI Intro 생성] userId: {}, DB에서 조회한 관심사 수: {}, 관심사: {}",
-                userId,
-                persistedUserInterests.size(),
-                persistedUserInterests.stream()
-                        .map(userInterest -> userInterest.getInterest().getName())
-                        .toList()
-        );
-
         String apiUrl = fastApiBaseUrl + "/api/ai/intro";
 
         try {

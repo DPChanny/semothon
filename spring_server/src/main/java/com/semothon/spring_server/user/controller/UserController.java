@@ -1,5 +1,6 @@
 package com.semothon.spring_server.user.controller;
 
+import com.semothon.spring_server.ai.service.AiService;
 import com.semothon.spring_server.common.dto.BaseResponse;
 import com.semothon.spring_server.common.service.DateTimeUtil;
 import com.semothon.spring_server.room.dto.RoomSearchCondition;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final AiService aiService;
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
@@ -116,9 +118,10 @@ public class UserController {
             @AuthenticationPrincipal User user,
             @RequestBody @Valid UpdateUserInterestRequestDto updateUserInterestRequestDto
     ){
-        String generatedIntroText =  userService.updateUserInterest(user.getUserId(), updateUserInterestRequestDto);
+        userService.updateUserInterest(user.getUserId(), updateUserInterestRequestDto);
+        String generatedIntroText = aiService.generateIntroAfterCommit(user.getUserId());
 
-        return BaseResponse.success(Map.of("code", 200, "generatedIntroText", generatedIntroText), "User profile updated successfully");
+        return BaseResponse.success(Map.of("code", 200, "generatedIntroText", generatedIntroText), "Intro text generated successfully");
     }
 
     @GetMapping("/profile-image")

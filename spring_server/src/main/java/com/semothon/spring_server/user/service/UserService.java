@@ -164,7 +164,7 @@ public class UserService {
         return userRepository.searchUserList(condition, userId);
     }
 
-    public String updateUserInterest(String userId, UpdateUserInterestRequestDto updateUserInterestRequestDto) {
+    public void updateUserInterest(String userId, UpdateUserInterestRequestDto updateUserInterestRequestDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidInputException("User not found"));
 
@@ -187,23 +187,5 @@ public class UserService {
                 .collect(Collectors.toList());
 
         userInterestRepository.saveAll(userInterests);
-        userInterestRepository.flush();
-
-
-        //트랜잭션 처리 후 fast api 호출
-        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
-            @Override
-            public void afterCommit() {
-                try {
-                    aiService.generateIntroAfterCommit(userId);
-                } catch (Exception e) {
-                    log.error("FastAPI 호출 실패", e);
-                }
-            }
-        });
-
-        return aiService.generateIntroAfterCommit(userId);
     }
-
-
 }
