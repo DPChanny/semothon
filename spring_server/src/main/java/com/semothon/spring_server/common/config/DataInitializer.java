@@ -351,7 +351,7 @@ public class DataInitializer {
 
             List<String> room1Tags = List.of("머신러닝", "딥러닝", "데이터구조", "윤리학");
             for (String name : room1Tags) {
-                Interest interest = interestRepository.findByName(name).orElseThrow(() -> new IllegalArgumentException("관심사 [" + name + "] 를 찾을 수 없습니다."));
+                Interest interest = interestRepository.findByName(name).orElseThrow();
                 RoomInterest ri = RoomInterest.builder().build();
                 ri.updateRoom(room1);
                 ri.updateInterest(interest);
@@ -443,5 +443,6 @@ public class DataInitializer {
         } else {
             log.debug("[info] Test Data already exists. do not add new Test Data");
         }
+
     }
 }

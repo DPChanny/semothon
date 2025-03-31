@@ -7,41 +7,23 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 public class GetUserResponseDto {
+    private UserInfoDto userInfo;
+    private List<UserRoomInfoDto> rooms;
 
-    private String userId;
-    private String nickname;
-    private String department;
-    private String studentId;
-    private LocalDate birthdate;
-    private Gender gender;
-    private String profileImageUrl;
-    private String socialProvider;
-    private String socialId;
-    private String introText;
-    private String shortIntro;
-    private LocalDateTime createdAt;
-
-    public static GetUserResponseDto from(User user) {
+    public static GetUserResponseDto from(User user){
         return GetUserResponseDto.builder()
-                .userId(user.getUserId())
-                .nickname(user.getNickname())
-                .department(user.getDepartment())
-                .studentId(user.getStudentId())
-                .birthdate(user.getBirthdate())
-                .gender(user.getGender())
-                .profileImageUrl(user.getProfileImageUrl())
-                .socialProvider(user.getSocialProvider())
-                .socialId(user.getSocialId())
-                .introText(user.getIntroText())
-                .shortIntro(user.getShortIntro())
-                .createdAt(DateTimeUtil.convertUTCToKST(user.getCreatedAt()))
+                .userInfo(UserInfoDto.from(user))
+                .rooms(user.getRoomUsers().stream()
+                        .map(UserRoomInfoDto::from)
+                        .collect(Collectors.toList()))
                 .build();
     }
-
 }

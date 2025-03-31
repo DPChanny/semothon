@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/pages/user_input/department_input_page.dart';
-import 'package:flutter_app/dto/user_info.dart';
+
+import 'package:flutter_app/dto/user_register_dto.dart';
 
 class NicknameInputPage extends StatefulWidget {
-  final UserInfo userInfo;
-
-  const NicknameInputPage({super.key, required this.userInfo});
+  const NicknameInputPage({super.key});
 
   @override
   State<NicknameInputPage> createState() => _NicknameInputPageState();
@@ -118,19 +116,22 @@ class _NicknameInputPageState extends State<NicknameInputPage> {
                 width: 335,
                 height: 47,
                 child: ElevatedButton(
-                  onPressed: _isButtonEnabled ? () {
-                    final updatedUserInfo = widget.userInfo;
-                    updatedUserInfo.nickname = _controller.text;
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DepartmentInputPage(userInfo: updatedUserInfo),
-                      ),
-                    );// 다음 페이지로 이동
-                  } : null,
+                  onPressed:
+                      _isButtonEnabled
+                          ? () {
+                            UserRegisterDTO.instance.nickname =
+                                _controller.text;
+                            Navigator.pushNamed(
+                              context,
+                              "/user_input/department_input_page",
+                            );
+                          }
+                          : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _isButtonEnabled ? const Color(0xFF008CFF) : const Color(0xFFE4E4E4),
+                    backgroundColor:
+                        _isButtonEnabled
+                            ? const Color(0xFF008CFF)
+                            : const Color(0xFFE4E4E4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(23.50),
                     ),
@@ -138,7 +139,10 @@ class _NicknameInputPageState extends State<NicknameInputPage> {
                   child: Text(
                     '다음',
                     style: TextStyle(
-                      color: _isButtonEnabled ? Colors.white : const Color(0xFFB1B1B1),
+                      color:
+                          _isButtonEnabled
+                              ? Colors.white
+                              : const Color(0xFFB1B1B1),
                       fontSize: 17,
                       fontFamily: 'Noto Sans KR',
                       fontWeight: FontWeight.w700,

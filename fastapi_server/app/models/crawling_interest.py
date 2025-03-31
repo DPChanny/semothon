@@ -9,8 +9,8 @@ class CrawlingInterest(Base):
     )
 
     crawling_interest_id = Column(Integer, primary_key=True, autoincrement=True)
-    crawling_id = Column(Integer, ForeignKey("crawling_data.crawling_id"), nullable=False)
+    crawling_id = Column(Integer, ForeignKey("crawling.crawling_id"), nullable=False)
     interest_id = Column(Integer, ForeignKey("interests.interest_id"), nullable=False)
 
-    crawling_data = relationship("CrawlingData")
+    crawling = relationship("Crawling")
     interest = relationship("Interest")

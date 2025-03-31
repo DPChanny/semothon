@@ -1,28 +1,61 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/pages/user_input/name_input_page.dart';
-
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      supportedLocales: const [
-        Locale('ko', ''),
-        Locale('en', ''),
-      ],
-      home: const MyHomePage(),
-    );
-  }
-}
+  Future<bool> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return false;
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      User? user = await FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        String? idToken = await user.getIdToken();
+
+        final String protocol = 'http';
+        final String host = 'localhost';
+        final int port = 8080;
+        final String path = '/api/users/login';
+
+        final Uri url = Uri(
+          scheme: protocol,
+          host: host,
+          port: port,
+          path: path,
+        );
+
+        final response = await http.get(
+          url,
+          headers: {
+            'Authorization': 'Bearer $idToken',
+          },
+        );
+
+        // http.get()
+
+        return true;
+      }
+      else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +65,9 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 80),
-
-            // ✅ 로고 누르면 정보 입력 페이지로 이동
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NameInputPage(),
-                  ),
-                );
+                Navigator.pushNamed(context, "/home_page");
               },
               child: Center(
                 child: Container(
@@ -84,114 +110,55 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(height: 36),
 
             // ✅ Google 버튼 (팝업 띄움)
-            Container(
-              width: 263,
-              height: 38,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    width: 1,
-                    color: Color(0xFFB1B1B1),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(19),
+                onTap: () async {
+                  if (await signInWithGoogle(context)) {
+                    Navigator.pushNamed(context, '/login_complete_page');
+                  } else {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text('로그인 실패')));
+                  }
+                },
+                child: Ink(
+                  width: 263,
+                  height: 38,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                        width: 1,
+                        color: Color(0xFFB1B1B1),
+                      ),
+                      borderRadius: BorderRadius.circular(19),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(19),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/google_logo.png',
+                        width: 24,
+                        height: 24,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Google 계정으로 가입',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Noto Sans KR',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      showGeneralDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        barrierLabel: '회원가입 완료',
-                        pageBuilder: (context, animation, secondaryAnimation) {
-                          return Scaffold(
-                            backgroundColor: Colors.white,
-                            body: SafeArea(
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/check_icon.svg',
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                    const SizedBox(height: 20),
-                                    const Text(
-                                      '회원가입이 완료되었습니다.',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Noto Sans KR',
-                                      ),
-                                    ),
-                                    const SizedBox(height: 12),
-                                    const Text(
-                                      '당신의 진로를 Pathagora와 함께 시작해보세요!',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: 'Noto Sans KR',
-                                      ),
-                                    ),
-                                    const SizedBox(height: 40),
-                                    SizedBox(
-                                      width: 335,
-                                      height: 47,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Color(0xFF008CFF),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(23.5),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.pushNamed(context, '/home');
-                                        },
-                                        child: const Text(
-                                          '확인',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 17,
-                                            fontFamily: 'Noto Sans KR',
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Image.asset(
-                      'assets/google_logo.png',
-                      width: 24,
-                      height: 24,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Google 계정으로 가입',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Noto Sans KR',
-                    ),
-                  ),
-                ],
-              ),
             ),
-
-            const Spacer(),
           ],
         ),
       ),

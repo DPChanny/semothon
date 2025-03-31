@@ -30,6 +30,8 @@ dependencies {
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
+	implementation 'org.springframework.boot:spring-boot-starter-webflux' //WebClient 추가
+
 	//Querydsl 추가
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"

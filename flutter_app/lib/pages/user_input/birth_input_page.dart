@@ -1,39 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/dto/user_info.dart';
-import 'package:flutter_app/pages/user_input/gender_input_page.dart';
+import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:intl/intl.dart';
 
 class BirthInputPage extends StatefulWidget {
-  final UserInfo userInfo;
-
-  const BirthInputPage({super.key, required this.userInfo});
+  const BirthInputPage({super.key});
 
   @override
   State<BirthInputPage> createState() => _BirthInputPageState();
 }
 
 class _BirthInputPageState extends State<BirthInputPage> {
-  final TextEditingController _controller = TextEditingController();
-  bool _isButtonEnabled = false;
+  DateTime? selectedDate;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(() {
-      setState(() {
-        _isButtonEnabled = _controller.text.trim().isNotEmpty;
-      });
-    });
+  String get formattedDate {
+    if (selectedDate == null) return 'YYYY-MM-DD';
+    return DateFormat('yyyy-MM-dd').format(selectedDate!);
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  Future<void> _pickDate() async {
+    final now = DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2000, 1, 1),
+      firstDate: DateTime(1900),
+      lastDate: now,
+      locale: const Locale('ko', 'KR'), // 한글화
+    );
+
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  void _submit() {
+    if (selectedDate != null) {
+      UserRegisterDTO.instance.birthdate = selectedDate;
+      Navigator.pushNamed(context, "/user_input/gender_input_page");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final isButtonEnabled = selectedDate != null;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -81,46 +92,29 @@ class _BirthInputPageState extends State<BirthInputPage> {
                 fontSize: 12,
               ),
             ),
-            TextField(
-              controller: _controller,
-              keyboardType: TextInputType.datetime,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 17,
-                fontFamily: 'Noto Sans KR',
-                fontWeight: FontWeight.w400,
-                letterSpacing: -0.29,
-              ),
-              decoration: InputDecoration(
-                hintText: 'YYYYMMDD',
-                hintStyle: const TextStyle(
-                  color: Color(0xFFBCBCBC),
-                  fontSize: 17,
-                  fontFamily: 'Noto Sans KR',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: -0.29,
+            GestureDetector(
+              onTap: _pickDate,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 14,
+                  horizontal: 12,
                 ),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    _controller.clear();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SvgPicture.asset(
-                      'assets/X_icon.svg',
-                      width: 24,
-                      height: 24,
-                    ),
+                margin: const EdgeInsets.only(top: 8),
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Color(0xFF008CFF))),
+                ),
+                child: Text(
+                  formattedDate,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontFamily: 'Noto Sans KR',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.29,
                   ),
                 ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF008CFF)),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF008CFF)),
-                ),
               ),
-              cursorColor: const Color(0xFF008CFF),
             ),
             const Spacer(),
             Center(
@@ -128,22 +122,12 @@ class _BirthInputPageState extends State<BirthInputPage> {
                 width: 335,
                 height: 47,
                 child: ElevatedButton(
-                  onPressed: _isButtonEnabled
-                      ? () {
-                    final updatedUserInfo = widget.userInfo;
-                    updatedUserInfo.birth = _controller.text;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GenderInputPage(userInfo: updatedUserInfo),
-                      ),
-                    );
-                  }
-                      : null,
+                  onPressed: isButtonEnabled ? _submit : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _isButtonEnabled
-                        ? const Color(0xFF008CFF)
-                        : const Color(0xFFE4E4E4),
+                    backgroundColor:
+                        isButtonEnabled
+                            ? const Color(0xFF008CFF)
+                            : const Color(0xFFE4E4E4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(23.50),
                     ),
@@ -151,7 +135,10 @@ class _BirthInputPageState extends State<BirthInputPage> {
                   child: Text(
                     '완료',
                     style: TextStyle(
-                      color: _isButtonEnabled ? Colors.white : const Color(0xFFB1B1B1),
+                      color:
+                          isButtonEnabled
+                              ? Colors.white
+                              : const Color(0xFFB1B1B1),
                       fontSize: 17,
                       fontFamily: 'Noto Sans KR',
                       fontWeight: FontWeight.w700,

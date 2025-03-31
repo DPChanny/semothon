@@ -4,20 +4,31 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.semothon.spring_server.ai.service.AiService;
 import com.semothon.spring_server.common.exception.InvalidInputException;
+import com.semothon.spring_server.interest.entity.Interest;
+import com.semothon.spring_server.interest.repository.InterestRepository;
+import com.semothon.spring_server.user.dto.UpdateUserInterestRequestDto;
 import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
+import com.semothon.spring_server.user.dto.UserSearchCondition;
 import com.semothon.spring_server.user.entity.User;
+import com.semothon.spring_server.user.entity.UserInterest;
+import com.semothon.spring_server.user.repository.UserInterestRepository;
 import com.semothon.spring_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -26,7 +37,9 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final UserInterestRepository userInterestRepository;
+    private final InterestRepository interestRepository;
+    private final AiService aiService;
 
     private final AmazonS3 amazonS3;
     @Value("${cloud.aws.s3.bucket}")
@@ -55,6 +68,12 @@ public class UserService {
         return !userRepository.existsByNickname(nickname);
     }
 
+    @Transactional(readOnly = true)
+    public User getUser(String userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("User not found"));
+
+    }
 
     public User updateUser(String userId, UpdateUserProfileRequestDto dto) {
         User user = userRepository.findById(userId)
@@ -139,4 +158,42 @@ public class UserService {
 
         return user.getProfileImageUrl();
     }
+
+    @Transactional(readOnly = true)
+    public List<User> getUserList(String userId, UserSearchCondition condition) {
+        return userRepository.searchUserList(condition, userId);
+    }
+
+    public void updateUserInterest(String userId, UpdateUserInterestRequestDto updateUserInterestRequestDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("User not found"));
+
+        log.info("updateUserInterestRequestDto.getInterestNames(): {}", updateUserInterestRequestDto.getInterestNames());
+
+        // 기존 관심사 제거
+        userInterestRepository.deleteAllByUser(user);
+
+        List<Interest> interests = interestRepository.findAllByNameIn(updateUserInterestRequestDto.getInterestNames());
+
+        List<UserInterest> userInterests = interests.stream()
+                .map(interest -> {
+                    UserInterest userInterest = UserInterest.builder()
+                            .build();
+
+                    userInterest.updateUser(user);
+                    userInterest.updateInterest(interest);
+                    return userInterest;
+                })
+                .collect(Collectors.toList());
+
+        userInterestRepository.saveAll(userInterests);
+    }
+
+    public void updateUserIntro(String userId, String intro) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("User not found"));
+
+        user.updateIntroText(intro);
+    }
+
 }

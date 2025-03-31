@@ -25,6 +25,7 @@ def user_interest_service(request, db: Session):
             )
 
     db.commit()
+
     return {"success": True, "message": "Interests successfully generated"}
 
 def room_interest_service(request, db: Session):

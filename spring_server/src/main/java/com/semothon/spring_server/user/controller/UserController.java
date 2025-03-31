@@ -1,9 +1,12 @@
 package com.semothon.spring_server.user.controller;
 
+import com.semothon.spring_server.ai.service.AiService;
 import com.semothon.spring_server.common.dto.BaseResponse;
-import com.semothon.spring_server.user.dto.CheckNicknameRequestDto;
-import com.semothon.spring_server.user.dto.GetUserResponseDto;
-import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
+import com.semothon.spring_server.common.service.DateTimeUtil;
+import com.semothon.spring_server.room.dto.RoomSearchCondition;
+import com.semothon.spring_server.room.dto.RoomSortBy;
+import com.semothon.spring_server.room.dto.RoomSortDirection;
+import com.semothon.spring_server.user.dto.*;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.service.UserService;
 import jakarta.validation.Valid;
@@ -11,10 +14,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -23,13 +29,15 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final AiService aiService;
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse userLogin(
             @AuthenticationPrincipal User user
     ){
-        return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(user)), "Login successful");
+        User findUser = userService.getUser(user.getUserId());
+        return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(findUser)), "Login successful");
     }
 
     @PostMapping("/check-nickname")
@@ -49,7 +57,48 @@ public class UserController {
     public BaseResponse getUserProfile(
             @AuthenticationPrincipal User user
     ){
-        return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(user)), "User profile retrieved successfully");
+        User findUser = userService.getUser(user.getUserId());
+        GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
+
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile retrieved successfully");
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse getUserList(
+            @AuthenticationPrincipal User user,
+            @ModelAttribute @Valid UserSearchCondition condition
+    ){
+        //default value 명시적 설정
+        if (condition.getSortBy() == null) {
+            condition.setSortBy(UserSortBy.CREATE_AT);
+        }
+        if (condition.getSortDirection() == null) {
+            condition.setSortDirection(UserSortDirection.DESC);
+        }
+        if (condition.getPage() == null) {
+            condition.setPage(0);
+        }
+        if (condition.getLimit() == null) {
+            condition.setLimit(10);
+        }
+
+        //KST 시간을 UTC로 변환
+        if(condition.getCreatedAfter() != null){
+            condition.setCreatedAfter(DateTimeUtil.convertKSTToUTC(condition.getCreatedAfter()));
+        }
+        if(condition.getCreatedBefore() != null){
+            condition.setCreatedBefore(DateTimeUtil.convertKSTToUTC(condition.getCreatedBefore()));
+        }
+
+        List<User> userList = userService.getUserList(user.getUserId(), condition);
+
+        List<GetUserListResponseDto> userListResponseDtos =
+                userList.stream()
+                        .map(GetUserListResponseDto::from)
+                        .toList();
+
+        return BaseResponse.success(Map.of("code", 200, "totalCount", userListResponseDtos.size(), "userList", userListResponseDtos), "Search results retrieved successfully");
     }
 
     @PatchMapping("/profile")
@@ -59,8 +108,46 @@ public class UserController {
             @RequestBody @Valid UpdateUserProfileRequestDto profileRequestDto
     ){
         User updatedUser = userService.updateUser(user.getUserId(), profileRequestDto);
+        GetUserResponseDto userResponseDto = GetUserResponseDto.from(updatedUser);
 
-        return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(updatedUser)), "User profile updated successfully");
+
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile updated successfully");
+    }
+
+    @PutMapping("/interests")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse updateUserInterest(
+            @AuthenticationPrincipal User user,
+            @RequestBody @Valid UpdateUserInterestRequestDto updateUserInterestRequestDto
+    ){
+        userService.updateUserInterest(user.getUserId(), updateUserInterestRequestDto);
+        String generatedIntroText = aiService.generateIntro(user.getUserId());
+
+        return BaseResponse.success(Map.of("code", 200, "generatedIntroText", generatedIntroText), "Intro text generated successfully");
+    }
+
+    @PutMapping("/intro")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse updateUserIntro(
+            @AuthenticationPrincipal User user,
+            @RequestBody String intro
+    ){
+        User findUser = userService.getUser(user.getUserId());
+
+        if(StringUtils.hasText(intro)){
+            userService.updateUserIntro(findUser.getUserId(), intro);
+            aiService.updateInterestByIntroText(findUser.getUserId());
+        }
+        String finalIntro = aiService.generateIntro(findUser.getUserId());
+
+        userService.updateUserIntro(findUser.getUserId(), finalIntro);
+
+        aiService.updateUserRoomRecommendation(findUser.getUserId());
+        aiService.updateUserCrawlingRecommendation(findUser.getUserId());
+
+        GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
+
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User intro updated successfully");
     }
 
     @GetMapping("/profile-image")

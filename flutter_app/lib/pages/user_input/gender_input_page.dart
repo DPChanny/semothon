@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_info.dart';
-import 'package:flutter_app/pages/user_input/register_complete_page.dart';
+
+import 'package:flutter_app/dto/user_register_dto.dart';
 
 class GenderInputPage extends StatefulWidget {
-  final UserInfo userInfo;
-
-  const GenderInputPage({super.key, required this.userInfo});
+  const GenderInputPage({super.key});
 
   @override
   State<GenderInputPage> createState() => _GenderInputPageState();
@@ -56,10 +54,7 @@ class _GenderInputPageState extends State<GenderInputPage> {
             const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildGenderButton('남'),
-                _buildGenderButton('여'),
-              ],
+              children: [_buildGenderButton('남'), _buildGenderButton('여')],
             ),
             const Spacer(),
             Center(
@@ -67,21 +62,21 @@ class _GenderInputPageState extends State<GenderInputPage> {
                 width: 335,
                 height: 47,
                 child: ElevatedButton(
-                  onPressed: _selectedGender != null
-                      ? () {
-                    final updatedUserInfo = widget.userInfo;
-                    updatedUserInfo.gender = _selectedGender!;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegisterCompletePage(userInfo: updatedUserInfo),
-                      ),
-                    );
-                  }
-                      : null,
+                  onPressed:
+                      _selectedGender != null
+                          ? () {
+                            UserRegisterDTO.instance.gender = _selectedGender!;
+                            Navigator.pushNamed(
+                              context,
+                              "/user_input/register_complete_page",
+                            );
+                          }
+                          : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                    _selectedGender != null ? const Color(0xFF008CFF) : const Color(0xFFE4E4E4),
+                        _selectedGender != null
+                            ? const Color(0xFF008CFF)
+                            : const Color(0xFFE4E4E4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(23.50),
                     ),
@@ -89,7 +84,10 @@ class _GenderInputPageState extends State<GenderInputPage> {
                   child: Text(
                     '완료',
                     style: TextStyle(
-                      color: _selectedGender != null ? Colors.white : const Color(0xFFB1B1B1),
+                      color:
+                          _selectedGender != null
+                              ? Colors.white
+                              : const Color(0xFFB1B1B1),
                       fontSize: 17,
                       fontFamily: 'Noto Sans KR',
                       fontWeight: FontWeight.w700,

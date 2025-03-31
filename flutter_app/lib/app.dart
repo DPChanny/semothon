@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'routes/app_routes.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'package:flutter_app/routes/app_routes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -7,10 +9,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/login',
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [Locale('ko', ''), Locale('en', '')],
+      initialRoute: '/login_page',
       routes: appRoutes,
       title: 'Semothon',
-      debugShowCheckedModeBanner: false
+      debugShowCheckedModeBanner: false,
     );
   }
 }

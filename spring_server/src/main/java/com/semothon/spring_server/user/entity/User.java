@@ -36,6 +36,9 @@ public class User {
     @Id
     private String userId;
 
+    @Column(length = 50)
+    private String name;
+
     @Column(length = 50 ,unique = true)
     private String nickname;
 
@@ -127,16 +130,20 @@ public class User {
 
 
     public void updateProfile(UpdateUserProfileRequestDto dto) {
+        if (dto.getName() != null) this.name = dto.getName();
         if (dto.getNickname() != null) this.nickname = dto.getNickname();
         if (dto.getDepartment() != null) this.department = dto.getDepartment();
         if (dto.getStudentId() != null) this.studentId = dto.getStudentId();
         if (dto.getBirthdate() != null) this.birthdate = dto.getBirthdate();
         if (dto.getGender() != null) this.gender = dto.getGender();
-        if (dto.getIntroText() != null) this.introText = dto.getIntroText();
         if (dto.getShortIntro() != null) this.shortIntro = dto.getShortIntro();
     }
 
     public void updateProfileImage(String profileImageUrl){
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public void updateIntroText(String introText){
+        this.introText = introText;
     }
 }
