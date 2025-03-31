@@ -20,19 +20,38 @@ class LoginPage extends StatelessWidget {
       );
 
       await FirebaseAuth.instance.signInWithCredential(credential);
-      String?  idToken = await FirebaseAuth.instance.currentUser.getIdToken();
-      final Uri url = Uri.parse('http://localhost:8080/api/users/login');
 
-      final response = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $idToken',
-        },
-      );
+      User? user = await FirebaseAuth.instance.currentUser;
 
-      http.get()
+      if (user != null) {
+        String? idToken = await user.getIdToken();
 
-      return true;
+        final String protocol = 'http';
+        final String host = 'localhost';
+        final int port = 8080;
+        final String path = '/api/users/login';
+
+        final Uri url = Uri(
+          scheme: protocol,
+          host: host,
+          port: port,
+          path: path,
+        );
+
+        final response = await http.get(
+          url,
+          headers: {
+            'Authorization': 'Bearer $idToken',
+          },
+        );
+
+        http.get()
+
+        return true;
+      }
+      else {
+        return false;
+      }
     } catch (e) {
       return false;
     }
