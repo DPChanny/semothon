@@ -36,7 +36,8 @@ public class UserController {
     public BaseResponse userLogin(
             @AuthenticationPrincipal User user
     ){
-        return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(user)), "Login successful");
+        User findUser = userService.getUser(user.getUserId());
+        return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(findUser)), "Login successful");
     }
 
     @PostMapping("/check-nickname")
