@@ -11,7 +11,7 @@ POST http://localhost:8000/api/ai/intro
 Content-Type: application/json
 
 {
-  "user_id": "test-user-2"
+  "user_id": "test-user-3"
 }
 
 ### 관심사 추출 테스트
