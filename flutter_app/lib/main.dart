@@ -10,8 +10,12 @@ import 'package:flutter_app/firebase_options.dart';
 Future<void> main() async {
   await dotenv.load(fileName: "assets/env/.env");
 
-  final envName = dotenv.env['ENV'] ?? 'dev';
-  final envFile = 'assets/env/.env.$envName';
+  final String envName = dotenv.env['ENV'] ?? 'device';
+  final bool local = bool.parse(dotenv.env['LOCAL'] ?? 'false');
+  print(dotenv.env['LOCAL']);
+  print(local);
+  final String envFile = 'assets/env/.env' + (local ? '.local' : '.server') + "." + envName + '';
+  print(envFile);
 
   await dotenv.load(fileName: envFile);
 

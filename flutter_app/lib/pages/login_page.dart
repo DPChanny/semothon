@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,7 +14,14 @@ class LoginPage extends StatelessWidget {
 
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser;
+      if (bool.parse(dotenv.env['WEB'] ?? 'false')) {
+        googleUser = await GoogleSignIn(clientId: "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com").signIn();
+      }
+      else{
+        googleUser = await GoogleSignIn().signIn();
+      }
+
       if (googleUser == null) return;
 
       final GoogleSignInAuthentication googleAuth =

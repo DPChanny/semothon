@@ -30,10 +30,6 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 
-### Dart Patch ###
-# dotenv environment variables file
-.env
-
 ### Flutter ###
 # Flutter/Dart/Pub related
 firebase_options.dart
@@ -454,3 +450,5 @@ gradle-app.setting
 .DS_Store
 flutter_app/android/app/google-services.json
 
+!flutter_app/assets/env/
+!flutter_app/assets/env/.env*

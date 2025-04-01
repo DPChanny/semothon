@@ -1,14 +1,13 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Uri url(String path) {
-  final protocol = dotenv.env['PROTOCOL'];
-  final host = dotenv.env['HOST'];
-  final port = int.parse(dotenv.env['PORT'] ?? "8080");
+  final springHost = dotenv.env['SPRING_HOST'];
+  final springPort = int.parse(dotenv.env['SPRING_PORT']!);
 
   return Uri(
-    scheme: protocol,
-    host: host,
-    port: port,
+    scheme: "http",
+    host: springHost,
+    port: springPort,
     path: path,
   );
 }
