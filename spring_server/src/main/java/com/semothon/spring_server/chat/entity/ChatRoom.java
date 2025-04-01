@@ -51,6 +51,12 @@ public class ChatRoom {
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatMessage> chatMessages = new ArrayList<>();
 
+    @JsonIgnore
+    @Builder.Default
+    @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChatUser> chatUsers = new ArrayList<>();
+
+
     public void updateRoom(Room room){
         this.room = room;
         room.setChatRoom(this);
@@ -63,5 +69,9 @@ public class ChatRoom {
 
     protected void addChatMessage(ChatMessage chatMessage){
         this.chatMessages.add(chatMessage);
+    }
+
+    protected void addChatUser(ChatUser chatUser){
+        this.chatUsers.add(chatUser);
     }
 }
