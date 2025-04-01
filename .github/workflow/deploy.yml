@@ -58,7 +58,10 @@ AWS_BUCKET_NAME=${{ vars.AWS_BUCKET_NAME }}
 OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}
 EOT
             echo "[+] Removing flutter_app directory if it exists"
-            rm -rf flutter_app  # 이 줄 추가
+            rm -rf flutter_app
+
+            echo "[+] Removing test directory if it exists"
+            rm -rf test 
 
             echo "[+] Docker Compose build & restart"
             docker compose down
