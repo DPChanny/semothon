@@ -31,6 +31,7 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	implementation 'org.springframework.boot:spring-boot-starter-webflux' //WebClient 추가
+	implementation 'org.springframework.boot:spring-boot-starter-websocket' //WebSocket 추가
 
 	//Querydsl 추가
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
