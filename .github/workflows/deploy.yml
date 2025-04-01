@@ -17,13 +17,13 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             set -e
             cd ~/semothon
 
@@ -31,31 +31,33 @@ jobs:
             git pull origin main
 
             echo "[+] Rewriting .env file"
-            echo "ENV=${{ vars.ENV }}" > .env
-            echo "" >> .env
-            echo "# MYSQL" >> .env
-            echo "MYSQL_HOST=${{ vars.MYSQL_HOST }}" >> .env
-            echo "MYSQL_PORT=${{ vars.MYSQL_PORT }}" >> .env
-            echo "MYSQL_USER=${{ vars.MYSQL_USER }}" >> .env
-            echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
-            echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> .env
-            echo "MYSQL_DATABASE=${{ vars.MYSQL_DATABASE }}" >> .env
-            echo "" >> .env
-            echo "# FastAPI" >> .env
-            echo "FASTAPI_HOST=${{ vars.FASTAPI_HOST }}" >> .env
-            echo "FASTAPI_PORT=${{ vars.FASTAPI_PORT }}" >> .env
-            echo "" >> .env
-            echo "# Spring" >> .env
-            echo "SPRING_HOST=${{ vars.SPRING_HOST }}" >> .env
-            echo "SPRING_PORT=${{ vars.SPRING_PORT }}" >> .env
-            echo "" >> .env
-            echo "# S3" >> .env
-            echo "AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" >> .env
-            echo "AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }}" >> .env
-            echo "AWS_REGION=${{ vars.AWS_REGION }}" >> .env
-            echo "AWS_BUCKET_NAME=${{ vars.AWS_BUCKET_NAME }}" >> .env
-            echo "" >> .env
-            echo "OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}" >> .env
+            cat > .env << EOT
+ENV=${{ vars.ENV }}
+
+# MYSQL
+MYSQL_HOST=${{ vars.MYSQL_HOST }}
+MYSQL_PORT=${{ vars.MYSQL_PORT }}
+MYSQL_USER=${{ vars.MYSQL_USER }}
+MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+MYSQL_DATABASE=${{ vars.MYSQL_DATABASE }}
+
+# FastAPI
+FASTAPI_HOST=${{ vars.FASTAPI_HOST }}
+FASTAPI_PORT=${{ vars.FASTAPI_PORT }}
+
+# Spring
+SPRING_HOST=${{ vars.SPRING_HOST }}
+SPRING_PORT=${{ vars.SPRING_PORT }}
+
+# S3
+AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}
+AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }}
+AWS_REGION=${{ vars.AWS_REGION }}
+AWS_BUCKET_NAME=${{ vars.AWS_BUCKET_NAME }}
+
+OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}
+EOT
 
             echo "[+] Cleaning unnecessary directories"
             rm -rf flutter_app
