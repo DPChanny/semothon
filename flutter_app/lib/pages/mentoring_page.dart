@@ -7,6 +7,7 @@ import 'package:flutter_app/services/fetch_mentors.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
 import 'package:flutter_app/services/dummy_rooms.dart';
+import 'package:flutter_app/dto/room_dto.dart';
 
 
 class MentoringPage extends StatefulWidget {
@@ -159,22 +160,88 @@ class MentorListView extends StatelessWidget {
   }
 }
 
+
+class RecommendedRoomDetailModal extends StatelessWidget {
+  final RoomDTO room;
+
+  const RecommendedRoomDetailModal({super.key, required this.room});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.only(bottom: 12),
+              decoration: BoxDecoration(
+                color: Colors.grey[400],
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          Text(
+            room.title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Text(room.description),
+          const SizedBox(height: 8),
+          Text('인원: 3 / ${room.capacity}'),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              minimumSize: const Size.fromHeight(45),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: const Text("입장하기"),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 //추천 멘토방 리스트
 class RecommendedRoomListView extends StatelessWidget {
   const RecommendedRoomListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final rooms = randomRooms(6); // 랜덤으로 6개 선택
+    final rooms = randomRooms(6);
 
     return ListView.builder(
       itemCount: rooms.length,
       itemBuilder: (context, index) {
-        return RecommendedChatRoom(
-          room: rooms[index],
-          index: index,
+        final room = rooms[index];
+        return GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              isScrollControlled: true,
+              builder: (context) => RecommendedRoomDetailModal(room: room),
+            );
+          },
+          child: RecommendedChatRoom(room: room, index: index),
         );
       },
     );
   }
 }
+
