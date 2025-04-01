@@ -21,7 +21,14 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  final googleSignIn = GoogleSignIn();
+  final GoogleSignIn? googleSignIn;
+  final GoogleSignInAccount? googleUser;
+  if (bool.parse(dotenv.env['WEB'] ?? 'false')) {
+    googleSignIn = GoogleSignIn(clientId: "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com");
+  }
+  else{
+    googleSignIn = GoogleSignIn();
+  }
 
   if (await googleSignIn.isSignedIn()) {
     await googleSignIn.disconnect();
