@@ -14,19 +14,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         
-      - name: 🔐 Debug Key Start
+      - name: 🔐 Setup SSH Key and Known Hosts
         run: |
+          echo "=== Setting up SSH ==="
           mkdir -p ~/.ssh
-          printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          echo "=== id_rsa PREVIEW ==="
+          
+          echo "=== Preview id_rsa ==="
           head -n 5 ~/.ssh/id_rsa
           
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "=== Scanning host key ==="
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
@@ -67,11 +66,15 @@ jobs:
               "OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}" \
               > .env
 
+            echo "[+] Restoring firebase-service-account.json"
+            mkdir -p spring_server
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}" | base64 -d > spring_server/src/main/resources/firebase-service-account.json
+
             echo "[+] Cleaning unnecessary directories"
             rm -rf flutter_app
             rm -rf test
 
             echo "[+] Docker Compose build & restart"
-            docker-compose down
-            docker-compose up -d --build
+            docker compose down
+            docker compose up -d --build
           EOF
