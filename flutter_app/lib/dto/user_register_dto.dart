@@ -1,6 +1,7 @@
 class UserRegisterDTO {
   static final UserRegisterDTO instance = UserRegisterDTO();
 
+  String? name;
   String? nickname;
   String? department;
   String? studentId;
@@ -11,6 +12,7 @@ class UserRegisterDTO {
   String? profileImageUrl;
 
   UserRegisterDTO({
+    this.name,
     this.nickname,
     this.department,
     this.studentId,
@@ -23,14 +25,12 @@ class UserRegisterDTO {
 
   Map<String, dynamic> toJson() {
     return {
+      'name': name,
       'nickname': nickname,
       'department': department,
       'studentId': studentId,
       'birthdate': birthdate?.toIso8601String(),
       'gender': gender,
-      'introText': introText,
-      'shortIntro': shortIntro,
-      'profileImageUrl': profileImageUrl,
     };
   }
 }

@@ -1,5 +1,6 @@
 class UserDTO {
   final String userId;
+  final String? name;
   final String? nickname;
   final String? department;
   final String? studentId;
@@ -14,6 +15,7 @@ class UserDTO {
 
   UserDTO({
     required this.userId,
+    this.name,
     this.nickname,
     this.department,
     this.studentId,
@@ -30,6 +32,7 @@ class UserDTO {
   factory UserDTO.fromJson(Map<String, dynamic> json) {
     return UserDTO(
       userId: json['userId'],
+      name: json['name'],
       nickname: json['nickname'],
       department: json['department'],
       studentId: json['studentId'],
@@ -50,6 +53,7 @@ class UserDTO {
   Map<String, dynamic> toJson() {
     return {
       'userId': userId,
+      'name': name,
       'nickname': nickname,
       'department': department,
       'studentId': studentId,

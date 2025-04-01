@@ -118,7 +118,7 @@ class _NameInputPageState extends State<NameInputPage> {
                   onPressed:
                       _isButtonEnabled
                           ? () {
-                            UserRegisterDTO.instance.nickname =
+                            UserRegisterDTO.instance.name =
                                 _controller.text;
                             Navigator.pushNamed(
                               context,
