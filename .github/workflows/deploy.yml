@@ -1,0 +1,77 @@
+name: Deploy Full Stack to EC2
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      - name: 🔐 Debug Key Start
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "=== id_rsa PREVIEW ==="
+          head -n 5 ~/.ssh/id_rsa
+          
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            set -e
+            cd ~/semothon
+
+            echo "[+] Pull latest code"
+            git pull origin master
+
+            echo "[+] Rewriting .env file"
+            printf "%s\n" \
+              "ENV=${{ vars.ENV }}" \
+              "" \
+              "# MYSQL" \
+              "MYSQL_HOST=${{ vars.MYSQL_HOST }}" \
+              "MYSQL_PORT=${{ vars.MYSQL_PORT }}" \
+              "MYSQL_USER=${{ vars.MYSQL_USER }}" \
+              "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" \
+              "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" \
+              "MYSQL_DATABASE=${{ vars.MYSQL_DATABASE }}" \
+              "" \
+              "# FastAPI" \
+              "FASTAPI_HOST=${{ vars.FASTAPI_HOST }}" \
+              "FASTAPI_PORT=${{ vars.FASTAPI_PORT }}" \
+              "" \
+              "# Spring" \
+              "SPRING_HOST=${{ vars.SPRING_HOST }}" \
+              "SPRING_PORT=${{ vars.SPRING_PORT }}" \
+              "" \
+              "# S3" \
+              "AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" \
+              "AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }}" \
+              "AWS_REGION=${{ vars.AWS_REGION }}" \
+              "AWS_BUCKET_NAME=${{ vars.AWS_BUCKET_NAME }}" \
+              "" \
+              "OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }}" \
+              > .env
+
+            echo "[+] Cleaning unnecessary directories"
+            rm -rf flutter_app
+            rm -rf test
+
+            echo "[+] Docker Compose build & restart"
+            docker-compose down
+            docker-compose up -d --build
+          EOF
