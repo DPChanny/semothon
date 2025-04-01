@@ -8,14 +8,17 @@ import 'package:flutter_app/services/fetch_crawlings.dart';
 import 'package:flutter_app/services/fetch_user.dart';
 import 'package:flutter_app/widgets/crawling_item.dart';
 import 'package:flutter_app/widgets/interest_card.dart';
+import 'package:flutter_app/pages/mentoring_page.dart';
+import 'package:flutter_app/widgets/bottom_navigation.dart';
 
-AppBar buildAppBar() {
+
+AppBar buildAppBar(String title) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0,
     automaticallyImplyLeading: false,
-    title: const Text(
-      '브랜드 로고',
+    title: Text(
+      title,
       style: TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.bold,
@@ -63,9 +66,9 @@ Widget buildInterestCard() {
   );
 }
 
-Widget buildMentorsCard() {
+Widget buildMentorsCard(context) {
   return FutureBuilder<List<UserDTO>>(
-    future: fetchMentors(),
+    future: fetchMentors(3),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const SizedBox(
@@ -117,10 +120,20 @@ Widget buildMentorsCard() {
                 ),
 
                 // 아이콘 부분
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: Colors.blue, // 🔹 파란색
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MentoringPage(initialTab: 0),
+                      ),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                    color: Colors.blue,
+                  ),
                 ),
               ],
             ),
@@ -183,7 +196,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   // 탭별 화면 위젯들
-  final List<Widget> _pages = [
+  List<Widget> get _pages => [
     // 홈 탭
     SingleChildScrollView(
       child: Column(
@@ -194,7 +207,7 @@ class _HomePageState extends State<HomePage> {
             offset: Offset(0, -90),
             child: Column(
               children: [
-                buildMentorsCard(), // 멘토 리스트
+                buildMentorsCard(context), // 멘토 리스트
 
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -243,44 +256,32 @@ class _HomePageState extends State<HomePage> {
       ),
     ),
 
-    // 채팅 탭
-    Center(child: Text('채팅 페이지')),
-
-    // 멘토링 탭
-    Center(child: Text('멘토링 페이지')),
-
-    // 추천 활동 탭
-    Center(child: Text('추천 활동 페이지')),
   ];
 
   void _onTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  Widget bottomNavigationBarWidget() {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: _onTap,
-      type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-        BottomNavigationBarItem(icon: Icon(Icons.chat), label: '채팅'),
-        BottomNavigationBarItem(icon: Icon(Icons.school), label: '멘토링'),
-        BottomNavigationBarItem(icon: Icon(Icons.star), label: '추천 활동'),
-      ],
+  if (index == 2) {
+    // 멘토링 탭은 push로 이동
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MentoringPage()),
     );
+    return; // selectedIndex는 변경하지 않음
   }
 
-  @override
+  setState(() {
+    _selectedIndex = index;
+  });
+}
+
+    @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: buildAppBar(),
-        body: _pages[_selectedIndex], // 현재 탭의 화면
-        bottomNavigationBar: bottomNavigationBarWidget(),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: buildAppBar("브랜드이름"),
+      body: _pages[_selectedIndex], // ✅ SafeArea 제거
+      bottomNavigationBar: BottomNavigationBarWidget(
+        currentIndex: _selectedIndex,
+        onTap: _onTap,
       ),
     );
   }
