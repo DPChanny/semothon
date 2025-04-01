@@ -16,6 +16,7 @@ jobs:
         
       - name: 🔐 Debug Key Start
         run: |
+          mkdir -p ~/.ssh
           printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           echo "=== id_rsa PREVIEW ==="
