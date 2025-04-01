@@ -19,5 +19,5 @@ public class CreateRoomRequestDto {
 
     @Min(value = 2, message = "Minimum capacity is 2")
     @Max(value = 100, message = "Maximum capacity is 100")
-    private int capacity;
+    private Integer capacity;
 }

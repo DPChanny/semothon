@@ -28,6 +28,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class RoomService {
+    //room 생성, 삭제, 참여, 탈퇴 시 자동으로 chat연결 및 chatUser 연결 생각하며 코드 리팩토링 진행 필요
 
     private final RoomRepository roomRepository;
     private final RoomUserRepository roomUserRepository;

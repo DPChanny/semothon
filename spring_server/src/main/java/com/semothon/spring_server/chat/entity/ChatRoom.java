@@ -56,6 +56,10 @@ public class ChatRoom {
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatUser> chatUsers = new ArrayList<>();
 
+    @Column(nullable = false)
+    @Builder.Default //기본값 30명
+    private Integer capacity = 30;
+
 
     public void updateRoom(Room room){
         this.room = room;

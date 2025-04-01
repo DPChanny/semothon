@@ -14,9 +14,9 @@ public class RoomInfoDto {
     private Long roomId;
     private String title;
     private String description;
-    private int capacity;
+    private Integer capacity;
     private LocalDateTime createdAt;
-    private int currentMemberCount;
+    private Integer currentMemberCount;
     private Long chatRoomId;
 
     public static RoomInfoDto from(Room room){
