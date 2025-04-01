@@ -9,17 +9,17 @@ services:
       test: [
         "CMD", "mysql",
         "-h", "localhost",
-        "-u", "${DB_USER}",
-        "-p${DB_PASSWORD}",
+        "-u", "${MYSQL_USER}",
+        "-p${MYSQL_PASSWORD}",
         "-e", "SELECT 1"
       ]
       interval: 5s
       timeout: 3s
       retries: 20
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
     env_file:
-      - ${ENV_FILE}
+      - .env
 
   spring_server:
     build:
@@ -33,7 +33,7 @@ services:
     ports:
       - "${SPRING_PORT}:${SPRING_PORT}"
     env_file:
-      - ${ENV_FILE}
+      - .env
 
   fastapi_server:
     build:
@@ -50,4 +50,4 @@ services:
       - ./fastapi_server/app:/app
     command: uvicorn main:app --host 0.0.0.0 --port ${FASTAPI_PORT} --reload
     env_file:
-      - ${ENV_FILE}
+      - .env

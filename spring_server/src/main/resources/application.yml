@@ -3,6 +3,9 @@ server:
   port: ${SPRING_PORT}
 
 spring:
+  profiles:
+    active: ${ENV}
+
   datasource:
     url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
     username: ${MYSQL_USER}
@@ -10,8 +13,8 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
-    show-sql: true
+      ddl-auto: none
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -32,8 +35,8 @@ external:
 logging:
   level:
     root: INFO
-    com.zaxxer.hikari: DEBUG
-    org.hibernate.engine.jdbc.connections: DEBUG
+    com.zaxxer.hikari: INFO
+    org.hibernate.engine.jdbc.connections: INFO
 
 cloud:
   aws:

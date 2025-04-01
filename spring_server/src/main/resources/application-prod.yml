@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+logging:
+  level:
+    root: INFO
+    com.zaxxer.hikari: WARN
+    org.hibernate.engine.jdbc.connections: WARN
