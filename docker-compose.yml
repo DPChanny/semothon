@@ -16,16 +16,10 @@ services:
       interval: 5s
       timeout: 3s
       retries: 20
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "${DB_PORT}:${DB_PORT}"
     env_file:
-      - .env
-      
+      - ${ENV_FILE}
 
   spring_server:
     build:
@@ -36,15 +30,10 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    environment:
-      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
-      SPRING_DATASOURCE_URL: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-      SPRING_DATASOURCE_USERNAME: ${DB_USER}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "8080:8080"
+      - "${SPRING_PORT}:${SPRING_PORT}"
     env_file:
-      - .env
+      - ${ENV_FILE}
 
   fastapi_server:
     build:
@@ -56,12 +45,9 @@ services:
       mysql:
         condition: service_healthy
     ports:
-      - "8000:8000"
+      - "${FASTAPI_PORT}:${FASTAPI_PORT}"
     volumes:
       - ./fastapi_server/app:/app
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn main:app --host 0.0.0.0 --port ${FASTAPI_PORT} --reload
     env_file:
-      - .env
-    environment:
-      ENV: ${ENV}
-      
+      - ${ENV_FILE}

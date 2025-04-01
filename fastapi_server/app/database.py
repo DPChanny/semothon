@@ -1,13 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from config import DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER
+from config import MYSQL_HOST, MYSQL_DATABASE, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USER
 from tenacity import retry, wait_fixed, stop_after_attempt, before_log
 import logging
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+MYSQL_URL = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}"
 
 @retry(
     stop=stop_after_attempt(20),
@@ -16,7 +16,7 @@ DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB
 )
 def get_engine():
     engine = create_engine(
-                DATABASE_URL,
+                MYSQL_URL,
                 pool_timeout=3,
                 pool_pre_ping=True,
                 future=True,
