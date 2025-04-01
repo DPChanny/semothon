@@ -1,10 +1,15 @@
 
+import 'package:flutter_app/dto/user_dto.dart';
+
 class RoomDTO {
   final int roomId;
   final String title;
   final String description;
   final int capacity;
   final String createdAt;
+
+  final UserDTO host;
+  
 
 
   RoomDTO({
@@ -13,6 +18,7 @@ class RoomDTO {
     required this.description,
     required this.capacity,
     required this.createdAt,
+    required this.host,
   });
 
   factory RoomDTO.fromJson(Map<String, dynamic> json) {
@@ -22,6 +28,7 @@ class RoomDTO {
       description: json['description'],
       capacity: json['capacity'],
       createdAt: json['createdAt'],
+      host: UserDTO.fromJson(json['host']),
     );
   }
 
@@ -32,6 +39,7 @@ class RoomDTO {
       'description': description,
       'capacity': capacity,
       'createdAt': createdAt,
+      'host': host.toJson(),
       
     };
   }

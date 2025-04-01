@@ -62,7 +62,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-    - assets/env/.env
+    - assets/env/
 
   fonts:
     - family: Noto Sans KR

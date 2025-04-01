@@ -159,8 +159,6 @@ class MentorListView extends StatelessWidget {
     );
   }
 }
-
-
 class RecommendedRoomDetailModal extends StatelessWidget {
   final RoomDTO room;
 
@@ -178,6 +176,7 @@ class RecommendedRoomDetailModal extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // 위에 회색 손잡이
           Center(
             child: Container(
               width: 40,
@@ -189,15 +188,59 @@ class RecommendedRoomDetailModal extends StatelessWidget {
               ),
             ),
           ),
+
+          // 타이틀
           Text(
             room.title,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          Text(room.description),
-          const SizedBox(height: 8),
-          Text('인원: 3 / ${room.capacity}'),
+
+          // 설명 + 인원 수 Row
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 설명
+              Expanded(
+                child: Text(
+                  room.description,
+                  style: const TextStyle(fontSize: 14),
+                ),
+              ),
+              const SizedBox(width: 8),
+              // 인원 수
+              Text(
+                '${room.capacity} / 10',
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+            ],
+          ),
+
           const SizedBox(height: 20),
+
+          // 방장 정보 (이미지 + 텍스트)
+          Row(
+            children: const [
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: NetworkImage(
+                  'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
+                ),
+              ),
+              SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('방장', style: TextStyle(color: Colors.grey)),
+                  Text('날아다니는 코딩맨', style: TextStyle(fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
+          // 입장 버튼
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
             style: ElevatedButton.styleFrom(
@@ -214,6 +257,7 @@ class RecommendedRoomDetailModal extends StatelessWidget {
     );
   }
 }
+
 
 //추천 멘토방 리스트
 class RecommendedRoomListView extends StatelessWidget {
