@@ -13,7 +13,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
+        
+      - name: 🔐 Debug Key Start
+        run: |
+          printf "%s\n" "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "=== id_rsa PREVIEW ==="
+          head -n 5 ~/.ssh/id_rsa
+          
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
