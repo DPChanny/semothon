@@ -9,6 +9,7 @@ class UserRegisterDTO {
   String? introText;
   String? shortIntro;
   String? profileImageUrl;
+  String? interest;
 
   UserRegisterDTO({
     this.nickname,
@@ -19,6 +20,7 @@ class UserRegisterDTO {
     this.introText,
     this.shortIntro,
     this.profileImageUrl,
+    this.interest,
   });
 
   Map<String, dynamic> toJson() {
@@ -31,6 +33,7 @@ class UserRegisterDTO {
       'introText': introText,
       'shortIntro': shortIntro,
       'profileImageUrl': profileImageUrl,
+      'interest': interest,
     };
   }
 }

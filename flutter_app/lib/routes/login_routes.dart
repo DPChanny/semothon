@@ -8,6 +8,8 @@ import 'package:flutter_app/pages/user_input/name_input_page.dart';
 import 'package:flutter_app/pages/user_input/nickname_input_page.dart';
 import 'package:flutter_app/pages/user_input/register_complete_page.dart';
 import 'package:flutter_app/pages/user_input/student_id_input_page.dart';
+import 'package:flutter_app/pages/interest_selection_page.dart';
+import 'package:flutter_app/pages/detail_selection_page.dart';
 
 final Map<String, WidgetBuilder> loginRoutes = {
   '/login_page': (context) => const LoginPage(),
@@ -20,4 +22,6 @@ final Map<String, WidgetBuilder> loginRoutes = {
   '/user_input/register_complete_page':
       (context) => const RegisterCompletePage(),
   '/user_input/student_id_input_page': (context) => const StudentIdInputPage(),
+  '/interest_selection_page': (context) => const InterestSelectionPage(),
+  '/detail_selection_page': (context) => const DetailSelectionPage(),
 };

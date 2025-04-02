@@ -58,7 +58,7 @@ class RegisterCompletePage extends StatelessWidget {
                     height: 47,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.popUntil(context, (route) => route.isFirst);
+                        Navigator.pushNamed(context, "/interest_selection_page",);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF008CFF),
