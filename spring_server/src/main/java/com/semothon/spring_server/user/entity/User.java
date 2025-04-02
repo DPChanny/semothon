@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 //추후 기능 및 DB가 확정이 되면 각 DB마다 Index 추가 설정
 @Entity
@@ -57,8 +58,7 @@ public class User {
     @Column(length = 10)
     private Gender gender;
 
-    @Builder.Default
-    private String profileImageUrl = "https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png";
+    private String profileImageUrl;
 
     @Column(nullable = false, length = 50)
     private String socialProvider;
@@ -116,6 +116,13 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatUser> chatUsers = new ArrayList<>();
 
+    @PrePersist
+    public void assignRandomDefaultProfileImageIfNull() {
+        if (this.profileImageUrl == null) {
+            int random = new Random().nextInt(6) + 1;
+            this.profileImageUrl = "https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default" + random + ".png";
+        }
+    }
 
     public void addHostedRooms(Room room){ //사용 x 연관계 편의 메서드 구성을 위한 메서드 <- hostRoom 추가는 연관관계 편의 메서드를 이용
         this.hostedRooms.add(room);

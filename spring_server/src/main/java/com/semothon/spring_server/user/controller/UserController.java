@@ -64,6 +64,7 @@ public class UserController {
         return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile retrieved successfully");
     }
 
+    //나중에 다시 점검
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse getUserList(
@@ -146,9 +147,8 @@ public class UserController {
         aiService.updateUserRoomRecommendation(findUser.getUserId());
         aiService.updateUserCrawlingRecommendation(findUser.getUserId());
 
-        GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
 
-        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User intro updated successfully");
+        return BaseResponse.success(Map.of("code", 200, "userId", findUser.getUserId()), "User intro updated successfully");
     }
 
     @GetMapping("/profile-image")
