@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:flutter_app/dto/user_update_dto.dart';
 import 'package:flutter_app/routes/input_page_routes.dart';
 import 'package:intl/intl.dart';
 
@@ -37,7 +37,7 @@ class _BirthInputPageState extends State<BirthInputPage> {
 
   void _submit() {
     if (selectedDate != null) {
-      UserRegisterDTO.instance.birthdate = selectedDate;
+      UserUpdateDTO.instance.birthdate = selectedDate;
       Navigator.pushNamed(context, InputPageRouteNames.genderInputPage);
     }
   }

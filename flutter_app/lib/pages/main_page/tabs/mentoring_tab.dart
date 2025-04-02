@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/room_dto.dart';
 import 'package:flutter_app/dto/user_dto.dart';
-import 'package:flutter_app/services/dummy_rooms.dart';
-import 'package:flutter_app/services/fetch_mentors.dart';
+import 'package:flutter_app/services/queries/dummy_rooms.dart';
+import 'package:flutter_app/services/queries/fetch_mentors.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
 

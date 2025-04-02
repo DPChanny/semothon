@@ -1,29 +1,8 @@
-import 'dart:convert';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:flutter_app/dto/user_update_dto.dart';
 import 'package:flutter_app/routes/input_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
-import 'package:flutter_app/url.dart';
-import 'package:http/http.dart' as http;
-
-Future<bool> registerUser(String idToken) async {
-  final headers = {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer $idToken',
-  };
-
-  final body = jsonEncode(UserRegisterDTO.instance.toJson());
-
-  final response = await http.patch(
-    url('/api/users/profile'),
-    headers: headers,
-    body: body,
-  );
-
-  return (response.statusCode == 200);
-}
+import 'package:flutter_app/services/queries/user_query.dart';
 
 class GenderInputPage extends StatefulWidget {
   const GenderInputPage({super.key});
@@ -88,36 +67,9 @@ class _GenderInputPageState extends State<GenderInputPage> {
                   onPressed:
                       _selectedGender != null
                           ? () async {
-                            void _showRegisterFailureDialog() {
-                              showDialog(
-                                context: context,
-                                builder:
-                                    (context) => const AlertDialog(
-                                      title: Text("등록 실패"),
-                                      content: Text("서버와의 통신 중 오류가 발생했습니다."),
-                                    ),
-                              );
-                            }
-
-                            UserRegisterDTO.instance.gender =
+                            UserUpdateDTO.instance.gender =
                                 _selectedGender == '남' ? 'MALE' : 'FEMALE';
 
-                            final idToken = await FirebaseAuth
-                                .instance
-                                .currentUser
-                                ?.getIdToken(true);
-
-                            if (idToken == null) {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                "/login_page",
-                                (route) => false,
-                              );
-                              _showRegisterFailureDialog();
-                              return;
-                            }
-
-                            // 로딩 인디케이터 표시
                             showDialog(
                               context: context,
                               barrierDismissible: false,
@@ -127,11 +79,11 @@ class _GenderInputPageState extends State<GenderInputPage> {
                                   ),
                             );
 
-                            final success = await registerUser(idToken);
+                            final result = await updateUser();
 
                             Navigator.pop(context); // 로딩 다이얼로그 닫기
 
-                            if (success) {
+                            if (result.success) {
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 InputPageRouteNames.inputCompletePage,
@@ -143,7 +95,9 @@ class _GenderInputPageState extends State<GenderInputPage> {
                                 LoginPageRouteNames.loginPage,
                                 (route) => false,
                               );
-                              _showRegisterFailureDialog();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(result.message)),
+                              );
                             }
                           }
                           : null,

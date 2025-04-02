@@ -1,5 +1,5 @@
-class UserRegisterDTO {
-  static final UserRegisterDTO instance = UserRegisterDTO();
+class UserUpdateDTO {
+  static final UserUpdateDTO instance = UserUpdateDTO();
 
   String? name;
   String? nickname;
@@ -11,7 +11,7 @@ class UserRegisterDTO {
   String? shortIntro;
   String? profileImageUrl;
 
-  UserRegisterDTO({
+  UserUpdateDTO({
     this.name,
     this.nickname,
     this.department,

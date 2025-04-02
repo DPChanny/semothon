@@ -12,6 +12,7 @@ class UserDTO {
   final String? introText;
   final String? shortIntro;
   final DateTime createdAt;
+  final List<String>? interests;
 
   UserDTO({
     required this.userId,
@@ -27,6 +28,7 @@ class UserDTO {
     this.introText,
     this.shortIntro,
     required this.createdAt,
+    this.interests,
   });
 
   factory UserDTO.fromJson(Map<String, dynamic> json) {

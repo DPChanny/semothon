@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/crawling_dto.dart';
 import 'package:flutter_app/dto/user_dto.dart';
-import 'package:flutter_app/services/fetch_crawlings.dart';
-import 'package:flutter_app/services/fetch_mentors.dart';
-import 'package:flutter_app/services/fetch_user.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
+import 'package:flutter_app/services/queries/crawling_query.dart';
+import 'package:flutter_app/services/queries/fetch_mentors.dart';
+import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/widgets/crawling_item.dart';
 import 'package:flutter_app/widgets/interest_card.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
@@ -17,7 +18,6 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   UserDTO? _user;
-  List<String> _keywords = [];
   List<UserDTO> _mentors = [];
   List<CrawlingDto> _crawlings = [];
   bool _isLoading = true;
@@ -30,12 +30,22 @@ class _HomeTabState extends State<HomeTab> {
 
   Future<void> _loadData() async {
     try {
-      final (user, keywords) = await fetchUser();
+      final result = await getUser();
+      if (!result.success) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(result.message)));
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          LoginPageRouteNames.loginPage,
+          (route) => false,
+        );
+        return;
+      }
       final mentors = await fetchMentors(3);
       final crawlings = await fetchCrawlingItems();
       setState(() {
-        _user = user;
-        _keywords = keywords;
+        _user = result.user!;
         _mentors = mentors;
         _crawlings = crawlings;
         _isLoading = false;
@@ -63,7 +73,7 @@ class _HomeTabState extends State<HomeTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          interestCard(context, _user!, _keywords),
+          interestCard(context, _user!, _user!.interests!),
           Transform.translate(
             offset: const Offset(0, -90),
             child: Column(
