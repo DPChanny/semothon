@@ -1,9 +1,11 @@
 spring:
-  datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
 
-external:
-  fastapi:
-    url: ${FASTAPI_BASE_URL}
+logging:
+  level:
+    root: DEBUG
+    com.zaxxer.hikari: DEBUG
+    org.hibernate.engine.jdbc.connections: DEBUG

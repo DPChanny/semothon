@@ -63,7 +63,7 @@ Widget mentorItem(UserDTO mentor) {
                 ),
               ),
               Text(
-                "${mentor.department ?? ""} ${("${mentor.studentId}학번") ?? "학번"}",
+                "${mentor.department ?? ""} ${("${mentor.studentId}학번")}",
                 style: const TextStyle(
                   color: Color(0xFF888888),
                   fontSize: 12,

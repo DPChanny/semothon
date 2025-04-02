@@ -1,15 +1,28 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:flutter_app/url.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  Future<bool> signInWithGoogle(BuildContext context) async {
+  Future<void> signInWithGoogle(BuildContext context) async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) return false;
+      final GoogleSignInAccount? googleUser;
+      if (bool.parse(dotenv.env['WEB'] ?? 'false')) {
+        googleUser = await GoogleSignIn(clientId: "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com").signIn();
+      }
+      else{
+        googleUser = await GoogleSignIn().signIn();
+      }
+
+      if (googleUser == null) return;
 
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
@@ -21,39 +34,55 @@ class LoginPage extends StatelessWidget {
 
       await FirebaseAuth.instance.signInWithCredential(credential);
 
-      User? user = await FirebaseAuth.instance.currentUser;
+      User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
         String? idToken = await user.getIdToken();
 
-        final String protocol = 'http';
-        final String host = 'localhost';
-        final int port = 8080;
-        final String path = '/api/users/login';
-
-        final Uri url = Uri(
-          scheme: protocol,
-          host: host,
-          port: port,
-          path: path,
-        );
-
-        final response = await http.get(
-          url,
+        final response = await http.post(
+          url('/api/users/login'),
           headers: {
             'Authorization': 'Bearer $idToken',
+            'Content-Type': 'application/json',
           },
         );
 
-        // http.get()
+        if (response.statusCode == 200) {
+          final Map<String, dynamic> jsonBody = jsonDecode(response.body);
 
-        return true;
+          final userInfoJson = jsonBody['data']?['user']?['userInfo'];
+
+          if (userInfoJson != null) {
+            final user = UserDTO.fromJson(userInfoJson);
+            if (user.introText != null) {
+              Navigator.pushNamed(context, "/home_page");
+            } else if (user.name != null) {
+              Navigator.pushNamed(context, '/user_input/register_complete_page');
+            }
+            else
+              {
+                Navigator.pushNamed(context, '/login_complete_page');
+              }
+          } else {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('로그인 실패: parsing failure')));
+          }
+        } else {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('로그인 실패: server failure')));
+        }
       }
       else {
-        return false;
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('로그인 실패: firebase failure')));
       }
     } catch (e) {
-      return false;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('로그인 실패: $e')));
     }
   }
 
@@ -114,15 +143,7 @@ class LoginPage extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(19),
-                onTap: () async {
-                  if (await signInWithGoogle(context)) {
-                    Navigator.pushNamed(context, '/login_complete_page');
-                  } else {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text('로그인 실패')));
-                  }
-                },
+                onTap: () async => signInWithGoogle(context),
                 child: Ink(
                   width: 263,
                   height: 38,
