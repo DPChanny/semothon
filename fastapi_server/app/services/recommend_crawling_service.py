@@ -46,7 +46,7 @@ def recommend_crawling_by_user_service(request, db: Session):
 
 
 def recommend_crawling_by_crawling_service(request, db: Session):
-    users = db.query(User).all()
+    users = db.query(User).filter(User.intro_text.isnot(None)).all()
     crawling = db.query(Crawling).filter(Crawling.crawling_id == request.crawling_id).first()
 
     if not crawling:
