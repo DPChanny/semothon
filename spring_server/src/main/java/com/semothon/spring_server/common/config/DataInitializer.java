@@ -439,7 +439,7 @@ public class DataInitializer {
 
 
         } else {
-            log.debug("Test Data already exists. do not add new Test Data");
+            log.info("Test Data already exists. do not add new Test Data");
         }
     }
 }
