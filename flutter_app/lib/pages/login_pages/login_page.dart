@@ -6,11 +6,10 @@ import 'package:flutter_app/dto/user_dto.dart';
 import 'package:flutter_app/routes/input_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/routes/main_page_routes.dart';
+import 'package:flutter_app/url.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:flutter_app/url.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -19,9 +18,12 @@ class LoginPage extends StatelessWidget {
     try {
       final GoogleSignInAccount? googleUser;
       if (bool.parse(dotenv.env['WEB'] ?? 'false')) {
-        googleUser = await GoogleSignIn(clientId: "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com").signIn();
-      }
-      else{
+        googleUser =
+            await GoogleSignIn(
+              clientId:
+                  "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com",
+            ).signIn();
+      } else {
         googleUser = await GoogleSignIn().signIn();
       }
 
@@ -58,14 +60,24 @@ class LoginPage extends StatelessWidget {
           if (userInfoJson != null) {
             final user = UserDTO.fromJson(userInfoJson);
             if (user.introText != null) {
-              Navigator.pushNamed(context, MainPageRouteNames.mainPage);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                MainPageRouteNames.mainPage,
+                (route) => false,
+              );
             } else if (user.name != null) {
-              Navigator.pushNamed(context, InputPageRouteNames.registerCompletePage);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                InputPageRouteNames.inputCompletePage,
+                (route) => false,
+              );
+            } else {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                LoginPageRouteNames.loginCompletePage,
+                (route) => false,
+              );
             }
-            else
-              {
-                Navigator.pushNamed(context, '/login_complete_page');
-              }
           } else {
             ScaffoldMessenger.of(
               context,
@@ -76,8 +88,7 @@ class LoginPage extends StatelessWidget {
             context,
           ).showSnackBar(SnackBar(content: Text('로그인 실패: server failure')));
         }
-      }
-      else {
+      } else {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text('로그인 실패: firebase failure')));

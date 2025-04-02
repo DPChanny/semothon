@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
-import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_app/dto/user_register_dto.dart';
 
 class InterestSelectionPage extends StatefulWidget {
   const InterestSelectionPage({super.key});
@@ -48,8 +46,16 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
               const SizedBox(height: 6),
               Stack(
                 children: [
-                  Container(height: 4, width: double.infinity, color: Color(0xFFE4E4E4)),
-                  Container(height: 4, width: MediaQuery.of(context).size.width * 0.33, color: Color(0xFF008CFF)),
+                  Container(
+                    height: 4,
+                    width: double.infinity,
+                    color: Color(0xFFE4E4E4),
+                  ),
+                  Container(
+                    height: 4,
+                    width: MediaQuery.of(context).size.width * 0.33,
+                    color: Color(0xFF008CFF),
+                  ),
                 ],
               ),
               const SizedBox(height: 24),
@@ -70,9 +76,13 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
                   crossAxisCount: 3,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 12,
-                  children: interests.map((item) {
-                    return _buildInterestItem(item['icon']!, item['label']!);
-                  }).toList(),
+                  children:
+                      interests.map((item) {
+                        return _buildInterestItem(
+                          item['icon']!,
+                          item['label']!,
+                        );
+                      }).toList(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -81,14 +91,22 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
                   width: 335,
                   height: 47,
                   child: ElevatedButton(
-                    onPressed: selectedLabel != null
-                        ? () {
-                      //UserRegisterDTO.instance.interest = selectedLabel!;
-                      Navigator.pushNamed(context, InterestPageRouteNames.interestCategorySelectionPage);
-                    }
-                        : null,
+                    onPressed:
+                        selectedLabel != null
+                            ? () {
+                              //UserRegisterDTO.instance.interest = selectedLabel!;
+                              Navigator.pushNamed(
+                                context,
+                                InterestPageRouteNames
+                                    .interestCategorySelectionPage,
+                              );
+                            }
+                            : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: selectedLabel != null ? const Color(0xFF008CFF) : const Color(0xFFE4E4E4),
+                      backgroundColor:
+                          selectedLabel != null
+                              ? const Color(0xFF008CFF)
+                              : const Color(0xFFE4E4E4),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(23.5),
                       ),
@@ -98,7 +116,10 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w700,
-                        color: selectedLabel != null ? Colors.white : const Color(0xFFB1B1B1),
+                        color:
+                            selectedLabel != null
+                                ? Colors.white
+                                : const Color(0xFFB1B1B1),
                         fontFamily: 'Noto Sans KR',
                       ),
                     ),

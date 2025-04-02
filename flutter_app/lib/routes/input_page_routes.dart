@@ -13,16 +13,18 @@ class InputPageRouteNames {
   static const genderInputPage = '/gender_input_page';
   static const nameInputPage = '/name_input_page';
   static const nicknameInputPage = '/nickname_input_page';
-  static const registerCompletePage = '/register_complete_page';
+  static const inputCompletePage = '/input_complete_page';
   static const studentIdInputPage = '/student_id_input_page';
 }
 
 final Map<String, WidgetBuilder> inputPageRoutes = {
   InputPageRouteNames.birthInputPage: (context) => const BirthInputPage(),
-  InputPageRouteNames.departmentInputPage: (context) => const DepartmentInputPage(),
+  InputPageRouteNames.departmentInputPage:
+      (context) => const DepartmentInputPage(),
   InputPageRouteNames.genderInputPage: (context) => const GenderInputPage(),
   InputPageRouteNames.nameInputPage: (context) => const NameInputPage(),
   InputPageRouteNames.nicknameInputPage: (context) => const NicknameInputPage(),
-  InputPageRouteNames.registerCompletePage: (context) => const InputCompletePage(),
-  InputPageRouteNames.studentIdInputPage: (context) => const StudentIdInputPage(),
+  InputPageRouteNames.inputCompletePage: (context) => const InputCompletePage(),
+  InputPageRouteNames.studentIdInputPage:
+      (context) => const StudentIdInputPage(),
 };

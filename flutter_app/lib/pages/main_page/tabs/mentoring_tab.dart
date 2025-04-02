@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/room_dto.dart';
 import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/services/dummy_rooms.dart';
 import 'package:flutter_app/services/fetch_mentors.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
-import 'package:flutter_app/services/dummy_rooms.dart';
-import 'package:flutter_app/dto/room_dto.dart';
 
 class MentoringTab extends StatefulWidget {
   const MentoringTab({super.key});
@@ -218,7 +218,10 @@ class RecommendedRoomDetailModal extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('방장', style: TextStyle(color: Colors.grey)),
-                  Text('날아다니는 코딩맨', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    '날아다니는 코딩맨',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ],

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_dto.dart';
-import 'package:flutter_app/services/fetch_mentors.dart';
-import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/dto/crawling_dto.dart';
+import 'package:flutter_app/dto/user_dto.dart';
 import 'package:flutter_app/services/fetch_crawlings.dart';
+import 'package:flutter_app/services/fetch_mentors.dart';
 import 'package:flutter_app/services/fetch_user.dart';
 import 'package:flutter_app/widgets/crawling_item.dart';
 import 'package:flutter_app/widgets/interest_card.dart';
+import 'package:flutter_app/widgets/mentor_item.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -69,7 +69,10 @@ class _HomeTabState extends State<HomeTab> {
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -98,15 +101,19 @@ class _HomeTabState extends State<HomeTab> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-
-                            },
-                            child: const Icon(Icons.arrow_forward_ios, size: 20, color: Colors.blue),
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 20,
+                              color: Colors.blue,
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      Column(children: _mentors.map((m) => mentorItem(m)).toList()),
+                      Column(
+                        children: _mentors.map((m) => mentorItem(m)).toList(),
+                      ),
                     ],
                   ),
                 ),
@@ -119,16 +126,29 @@ class _HomeTabState extends State<HomeTab> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('추천 활동', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                            Text(
+                              '추천 활동',
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             SizedBox(height: 4),
                             Text(
                               '관심사 분석을 통해 세모님의 맞춤형 활동을 추천합니다.',
-                              style: TextStyle(fontSize: 15, color: Colors.grey),
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey,
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Icon(Icons.arrow_forward_ios, size: 20, color: Colors.blue),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                        color: Colors.blue,
+                      ),
                     ],
                   ),
                 ),

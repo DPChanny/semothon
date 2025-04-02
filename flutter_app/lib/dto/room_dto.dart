@@ -1,4 +1,3 @@
-
 import 'package:flutter_app/dto/user_dto.dart';
 
 class RoomDTO {
@@ -9,8 +8,6 @@ class RoomDTO {
   final String createdAt;
 
   final UserDTO host;
-  
-
 
   RoomDTO({
     required this.roomId,
@@ -40,7 +37,6 @@ class RoomDTO {
       'capacity': capacity,
       'createdAt': createdAt,
       'host': host.toJson(),
-      
     };
   }
 }

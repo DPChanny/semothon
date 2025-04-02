@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_register_dto.dart';
 import 'package:flutter_app/routes/input_page_routes.dart';
-import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DepartmentInputPage extends StatefulWidget {
@@ -123,7 +122,7 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                                 _controller.text;
                             Navigator.pushNamed(
                               context,
-                              InputPageRouteNames.studentIdInputPage
+                              InputPageRouteNames.studentIdInputPage,
                             );
                           }
                           : null,

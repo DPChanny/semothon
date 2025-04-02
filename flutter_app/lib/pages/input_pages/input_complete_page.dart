@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/routes/interest_page_routes.dart';
-import 'package:flutter_app/routes/login_page_routes.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:flutter_app/routes/interest_page_routes.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class InputCompletePage extends StatelessWidget {
   const InputCompletePage({super.key});
@@ -26,18 +24,18 @@ class InputCompletePage extends StatelessWidget {
                   width: 78,
                   height: 78,
                 ),
-              const SizedBox(height: 32),
-              Text(
-                '${UserRegisterDTO.instance.nickname} 님\n정보 입력이 완료되었습니다.',
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  height: 1.42,
-                  letterSpacing: -0.41,
-                  fontFamily: 'Noto Sans KR',
+                const SizedBox(height: 32),
+                Text(
+                  '${UserRegisterDTO.instance.nickname} 님\n정보 입력이 완료되었습니다.',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    height: 1.42,
+                    letterSpacing: -0.41,
+                    fontFamily: 'Noto Sans KR',
+                  ),
                 ),
-              ),
                 const Spacer(),
                 Center(
                   child: const Text(
@@ -60,7 +58,11 @@ class InputCompletePage extends StatelessWidget {
                     height: 47,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, InterestPageRouteNames.interestSelectionPage,);
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          InterestPageRouteNames.interestSelectionPage,
+                          (route) => false,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF008CFF),

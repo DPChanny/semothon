@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/routes/input_page_routes.dart';
-import 'package:flutter_app/routes/login_page_routes.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StudentIdInputPage extends StatefulWidget {
   const StudentIdInputPage({super.key});

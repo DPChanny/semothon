@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_app/dto/user_register_dto.dart';
 import 'package:flutter_app/routes/input_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/url.dart';
 import 'package:http/http.dart' as http;
-
 
 Future<bool> registerUser(String idToken) async {
   final headers = {
@@ -87,57 +85,68 @@ class _GenderInputPageState extends State<GenderInputPage> {
                 width: 335,
                 height: 47,
                 child: ElevatedButton(
-                  onPressed: _selectedGender != null
-                    ? () async {
-                    void _showRegisterFailureDialog() {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const AlertDialog(
-                          title: Text("등록 실패"),
-                          content: Text("서버와의 통신 중 오류가 발생했습니다."),
-                        ),
-                      );
-                    }
-                    UserRegisterDTO.instance.gender =
-                    _selectedGender == '남' ? 'MALE' : 'FEMALE';
+                  onPressed:
+                      _selectedGender != null
+                          ? () async {
+                            void _showRegisterFailureDialog() {
+                              showDialog(
+                                context: context,
+                                builder:
+                                    (context) => const AlertDialog(
+                                      title: Text("등록 실패"),
+                                      content: Text("서버와의 통신 중 오류가 발생했습니다."),
+                                    ),
+                              );
+                            }
 
-                      final idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+                            UserRegisterDTO.instance.gender =
+                                _selectedGender == '남' ? 'MALE' : 'FEMALE';
 
-                      if (idToken == null) {
-                      Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      "/login_page",
-                      (route) => false,
-                      );
-                      _showRegisterFailureDialog();
-                      return;
-                      }
+                            final idToken = await FirebaseAuth
+                                .instance
+                                .currentUser
+                                ?.getIdToken(true);
 
-                      // 로딩 인디케이터 표시
-                      showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => const Center(child: CircularProgressIndicator()),
-                      );
+                            if (idToken == null) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                "/login_page",
+                                (route) => false,
+                              );
+                              _showRegisterFailureDialog();
+                              return;
+                            }
 
-                      final success = await registerUser(idToken);
+                            // 로딩 인디케이터 표시
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder:
+                                  (context) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                            );
 
-                      Navigator.pop(context); // 로딩 다이얼로그 닫기
+                            final success = await registerUser(idToken);
 
-                      if (success) {
-                        Navigator.pushNamed(
-                            context,
-                            InputPageRouteNames.registerCompletePage);
-                      } else {
-                        Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      LoginPageRouteNames.loginPage,
-                      (route) => false,
-                      );
-                      _showRegisterFailureDialog();
-                      }
-                    }
-                    : null,
+                            Navigator.pop(context); // 로딩 다이얼로그 닫기
+
+                            if (success) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                InputPageRouteNames.inputCompletePage,
+                                (route) => false,
+                              );
+                            } else {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                LoginPageRouteNames.loginPage,
+                                (route) => false,
+                              );
+                              _showRegisterFailureDialog();
+                            }
+                          }
+                          : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         _selectedGender != null

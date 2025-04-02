@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_register_dto.dart';
 import 'package:flutter_app/routes/input_page_routes.dart';
-import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:intl/intl.dart';
-
 
 class BirthInputPage extends StatefulWidget {
   const BirthInputPage({super.key});
