@@ -1,5 +1,6 @@
 package com.semothon.spring_server.room.dto;
 
+import com.semothon.spring_server.chat.dto.GetChatRoomResponseDto;
 import com.semothon.spring_server.room.entity.Room;
 import lombok.*;
 
@@ -14,6 +15,7 @@ public class GetRoomResponseDto {
     private RoomInfoDto roomInfo;
     private List<RoomUserInfoDto> members;
     private HostUserInfoDto host;
+    private GetChatRoomResponseDto chatRoom;
 
     public static GetRoomResponseDto from(Room room){
         return GetRoomResponseDto.builder()
@@ -22,6 +24,7 @@ public class GetRoomResponseDto {
                         .map(RoomUserInfoDto::from)
                         .collect(Collectors.toList()))
                 .host(HostUserInfoDto.from(room.getHost()))
+                .chatRoom(GetChatRoomResponseDto.from(room.getChatRoom()))
                 .build();
     }
 }

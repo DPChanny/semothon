@@ -1,11 +1,11 @@
 package com.semothon.spring_server.room.controller;
 
+import com.semothon.spring_server.ai.service.AiService;
 import com.semothon.spring_server.common.dto.BaseResponse;
 import com.semothon.spring_server.common.service.DateTimeUtil;
 import com.semothon.spring_server.room.dto.*;
 import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.room.service.RoomService;
-import com.semothon.spring_server.user.dto.GetUserResponseDto;
 import com.semothon.spring_server.user.entity.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +24,7 @@ import java.util.Map;
 public class RoomController {
 
     private final RoomService roomService;
+    private final AiService aiService;
 
     @GetMapping("/{roomId}")
     @ResponseStatus(HttpStatus.OK)
@@ -32,9 +33,10 @@ public class RoomController {
     ){
         GetRoomResponseDto getRoomResponseDto = roomService.getRoom(roomId);
 
-        return BaseResponse.success(Map.of("code", 200, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost()), "room retrieved successfully");
+        return BaseResponse.success(Map.of("code", 200, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost(), "chatRoom", getRoomResponseDto.getChatRoom()), "room retrieved successfully");
     }
 
+    // 마지막에 점검
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse getRoomList(
@@ -85,9 +87,16 @@ public class RoomController {
             @AuthenticationPrincipal User user,
             @RequestBody @Valid CreateRoomRequestDto requestDto
     ){
-        GetRoomResponseDto getRoomResponseDto = roomService.createRoom(user.getUserId(), requestDto);
+        Long roomId = roomService.createRoom(user.getUserId(), requestDto);
+        try {
+            aiService.updateInterestByRoomDescription(roomId);
+            aiService.updateAllUserRoomRecommendationByRoom(roomId);
+        } catch (Exception e) {
+            log.warn("AI service failed for room {}: {}", roomId, e.getMessage());
+        }
+        GetRoomResponseDto getRoomResponseDto = roomService.getRoom(roomId);
 
-        return BaseResponse.success(Map.of("code", 201, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost()), "room created successfully");
+        return BaseResponse.success(Map.of("code", 201, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost(), "chatRoom", getRoomResponseDto.getChatRoom()), "room created successfully");
     }
 
     @DeleteMapping("/{roomId}")
@@ -107,9 +116,9 @@ public class RoomController {
             @AuthenticationPrincipal User user,
             @PathVariable Long roomId
     ){
-        RoomUserInfoDto roomUserInfoDto =  roomService.joinRoom(user.getUserId(), roomId);
+        GetRoomResponseDto getRoomResponseDto = roomService.joinRoom(user.getUserId(), roomId);
 
-        return BaseResponse.success(Map.of("code", 200, "roomUser", roomUserInfoDto), "joined room successfully");
+        return BaseResponse.success(Map.of("code", 200, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost(), "chatRoom", getRoomResponseDto.getChatRoom()), "joined room successfully");
     }
 
     @PostMapping("/{roomId}/leave")

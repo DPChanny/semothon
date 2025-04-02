@@ -3,6 +3,7 @@ package com.semothon.spring_server.room.service;
 import com.semothon.spring_server.chat.entity.ChatRoom;
 import com.semothon.spring_server.chat.entity.ChatRoomType;
 import com.semothon.spring_server.chat.repository.ChatRoomRepository;
+import com.semothon.spring_server.chat.service.ChatRoomService;
 import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.common.exception.ForbiddenException;
 import com.semothon.spring_server.room.dto.CreateRoomRequestDto;
@@ -28,12 +29,10 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class RoomService {
-    //room 생성, 삭제, 참여, 탈퇴 시 자동으로 chat연결 및 chatUser 연결 생각하며 코드 리팩토링 진행 필요
-
     private final RoomRepository roomRepository;
     private final RoomUserRepository roomUserRepository;
-    private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
+    private final ChatRoomService chatRoomService;
 
     @Transactional(readOnly = true)
     public GetRoomResponseDto getRoom(Long roomId) {
@@ -43,7 +42,7 @@ public class RoomService {
         return GetRoomResponseDto.from(room);
     }
 
-    public GetRoomResponseDto createRoom(String userId, CreateRoomRequestDto requestDto) {
+    public Long createRoom(String userId, CreateRoomRequestDto requestDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidInputException("user not found"));
 
@@ -52,7 +51,6 @@ public class RoomService {
                 .description(requestDto.getDescription())
                 .capacity(requestDto.getCapacity())
                 .build();
-
         room.updateHost(user);
 
         RoomUser roomUser = RoomUser.builder()
@@ -61,16 +59,12 @@ public class RoomService {
         roomUser.updateRoom(room);
         roomUser.updateUser(user);
 
-        ChatRoom chatRoom = ChatRoom.builder()
-                .type(ChatRoomType.ROOM)
-                .build();
-        chatRoom.updateRoom(room);
-
-        roomRepository.save(room);
-        chatRoomRepository.save(chatRoom);
+        Room savedRoom = roomRepository.save(room);
         roomUserRepository.save(roomUser);
 
-        return GetRoomResponseDto.from(room);
+        chatRoomService.createRoomChat(savedRoom);
+
+        return room.getRoomId();
     }
 
     public void deleteRoom(String userId, Long roomId) {
@@ -83,10 +77,14 @@ public class RoomService {
             throw new ForbiddenException("Only the host can delete the room.");
         }
 
+        if (room.getChatRoom() != null) {
+            chatRoomService.deleteChatRoom(room.getChatRoom().getChatRoomId(), user);
+        }
+
         roomRepository.delete(room);
     }
 
-    public RoomUserInfoDto joinRoom(String userId, Long roomId) {
+    public GetRoomResponseDto joinRoom(String userId, Long roomId) {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new InvalidInputException("room not found"));
         User user = userRepository.findById(userId)
@@ -106,9 +104,12 @@ public class RoomService {
         roomUser.updateRoom(room);
         roomUser.updateUser(user);
 
+        if (room.getChatRoom() != null) {
+            chatRoomService.joinChatRoom(room.getChatRoom().getChatRoomId(), user);
+        }
         roomUserRepository.save(roomUser);
 
-        return RoomUserInfoDto.from(roomUser);
+        return GetRoomResponseDto.from(room);
     }
 
     public void leaveRoom(String userId, Long roomId) {
@@ -122,6 +123,10 @@ public class RoomService {
 
         if (roomUser.getRole() == RoomUserRole.ADMIN) {
             throw new ForbiddenException("Host cannot leave the room. Try deleting instead.");
+        }
+
+        if (room.getChatRoom() != null) {
+            chatRoomService.leaveChatRoom(room.getChatRoom().getChatRoomId(), user);
         }
 
         roomUserRepository.delete(roomUser);
