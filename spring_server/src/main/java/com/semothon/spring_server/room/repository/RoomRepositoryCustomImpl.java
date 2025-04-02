@@ -1,12 +1,14 @@
 package com.semothon.spring_server.room.repository;
 
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.semothon.spring_server.room.dto.RoomSearchCondition;
 import com.semothon.spring_server.room.dto.RoomSortBy;
 import com.semothon.spring_server.room.dto.RoomSortDirection;
+import com.semothon.spring_server.room.dto.RoomWithScoreDto;
 import com.semothon.spring_server.room.entity.QRoomUser;
 import com.semothon.spring_server.room.entity.Room;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +33,15 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
     private final JPAQueryFactory queryFactory;
     @Override
     public List<Room> searchRoomList(RoomSearchCondition condition, String currentUserId) {
-        return queryFactory.selectFrom(room)
+        List<RoomWithScoreDto> results = queryFactory
+                .select(Projections.constructor(RoomWithScoreDto.class, room, userRoomRecommendation.score))
+                .from(room)
                 .leftJoin(room.host, user).fetchJoin()
                 .leftJoin(room.roomUsers, roomUser)
                 .leftJoin(room.roomInterests, roomInterest)
                 .leftJoin(roomInterest.interest, interest)
-                .leftJoin(userRoomRecommendation).on(userRoomRecommendation.room.eq(room).and(userRoomRecommendation.user.userId.eq(currentUserId)))
+                .leftJoin(room.userRoomRecommendations, userRoomRecommendation)
+                    .on(userRoomRecommendation.user.userId.eq(currentUserId))
                 .where(
                         titleKeywordIn(condition.getTitleKeyword()),
                         descriptionKeywordIn(condition.getDescriptionKeyword()),
@@ -55,6 +60,12 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
                 .offset((long) condition.getPage() * condition.getLimit())
                 .limit(condition.getLimit())
                 .fetch();
+
+        List<Room> rooms = results.stream()
+                .map(RoomWithScoreDto::room)
+                .toList();
+
+        return rooms;
     }
 
     private BooleanExpression titleKeywordIn(List<String> keywords) {
@@ -138,7 +149,7 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
             case CREATED_AT -> direction == RoomSortDirection.ASC ? room.createdAt.asc() : room.createdAt.desc();
             case CAPACITY -> direction == RoomSortDirection.ASC ? room.capacity.asc() : room.capacity.desc();
             case CURRENT_MEMBERS -> direction == RoomSortDirection.ASC ? room.roomUsers.size().asc() : room.roomUsers.size().desc();
-            case SCORE -> direction == RoomSortDirection.ASC ? room.userRoomRecommendations.any().score.asc() : room.userRoomRecommendations.any().score.desc();
+            case SCORE -> direction == RoomSortDirection.ASC ? userRoomRecommendation.score.asc() : userRoomRecommendation.score.desc();
         };
     }
 }
