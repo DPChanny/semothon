@@ -62,7 +62,7 @@ public class RoomService {
         roomUser.updateUser(user);
 
         ChatRoom chatRoom = ChatRoom.builder()
-                .type(ChatRoomType.GROUP)
+                .type(ChatRoomType.ROOM)
                 .build();
         chatRoom.updateRoom(room);
 

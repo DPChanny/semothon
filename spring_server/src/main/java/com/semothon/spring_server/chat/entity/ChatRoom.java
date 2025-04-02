@@ -60,6 +60,8 @@ public class ChatRoom {
     @Builder.Default //기본값 30명
     private Integer capacity = 30;
 
+    // title, description과 host user도 필요할 듯
+    // room의 chat일 경우 room과 동일하게 설정, crawling의 chat이면 새로 작성하도록
 
     public void updateRoom(Room room){
         this.room = room;
