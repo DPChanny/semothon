@@ -5,6 +5,7 @@ import com.semothon.spring_server.common.dto.BaseResponse;
 import com.semothon.spring_server.common.service.DateTimeUtil;
 import com.semothon.spring_server.room.dto.*;
 import com.semothon.spring_server.room.entity.Room;
+import com.semothon.spring_server.room.repository.RoomInterestRepository;
 import com.semothon.spring_server.room.service.RoomService;
 import com.semothon.spring_server.user.entity.User;
 import jakarta.validation.Valid;
@@ -99,6 +100,34 @@ public class RoomController {
         return BaseResponse.success(Map.of("code", 201, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost(), "chatRoom", getRoomResponseDto.getChatRoom()), "room created successfully");
     }
 
+    @PatchMapping("/{roomId}")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse updateRoom(
+            @AuthenticationPrincipal User user,
+            @PathVariable Long roomId,
+            @RequestBody UpdateRoomRequestDto dto
+    ){
+        // 기존 Room 정보 조회
+        Room existingRoom = roomService.getRoomEntity(roomId);
+        String oldDescription = existingRoom.getDescription();
+
+        GetRoomResponseDto updated = roomService.updateRoom(user.getUserId(), roomId, dto);
+
+        // description 변경 시 AI 연동
+        if (dto.getDescription() != null && !dto.getDescription().equals(oldDescription)) {
+            try {
+                roomService.deleteRoomInterest(existingRoom);
+                aiService.updateInterestByRoomDescription(roomId);
+                aiService.updateAllUserRoomRecommendationByRoom(roomId);
+            } catch (Exception e) {
+                log.warn("AI service failed for room update {}: {}", roomId, e.getMessage());
+            }
+        }
+
+        return BaseResponse.success(Map.of("code", 200, "room", updated.getRoomInfo(), "members", updated.getMembers(), "host", updated.getHost(), "chatRoom", updated.getChatRoom()), "room updated successfully");
+
+    }
+
     @DeleteMapping("/{roomId}")
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse deleteRoom(
@@ -131,5 +160,4 @@ public class RoomController {
 
         return BaseResponse.success(Map.of("code", 200), "left room successfully");
     }
-
 }

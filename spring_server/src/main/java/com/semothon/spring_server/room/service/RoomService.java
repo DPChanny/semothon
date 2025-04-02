@@ -1,18 +1,17 @@
 package com.semothon.spring_server.room.service;
 
-import com.semothon.spring_server.chat.entity.ChatRoom;
-import com.semothon.spring_server.chat.entity.ChatRoomType;
-import com.semothon.spring_server.chat.repository.ChatRoomRepository;
+import com.semothon.spring_server.chat.dto.UpdateChatRoomRequestDto;
 import com.semothon.spring_server.chat.service.ChatRoomService;
-import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.common.exception.ForbiddenException;
+import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.room.dto.CreateRoomRequestDto;
 import com.semothon.spring_server.room.dto.GetRoomResponseDto;
 import com.semothon.spring_server.room.dto.RoomSearchCondition;
-import com.semothon.spring_server.room.dto.RoomUserInfoDto;
+import com.semothon.spring_server.room.dto.UpdateRoomRequestDto;
 import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.room.entity.RoomUser;
 import com.semothon.spring_server.room.entity.RoomUserRole;
+import com.semothon.spring_server.room.repository.RoomInterestRepository;
 import com.semothon.spring_server.room.repository.RoomRepository;
 import com.semothon.spring_server.room.repository.RoomUserRepository;
 import com.semothon.spring_server.user.entity.User;
@@ -33,6 +32,7 @@ public class RoomService {
     private final RoomUserRepository roomUserRepository;
     private final UserRepository userRepository;
     private final ChatRoomService chatRoomService;
+    private final RoomInterestRepository roomInterestRepository;
 
     @Transactional(readOnly = true)
     public GetRoomResponseDto getRoom(Long roomId) {
@@ -40,6 +40,12 @@ public class RoomService {
                 .orElseThrow(() -> new InvalidInputException("room not found"));
 
         return GetRoomResponseDto.from(room);
+    }
+
+    @Transactional(readOnly = true)
+    public Room getRoomEntity(Long roomId) {
+        return roomRepository.findById(roomId)
+                .orElseThrow(() -> new InvalidInputException("room not found"));
     }
 
     public Long createRoom(String userId, CreateRoomRequestDto requestDto) {
@@ -135,5 +141,35 @@ public class RoomService {
     @Transactional(readOnly = true)
     public List<Room> getRoomList(String userId, RoomSearchCondition condition) {
         return roomRepository.searchRoomList(condition, userId);
+    }
+
+    public GetRoomResponseDto updateRoom(String userId, Long roomId, UpdateRoomRequestDto dto) {
+        Room room = roomRepository.findByIdWithRoomUsersAndHost(roomId)
+                .orElseThrow(() -> new InvalidInputException("room not found"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("user not found"));
+
+        if (!room.getHost().getUserId().equals(userId)) {
+            throw new ForbiddenException("Only the host can edit the room.");
+        }
+
+        room.updateRoom(dto);
+        // ChatRoom 동기화
+        if (room.getChatRoom() != null) {
+            chatRoomService.updateChatRoom(room.getChatRoom().getChatRoomId(), user,
+                    UpdateChatRoomRequestDto.builder()
+                            .title(dto.getTitle())
+                            .description(dto.getDescription())
+                            .capacity(dto.getCapacity())
+                            .build());
+        }
+
+        return GetRoomResponseDto.from(room);
+    }
+
+    public void deleteRoomInterest(Room room) {
+        Room managedRoom = roomRepository.findById(room.getRoomId())
+                .orElseThrow(() -> new InvalidInputException("room not found"));
+        roomInterestRepository.deleteAllByRoom(managedRoom);
     }
 }

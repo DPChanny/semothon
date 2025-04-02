@@ -121,7 +121,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri(apiUrl)
-                    .bodyValue(Map.of("room_id", roomId))
+                    .bodyValue(Map.of("room_id", String.valueOf(roomId)))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
                     .block();
@@ -144,7 +144,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri(apiUrl)
-                    .bodyValue(Map.of("room_id", roomId))
+                    .bodyValue(Map.of("room_id", String.valueOf(roomId)))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
                     .block();
