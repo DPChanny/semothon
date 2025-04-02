@@ -113,4 +113,50 @@ public class AiService {
             throw new RuntimeException("FastAPI interest/user request failed", e);
         }
     }
+
+    @Transactional
+    public String updateInterestByRoomDescription(Long roomId) {
+        String apiUrl = fastApiBaseUrl + "/api/ai/interest/room";
+
+        try {
+            FastApiIntroResponse response = webClient.post()
+                    .uri(apiUrl)
+                    .bodyValue(Map.of("room_id", String.valueOf(roomId)))
+                    .retrieve()
+                    .bodyToMono(FastApiIntroResponse.class)
+                    .block();
+
+            if (response != null && response.isSuccess()) {
+                return response.getMessage();
+            } else {
+                throw new RuntimeException("FastAPI update interests from room failed: " +
+                        (response != null ? response.getMessage() : "unknown error"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("FastAPI interest/room request failed", e);
+        }
+    }
+
+    @Transactional
+    public String updateAllUserRoomRecommendationByRoom(Long roomId) {
+        String apiUrl = fastApiBaseUrl + "/api/ai/recommend/room/by-room";
+
+        try {
+            FastApiIntroResponse response = webClient.post()
+                    .uri(apiUrl)
+                    .bodyValue(Map.of("room_id", String.valueOf(roomId)))
+                    .retrieve()
+                    .bodyToMono(FastApiIntroResponse.class)
+                    .block();
+
+            if (response != null && response.isSuccess()) {
+                return response.getMessage();
+            } else {
+                throw new RuntimeException("FastAPI update recommendation by room failed: " +
+                        (response != null ? response.getMessage() : "unknown error"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("FastAPI recommend/room/by-room request failed", e);
+        }
+    }
 }

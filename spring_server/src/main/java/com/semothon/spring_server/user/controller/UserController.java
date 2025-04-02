@@ -3,9 +3,6 @@ package com.semothon.spring_server.user.controller;
 import com.semothon.spring_server.ai.service.AiService;
 import com.semothon.spring_server.common.dto.BaseResponse;
 import com.semothon.spring_server.common.service.DateTimeUtil;
-import com.semothon.spring_server.room.dto.RoomSearchCondition;
-import com.semothon.spring_server.room.dto.RoomSortBy;
-import com.semothon.spring_server.room.dto.RoomSortDirection;
 import com.semothon.spring_server.user.dto.*;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.service.UserService;
@@ -20,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -63,6 +59,7 @@ public class UserController {
         return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile retrieved successfully");
     }
 
+    //나중에 다시 점검
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse getUserList(
@@ -71,7 +68,7 @@ public class UserController {
     ){
         //default value 명시적 설정
         if (condition.getSortBy() == null) {
-            condition.setSortBy(UserSortBy.CREATE_AT);
+            condition.setSortBy(UserSortBy.CREATED_AT);
         }
         if (condition.getSortDirection() == null) {
             condition.setSortDirection(UserSortDirection.DESC);
@@ -145,9 +142,8 @@ public class UserController {
         aiService.updateUserRoomRecommendation(findUser.getUserId());
         aiService.updateUserCrawlingRecommendation(findUser.getUserId());
 
-        GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
 
-        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User intro updated successfully");
+        return BaseResponse.success(Map.of("code", 200, "userId", findUser.getUserId()), "User intro updated successfully");
     }
 
     @GetMapping("/profile-image")
@@ -180,5 +176,4 @@ public class UserController {
 
         return BaseResponse.success(Map.of("code", 200, "image_url", imageUrl), "Profile image deleted successfully.");
     }
-
 }

@@ -2,7 +2,9 @@ package com.semothon.spring_server.room.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.semothon.spring_server.chat.entity.ChatRoom;
+import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.interest.entity.Interest;
+import com.semothon.spring_server.room.dto.UpdateRoomRequestDto;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.entity.UserInterest;
 import jakarta.persistence.*;
@@ -90,5 +92,16 @@ public class Room {
     public void updateHost(User user){
         this.host = user;
         user.addHostedRooms(this);
+    }
+
+    public void updateRoom(UpdateRoomRequestDto dto){
+        if (dto.getTitle() != null) this.title = dto.getTitle();
+        if (dto.getDescription() != null) this.description = dto.getDescription();
+        if (dto.getCapacity() != null) {
+            if (dto.getCapacity() < roomUsers.size()) {
+                throw new InvalidInputException("current member count is more than updated capacity. current member counts: " + roomUsers.size());
+            }
+            this.capacity = dto.getCapacity();
+        }
     }
 }

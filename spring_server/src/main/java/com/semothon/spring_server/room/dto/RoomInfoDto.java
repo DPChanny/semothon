@@ -5,6 +5,8 @@ import com.semothon.spring_server.room.entity.Room;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,6 +20,7 @@ public class RoomInfoDto {
     private LocalDateTime createdAt;
     private Integer currentMemberCount;
     private Long chatRoomId;
+    private List<String> interests;
 
     public static RoomInfoDto from(Room room){
         return RoomInfoDto.builder()
@@ -28,6 +31,9 @@ public class RoomInfoDto {
                 .createdAt(DateTimeUtil.convertUTCToKST(room.getCreatedAt()))
                 .currentMemberCount(room.getRoomUsers() != null ? room.getRoomUsers().size() : 0)
                 .chatRoomId(room.getChatRoom() != null ? room.getChatRoom().getChatRoomId() : null)
+                .interests(room.getRoomInterests().stream()
+                        .map(roomInterest -> roomInterest.getInterest().getName())
+                        .collect(Collectors.toList()))
                 .build();
     }
 }

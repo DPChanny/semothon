@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// 마지막에 검증 및 테스트 진행
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -49,7 +51,7 @@ public class UserSearchCondition {
 
     // 정렬 기준
     @Builder.Default
-    private UserSortBy sortBy = UserSortBy.CREATE_AT;
+    private UserSortBy sortBy = UserSortBy.CREATED_AT;
 
     @Builder.Default
     private UserSortDirection sortDirection = UserSortDirection.DESC;
