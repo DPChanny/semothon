@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/crawling_dto.dart';
 import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/services/queries/crawling_query.dart';
 import 'package:flutter_app/services/queries/fetch_mentors.dart';
@@ -17,7 +18,7 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  UserDTO? _user;
+  ({String message, bool success, UserDTO? user})? _user;
   List<UserDTO> _mentors = [];
   List<CrawlingDto> _crawlings = [];
   bool _isLoading = true;
@@ -29,32 +30,41 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   Future<void> _loadData() async {
-    try {
-      final result = await getUser();
-      if (!result.success) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(result.message)));
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          LoginPageRouteNames.loginPage,
-          (route) => false,
-        );
-        return;
-      }
-      final mentors = await fetchMentors(3);
-      final crawlings = await fetchCrawlingItems();
-      setState(() {
-        _user = result.user!;
-        _mentors = mentors;
-        _crawlings = crawlings;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
+    final userResult = await getUser();
+
+    if (!userResult.success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(userResult.message)),
+      );
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginPageRouteNames.loginPage,
+            (route) => false,
+      );
+      return;
     }
+
+    if (userResult.user!.interests == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("관심사를 먼저 설정해주세요.")),
+      );
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        InterestPageRouteNames.interestSelectionPage,
+            (route) => false,
+      );
+      return;
+    }
+
+    final mentors = await fetchMentors(3);
+    final crawlings = await fetchCrawlingItems();
+
+    setState(() {
+      _user = userResult;
+      _mentors = mentors;
+      _crawlings = crawlings;
+      _isLoading = false;
+    });
   }
 
   @override
@@ -63,17 +73,13 @@ class _HomeTabState extends State<HomeTab> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (_user == null) {
-      return const Center(child: Text('데이터 로드 실패'));
-    }
-
     final pageController = PageController(viewportFraction: 0.85);
 
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          interestCard(context, _user!, _user!.interests!),
+          interestCard(context, _user!.user!, _user!.user!.interests!),
           Transform.translate(
             offset: const Offset(0, -90),
             child: Column(
@@ -127,7 +133,6 @@ class _HomeTabState extends State<HomeTab> {
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: Row(
@@ -162,7 +167,6 @@ class _HomeTabState extends State<HomeTab> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 12),
                 SizedBox(
                   height: 200,

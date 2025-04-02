@@ -91,7 +91,7 @@ class InputCompletePage extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              InterestPageRouteNames.interestSelectionPage,
+                              InterestPageRouteNames.interestCategorySelectionPage,
                               (route) => false,
                             );
                           },

@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
 
     final GoogleSignInAccount? googleUser = await getGoogleSignIn().signIn();
     if (googleUser == null) {
-      Navigator.pop(context); // 로딩 다이얼로그 닫기
+      Navigator.pop(context);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("google failure")));
@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
     }
 
     final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    await googleUser.authentication;
 
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -38,32 +38,32 @@ class LoginPage extends StatelessWidget {
 
     final result = await loginUser();
     if (!result.success) {
-      Navigator.pop(context); // 로딩 다이얼로그 닫기
+      Navigator.pop(context);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(result.message)));
       return;
     }
 
-    Navigator.pop(context); // 로딩 다이얼로그 닫기
+    Navigator.pop(context);
 
     if (result.user!.introText != null) {
       Navigator.pushNamedAndRemoveUntil(
         context,
         MainPageRouteNames.mainPage,
-        (route) => false,
+            (route) => false,
       );
     } else if (result.user!.name != null) {
       Navigator.pushNamedAndRemoveUntil(
         context,
         InputPageRouteNames.inputCompletePage,
-        (route) => false,
+            (route) => false,
       );
     } else {
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginCompletePage,
-        (route) => false,
+            (route) => false,
       );
     }
   }
@@ -76,20 +76,15 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 80),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, MainPageRouteNames.mainPage);
-              },
-              child: Center(
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    image: const DecorationImage(
-                      image: AssetImage('assets/logo.png'),
-                      fit: BoxFit.cover,
-                    ),
+            Center(
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  image: const DecorationImage(
+                    image: AssetImage('assets/logo.png'),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

@@ -29,8 +29,9 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _pages = const [
     HomeTab(),
+    Center(child: Text("채팅")),
     MentoringTab(),
-    Center(child: Text("설정 페이지")),
+    Center(child: Text("추천 활동")),
   ];
 
   @override
