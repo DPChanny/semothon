@@ -43,7 +43,7 @@ public class Room {
 
     @Column(nullable = false)
     @Builder.Default //기본값 30명
-    private int capacity = 30;
+    private Integer capacity = 30;
 
 
     @CreationTimestamp

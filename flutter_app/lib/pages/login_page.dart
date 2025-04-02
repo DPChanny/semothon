@@ -56,9 +56,13 @@ class LoginPage extends StatelessWidget {
             final user = UserDTO.fromJson(userInfoJson);
             if (user.introText != null) {
               Navigator.pushNamed(context, "/home_page");
-            } else {
-              Navigator.pushNamed(context, '/login_complete_page');
+            } else if (user.name != null) {
+              Navigator.pushNamed(context, '/user_input/register_complete_page');
             }
+            else
+              {
+                Navigator.pushNamed(context, '/login_complete_page');
+              }
           } else {
             ScaffoldMessenger.of(
               context,

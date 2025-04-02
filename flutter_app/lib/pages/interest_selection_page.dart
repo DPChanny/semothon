@@ -81,7 +81,7 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
                   child: ElevatedButton(
                     onPressed: selectedLabel != null
                         ? () {
-                      UserRegisterDTO.instance.interest = selectedLabel!;
+                      //UserRegisterDTO.instance.interest = selectedLabel!;
                       Navigator.pushNamed(context, "/detail_selection_page");
                     }
                         : null,
