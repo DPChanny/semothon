@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginCompletePage extends StatelessWidget {
@@ -41,7 +43,7 @@ class LoginCompletePage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "/user_input/name_input_page");
+                    Navigator.pushNamed(context, InputPageRouteNames.nameInputPage);
                   },
                   child: const Text(
                     '확인',

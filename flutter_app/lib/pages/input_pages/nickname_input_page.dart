@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter_app/dto/user_register_dto.dart';
 
-class StudentIdInputPage extends StatefulWidget {
-  const StudentIdInputPage({super.key});
+class NicknameInputPage extends StatefulWidget {
+  const NicknameInputPage({super.key});
 
   @override
-  State<StudentIdInputPage> createState() => _StudentIdInputPageState();
+  State<NicknameInputPage> createState() => _NicknameInputPageState();
 }
 
-class _StudentIdInputPageState extends State<StudentIdInputPage> {
+class _NicknameInputPageState extends State<NicknameInputPage> {
   final TextEditingController _controller = TextEditingController();
   bool _isButtonEnabled = false;
 
@@ -44,6 +46,7 @@ class _StudentIdInputPageState extends State<StudentIdInputPage> {
         centerTitle: true,
         title: const Text(
           '사용자 정보',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.black,
             fontSize: 17,
@@ -60,7 +63,7 @@ class _StudentIdInputPageState extends State<StudentIdInputPage> {
           children: [
             const SizedBox(height: 40),
             const Text(
-              '학번을 입력해 주세요.',
+              '닉네임을 입력해 주세요.',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 24,
@@ -72,7 +75,6 @@ class _StudentIdInputPageState extends State<StudentIdInputPage> {
             const SizedBox(height: 30),
             TextField(
               controller: _controller,
-              keyboardType: TextInputType.number,
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 17,
@@ -81,7 +83,7 @@ class _StudentIdInputPageState extends State<StudentIdInputPage> {
                 letterSpacing: -0.29,
               ),
               decoration: InputDecoration(
-                labelText: '학번',
+                labelText: '닉네임',
                 labelStyle: const TextStyle(
                   color: Color(0xFFB1B1B1),
                   fontFamily: 'Noto Sans KR',
@@ -119,11 +121,11 @@ class _StudentIdInputPageState extends State<StudentIdInputPage> {
                   onPressed:
                       _isButtonEnabled
                           ? () {
-                            UserRegisterDTO.instance.studentId =
+                            UserRegisterDTO.instance.nickname =
                                 _controller.text;
                             Navigator.pushNamed(
                               context,
-                              "/user_input/birth_input_page",
+                              InputPageRouteNames.departmentInputPage,
                             );
                           }
                           : null,

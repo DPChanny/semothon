@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_register_dto.dart';
 
-class DetailSelectionPage extends StatefulWidget {
-  const DetailSelectionPage({super.key});
+class InterestCategorySelectionPage extends StatefulWidget {
+  const InterestCategorySelectionPage({super.key});
 
   @override
-  State<DetailSelectionPage> createState() => _DetailSelectionPageState();
+  State<InterestCategorySelectionPage> createState() => _InterestCategorySelectionPageState();
 }
 
-class _DetailSelectionPageState extends State<DetailSelectionPage> {
+class _InterestCategorySelectionPageState extends State<InterestCategorySelectionPage> {
   final Map<String, List<String>> keywords = {
     '미술': [
       '산업디자인', '시각디자인', '패션디자인', '콘텐츠 디자인', '도예',

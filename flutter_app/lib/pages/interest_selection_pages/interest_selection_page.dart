@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/interest_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/user_register_dto.dart';
 
@@ -82,7 +84,7 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
                     onPressed: selectedLabel != null
                         ? () {
                       //UserRegisterDTO.instance.interest = selectedLabel!;
-                      Navigator.pushNamed(context, "/detail_selection_page");
+                      Navigator.pushNamed(context, InterestPageRouteNames.interestCategorySelectionPage);
                     }
                         : null,
                     style: ElevatedButton.styleFrom(

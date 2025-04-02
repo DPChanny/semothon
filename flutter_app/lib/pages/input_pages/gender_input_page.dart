@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -123,11 +125,13 @@ class _GenderInputPageState extends State<GenderInputPage> {
                       Navigator.pop(context); // 로딩 다이얼로그 닫기
 
                       if (success) {
-                        Navigator.pushNamed(context, "/user_input/register_complete_page");
+                        Navigator.pushNamed(
+                            context,
+                            InputPageRouteNames.registerCompletePage);
                       } else {
                         Navigator.pushNamedAndRemoveUntil(
                       context,
-                      "/login_page",
+                      LoginPageRouteNames.loginPage,
                       (route) => false,
                       );
                       _showRegisterFailureDialog();

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/interest_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter_app/dto/user_register_dto.dart';
 
-class RegisterCompletePage extends StatelessWidget {
-  const RegisterCompletePage({super.key});
+class InputCompletePage extends StatelessWidget {
+  const InputCompletePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class RegisterCompletePage extends StatelessWidget {
                     height: 47,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/interest_selection_page",);
+                        Navigator.pushNamed(context, InterestPageRouteNames.interestSelectionPage,);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF008CFF),

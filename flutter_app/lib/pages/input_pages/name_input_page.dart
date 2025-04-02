@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class DepartmentInputPage extends StatefulWidget {
-  const DepartmentInputPage({super.key});
+import 'package:flutter_app/dto/user_register_dto.dart';
+
+class NameInputPage extends StatefulWidget {
+  const NameInputPage({super.key});
 
   @override
-  State<DepartmentInputPage> createState() => _DepartmentInputPageState();
+  State<NameInputPage> createState() => _NameInputPageState();
 }
 
-class _DepartmentInputPageState extends State<DepartmentInputPage> {
+class _NameInputPageState extends State<NameInputPage> {
   final TextEditingController _controller = TextEditingController();
   bool _isButtonEnabled = false;
 
@@ -59,7 +62,7 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
           children: [
             const SizedBox(height: 40),
             const Text(
-              '학과를 입력해 주세요.',
+              '이름을 입력해 주세요.',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 24,
@@ -79,7 +82,7 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                 letterSpacing: -0.29,
               ),
               decoration: InputDecoration(
-                labelText: '학과',
+                labelText: '이름',
                 labelStyle: const TextStyle(
                   color: Color(0xFFB1B1B1),
                   fontFamily: 'Noto Sans KR',
@@ -117,11 +120,11 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                   onPressed:
                       _isButtonEnabled
                           ? () {
-                            UserRegisterDTO.instance.department =
+                            UserRegisterDTO.instance.name =
                                 _controller.text;
                             Navigator.pushNamed(
                               context,
-                              "/user_input/student_id_input_page",
+                              InputPageRouteNames.nicknameInputPage,
                             );
                           }
                           : null,

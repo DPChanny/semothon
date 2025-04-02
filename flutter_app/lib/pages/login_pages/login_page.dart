@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
+import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -55,9 +58,9 @@ class LoginPage extends StatelessWidget {
           if (userInfoJson != null) {
             final user = UserDTO.fromJson(userInfoJson);
             if (user.introText != null) {
-              Navigator.pushNamed(context, "/home_page");
+              Navigator.pushNamed(context, MainPageRouteNames.mainPage);
             } else if (user.name != null) {
-              Navigator.pushNamed(context, '/user_input/register_complete_page');
+              Navigator.pushNamed(context, InputPageRouteNames.registerCompletePage);
             }
             else
               {
@@ -96,7 +99,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 80),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/home_page");
+                Navigator.pushNamed(context, MainPageRouteNames.mainPage);
               },
               child: Center(
                 child: Container(

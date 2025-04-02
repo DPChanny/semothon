@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_register_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:intl/intl.dart';
+
 
 class BirthInputPage extends StatefulWidget {
   const BirthInputPage({super.key});
@@ -37,7 +40,7 @@ class _BirthInputPageState extends State<BirthInputPage> {
   void _submit() {
     if (selectedDate != null) {
       UserRegisterDTO.instance.birthdate = selectedDate;
-      Navigator.pushNamed(context, "/user_input/gender_input_page");
+      Navigator.pushNamed(context, InputPageRouteNames.genderInputPage);
     }
   }
 
