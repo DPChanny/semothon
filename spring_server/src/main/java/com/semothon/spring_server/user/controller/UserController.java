@@ -9,6 +9,7 @@ import com.semothon.spring_server.room.dto.RoomSortDirection;
 import com.semothon.spring_server.user.dto.*;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.service.UserService;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

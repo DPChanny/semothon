@@ -8,6 +8,7 @@ import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.room.repository.RoomInterestRepository;
 import com.semothon.spring_server.room.service.RoomService;
 import com.semothon.spring_server.user.entity.User;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -95,9 +96,8 @@ public class RoomController {
         } catch (Exception e) {
             log.warn("AI service failed for room {}: {}", roomId, e.getMessage());
         }
-        GetRoomResponseDto getRoomResponseDto = roomService.getRoom(roomId);
 
-        return BaseResponse.success(Map.of("code", 201, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost(), "chatRoom", getRoomResponseDto.getChatRoom()), "room created successfully");
+        return BaseResponse.success(Map.of("code", 201, "roomId", roomId), "room created successfully");
     }
 
     @PatchMapping("/{roomId}")
@@ -124,7 +124,7 @@ public class RoomController {
             }
         }
 
-        return BaseResponse.success(Map.of("code", 200, "room", updated.getRoomInfo(), "members", updated.getMembers(), "host", updated.getHost(), "chatRoom", updated.getChatRoom()), "room updated successfully");
+        return BaseResponse.success(Map.of("code", 200, "roomId", roomId), "room updated successfully");
 
     }
 
