@@ -12,17 +12,13 @@ Future<void> main() async {
 
   final String envName = dotenv.env['ENV'] ?? 'device';
   final bool local = bool.parse(dotenv.env['LOCAL'] ?? 'false');
-  print(dotenv.env['LOCAL']);
-  print(local);
   final String envFile = 'assets/env/.env' + (local ? '.local' : '.server') + "." + envName + '';
-  print(envFile);
 
   await dotenv.load(fileName: envFile);
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final GoogleSignIn? googleSignIn;
-  final GoogleSignInAccount? googleUser;
   if (bool.parse(dotenv.env['WEB'] ?? 'false')) {
     googleSignIn = GoogleSignIn(clientId: "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com");
   }

@@ -42,10 +42,8 @@ public class DataInitializer {
     @Transactional
     @EventListener(ApplicationReadyEvent.class)
     public void initData(){
-        log.info("Initializing test data...");
-
-        //userRepository 에 데이터가 있으면 추가 x
         if (userRepository.count() == 0){
+            log.info("Initializing test data...");
             User user1 = User.builder()
                     .userId("test-user-1")
                     .nickname("tester1")
@@ -441,8 +439,7 @@ public class DataInitializer {
 
 
         } else {
-            log.debug("[info] Test Data already exists. do not add new Test Data");
+            log.info("Test Data already exists. do not add new Test Data");
         }
-
     }
 }

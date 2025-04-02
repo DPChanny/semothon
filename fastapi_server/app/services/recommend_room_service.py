@@ -46,7 +46,7 @@ def recommend_room_by_user_service(request, db: Session):
 
 
 def recommend_room_by_room_service(request, db: Session):
-    users = db.query(User).all()
+    users = db.query(User).filter(User.intro_text.isnot(None)).all()
     room = db.query(Room).filter(Room.room_id == request.room_id).first()
 
     if not room:

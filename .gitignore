@@ -451,4 +451,4 @@ gradle-app.setting
 flutter_app/android/app/google-services.json
 
 !flutter_app/assets/env/
-!flutter_app/assets/env/.env*
+!flutter_app/assets/env/.env.*
