@@ -1,11 +1,13 @@
 package com.semothon.spring_server.user.repository;
 
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.semothon.spring_server.user.dto.UserSearchCondition;
 import com.semothon.spring_server.user.dto.UserSortBy;
 import com.semothon.spring_server.user.dto.UserSortDirection;
+import com.semothon.spring_server.user.dto.UserWithScoreDto;
 import com.semothon.spring_server.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.semothon.spring_server.interest.entity.QInterest.interest;
-import static com.semothon.spring_server.room.entity.QRoomUser.roomUser;
+import static com.semothon.spring_server.room.entity.QRoom.room;
 import static com.semothon.spring_server.room.entity.QUserRoomRecommendation.userRoomRecommendation;
 import static com.semothon.spring_server.user.entity.QUser.user;
 import static com.semothon.spring_server.user.entity.QUserInterest.userInterest;
@@ -30,12 +32,17 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
 
     @Override
     public List<User> searchUserList(UserSearchCondition condition, String currentUserId) {
-        return queryFactory.selectDistinct(user)
+        List<UserWithScoreDto> results =  queryFactory
+                .select(Projections.constructor(UserWithScoreDto.class, user, userRoomRecommendation.score))
                 .from(user)
-                .leftJoin(user.userInterests, userInterest).leftJoin(userInterest.interest, interest)
-                .leftJoin(user.roomUsers, roomUser)
-                .leftJoin(userRoomRecommendation).on(userRoomRecommendation.user.eq(user))
+                .join(user.hostedRooms, room)
+                .leftJoin(user.userInterests, userInterest)
+                .leftJoin(userInterest.interest, interest)
+                .leftJoin(userRoomRecommendation)
+                    .on(userRoomRecommendation.user.userId.eq(currentUserId)
+                        .and(userRoomRecommendation.room.host.eq(user)))
                 .where(
+                        user.userId.ne(currentUserId),
                         nicknameContains(condition.getNicknameKeyword()),
                         departmentEquals(condition.getDepartmentKeyword()),
                         nameContains(condition.getNameKeyword()),
@@ -46,11 +53,17 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
                         interestIn(condition.getInterestNames()),
                         recommendationScoreBetween(condition.getMinRecommendationScore(), condition.getMaxRecommendationScore())
                 )
+                .distinct()
                 .orderBy(getOrderSpecifier(condition.getSortBy(), condition.getSortDirection()))
                 .offset((long) condition.getPage() * condition.getLimit())
                 .limit(condition.getLimit())
                 .fetch();
 
+        List<User> users = results.stream()
+                .map(UserWithScoreDto::user)
+                .toList();
+
+        return users;
     }
 
     private BooleanExpression nicknameContains(String keyword) {
@@ -108,7 +121,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
 
     private OrderSpecifier<?> getOrderSpecifier(UserSortBy sortBy, UserSortDirection direction) {
         return switch (sortBy) {
-            case CREATE_AT -> direction == UserSortDirection.ASC ? user.createdAt.asc() : user.createdAt.desc();
+            case CREATED_AT -> direction == UserSortDirection.ASC ? user.createdAt.asc() : user.createdAt.desc();
             case SCORE -> direction == UserSortDirection.ASC ? userRoomRecommendation.score.asc() : userRoomRecommendation.score.desc();
         };
     }

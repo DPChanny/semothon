@@ -51,7 +51,7 @@ public class UserSearchCondition {
 
     // 정렬 기준
     @Builder.Default
-    private UserSortBy sortBy = UserSortBy.CREATE_AT;
+    private UserSortBy sortBy = UserSortBy.CREATED_AT;
 
     @Builder.Default
     private UserSortDirection sortDirection = UserSortDirection.DESC;

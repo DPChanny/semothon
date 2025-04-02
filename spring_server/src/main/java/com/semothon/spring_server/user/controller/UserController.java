@@ -3,13 +3,9 @@ package com.semothon.spring_server.user.controller;
 import com.semothon.spring_server.ai.service.AiService;
 import com.semothon.spring_server.common.dto.BaseResponse;
 import com.semothon.spring_server.common.service.DateTimeUtil;
-import com.semothon.spring_server.room.dto.RoomSearchCondition;
-import com.semothon.spring_server.room.dto.RoomSortBy;
-import com.semothon.spring_server.room.dto.RoomSortDirection;
 import com.semothon.spring_server.user.dto.*;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.service.UserService;
-import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -73,7 +68,7 @@ public class UserController {
     ){
         //default value 명시적 설정
         if (condition.getSortBy() == null) {
-            condition.setSortBy(UserSortBy.CREATE_AT);
+            condition.setSortBy(UserSortBy.CREATED_AT);
         }
         if (condition.getSortDirection() == null) {
             condition.setSortDirection(UserSortDirection.DESC);

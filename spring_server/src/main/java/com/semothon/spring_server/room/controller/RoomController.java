@@ -38,7 +38,6 @@ public class RoomController {
         return BaseResponse.success(Map.of("code", 200, "room", getRoomResponseDto.getRoomInfo(), "members", getRoomResponseDto.getMembers(), "host", getRoomResponseDto.getHost(), "chatRoom", getRoomResponseDto.getChatRoom()), "room retrieved successfully");
     }
 
-    // 마지막에 점검
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public BaseResponse getRoomList(
