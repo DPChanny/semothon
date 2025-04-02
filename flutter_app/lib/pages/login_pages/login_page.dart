@@ -1,88 +1,70 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_dto.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
+import 'package:flutter_app/routes/main_page_routes.dart';
+import 'package:flutter_app/services/auth.dart';
+import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
-
-import 'package:flutter_app/url.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   Future<void> signInWithGoogle(BuildContext context) async {
-    try {
-      final GoogleSignInAccount? googleUser;
-      if (bool.parse(dotenv.env['WEB'] ?? 'false')) {
-        googleUser = await GoogleSignIn(clientId: "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com").signIn();
-      }
-      else{
-        googleUser = await GoogleSignIn().signIn();
-      }
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
 
-      if (googleUser == null) return;
-
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      await FirebaseAuth.instance.signInWithCredential(credential);
-
-      User? user = FirebaseAuth.instance.currentUser;
-
-      if (user != null) {
-        String? idToken = await user.getIdToken();
-
-        final response = await http.post(
-          url('/api/users/login'),
-          headers: {
-            'Authorization': 'Bearer $idToken',
-            'Content-Type': 'application/json',
-          },
-        );
-
-        if (response.statusCode == 200) {
-          final Map<String, dynamic> jsonBody = jsonDecode(response.body);
-
-          final userInfoJson = jsonBody['data']?['user']?['userInfo'];
-
-          if (userInfoJson != null) {
-            final user = UserDTO.fromJson(userInfoJson);
-            if (user.introText != null) {
-              Navigator.pushNamed(context, "/home_page");
-            } else if (user.name != null) {
-              Navigator.pushNamed(context, '/user_input/register_complete_page');
-            }
-            else
-              {
-                Navigator.pushNamed(context, '/login_complete_page');
-              }
-          } else {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text('로그인 실패: parsing failure')));
-          }
-        } else {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('로그인 실패: server failure')));
-        }
-      }
-      else {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('로그인 실패: firebase failure')));
-      }
-    } catch (e) {
+    final GoogleSignInAccount? googleUser = await getGoogleSignIn().signIn();
+    if (googleUser == null) {
+      Navigator.pop(context); // 로딩 다이얼로그 닫기
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('로그인 실패: $e')));
+      ).showSnackBar(SnackBar(content: Text("google failure")));
+      return;
+    }
+
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final result = await loginUser();
+    if (!result.success) {
+      Navigator.pop(context); // 로딩 다이얼로그 닫기
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(result.message)));
+      return;
+    }
+
+    Navigator.pop(context); // 로딩 다이얼로그 닫기
+
+    if (result.user!.introText != null) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        MainPageRouteNames.mainPage,
+        (route) => false,
+      );
+    } else if (result.user!.name != null) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        InputPageRouteNames.inputCompletePage,
+        (route) => false,
+      );
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginPageRouteNames.loginCompletePage,
+        (route) => false,
+      );
     }
   }
 
@@ -96,7 +78,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 80),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/home_page");
+                Navigator.pushNamed(context, MainPageRouteNames.mainPage);
               },
               child: Center(
                 child: Container(

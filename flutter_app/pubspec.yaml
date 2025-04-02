@@ -63,16 +63,17 @@ flutter:
   assets:
     - assets/
     - assets/env/
+    - assets/interest_icon/
 
   fonts:
     - family: Noto Sans KR
       fonts:
-      - asset: assets/fonts/NotoSansKR-Regular.ttf
-        weight: 400
-      - asset: assets/fonts/NotoSansKR-Bold.ttf
-        weight: 700
-      - asset: assets/fonts/NotoSansKR-Light.ttf
-        weight: 300
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/NotoSansKR-Light.ttf
+          weight: 300
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

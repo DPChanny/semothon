@@ -22,9 +22,7 @@ class _MentorButtonState extends State<MentorButton> {
       style: ElevatedButton.styleFrom(
         backgroundColor: _isClicked ? Colors.blue : Colors.white70,
         foregroundColor: _isClicked ? Colors.white : Colors.grey,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
         minimumSize: const Size(75, 10),
         elevation: 0,
@@ -33,7 +31,6 @@ class _MentorButtonState extends State<MentorButton> {
     );
   }
 }
-
 
 Widget mentorItem(UserDTO mentor) {
   return Container(

@@ -1,50 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_register_dto.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_app/dto/user_update_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class BirthInputPage extends StatefulWidget {
-  const BirthInputPage({super.key});
+class NameInputPage extends StatefulWidget {
+  const NameInputPage({super.key});
 
   @override
-  State<BirthInputPage> createState() => _BirthInputPageState();
+  State<NameInputPage> createState() => _NameInputPageState();
 }
 
-class _BirthInputPageState extends State<BirthInputPage> {
-  DateTime? selectedDate;
+class _NameInputPageState extends State<NameInputPage> {
+  final TextEditingController _controller = TextEditingController();
+  bool _isButtonEnabled = false;
 
-  String get formattedDate {
-    if (selectedDate == null) return 'YYYY-MM-DD';
-    return DateFormat('yyyy-MM-dd').format(selectedDate!);
-  }
-
-  Future<void> _pickDate() async {
-    final now = DateTime.now();
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime(2000, 1, 1),
-      firstDate: DateTime(1900),
-      lastDate: now,
-      locale: const Locale('ko', 'KR'), // 한글화
-    );
-
-    if (picked != null) {
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
       setState(() {
-        selectedDate = picked;
+        _isButtonEnabled = _controller.text.trim().isNotEmpty;
       });
-    }
+    });
   }
 
-  void _submit() {
-    if (selectedDate != null) {
-      UserRegisterDTO.instance.birthdate = selectedDate;
-      Navigator.pushNamed(context, "/user_input/gender_input_page");
-    }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final isButtonEnabled = selectedDate != null;
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -73,7 +60,7 @@ class _BirthInputPageState extends State<BirthInputPage> {
           children: [
             const SizedBox(height: 40),
             const Text(
-              '생년월일을 입력해 주세요.',
+              '이름을 입력해 주세요.',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 24,
@@ -83,38 +70,44 @@ class _BirthInputPageState extends State<BirthInputPage> {
               ),
             ),
             const SizedBox(height: 30),
-            const Text(
-              '생년월일',
-              style: TextStyle(
-                color: Color(0xFFB1B1B1),
+            TextField(
+              controller: _controller,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 17,
                 fontFamily: 'Noto Sans KR',
                 fontWeight: FontWeight.w400,
-                fontSize: 12,
+                letterSpacing: -0.29,
               ),
-            ),
-            GestureDetector(
-              onTap: _pickDate,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 14,
-                  horizontal: 12,
+              decoration: InputDecoration(
+                labelText: '이름',
+                labelStyle: const TextStyle(
+                  color: Color(0xFFB1B1B1),
+                  fontFamily: 'Noto Sans KR',
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: -0.20,
                 ),
-                margin: const EdgeInsets.only(top: 8),
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Color(0xFF008CFF))),
-                ),
-                child: Text(
-                  formattedDate,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 17,
-                    fontFamily: 'Noto Sans KR',
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.29,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    _controller.clear();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SvgPicture.asset(
+                      'assets/X_icon.svg',
+                      width: 24,
+                      height: 24,
+                    ),
                   ),
                 ),
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF008CFF)),
+                ),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF008CFF)),
+                ),
               ),
+              cursorColor: const Color(0xFF008CFF),
             ),
             const Spacer(),
             Center(
@@ -122,10 +115,19 @@ class _BirthInputPageState extends State<BirthInputPage> {
                 width: 335,
                 height: 47,
                 child: ElevatedButton(
-                  onPressed: isButtonEnabled ? _submit : null,
+                  onPressed:
+                      _isButtonEnabled
+                          ? () {
+                            UserUpdateDTO.instance.name = _controller.text;
+                            Navigator.pushNamed(
+                              context,
+                              InputPageRouteNames.nicknameInputPage,
+                            );
+                          }
+                          : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        isButtonEnabled
+                        _isButtonEnabled
                             ? const Color(0xFF008CFF)
                             : const Color(0xFFE4E4E4),
                     shape: RoundedRectangleBorder(
@@ -133,10 +135,10 @@ class _BirthInputPageState extends State<BirthInputPage> {
                     ),
                   ),
                   child: Text(
-                    '완료',
+                    '다음',
                     style: TextStyle(
                       color:
-                          isButtonEnabled
+                          _isButtonEnabled
                               ? Colors.white
                               : const Color(0xFFB1B1B1),
                       fontSize: 17,

@@ -1,36 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_register_dto.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_app/dto/user_update_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
+import 'package:intl/intl.dart';
 
-class DepartmentInputPage extends StatefulWidget {
-  const DepartmentInputPage({super.key});
+class BirthInputPage extends StatefulWidget {
+  const BirthInputPage({super.key});
 
   @override
-  State<DepartmentInputPage> createState() => _DepartmentInputPageState();
+  State<BirthInputPage> createState() => _BirthInputPageState();
 }
 
-class _DepartmentInputPageState extends State<DepartmentInputPage> {
-  final TextEditingController _controller = TextEditingController();
-  bool _isButtonEnabled = false;
+class _BirthInputPageState extends State<BirthInputPage> {
+  DateTime? selectedDate;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(() {
-      setState(() {
-        _isButtonEnabled = _controller.text.trim().isNotEmpty;
-      });
-    });
+  String get formattedDate {
+    if (selectedDate == null) return 'YYYY-MM-DD';
+    return DateFormat('yyyy-MM-dd').format(selectedDate!);
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  Future<void> _pickDate() async {
+    final now = DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2000, 1, 1),
+      firstDate: DateTime(1900),
+      lastDate: now,
+      locale: const Locale('ko', 'KR'), // 한글화
+    );
+
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  void _submit() {
+    if (selectedDate != null) {
+      UserUpdateDTO.instance.birthdate = selectedDate;
+      Navigator.pushNamed(context, InputPageRouteNames.genderInputPage);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final isButtonEnabled = selectedDate != null;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -59,7 +74,7 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
           children: [
             const SizedBox(height: 40),
             const Text(
-              '학과를 입력해 주세요.',
+              '생년월일을 입력해 주세요.',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 24,
@@ -69,44 +84,38 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
               ),
             ),
             const SizedBox(height: 30),
-            TextField(
-              controller: _controller,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 17,
+            const Text(
+              '생년월일',
+              style: TextStyle(
+                color: Color(0xFFB1B1B1),
                 fontFamily: 'Noto Sans KR',
                 fontWeight: FontWeight.w400,
-                letterSpacing: -0.29,
+                fontSize: 12,
               ),
-              decoration: InputDecoration(
-                labelText: '학과',
-                labelStyle: const TextStyle(
-                  color: Color(0xFFB1B1B1),
-                  fontFamily: 'Noto Sans KR',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: -0.20,
+            ),
+            GestureDetector(
+              onTap: _pickDate,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 14,
+                  horizontal: 12,
                 ),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    _controller.clear();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SvgPicture.asset(
-                      'assets/X_icon.svg',
-                      width: 24,
-                      height: 24,
-                    ),
+                margin: const EdgeInsets.only(top: 8),
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Color(0xFF008CFF))),
+                ),
+                child: Text(
+                  formattedDate,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontFamily: 'Noto Sans KR',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.29,
                   ),
                 ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF008CFF)),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF008CFF)),
-                ),
               ),
-              cursorColor: const Color(0xFF008CFF),
             ),
             const Spacer(),
             Center(
@@ -114,20 +123,10 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                 width: 335,
                 height: 47,
                 child: ElevatedButton(
-                  onPressed:
-                      _isButtonEnabled
-                          ? () {
-                            UserRegisterDTO.instance.department =
-                                _controller.text;
-                            Navigator.pushNamed(
-                              context,
-                              "/user_input/student_id_input_page",
-                            );
-                          }
-                          : null,
+                  onPressed: isButtonEnabled ? _submit : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        _isButtonEnabled
+                        isButtonEnabled
                             ? const Color(0xFF008CFF)
                             : const Color(0xFFE4E4E4),
                     shape: RoundedRectangleBorder(
@@ -135,10 +134,10 @@ class _DepartmentInputPageState extends State<DepartmentInputPage> {
                     ),
                   ),
                   child: Text(
-                    '다음',
+                    '완료',
                     style: TextStyle(
                       color:
-                          _isButtonEnabled
+                          isButtonEnabled
                               ? Colors.white
                               : const Color(0xFFB1B1B1),
                       fontSize: 17,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_app/dto/crawling_dto.dart';
 
 Widget crawlingItem(BuildContext context, CrawlingDto item) {

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/user_update_dto.dart';
+import 'package:flutter_app/routes/input_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:flutter_app/dto/user_register_dto.dart';
-
-class NameInputPage extends StatefulWidget {
-  const NameInputPage({super.key});
+class DepartmentInputPage extends StatefulWidget {
+  const DepartmentInputPage({super.key});
 
   @override
-  State<NameInputPage> createState() => _NameInputPageState();
+  State<DepartmentInputPage> createState() => _DepartmentInputPageState();
 }
 
-class _NameInputPageState extends State<NameInputPage> {
+class _DepartmentInputPageState extends State<DepartmentInputPage> {
   final TextEditingController _controller = TextEditingController();
   bool _isButtonEnabled = false;
 
@@ -60,7 +60,7 @@ class _NameInputPageState extends State<NameInputPage> {
           children: [
             const SizedBox(height: 40),
             const Text(
-              '이름을 입력해 주세요.',
+              '학과를 입력해 주세요.',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 24,
@@ -80,7 +80,7 @@ class _NameInputPageState extends State<NameInputPage> {
                 letterSpacing: -0.29,
               ),
               decoration: InputDecoration(
-                labelText: '이름',
+                labelText: '학과',
                 labelStyle: const TextStyle(
                   color: Color(0xFFB1B1B1),
                   fontFamily: 'Noto Sans KR',
@@ -118,11 +118,11 @@ class _NameInputPageState extends State<NameInputPage> {
                   onPressed:
                       _isButtonEnabled
                           ? () {
-                            UserRegisterDTO.instance.name =
+                            UserUpdateDTO.instance.department =
                                 _controller.text;
                             Navigator.pushNamed(
                               context,
-                              "/user_input/nickname_input_page",
+                              InputPageRouteNames.studentIdInputPage,
                             );
                           }
                           : null,
