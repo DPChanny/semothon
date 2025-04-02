@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// 마지막에 검증 및 테스트 진행
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

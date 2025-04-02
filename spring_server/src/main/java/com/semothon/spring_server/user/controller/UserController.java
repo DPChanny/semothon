@@ -180,5 +180,4 @@ public class UserController {
 
         return BaseResponse.success(Map.of("code", 200, "image_url", imageUrl), "Profile image deleted successfully.");
     }
-
 }

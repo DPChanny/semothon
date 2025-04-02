@@ -1,8 +1,8 @@
-package com.semothon.spring_server.room.dto;
+package com.semothon.spring_server.chat.dto;
 
+import com.semothon.spring_server.chat.entity.ChatUser;
+import com.semothon.spring_server.chat.entity.ChatUserRole;
 import com.semothon.spring_server.common.service.DateTimeUtil;
-import com.semothon.spring_server.room.entity.RoomUser;
-import com.semothon.spring_server.room.entity.RoomUserRole;
 import com.semothon.spring_server.user.entity.User;
 import lombok.*;
 
@@ -12,24 +12,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class RoomUserInfoDto {
+public class ChatUserInfoDto {
     private String userId;
     private String nickname;
     private String profileImageUrl;
     private String shortIntro;
-    private RoomUserRole role;
+    private ChatUserRole role;
     private LocalDateTime joinedAt;
 
-    public static RoomUserInfoDto from(RoomUser roomUser){
-        User user = roomUser.getUser();
+    public static ChatUserInfoDto from(ChatUser chatUser) {
+        User user = chatUser.getUser();
 
-        return RoomUserInfoDto.builder()
+        return ChatUserInfoDto.builder()
                 .userId(user.getUserId())
                 .nickname(user.getNickname())
                 .profileImageUrl(user.getProfileImageUrl())
                 .shortIntro(user.getShortIntro())
-                .role(roomUser.getRole())
-                .joinedAt(DateTimeUtil.convertUTCToKST(roomUser.getJoinedAt()))
+                .role(chatUser.getRole())
+                .joinedAt(DateTimeUtil.convertUTCToKST(chatUser.getJoinedAt()))
                 .build();
     }
+
 }
