@@ -19,6 +19,7 @@ public class ChatRoomInfoDto {
     private Integer capacity;
     private Long roomId;
     private Long crawlingId;
+    private Integer currentMemberCount;
     private LocalDateTime createdAt;
 
     public static ChatRoomInfoDto from(ChatRoom chatRoom) {
@@ -28,6 +29,7 @@ public class ChatRoomInfoDto {
                 .title(chatRoom.getTitle())
                 .description(chatRoom.getDescription())
                 .capacity(chatRoom.getCapacity())
+                .currentMemberCount(chatRoom.getChatUsers() != null ? chatRoom.getChatUsers().size() : 0)
                 .roomId(chatRoom.getRoom() != null ? chatRoom.getRoom().getRoomId() : null)
                 .crawlingId(chatRoom.getCrawling() != null ? chatRoom.getCrawling().getCrawlingId() : null)
                 .createdAt(DateTimeUtil.convertUTCToKST(chatRoom.getCreatedAt()))

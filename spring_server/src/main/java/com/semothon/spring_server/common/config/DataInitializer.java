@@ -48,6 +48,7 @@ public class DataInitializer {
             log.info("Initializing test data...");
             User user1 = User.builder()
                     .userId("test-user-1")
+                    .name("테스터1")
                     .nickname("tester1")
                     .department("컴퓨터공학과")
                     .studentId("20230001")
@@ -62,6 +63,7 @@ public class DataInitializer {
 
             User user2 = User.builder()
                     .userId("test-user-2")
+                    .name("테스터2")
                     .nickname("tester2")
                     .department("관광학과")
                     .studentId("20230001")
@@ -76,6 +78,7 @@ public class DataInitializer {
 
             User user3 = User.builder()
                     .userId("test-user-3")
+                    .name("테스터3")
                     .nickname("tester3")
                     .department("문예창작학과")
                     .studentId("20220001")
@@ -90,6 +93,7 @@ public class DataInitializer {
 
             User user4 = User.builder()
                     .userId("test-user-4")
+                    .name("테스터4")
                     .nickname("tester4")
                     .department("문화인류학과")
                     .studentId("20220001")
@@ -104,6 +108,7 @@ public class DataInitializer {
 
             User user5 = User.builder()
                     .userId("test-user-5")
+                    .name("테스터5")
                     .nickname("tester5")
                     .department("외국어학과")
                     .studentId("20210001")
@@ -118,6 +123,7 @@ public class DataInitializer {
 
             User user6 = User.builder()
                     .userId("test-user-6")
+                    .name("테스터6")
                     .nickname("tester6")
                     .department("환경생명공학과")
                     .studentId("20210002")
@@ -131,6 +137,7 @@ public class DataInitializer {
 
             User user7 = User.builder()
                     .userId("test-user-7")
+                    .name("테스터7")
                     .nickname("tester7")
                     .department("컴퓨터공학과")
                     .studentId("20190045")
@@ -144,6 +151,7 @@ public class DataInitializer {
 
             User user8 = User.builder()
                     .userId("test-user-8")
+                    .name("테스터8")
                     .nickname("tester8")
                     .department("문헌정보학과")
                     .studentId("20200234")
@@ -157,6 +165,7 @@ public class DataInitializer {
 
             User user9 = User.builder()
                     .userId("test-user-9")
+                    .name("테스터9")
                     .nickname("tester9")
                     .department("수학과")
                     .studentId("20180123")
@@ -170,6 +179,7 @@ public class DataInitializer {
 
             User user10 = User.builder()
                     .userId("test-user-10")
+                    .name("테스터10")
                     .nickname("tester10")
                     .department("간호학과")
                     .studentId("20210101")
