@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_update_interest_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
-import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
 class IntroDetailPage extends StatefulWidget {

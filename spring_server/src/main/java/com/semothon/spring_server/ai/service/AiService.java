@@ -1,19 +1,12 @@
 package com.semothon.spring_server.ai.service;
 
 import com.semothon.spring_server.ai.dto.FastApiIntroResponse;
-import com.semothon.spring_server.user.entity.User;
-import com.semothon.spring_server.user.entity.UserInterest;
-import com.semothon.spring_server.user.repository.UserInterestRepository;
-import com.semothon.spring_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
