@@ -3,6 +3,8 @@ package com.semothon.spring_server.ai.service;
 import com.semothon.spring_server.ai.dto.FastApiIntroResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,6 +23,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri("/api/ai/intro")
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -41,6 +44,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri("/api/ai/interest/user")
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -61,6 +65,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri("/api/ai/recommend/room/by-user")
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -81,6 +86,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri("/api/ai/recommend/crawling/by-user")
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -101,6 +107,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri("/api/ai/interest/room")
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .bodyValue(Map.of("room_id", String.valueOf(roomId)))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -122,6 +129,7 @@ public class AiService {
         try {
             FastApiIntroResponse response = webClient.post()
                     .uri("/api/ai/recommend/room/by-room")
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                     .bodyValue(Map.of("room_id", String.valueOf(roomId)))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
