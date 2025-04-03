@@ -28,7 +28,7 @@ class CrawlingInfoDto {
       url: json['url'],
       imageUrl: json['imageUrl'],
       description: json['description'],
-      deadlinedAt: DateTime.parse(json['deadlinedAt']),
+      deadlinedAt: DateTime.parse(json['deadlinedAt'] ?? "2025-10-09T02:45:00"),
       crawledAt: DateTime.parse(json['crawledAt']),
       chatRoomsId: List<int>.from(json['chatRoomsId']),
       interests: List<String>.from(json['interests']),

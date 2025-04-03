@@ -5,7 +5,26 @@ import 'package:flutter_app/dto/get_crawling_list_response_dto.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
-Future<({bool success, String message, GetCrawlingListResponseDto? crawlingList})> getCrawlingList() async {
+Future<({
+bool success,
+String message,
+GetCrawlingListResponseDto? crawlingList,
+})> getCrawlingList({
+  List<String>? titleKeyword,
+  List<String>? descriptionKeyword,
+  List<String>? titleOrDescriptionKeyword,
+  List<String>? interestNames,
+  DateTime? deadlinedAfter,
+  DateTime? deadlinedBefore,
+  DateTime? crawledAfter,
+  DateTime? crawledBefore,
+  double? minRecommendationScore,
+  double? maxRecommendationScore,
+  String? sortBy,
+  String? sortDirection,
+  int? limit,
+  int? page,
+}) async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
@@ -17,10 +36,43 @@ Future<({bool success, String message, GetCrawlingListResponseDto? crawlingList}
     return (success: false, message: "token failure", crawlingList: null);
   }
 
-  final uri = url('/api/crawling'); // 실제 서버 경로에 맞게 수정
+  final queryParams = <String, String>{};
+
+  void addListParam(String key, List<String>? values) {
+    if (values != null && values.isNotEmpty) {
+      queryParams[key] = values.join(',');
+    }
+  }
+
+  void addDateParam(String key, DateTime? value) {
+    if (value != null) {
+      queryParams[key] = value.toIso8601String();
+    }
+  }
+
+  addListParam('titleKeyword', titleKeyword);
+  addListParam('descriptionKeyword', descriptionKeyword);
+  addListParam('titleOrDescriptionKeyword', titleOrDescriptionKeyword);
+  addListParam('interestNames', interestNames);
+
+  addDateParam('deadlinedAfter', deadlinedAfter);
+  addDateParam('deadlinedBefore', deadlinedBefore);
+  addDateParam('crawledAfter', crawledAfter);
+  addDateParam('crawledBefore', crawledBefore);
+
+  if (minRecommendationScore != null) {
+    queryParams['minRecommendationScore'] = minRecommendationScore.toString();
+  }
+  if (maxRecommendationScore != null) {
+    queryParams['maxRecommendationScore'] = maxRecommendationScore.toString();
+  }
+  if (sortBy != null) queryParams['sortBy'] = sortBy;
+  if (sortDirection != null) queryParams['sortDirection'] = sortDirection;
+  if (limit != null) queryParams['limit'] = limit.toString();
+  if (page != null) queryParams['page'] = page.toString();
 
   final response = await http.get(
-    uri,
+    url('/api/crawlings', queryParams: queryParams),
     headers: {
       'Authorization': 'Bearer $idToken',
       'Content-Type': 'application/json',
@@ -37,13 +89,14 @@ Future<({bool success, String message, GetCrawlingListResponseDto? crawlingList}
 
   try {
     final body = jsonDecode(utf8.decode(response.bodyBytes));
-    final GetCrawlingListResponseDto result = GetCrawlingListResponseDto.fromJson(body['data']);
-    return (
-    success: true,
-    message: "succeed",
-    crawlingList: result,
-    );
+    final GetCrawlingListResponseDto result =
+    GetCrawlingListResponseDto.fromJson(body['data']);
+    return (success: true, message: "succeed", crawlingList: result);
   } catch (e) {
-    return (success: false, message: "parsing failure: $e", crawlingList: null);
+    return (
+    success: false,
+    message: "parsing failure: $e",
+    crawlingList: null,
+    );
   }
 }

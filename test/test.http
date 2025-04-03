@@ -34,4 +34,4 @@ Content-Type: application/json
 POST http://localhost:8000/api/wevity/test
 
 ###
-GET http://localhost:8000/api/wevity/1
+GET http://3.107.196.48:8000/api/wevity/1

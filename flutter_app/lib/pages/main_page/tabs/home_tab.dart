@@ -44,7 +44,7 @@ class _HomeTabState extends State<HomeTab> {
       return;
     }
 
-    if (userResult.user!.interests == null) {
+    if (userResult.user!.interests.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("관심사를 먼저 설정해주세요.")),
       );
@@ -69,7 +69,7 @@ class _HomeTabState extends State<HomeTab> {
       return;
     }
 
-    final crawlings = await getCrawlingList();
+    final crawlings = await getCrawlingList(sortBy: "SCORE", limit: 10);
     if(!crawlings.success){
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(crawlings.message)),
@@ -102,7 +102,7 @@ class _HomeTabState extends State<HomeTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          interestCard(context, _user!.user!, _user!.user!.interests!),
+          interestCard(context, _user!.user!, _user!.user!.interests),
           Transform.translate(
             offset: const Offset(0, -90),
             child: Column(
