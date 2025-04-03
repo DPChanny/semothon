@@ -3,7 +3,7 @@ import torch
 
 from ai import sbert, descriptable_encoder
 
-def interest(descriptables, interests, threshold=0.65, max_results=5):
+def interest(descriptables, interests, threshold=0.5, max_results=5):
     encoded_interests = sbert.encode(
         [interest['name'] for interest in interests],
         convert_to_tensor=True

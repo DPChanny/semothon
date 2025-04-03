@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from dto.interest_dto import InterestCrawlingRequestDTO, InterestResponseDTO, InterestRoomRequestDTO, InterestUserRequestDTO
+from dto.interest_dto import InterestResponseDTO, InterestRoomRequestDTO, InterestUserRequestDTO
 from database import get_db
-from services.interest_service import user_interest_service, room_interest_service, crawling_interest_service
+from services.interest_service import user_interest_service, room_interest_service
 
 interest_router = APIRouter()
 
@@ -17,9 +17,3 @@ def recommend_room_by_user_route(
     request: InterestRoomRequestDTO,
     db: Session = Depends(get_db)):
         return room_interest_service(request, db)
-
-@interest_router.post("/ai/interest/crawling", response_model=InterestResponseDTO)
-def recommend_crawling_by_user_route(
-    request: InterestCrawlingRequestDTO,
-    db: Session = Depends(get_db)):
-        return crawling_interest_service(request, db)

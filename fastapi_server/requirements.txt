@@ -1,3 +1,5 @@
+beautifulsoup4
+
 fastapi
 uvicorn[standard]
 
@@ -12,3 +14,5 @@ torch>=1.13.1
 sentence-transformers>=2.2.2
 
 openai
+
+requests

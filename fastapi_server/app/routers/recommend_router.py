@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from dto.recommend_dto import RecommendCrawlingByCrawlingRequestDTO, RecommendCrawlingByUserRequestDTO, RecommendRoomByRoomRequestDTO, RecommendRoomByUserRequestDTO, RecommendResponseDTO
+from dto.recommend_dto import RecommendCrawlingByUserRequestDTO, RecommendRoomByRoomRequestDTO, RecommendRoomByUserRequestDTO, RecommendResponseDTO
 from database import get_db
 from services.recommend_room_service import recommend_room_by_user_service, recommend_room_by_room_service
-from services.recommend_crawling_service import recommend_crawling_by_user_service, recommend_crawling_by_crawling_service
+from services.recommend_crawling_service import recommend_crawling_by_user_service
 
 recommend_router = APIRouter()
 
@@ -24,9 +24,3 @@ def recommend_crawling_by_user_route(
     request: RecommendCrawlingByUserRequestDTO,
     db: Session = Depends(get_db)):
         return recommend_crawling_by_user_service(request, db)
-
-@recommend_router.post("/ai/recommend/crawling/by-crawling", response_model=RecommendResponseDTO)
-def recommend_crawling_by_crawling_route(
-    request: RecommendCrawlingByCrawlingRequestDTO,
-    db: Session = Depends(get_db)):
-        return recommend_crawling_by_crawling_service(request, db)
