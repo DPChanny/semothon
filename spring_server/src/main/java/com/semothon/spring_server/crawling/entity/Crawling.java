@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@ToString(of = {"crawlingId", "title", "url", "publishedAt", "crawledAt"})
+@ToString(of = {"crawlingId", "title", "url", "deadlinedAt", "crawledAt"})
 @Table(name = "crawling",
         indexes = {
         },
@@ -39,7 +39,7 @@ public class Crawling {
     private String description;
 
     @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime publishedAt;
+    private LocalDateTime deadlinedAt;
 
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime crawledAt;
