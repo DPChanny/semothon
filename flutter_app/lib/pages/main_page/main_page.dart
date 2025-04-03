@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
 
 class MainPage extends StatefulWidget {
   final int currentIndex;

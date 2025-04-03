@@ -5,6 +5,7 @@ import 'package:flutter_app/services/queries/dummy_rooms.dart';
 import 'package:flutter_app/services/queries/fetch_mentors.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab.dart';
 
 class MentoringTab extends StatefulWidget {
   const MentoringTab({super.key});
@@ -29,7 +30,7 @@ class _MentoringTabState extends State<MentoringTab> {
       case 1:
         return const RecommendedRoomListView();
       case 2:
-        return const Center(child: Text('멘토 되기 페이지'));
+        return const MyMentorTab();
       default:
         return const SizedBox();
     }
@@ -103,7 +104,7 @@ class TabBarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const labels = ['추천 멘토', '추천 멘토방', '멘토 되기'];
+    const labels = ['추천 멘토', '추천 멘토방', 'My 멘토'];
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
