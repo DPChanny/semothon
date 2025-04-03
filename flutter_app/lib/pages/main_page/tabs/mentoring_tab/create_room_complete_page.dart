@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/main_page_routes.dart';
 
-class RoomMakeDone extends StatelessWidget {
-  const RoomMakeDone({super.key});
+class CreateRoomCompletePage extends StatelessWidget {
+  const CreateRoomCompletePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class RoomMakeDone extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, MainPageRouteNames.mainPage);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF008CFF),

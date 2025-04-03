@@ -1,5 +1,5 @@
 class UserUpdateDTO {
-  static final UserUpdateDTO instance = UserUpdateDTO();
+  static UserUpdateDTO instance = UserUpdateDTO();
 
   String? name;
   String? nickname;
@@ -24,13 +24,18 @@ class UserUpdateDTO {
   });
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'nickname': nickname,
-      'department': department,
-      'studentId': studentId,
-      'birthdate': birthdate?.toIso8601String(),
-      'gender': gender,
-    };
+    final data = <String, dynamic>{};
+
+    if (name != null) data['name'] = name;
+    if (nickname != null) data['nickname'] = nickname;
+    if (department != null) data['department'] = department;
+    if (studentId != null) data['studentId'] = studentId;
+    if (birthdate != null) data['birthdate'] = birthdate!.toIso8601String();
+    if (gender != null) data['gender'] = gender;
+    if (introText != null) data['introText'] = introText;
+    if (shortIntro != null) data['shortIntro'] = shortIntro;
+    if (profileImageUrl != null) data['profileImageUrl'] = profileImageUrl;
+
+    return data;
   }
 }

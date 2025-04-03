@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'create_chatroom.dart'; // 첫 화면 파일 import 해줘야 함
+import 'create_room_page.dart'; // 첫 화면 파일 import 해줘야 함
 
-class MentorProfileCompletePage extends StatelessWidget {
-  const MentorProfileCompletePage({super.key});
+class ShortIntroInputCompletePage extends StatelessWidget {
+  const ShortIntroInputCompletePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class MentorProfileCompletePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const CreateChatRoomPage(),
+                        builder: (context) => const CreateRoomPage(),
                       ),
                     );
                   },

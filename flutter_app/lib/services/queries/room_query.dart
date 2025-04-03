@@ -1,10 +1,52 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app/dto/RoomUpdateDTO.dart';
 import 'package:flutter_app/dto/get_room_list_response_dto.dart';
 import 'package:http/http.dart' as http;
 
 import '../url.dart';
+
+Future<({bool success, String message})> createRoom(RoomUpdateDTO room) async {
+  String? idToken;
+  try {
+    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
+  }
+  catch (e){
+    return (success: false, message: "firebase failure $e");
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure");
+  }
+
+  final response = await http.post(
+    url('/api/rooms'),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(room.toJson())
+  );
+
+  if (response.statusCode != 201) {
+    final responseBody = response.body;
+    return (
+    success: false,
+    message: "server failure: $responseBody"
+    );
+  }
+
+  try {
+    return (
+    success: true,
+    message: "succeed"
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e");
+  }
+}
+
 
 Future<({bool success, String message, GetRoomListResponseDto? roomList})> getRoomList({
   List<String>? titleKeyword,

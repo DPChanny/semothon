@@ -81,8 +81,6 @@ class _GenderInputPageState extends State<GenderInputPage> {
 
                             final result = await updateUser();
 
-                            Navigator.pop(context); // 로딩 다이얼로그 닫기
-
                             if (result.success) {
                               Navigator.pushNamedAndRemoveUntil(
                                 context,

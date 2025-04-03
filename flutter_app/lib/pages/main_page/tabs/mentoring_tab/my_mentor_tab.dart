@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'mentor_info_input.dart';
+import 'short_intro_input_page.dart';
 
 class MyMentorTab extends StatelessWidget {
   const MyMentorTab({super.key});
@@ -24,7 +24,7 @@ class MyMentorTab extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MentorInfoInputPage()),
+                MaterialPageRoute(builder: (context) => const ShortIntroInputPage()),
               );
             },
             style: ElevatedButton.styleFrom(

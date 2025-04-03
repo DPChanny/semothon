@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/user_update_dto.dart';
 
 // 다음 페이지로 이동할 위젯 import (같은 파일에 있어도 됨)
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentor_profile_complete.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/short_intro_input_complete_page.dart';
+import 'package:flutter_app/services/queries/user_query.dart';
 
-class MentorInfoInputPage extends StatefulWidget {
-  const MentorInfoInputPage({super.key});
+class ShortIntroInputPage extends StatefulWidget {
+  const ShortIntroInputPage({super.key});
 
   @override
-  State<MentorInfoInputPage> createState() => _MentorInfoInputPageState();
+  State<ShortIntroInputPage> createState() => _ShortIntroInputPageState();
 }
 
-class _MentorInfoInputPageState extends State<MentorInfoInputPage> {
+class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
   final TextEditingController _controller = TextEditingController();
   bool _isButtonEnabled = false;
 
   void _onTextChanged() {
     setState(() {
-      _isButtonEnabled = _controller.text.trim().isNotEmpty;
+      _isButtonEnabled = _controller.text
+          .trim()
+          .isNotEmpty;
     });
   }
 
@@ -66,9 +70,9 @@ class _MentorInfoInputPageState extends State<MentorInfoInputPage> {
                 labelText: "소개글",
                 suffixIcon: _controller.text.isNotEmpty
                     ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () => _controller.clear(),
-                      )
+                  icon: const Icon(Icons.clear),
+                  onPressed: () => _controller.clear(),
+                )
                     : null,
               ),
             ),
@@ -77,20 +81,40 @@ class _MentorInfoInputPageState extends State<MentorInfoInputPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _isButtonEnabled
-                    ? () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MentorProfileCompletePage(),
-                          ),
-                        );
-                      }
+                    ? () async {
+                  UserUpdateDTO.instance = UserUpdateDTO(shortIntro: _controller.text);
+
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder:
+                        (context) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+
+                  final result = await updateUser();
+
+                  if (result.success) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (
+                            context) => const ShortIntroInputCompletePage(),
+                      ),
+                    );
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(result.message)),
+                    );
+                  }
+                }
                     : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      _isButtonEnabled ? Colors.blue : Colors.grey.shade300,
+                  _isButtonEnabled ? Colors.blue : Colors.grey.shade300,
                   foregroundColor:
-                      _isButtonEnabled ? Colors.white : Colors.grey,
+                  _isButtonEnabled ? Colors.white : Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),

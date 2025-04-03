@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/get_room_list_response_dto.dart';
-import 'package:flutter_app/dto/get_user_list_response_dto.dart';
+import 'package:flutter_app/dto/host_user_info_dto.dart';
 import 'package:flutter_app/dto/room_info_dto.dart';
-import 'package:flutter_app/routes/login_page_routes.dart';
-import 'package:flutter_app/services/queries/room_query.dart';
-import 'package:flutter_app/services/queries/user_query.dart';
-import 'package:flutter_app/widgets/mentor_item.dart';
-import 'package:flutter_app/widgets/recommended_chatroom.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/recommended_mentor_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/recommended_room_tab.dart';
+import 'package:flutter_app/widgets/custom_tab_bar.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab.dart';
 
 class MentoringTab extends StatefulWidget {
@@ -25,46 +22,12 @@ class _MentoringTabState extends State<MentoringTab> {
     });
   }
 
-  Widget _buildTabContent() {
-    switch (_selectedTabIndex) {
-      case 0:
-        return const MentorListView();
-      case 1:
-        return const RecommendedRoomListView();
-      case 2:
-        return const MyMentorTab();
-      default:
-        return const SizedBox();
-    }
-  }
+  static const tabLabels = ['추천 멘토', '추천 멘토방', 'My 멘토'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: const Text(
-          "멘토링",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.person, color: Colors.grey),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings, color: Colors.grey),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: Column(
         children: [
           Padding(
@@ -83,97 +46,33 @@ class _MentoringTabState extends State<MentoringTab> {
               ),
             ),
           ),
-          TabBarSection(
+          CustomTabBar(
+            labels: tabLabels,
             selectedIndex: _selectedTabIndex,
             onTabSelected: _onTabSelected,
           ),
-          Expanded(child: _buildTabContent()),
+          Expanded(
+            child: IndexedStack(
+              index: _selectedTabIndex,
+              children: const [
+                RecommendedMentorTab(),
+                RecommendedRoomTab(),
+                MyMentorTab(),
+              ],
+            ),
+          ),
+
         ],
       ),
     );
   }
 }
 
-class TabBarSection extends StatelessWidget {
-  final int selectedIndex;
-  final Function(int) onTabSelected;
-
-  const TabBarSection({
-    super.key,
-    required this.selectedIndex,
-    required this.onTabSelected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    const labels = ['추천 멘토', '추천 멘토방', 'My 멘토'];
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: List.generate(labels.length, (index) {
-        final isSelected = index == selectedIndex;
-
-        return GestureDetector(
-          onTap: () => onTabSelected(index),
-          child: Text(
-            labels[index],
-            style: TextStyle(
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected ? Colors.blue : Colors.grey,
-            ),
-          ),
-        );
-      }),
-    );
-  }
-}
-
-class MentorListView extends StatelessWidget {
-  const MentorListView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<({bool success, String message, GetUserListResponseDto? userList})>(
-      future: getUserList(sortBy: "SCORE"),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        if (!snapshot.hasData || !snapshot.data!.success){
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(snapshot.data!.message)),
-          );
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            LoginPageRouteNames.loginPage,
-                (route) => false,
-          );
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        if (!snapshot.hasData || snapshot.data!.userList!.userInfos.isEmpty) {
-          return const Center(child: Text('추천 멘토가 없습니다.'));
-        }
-
-        final mentors = snapshot.data!.userList!;
-
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: mentors.userInfos.length,
-          itemBuilder: (context, index) {
-            return mentorItem(mentors.userInfos[index]);
-          },
-        );
-      },
-    );
-  }
-}
-
 class RecommendedRoomDetailModal extends StatelessWidget {
   final RoomInfoDto room;
+  final HostUserInfoDto hostUser;
 
-  const RecommendedRoomDetailModal({super.key, required this.room});
+  const RecommendedRoomDetailModal({super.key, required this.room, required this.hostUser});
 
   @override
   Widget build(BuildContext context) {
@@ -221,11 +120,11 @@ class RecommendedRoomDetailModal extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Row(
-            children: const [
+            children: [
               CircleAvatar(
                 radius: 20,
                 backgroundImage: NetworkImage(
-                  'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
+                  hostUser.profileImageUrl,
                 ),
               ),
               SizedBox(width: 12),
@@ -234,7 +133,7 @@ class RecommendedRoomDetailModal extends StatelessWidget {
                 children: [
                   Text('방장', style: TextStyle(color: Colors.grey)),
                   Text(
-                    '날아다니는 코딩맨',
+                    hostUser.nickname,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -255,48 +154,6 @@ class RecommendedRoomDetailModal extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class RecommendedRoomListView extends StatelessWidget {
-  const RecommendedRoomListView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<({bool success, String message, GetRoomListResponseDto? roomList})>(
-      future: getRoomList(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        if (!snapshot.hasData || !snapshot.data!.success || snapshot.data!.roomList == null) {
-          return Center(child: Text('방 목록을 불러오지 못했어요: ${snapshot.data?.message ?? '알 수 없는 오류'}'));
-        }
-
-        final rooms = snapshot.data!.roomList!.roomInfos;
-
-        return ListView.builder(
-          itemCount: rooms.length,
-          itemBuilder: (context, index) {
-            final room = rooms[index];
-            return GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                  ),
-                  isScrollControlled: true,
-                  builder: (context) => RecommendedRoomDetailModal(room: room),
-                );
-              },
-              child: RecommendedChatRoom(room: room, index: index),
-            );
-          },
-        );
-      },
     );
   }
 }
