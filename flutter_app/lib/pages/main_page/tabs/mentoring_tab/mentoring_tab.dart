@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/room_dto.dart';
-import 'package:flutter_app/dto/user_list_dto.dart';
+import 'package:flutter_app/dto/get_room_list_response_dto.dart';
+import 'package:flutter_app/dto/get_user_list_response_dto.dart';
+import 'package:flutter_app/dto/room_info_dto.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
+import 'package:flutter_app/services/queries/room_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab.dart';
+import 'package:http/http.dart';
 
 class MentoringTab extends StatefulWidget {
   const MentoringTab({super.key});
@@ -131,7 +134,7 @@ class MentorListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<({bool success, String message, UserListDTO? userList})>(
+    return FutureBuilder<({bool success, String message, GetUserListResponseDto? userList})>(
       future: getUserList(sortBy: "SCORE"),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -150,7 +153,7 @@ class MentorListView extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (!snapshot.hasData || snapshot.data!.userList!.totalCount == 0) {
+        if (!snapshot.hasData || snapshot.data!.userList!.userInfos.isEmpty) {
           return const Center(child: Text('추천 멘토가 없습니다.'));
         }
 
@@ -158,9 +161,9 @@ class MentorListView extends StatelessWidget {
 
         return ListView.builder(
           padding: const EdgeInsets.all(16),
-          itemCount: mentors.totalCount,
+          itemCount: mentors.userInfos.length,
           itemBuilder: (context, index) {
-            return mentorItem(mentors.userList[index]);
+            return mentorItem(mentors.userInfos[index]);
           },
         );
       },
@@ -169,7 +172,7 @@ class MentorListView extends StatelessWidget {
 }
 
 class RecommendedRoomDetailModal extends StatelessWidget {
-  final RoomDTO room;
+  final RoomInfoDto room;
 
   const RecommendedRoomDetailModal({super.key, required this.room});
 
@@ -262,24 +265,37 @@ class RecommendedRoomListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rooms = {};
+    return FutureBuilder<({bool success, String message, GetRoomListResponseDto? roomList})>(
+      future: getRoomList(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-    return ListView.builder(
-      itemCount: rooms.length,
-      itemBuilder: (context, index) {
-        final room = rooms[index];
-        return GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-              isScrollControlled: true,
-              builder: (context) => RecommendedRoomDetailModal(room: room),
+        if (!snapshot.hasData || !snapshot.data!.success || snapshot.data!.roomList == null) {
+          return Center(child: Text('방 목록을 불러오지 못했어요: ${snapshot.data?.message ?? '알 수 없는 오류'}'));
+        }
+
+        final rooms = snapshot.data!.roomList!.roomInfos;
+
+        return ListView.builder(
+          itemCount: rooms.length,
+          itemBuilder: (context, index) {
+            final room = rooms[index];
+            return GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  ),
+                  isScrollControlled: true,
+                  builder: (context) => RecommendedRoomDetailModal(room: room),
+                );
+              },
+              child: RecommendedChatRoom(room: room, index: index),
             );
           },
-          child: RecommendedChatRoom(room: room, index: index),
         );
       },
     );

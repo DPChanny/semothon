@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/widgets/keyword_chip.dart';
 
-Widget interestCard(BuildContext context, UserDTO user, List<String> keywords) {
+Widget interestCard(BuildContext context, UserInfoDto user, List<String> keywords) {
   return Container(
     width: double.infinity,
     color: const Color(0xFF008CFF),
@@ -29,7 +29,7 @@ Widget interestCard(BuildContext context, UserDTO user, List<String> keywords) {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    user.shortIntro ?? '나의 현재 관심사를 확인하고\n수정해 보세요.',
+                    '나의 현재 관심사를 확인하고\n수정해 보세요.',
                     style: const TextStyle(color: Colors.white),
                   ),
                 ],
@@ -45,8 +45,7 @@ Widget interestCard(BuildContext context, UserDTO user, List<String> keywords) {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image: NetworkImage(
-                      user.profileImageUrl ??
-                          'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
+                      user.profileImageUrl,
                     ),
                     fit: BoxFit.cover,
                   ),
