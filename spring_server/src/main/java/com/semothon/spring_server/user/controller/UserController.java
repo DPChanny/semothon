@@ -59,6 +59,19 @@ public class UserController {
         return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile retrieved successfully");
     }
 
+    @GetMapping("/profile/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse getOtherUserProfile(
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable String userId
+    ){
+        User targetUser = userService.getUser(userId);
+
+        GetUserResponseDto userResponseDto = GetUserResponseDto.from(targetUser);
+
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "Other user's profile retrieved successfully");
+    }
+
     //나중에 다시 점검
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
