@@ -47,9 +47,9 @@ def room_interest_service(request, db: Session):
     db.commit()
     return {"success": True, "message": "Interests successfully generated"}
 
-def crawling_interest_service(request, db: Session):
+def crawling_interest_service(crawling_id, db: Session):
     crawling: Crawling = db.query(Crawling).filter(
-        Crawling.crawling_id == request.crawling_id
+        Crawling.crawling_id == crawling_id
     ).first()
     if not crawling:
         return {"success": False, "message": "Crawling data not found"}

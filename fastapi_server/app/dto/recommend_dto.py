@@ -9,9 +9,6 @@ class RecommendRoomByRoomRequestDTO(BaseModel):
 class RecommendCrawlingByUserRequestDTO(BaseModel):
     user_id: str
 
-class RecommendCrawlingByCrawlingRequestDTO(BaseModel):
-    crawling_id: str
-
 class RecommendResponseDTO(BaseModel):
     success: bool
     message: str

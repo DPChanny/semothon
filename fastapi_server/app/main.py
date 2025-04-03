@@ -20,4 +20,4 @@ def on_startup():
 app.include_router(recommend_router, prefix="/api")
 app.include_router(intro_router, prefix="/api")
 app.include_router(interest_router, prefix="/api")
-app.include_router(crawling_router.router)
+app.include_router(crawling_router, prefix='/api')

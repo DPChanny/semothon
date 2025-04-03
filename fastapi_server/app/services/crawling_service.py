@@ -1,5 +1,11 @@
 import time
 from typing import List
+import re
+
+from bs4 import BeautifulSoup
+import requests
+
+import logging
 
 def get_activities(url: str) -> List[dict]:
     try:
@@ -9,7 +15,7 @@ def get_activities(url: str) -> List[dict]:
 
         activities = []
         items = soup.select('.tit a')
-        for item in items:
+        for item in items[:10]:
             title = item.text.strip()
             wevity_url = 'https://www.wevity.com' + item['href']
             image_url = get_image_url(wevity_url)

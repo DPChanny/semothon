@@ -1,5 +1,5 @@
 ### 추천 테스트
-POST http://localhost:8000/api/ai/recommend/room/by-user
+POST http://localhost:8000/api/ai/recommend/crawling/by-user
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### 관심사 추출 테스트
-POST http://3.107.196.48:8000/api/ai/interest/user
+POST http://localhost:8000/api/ai/interest/user
 Content-Type: application/json
 
 {
@@ -29,3 +29,9 @@ Content-Type: application/json
 {
   "room_id": "2"
 }
+
+###
+POST http://localhost:8000/api/wevity/test
+
+###
+GET http://localhost:8000/api/wevity/1
