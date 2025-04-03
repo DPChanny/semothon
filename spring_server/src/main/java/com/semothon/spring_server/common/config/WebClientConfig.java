@@ -12,7 +12,7 @@ public class WebClientConfig {
 
     @Bean
     public WebClient webClient(@Value("${external.fastapi.url}") String fastApiBaseUrl) {
-        log.info("WebClient baseUrl = {}", fastApiBaseUrl);
+        log.info("WebClient baseUrl = '{}'", fastApiBaseUrl);
         return WebClient.builder()
                 .baseUrl(fastApiBaseUrl)
                 .build();
