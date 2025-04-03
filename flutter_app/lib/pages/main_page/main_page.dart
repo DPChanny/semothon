@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/chat_pages/chat_mentoring_page.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
 
@@ -29,7 +30,7 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _pages = const [
     HomeTab(),
-    Center(child: Text("채팅")),
+    ChatMentoringPage(),
     MentoringTab(),
     Center(child: Text("추천 활동")),
   ];
