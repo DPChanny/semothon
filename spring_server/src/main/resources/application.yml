@@ -1,17 +1,22 @@
+server:
+  address: ${SPRING_HOST}
+  port: ${SPRING_PORT}
+
 spring:
   config:
-    import: optional:file:.env[.properties] # `.env` 파일을 가져옴
+    import: optional:file:.env
+  profiles:
+    active: ${ENV}
 
   datasource:
-    url: jdbc:mysql://localhost:3306/main
-    username: user
-    password: user_password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: create
-    show-sql: true
+      ddl-auto: none
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
@@ -20,20 +25,22 @@ spring:
           default_storage: NORMALIZE
         jdbc:
           time_zone: UTC
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
         default_batch_fetch_size: 300
 
 external:
   fastapi:
-    url: http://localhost:8000
+    host: ${FASTAPI_HOST}
+    port: ${FASTAPI_PORT}
+    url: http://${FASTAPI_HOST}:${FASTAPI_PORT}
 
 logging:
   level:
     root: INFO
-    com.zaxxer.hikari: DEBUG
-    org.hibernate.engine.jdbc.connections: DEBUG
+    com.zaxxer.hikari: INFO
+    org.hibernate.engine.jdbc.connections: INFO
 
-cloud: #S3 설정
+cloud:
   aws:
     credentials:
       access-key: ${AWS_ACCESS_KEY}
