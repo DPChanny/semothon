@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/get_room_list_response_dto.dart';
 import 'package:flutter_app/dto/host_user_info_dto.dart';
 import 'package:flutter_app/dto/room_info_dto.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
 

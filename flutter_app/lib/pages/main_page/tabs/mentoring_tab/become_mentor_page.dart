@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
-import 'short_intro_input_page.dart';
 
 class BecomeMentorPage extends StatelessWidget {
   const BecomeMentorPage({super.key});
@@ -31,7 +30,7 @@ class BecomeMentorPage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                MentoringTabRouteNames.shortIntroInputPage
+                MentoringTabRouteNames.shortIntroInputPage,
               );
             },
             style: ElevatedButton.styleFrom(

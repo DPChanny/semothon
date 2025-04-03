@@ -54,7 +54,8 @@ Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
 }
 
 // 현재 유저 정보
-Future<({bool success, String message, GetUserResponseDto? user})> getUser() async {
+Future<({bool success, String message, GetUserResponseDto? user})>
+getUser() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);

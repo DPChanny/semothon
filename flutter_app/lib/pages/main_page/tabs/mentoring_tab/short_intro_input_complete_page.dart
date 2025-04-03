@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 
-import 'create_room_page.dart'; // 첫 화면 파일 import 해줘야 함
-
 class ShortIntroInputCompletePage extends StatelessWidget {
   const ShortIntroInputCompletePage({super.key});
 
@@ -40,7 +38,7 @@ class ShortIntroInputCompletePage extends StatelessWidget {
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       MentoringTabRouteNames.createRoomPage,
-                        (routes) => false
+                      (routes) => false,
                     );
                   },
                   style: ElevatedButton.styleFrom(
