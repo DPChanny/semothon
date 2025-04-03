@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_app/dto/user_dto.dart';
 import 'package:flutter_app/widgets/keyword_chip.dart';
 

@@ -16,6 +16,7 @@ public class RoomUserInfoDto {
     private String userId;
     private String nickname;
     private String profileImageUrl;
+    private String shortIntro;
     private RoomUserRole role;
     private LocalDateTime joinedAt;
 
@@ -26,6 +27,7 @@ public class RoomUserInfoDto {
                 .userId(user.getUserId())
                 .nickname(user.getNickname())
                 .profileImageUrl(user.getProfileImageUrl())
+                .shortIntro(user.getShortIntro())
                 .role(roomUser.getRole())
                 .joinedAt(DateTimeUtil.convertUTCToKST(roomUser.getJoinedAt()))
                 .build();

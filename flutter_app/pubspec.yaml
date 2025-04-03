@@ -1,5 +1,5 @@
 name: flutter_app
-description: "A new Flutter project."
+description: "Meet your mentors"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -62,18 +62,20 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+    
+    - assets/interest_category_icon/
+
     - assets/env/
-    - assets/interest_icon/
 
   fonts:
     - family: Noto Sans KR
       fonts:
-      - asset: assets/fonts/NotoSansKR-Regular.ttf
-        weight: 400
-      - asset: assets/fonts/NotoSansKR-Bold.ttf
-        weight: 700
-      - asset: assets/fonts/NotoSansKR-Light.ttf
-        weight: 300
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/NotoSansKR-Light.ttf
+          weight: 300
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

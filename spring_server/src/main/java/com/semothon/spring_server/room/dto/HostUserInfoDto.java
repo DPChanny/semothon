@@ -14,12 +14,14 @@ public class HostUserInfoDto {
     private String userId;
     private String nickname;
     private String profileImageUrl;
+    private String shortIntro;
 
     public static HostUserInfoDto from(User user){
         return HostUserInfoDto.builder()
                 .userId(user.getUserId())
                 .nickname(user.getNickname())
                 .profileImageUrl(user.getProfileImageUrl())
+                .shortIntro(user.getShortIntro())
                 .build();
     }
 }

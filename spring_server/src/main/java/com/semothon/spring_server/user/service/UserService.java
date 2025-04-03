@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -39,13 +40,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserInterestRepository userInterestRepository;
     private final InterestRepository interestRepository;
-    private final AiService aiService;
 
     private final AmazonS3 amazonS3;
     @Value("${cloud.aws.s3.bucket}")
     private String BUCKET_NAME;
     private static final String PROFILE_IMAGE_FOLDER_NAME = "profile-images/";
-    private static final String DEFAULT_PROFILE_IMAGE_URL = "https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png"; //기본 프로필 이미지 URL
+    private static final String DEFAULT_PROFILE_IMAGE_PREFIX = "https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default";
+    private static final int DEFAULT_IMAGE_COUNT = 6;
 
     public User findOrCreateUser(String uid, String email, String profileImageUrl, String socialProvider) {
         return userRepository.findById(uid).orElseGet(() -> {
@@ -98,7 +99,7 @@ public class UserService {
         }
 
         // 기본 프로필 이미지가 아니면 S3에서 삭제
-        if (user.getProfileImageUrl() != null && !user.getProfileImageUrl().equals(DEFAULT_PROFILE_IMAGE_URL)) {
+        if (user.getProfileImageUrl() != null && !user.getProfileImageUrl().contains("default")) {
             if(user.getProfileImageUrl().contains(BUCKET_NAME)){
                 String oldFilePath = PROFILE_IMAGE_FOLDER_NAME +  user.getProfileImageUrl().substring(user.getProfileImageUrl().lastIndexOf("/") + 1);
                 if (amazonS3.doesObjectExist(BUCKET_NAME, oldFilePath)) {
@@ -145,7 +146,7 @@ public class UserService {
         
         String currentImage = user.getProfileImageUrl();
 
-        if(currentImage != null && !currentImage.contains(DEFAULT_PROFILE_IMAGE_URL)){
+        if(currentImage != null && !currentImage.contains("default")){
             if(currentImage.contains(BUCKET_NAME)){
                 String oldFilePath = PROFILE_IMAGE_FOLDER_NAME +  user.getProfileImageUrl().substring(user.getProfileImageUrl().lastIndexOf("/") + 1);
                 if (amazonS3.doesObjectExist(BUCKET_NAME, oldFilePath)) {
@@ -154,7 +155,11 @@ public class UserService {
             }
         }
 
-        user.updateProfileImage(DEFAULT_PROFILE_IMAGE_URL);
+        // 랜덤 디폴트 이미지 선택
+        int randomIdx = new Random().nextInt(DEFAULT_IMAGE_COUNT) + 1;
+        String defaultImageUrl = DEFAULT_PROFILE_IMAGE_PREFIX + randomIdx + ".png";
+
+        user.updateProfileImage(defaultImageUrl);
 
         return user.getProfileImageUrl();
     }

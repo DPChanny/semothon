@@ -1,15 +1,17 @@
 package com.semothon.spring_server.common.config;
 
+import com.semothon.spring_server.crawling.entity.Crawling;
+import com.semothon.spring_server.crawling.repository.CrawlingRepository;
 import com.semothon.spring_server.interest.entity.Interest;
 import com.semothon.spring_server.interest.repository.InterestRepository;
+import com.semothon.spring_server.room.dto.CreateRoomRequestDto;
 import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.room.entity.RoomInterest;
-import com.semothon.spring_server.room.entity.RoomUser;
-import com.semothon.spring_server.room.entity.RoomUserRole;
+import com.semothon.spring_server.room.entity.UserRoomRecommendation;
 import com.semothon.spring_server.room.repository.RoomInterestRepository;
 import com.semothon.spring_server.room.repository.RoomRepository;
-import com.semothon.spring_server.room.repository.RoomUserRepository;
 import com.semothon.spring_server.room.repository.UserRoomRecommendationRepository;
+import com.semothon.spring_server.room.service.RoomService;
 import com.semothon.spring_server.user.entity.Gender;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.entity.UserInterest;
@@ -23,7 +25,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
@@ -33,11 +37,13 @@ public class DataInitializer {
 
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
-    private final UserRoomRecommendationRepository userRoomRecommendationRepository;
-    private final RoomUserRepository roomUserRepository;
     private final InterestRepository interestRepository;
     private final RoomInterestRepository roomInterestRepository;
     private final UserInterestRepository userInterestRepository;
+    private final UserRoomRecommendationRepository userRoomRecommendationRepository;
+    private final CrawlingRepository crawlingRepository;
+
+    private final RoomService roomService;
 
     @Transactional
     @EventListener(ApplicationReadyEvent.class)
@@ -46,12 +52,12 @@ public class DataInitializer {
             log.info("Initializing test data...");
             User user1 = User.builder()
                     .userId("test-user-1")
+                    .name("테스터1")
                     .nickname("tester1")
                     .department("컴퓨터공학과")
                     .studentId("20230001")
                     .birthdate(LocalDate.of(2000, 1, 1))
                     .gender(Gender.MALE)
-                    .profileImageUrl("https://example.com/profile1.jpg")
                     .socialProvider("google")
                     .socialId("tester1@example.com")
                     .introText("안녕하세요! 저는 최신 기술과 인공지능에 큰 관심을 가지고 있습니다. 주말에는 가끔 게임을 하며 스트레스를 풀고, 새로운 프로그래밍 언어를 배우는 것을 즐깁니다.")
@@ -61,12 +67,12 @@ public class DataInitializer {
 
             User user2 = User.builder()
                     .userId("test-user-2")
+                    .name("테스터2")
                     .nickname("tester2")
                     .department("관광학과")
                     .studentId("20230001")
                     .birthdate(LocalDate.of(2001, 1, 1))
                     .gender(Gender.MALE)
-                    .profileImageUrl("https://example.com/profile2.jpg")
                     .socialProvider("google")
                     .socialId("tester2@example.com")
                     .introText("안녕하세요! 저는 여행과 사진 찍는 것을 좋아하는 대학생입니다. 항상 새로운 경험을 찾아 다니며 다양한 사람들과 소통하고 싶습니다.")
@@ -76,12 +82,12 @@ public class DataInitializer {
 
             User user3 = User.builder()
                     .userId("test-user-3")
+                    .name("테스터3")
                     .nickname("tester3")
                     .department("문예창작학과")
                     .studentId("20220001")
                     .birthdate(LocalDate.of(1998, 1, 1))
                     .gender(Gender.FEMALE)
-                    .profileImageUrl("https://example.com/profile3.jpg")
                     .socialProvider("google")
                     .socialId("tester3@example.com")
                     .introText("저는 영화 감상과 소설 읽기를 좋아하는 대학생입니다. 특히 판타지 장르에 깊은 관심이 있으며, 언젠가는 나만의 이야기를 써보고 싶습니다.")
@@ -91,12 +97,12 @@ public class DataInitializer {
 
             User user4 = User.builder()
                     .userId("test-user-4")
+                    .name("테스터4")
                     .nickname("tester4")
                     .department("문화인류학과")
                     .studentId("20220001")
                     .birthdate(LocalDate.of(1995, 1, 1))
                     .gender(Gender.FEMALE)
-                    .profileImageUrl("https://example.com/profile4.jpg")
                     .socialProvider("google")
                     .socialId("tester4@example.com")
                     .introText("안녕하세요! 저는 기술과 인문학에 대한 깊은 관심을 가지고 있는 대학생입니다. 주말마다 독서를 즐기고, 가끔은 트레킹을 하면서 자연을 만끽하는 것을 좋아해요.")
@@ -106,12 +112,12 @@ public class DataInitializer {
 
             User user5 = User.builder()
                     .userId("test-user-5")
+                    .name("테스터5")
                     .nickname("tester5")
                     .department("외국어학과")
                     .studentId("20210001")
                     .birthdate(LocalDate.of(1997, 1, 1))
                     .gender(Gender.MALE)
-                    .profileImageUrl("https://example.com/profile5.jpg")
                     .socialProvider("google")
                     .socialId("tester5@example.com")
                     .introText("안녕하세요! 저는 다양한 문화와 언어에 관심이 많은 학생입니다. 여행과 요리를 즐기며, 새로운 사람들을 만나 이야기하는 것을 좋아해요.")
@@ -119,141 +125,127 @@ public class DataInitializer {
                     .build();
             userRepository.save(user5);
 
+            User user6 = User.builder()
+                    .userId("test-user-6")
+                    .name("테스터6")
+                    .nickname("tester6")
+                    .department("환경생명공학과")
+                    .studentId("20210002")
+                    .birthdate(LocalDate.of(1998, 3, 15))
+                    .gender(Gender.FEMALE)
+                    .socialProvider("google")
+                    .socialId("tester6@example.com")
+                    .introText("지구를 지키는 일에 관심이 많은 학생입니다. 플로깅과 업사이클링이 취미이며, 환경 문제에 대해 공부하고 있어요.")
+                    .shortIntro("업사이클링이 취미인 친환경 러버!")
+                    .build();
 
+            User user7 = User.builder()
+                    .userId("test-user-7")
+                    .name("테스터7")
+                    .nickname("tester7")
+                    .department("컴퓨터공학과")
+                    .studentId("20190045")
+                    .birthdate(LocalDate.of(1999, 7, 7))
+                    .gender(Gender.MALE)
+                    .socialProvider("google")
+                    .socialId("tester7@example.com")
+                    .introText("코딩을 사랑하는 개발자 지망생입니다. 요즘은 AI와 백엔드에 푹 빠져 있어요. 토이 프로젝트 같이 해요!")
+                    .shortIntro("디버깅이 취미인 개발자 지망생")
+                    .build();
 
-            // 2. 방 생성
-            Room room1 = Room.builder()
+            User user8 = User.builder()
+                    .userId("test-user-8")
+                    .name("테스터8")
+                    .nickname("tester8")
+                    .department("문헌정보학과")
+                    .studentId("20200234")
+                    .birthdate(LocalDate.of(2000, 11, 12))
+                    .gender(Gender.FEMALE)
+                    .socialProvider("google")
+                    .socialId("tester8@example.com")
+                    .introText("책과 커피를 사랑하는 고양이 집사입니다. 다양한 장르의 책을 좋아하고, 독서모임을 자주 참여해요.")
+                    .shortIntro("고양이와 책을 좋아하는 문학 소녀")
+                    .build();
+
+            User user9 = User.builder()
+                    .userId("test-user-9")
+                    .name("테스터9")
+                    .nickname("tester9")
+                    .department("수학과")
+                    .studentId("20180123")
+                    .birthdate(LocalDate.of(1996, 2, 2))
+                    .gender(Gender.MALE)
+                    .socialProvider("google")
+                    .socialId("tester9@example.com")
+                    .introText("수학 문제를 푸는 걸 좋아하는 조용한 타입입니다. 보드게임과 스도쿠를 자주 즐기고 있어요.")
+                    .shortIntro("보드게임과 수학의 조합이 좋은 사람")
+                    .build();
+
+            User user10 = User.builder()
+                    .userId("test-user-10")
+                    .name("테스터10")
+                    .nickname("tester10")
+                    .department("간호학과")
+                    .studentId("20210101")
+                    .birthdate(LocalDate.of(2001, 5, 5))
+                    .gender(Gender.FEMALE)
+                    .socialProvider("google")
+                    .socialId("tester10@example.com")
+                    .introText("사람을 도와주는 직업에 관심이 많아요. 병원 봉사활동을 자주 하며, 힐링이 되는 대화를 좋아합니다.")
+                    .shortIntro("따뜻한 마음을 가진 힐러 지망생")
+                    .build();
+
+            userRepository.saveAll(List.of(user6, user7, user8, user9, user10));
+
+            Long room1Id = roomService.createRoom(user1.getUserId(), CreateRoomRequestDto.builder()
                     .title("현대 미술 토론 모임")
                     .description("이 그룹은 현대 미술에 대한 관심을 공유하는 사람들을 위한 공간입니다. 참여자들은 각자의 경험과 관점을 통해 서로의 창의성을 자극하고, 다양한 전시회 및 워크숍에 참여하여 예술적 감각을 향상시킬 수 있습니다.")
                     .capacity(10)
-                    .build();
-            room1.updateHost(user1);
-            roomRepository.save(room1);
+                    .build());
+            Room room1 = roomRepository.findById(room1Id).get();
+            roomService.joinRoom(user2.getUserId(), room1Id);
+            roomService.joinRoom(user3.getUserId(), room1Id);
+            roomService.joinRoom(user4.getUserId(), room1Id);
+            roomService.joinRoom(user5.getUserId(), room1Id);
 
-            Room room2 = Room.builder()
+            Long room2Id = roomService.createRoom(user2.getUserId(), CreateRoomRequestDto.builder()
                     .title("AI 윤리와 기술 발전 연구회")
                     .description("이 그룹은 최신 인공지능 기술의 발전을 연구하고, 그에 따른 윤리적 문제를 논의하기 위해 설립되었습니다. 회원들은 각자의 전문 지식을 공유하며, 세미나와 워크숍을 통해 실질적인 문제 해결 방안을 모색합니다.")
                     .capacity(20)
-                    .build();
-            room2.updateHost(user2);
-            roomRepository.save(room2);
+                    .build());
+            Room room2 = roomRepository.findById(room2Id).get();
+            roomService.joinRoom(user1.getUserId(), room2Id);
+            roomService.joinRoom(user3.getUserId(), room2Id);
+            roomService.joinRoom(user4.getUserId(), room2Id);
 
-            Room room3 = Room.builder()
+            Long room3Id = roomService.createRoom(user3.getUserId(), CreateRoomRequestDto.builder()
                     .title("지속 가능한 농업 실천 커뮤니티")
                     .description("이 그룹은 지속 가능한 농업에 관심이 있는 사람들을 위한 플랫폼입니다. 회원들은 친환경 농업 기술을 공유하고, 실내 정원 가꾸기 및 지역 농산물 지원의 중요성을 논의합니다.")
                     .capacity(30)
-                    .build();
-            room3.updateHost(user3);
-            roomRepository.save(room3);
+                    .build());
+            Room room3 = roomRepository.findById(room3Id).get();
+            roomService.joinRoom(user1.getUserId(), room3Id);
+            roomService.joinRoom(user2.getUserId(), room3Id);
 
-            Room room4 = Room.builder()
+
+            Long room4Id = roomService.createRoom(user4.getUserId(), CreateRoomRequestDto.builder()
                     .title("건강한 라이프스타일 실천 모임")
                     .description("이 그룹은 건강한 라이프스타일을 추구하는 사람들을 위한 것입니다. 다양한 운동과 요리 클래스를 통해 서로의 경험을 나누고, 건강한 식습관을 배우며, 즐거운 커뮤니티를 형성하는 것을 목표로 합니다.")
                     .capacity(40)
-                    .build();
-            room4.updateHost(user4);
-            roomRepository.save(room4);
+                    .build());
+            Room room4 = roomRepository.findById(room4Id).get();
 
-            Room room5 = Room.builder()
+            Long room5Id = roomService.createRoom(user5.getUserId(), CreateRoomRequestDto.builder()
                     .title("보드게임 즐기는 사람들")
                     .description("이 그룹은 보드게임 애호가들이 모여 다양한 게임을 즐기고 전략을 공유하는 공간입니다. 매월 정기적으로 모임을 가져 새로운 게임을 시도하고, 경험을 나누는 것이 목표입니다.")
                     .capacity(50)
-                    .build();
-            room5.updateHost(user5);
-            roomRepository.save(room5);
-
-            // RoomUser 생성 및 저장
-            RoomUser ru1_admin = RoomUser.builder()
-                    .room(room1)
-                    .user(user1)
-                    .role(RoomUserRole.ADMIN)
-                    .build();
-
-            RoomUser ru1_member1 = RoomUser.builder()
-                    .room(room1)
-                    .user(user2)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru1_member2 = RoomUser.builder()
-                    .room(room1)
-                    .user(user3)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru2_admin = RoomUser.builder()
-                    .room(room2)
-                    .user(user2)
-                    .role(RoomUserRole.ADMIN)
-                    .build();
-
-            RoomUser ru2_member1 = RoomUser.builder()
-                    .room(room2)
-                    .user(user1)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru2_member2 = RoomUser.builder()
-                    .room(room2)
-                    .user(user5)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru3_admin = RoomUser.builder()
-                    .room(room3)
-                    .user(user3)
-                    .role(RoomUserRole.ADMIN)
-                    .build();
-
-            RoomUser ru4_admin = RoomUser.builder()
-                    .room(room4)
-                    .user(user4)
-                    .role(RoomUserRole.ADMIN)
-                    .build();
-
-            RoomUser ru4_member1 = RoomUser.builder()
-                    .room(room4)
-                    .user(user1)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru4_member2 = RoomUser.builder()
-                    .room(room4)
-                    .user(user2)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru4_member3 = RoomUser.builder()
-                    .room(room4)
-                    .user(user3)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru4_member4 = RoomUser.builder()
-                    .room(room4)
-                    .user(user5)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            RoomUser ru5_admin = RoomUser.builder()
-                    .room(room5)
-                    .user(user5)
-                    .role(RoomUserRole.ADMIN)
-                    .build();
-
-            RoomUser ru5_member1 = RoomUser.builder()
-                    .room(room5)
-                    .user(user1)
-                    .role(RoomUserRole.MEMBER)
-                    .build();
-
-            roomUserRepository.saveAll(List.of(
-                    ru1_admin, ru1_member1, ru1_member2,
-                    ru2_admin, ru2_member1, ru2_member2,
-                    ru3_admin,
-                    ru4_admin, ru4_member1, ru4_member2, ru4_member3, ru4_member4,
-                    ru5_admin, ru5_member1
-            ));
+                    .build());
+            Room room5 = roomRepository.findById(room5Id).get();
+            roomService.joinRoom(user10.getUserId(), room5Id);
+            roomService.joinRoom(user9.getUserId(), room5Id);
+            roomService.joinRoom(user8.getUserId(), room5Id);
+            roomService.joinRoom(user7.getUserId(), room5Id);
+            roomService.joinRoom(user6.getUserId(), room5Id);
 
             List<String> topics = List.of(
                     // 인문계열
@@ -436,6 +428,121 @@ public class DataInitializer {
                 ui.updateInterest(interest);
                 userInterestRepository.save(ui);
             }
+
+            List<String> user6Tags = List.of("동양철학", "미학", "언어철학", "사회철학");
+            for (String name : user6Tags) {
+                Interest interest = interestRepository.findByName(name).orElseThrow();
+                UserInterest ui = UserInterest.builder().build();
+                ui.updateUser(user6);
+                ui.updateInterest(interest);
+                userInterestRepository.save(ui);
+            }
+
+            List<String> user7Tags = List.of("머신러닝", "딥러닝", "데이터베이스", "소프트웨어공학");
+            for (String name : user7Tags) {
+                Interest interest = interestRepository.findByName(name).orElseThrow();
+                UserInterest ui = UserInterest.builder().build();
+                ui.updateUser(user7);
+                ui.updateInterest(interest);
+                userInterestRepository.save(ui);
+            }
+
+            List<String> user8Tags = List.of("현대문학", "문학비평", "미디어비평", "스토리텔링");
+            for (String name : user8Tags) {
+                Interest interest = interestRepository.findByName(name).orElseThrow();
+                UserInterest ui = UserInterest.builder().build();
+                ui.updateUser(user8);
+                ui.updateInterest(interest);
+                userInterestRepository.save(ui);
+            }
+
+            List<String> user9Tags = List.of("미적분학", "수리논리", "게임이론", "정수론");
+            for (String name : user9Tags) {
+                Interest interest = interestRepository.findByName(name).orElseThrow();
+                UserInterest ui = UserInterest.builder().build();
+                ui.updateUser(user9);
+                ui.updateInterest(interest);
+                userInterestRepository.save(ui);
+            }
+
+            List<String> user10Tags = List.of("상담심리", "임상심리", "기본간호", "지역사회간호");
+            for (String name : user10Tags) {
+                Interest interest = interestRepository.findByName(name).orElseThrow();
+                UserInterest ui = UserInterest.builder().build();
+                ui.updateUser(user10);
+                ui.updateInterest(interest);
+                userInterestRepository.save(ui);
+            }
+
+            Random random = new Random();
+
+            List<User> users = List.of(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10);
+            List<Room> rooms = List.of(room1, room2, room3, room4, room5);
+
+            for (User user : users) {
+                for (Room room : rooms) {
+                    double score = Math.round((random.nextDouble() * 2 - 1) * 100.0) / 100.0; // -1.0 ~ 1.0, 소수점 2자리
+
+                    UserRoomRecommendation recommendation = UserRoomRecommendation.builder()
+                            .score(score)
+                            .activityScore(score) // 동일한 값으로 설정
+                            .build();
+
+                    recommendation.updateUser(user);
+                    recommendation.updateRoom(room);
+
+                    userRoomRecommendationRepository.save(recommendation);
+                }
+            }
+
+            Crawling crawling1 = Crawling.builder()
+                    .title("AI로 구현한 새로운 음악 작곡 방식")
+                    .url("https://example.com/articles/ai-music-composition")
+                    .imageUrl("https://example.com/images/ai-music.jpg")
+                    .description("AI를 활용한 작곡 기술이 음악 산업에 어떤 변화를 가져오는지 소개합니다. 창작의 영역이 어떻게 확장되고 있는지 확인해보세요.")
+                    .deadlinedAt(LocalDateTime.of(2025, 12, 20, 14, 30))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling2 = Crawling.builder()
+                    .title("기후 변화에 대응하는 도시 설계 전략")
+                    .url("https://example.com/news/climate-smart-cities")
+                    .imageUrl("https://example.com/images/climate-city.jpg")
+                    .description("지속 가능한 도시 개발을 위한 다양한 설계 전략과 그 실제 적용 사례를 분석한 리포트입니다.")
+                    .deadlinedAt(LocalDateTime.of(2024, 11, 10, 10, 0))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling3 = Crawling.builder()
+                    .title("청년 세대를 위한 취업 트렌드 리포트 2025")
+                    .url("https://example.com/reports/youth-employment-trends-2025")
+                    .imageUrl("https://example.com/images/employment.jpg")
+                    .description("변화하는 취업 시장에서 청년들이 어떻게 준비하고 대응해야 할지에 대한 심층 분석.")
+                    .deadlinedAt(LocalDateTime.of(2025, 1, 5, 9, 0))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling4 = Crawling.builder()
+                    .title("세계 문학을 다시 쓰다 – 여성 작가들의 도전")
+                    .url("https://example.com/columns/women-in-literature")
+                    .imageUrl("https://example.com/images/literature.jpg")
+                    .description("문학사에 새롭게 자리 잡은 여성 작가들의 목소리와 그들이 바꿔가는 이야기들에 대해 다룹니다.")
+                    .deadlinedAt(LocalDateTime.of(2025, 10, 8, 17, 45))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling5 = Crawling.builder()
+                    .title("메타버스 속 사회 – 가상공간의 윤리적 고민")
+                    .url("https://example.com/tech/metaverse-ethics")
+                    .imageUrl("https://example.com/images/metaverse.jpg")
+                    .description("메타버스의 확장과 함께 떠오르는 프라이버시, 정체성, 커뮤니티의 윤리적 문제를 짚어봅니다.")
+                    .deadlinedAt(LocalDateTime.of(2024, 9, 15, 12, 15))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            crawlingRepository.saveAll(List.of(crawling1, crawling2, crawling3, crawling4, crawling5));
+
+
 
 
         } else {

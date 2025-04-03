@@ -1,3 +1,5 @@
+import 'package:flutter_app/dto/room_dto.dart';
+
 class UserDTO {
   final String userId;
   final String? name;
@@ -12,6 +14,8 @@ class UserDTO {
   final String? introText;
   final String? shortIntro;
   final DateTime createdAt;
+  final List<String>? interests;
+  final List<RoomDTO>? rooms;
 
   UserDTO({
     required this.userId,
@@ -27,6 +31,8 @@ class UserDTO {
     this.introText,
     this.shortIntro,
     required this.createdAt,
+    this.interests,
+    this.rooms,
   });
 
   factory UserDTO.fromJson(Map<String, dynamic> json) {
@@ -36,17 +42,23 @@ class UserDTO {
       nickname: json['nickname'],
       department: json['department'],
       studentId: json['studentId'],
-      birthdate:
-          json['birthdate'] != null ? DateTime.parse(json['birthdate']) : null,
+      birthdate: json['birthdate'] != null ? DateTime.parse(json['birthdate']) : null,
       gender: json['gender'],
-      profileImageUrl:
-          json['profileImageUrl'] ??
+      profileImageUrl: json['profileImageUrl'] ??
           'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
       socialProvider: json['socialProvider'],
       socialId: json['socialId'],
       introText: json['introText'],
       shortIntro: json['shortIntro'],
       createdAt: DateTime.parse(json['createdAt']),
+      interests: json['interests'] != null
+          ? List<String>.from(json['interests'])
+          : null,
+      rooms: json['rooms'] != null
+          ? (json['rooms'] as List)
+          .map((roomJson) => RoomDTO.fromJson(roomJson))
+          .toList()
+          : null,
     );
   }
 
@@ -65,6 +77,8 @@ class UserDTO {
       'introText': introText,
       'shortIntro': shortIntro,
       'createdAt': createdAt.toIso8601String(),
+      'interests': interests,
+      'rooms': rooms?.map((room) => room.toJson()).toList(),
     };
   }
 }

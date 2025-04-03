@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ChatMessageRequestDto {
-    private Long chatRoomId;
-    private String message;
-    private String imageUrl;
+    private Long chatRoomId;   // 채팅방 ID
+    private String message;    // 텍스트 메시지 내용
+    private String imageUrl;   // 이미지 URL (선택)
 }

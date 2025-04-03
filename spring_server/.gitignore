@@ -41,3 +41,7 @@ firebase-service-account.json
 
 ### env ###
 .env
+
+### local 설정 ###
+application-local.yml
+application-temp.yml
