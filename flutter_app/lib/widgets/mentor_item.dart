@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/dto/user_info_dto.dart';
 
 class MentorButton extends StatefulWidget {
   const MentorButton({super.key});
@@ -32,7 +32,7 @@ class _MentorButtonState extends State<MentorButton> {
   }
 }
 
-Widget mentorItem(UserDTO mentor) {
+Widget mentorItem(UserInfoDto mentor) {
   return Container(
     margin: const EdgeInsets.only(bottom: 12),
     child: Row(
@@ -41,8 +41,7 @@ Widget mentorItem(UserDTO mentor) {
         CircleAvatar(
           radius: 30,
           backgroundImage: NetworkImage(
-            mentor.profileImageUrl ??
-                'https://semothon.s3.ap-northeast-2.amazonaws.com/profile-images/default.png',
+            mentor.profileImageUrl,
           ),
         ),
         const SizedBox(width: 12),

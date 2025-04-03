@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_app/dto/user_dto.dart';
-import 'package:flutter_app/dto/user_list_dto.dart';
+import 'package:flutter_app/dto/get_user_list_response_dto.dart';
+import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/dto/user_update_dto.dart';
 import 'package:flutter_app/dto/user_update_interest_dto.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
 //로그인 후 유저 정보 조회
-Future<({bool success, String message, UserDTO? user})> loginUser() async {
+Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
@@ -42,7 +42,7 @@ Future<({bool success, String message, UserDTO? user})> loginUser() async {
     return (
       success: true,
       message: "succeed",
-      user: UserDTO.fromJson(
+      user: UserInfoDto.fromJson(
         jsonDecode(utf8.decode(response.bodyBytes))['data']?['user']?['userInfo'],
       ),
     );
@@ -52,7 +52,7 @@ Future<({bool success, String message, UserDTO? user})> loginUser() async {
 }
 
 // 현재 유저 정보
-Future<({bool success, String message, UserDTO? user})> getUser() async {
+Future<({bool success, String message, UserInfoDto? user})> getUser() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
@@ -85,7 +85,7 @@ Future<({bool success, String message, UserDTO? user})> getUser() async {
     return (
       success: true,
       message: "succeed",
-      user: UserDTO.fromJson(jsonDecode(utf8.decode(response.bodyBytes))['data']?['user']),
+      user: UserInfoDto.fromJson(jsonDecode(utf8.decode(response.bodyBytes))['data']?['user']),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", user: null);
@@ -188,7 +188,7 @@ Future<({bool success, String message})> updateUserIntro() async {
   return (success: true, message: "succeed");
 }
 
-Future<({bool success, String message, UserListDTO? userList})> getUserList({
+Future<({bool success, String message, GetUserListResponseDto? userList})> getUserList({
   String? nicknameKeyword,
   String? departmentKeyword,
   String? introKeyword,
@@ -258,7 +258,7 @@ Future<({bool success, String message, UserListDTO? userList})> getUserList({
 
   try {
     final body = jsonDecode(utf8.decode(response.bodyBytes));
-    final userListDto = UserListDTO.fromJson(body);
+    final userListDto = GetUserListResponseDto.fromJson(body['data']);
     return (
     success: true,
     message: "succeed",

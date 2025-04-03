@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/room_dto.dart';
+import 'package:flutter_app/dto/room_info_dto.dart';
 
 class RecommendedChatRoom extends StatelessWidget {
-  final RoomDTO room;
+  final RoomInfoDto room;
   final int index;
 
   const RecommendedChatRoom({

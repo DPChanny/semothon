@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/crawling_dto.dart';
-import 'package:flutter_app/dto/user_dto.dart';
-import 'package:flutter_app/dto/user_list_dto.dart';
+import 'package:flutter_app/dto/get_user_list_response_dto.dart';
+import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/services/queries/crawling_query.dart';
@@ -18,8 +18,8 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  ({String message, bool success, UserDTO? user})? _user;
-  UserListDTO? _mentors;
+  ({String message, bool success, UserInfoDto? user})? _user;
+  GetUserListResponseDto? _mentors;
   List<CrawlingDto> _crawlings = [];
   bool _isLoading = true;
 
@@ -140,7 +140,7 @@ class _HomeTabState extends State<HomeTab> {
                       ),
                       const SizedBox(height: 16),
                       Column(
-                        children: _mentors?.userList.map((m) => mentorItem(m)).toList() ?? [],
+                        children: _mentors?.userInfos.map((m) => mentorItem(m)).toList() ?? [],
                       ),
                     ],
                   ),
