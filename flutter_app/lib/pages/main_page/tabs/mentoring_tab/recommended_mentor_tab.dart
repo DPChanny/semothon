@@ -9,21 +9,23 @@ class RecommendedMentorTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<({bool success, String message, GetUserListResponseDto? userList})>(
+    return FutureBuilder<
+      ({bool success, String message, GetUserListResponseDto? userList})
+    >(
       future: getUserList(sortBy: "SCORE"),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (!snapshot.hasData || !snapshot.data!.success){
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(snapshot.data!.message)),
-          );
+        if (!snapshot.hasData || !snapshot.data!.success) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(snapshot.data!.message)));
           Navigator.pushNamedAndRemoveUntil(
             context,
             LoginPageRouteNames.loginPage,
-                (route) => false,
+            (route) => false,
           );
           return const Center(child: CircularProgressIndicator());
         }

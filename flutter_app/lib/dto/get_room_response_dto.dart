@@ -1,6 +1,6 @@
+import 'host_user_info_dto.dart';
 import 'room_info_dto.dart';
 import 'room_user_info_dto.dart';
-import 'host_user_info_dto.dart';
 
 class GetRoomResponseDto {
   final RoomInfoDto roomInfo;
@@ -16,9 +16,10 @@ class GetRoomResponseDto {
   factory GetRoomResponseDto.fromJson(Map<String, dynamic> json) {
     return GetRoomResponseDto(
       roomInfo: RoomInfoDto.fromJson(json['roomInfo']),
-      members: List<Map<String, dynamic>>.from(json['members'])
-          .map((e) => RoomUserInfoDto.fromJson(e))
-          .toList(),
+      members:
+          List<Map<String, dynamic>>.from(
+            json['members'],
+          ).map((e) => RoomUserInfoDto.fromJson(e)).toList(),
       host: HostUserInfoDto.fromJson(json['host']),
     );
   }

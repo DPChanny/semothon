@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
     }
 
     final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+        await googleUser.authentication;
 
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -51,19 +51,19 @@ class LoginPage extends StatelessWidget {
       Navigator.pushNamedAndRemoveUntil(
         context,
         MainPageRouteNames.mainPage,
-            (route) => false,
+        (route) => false,
       );
     } else if (result.user!.name != null) {
       Navigator.pushNamedAndRemoveUntil(
         context,
         InputPageRouteNames.inputCompletePage,
-            (route) => false,
+        (route) => false,
       );
     } else {
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginCompletePage,
-            (route) => false,
+        (route) => false,
       );
     }
   }

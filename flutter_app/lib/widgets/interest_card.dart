@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/widgets/keyword_chip.dart';
 
-Widget interestCard(BuildContext context, UserInfoDto user, List<String> keywords) {
+Widget interestCard(
+  BuildContext context,
+  UserInfoDto user,
+  List<String> keywords,
+) {
   return Container(
     width: double.infinity,
     color: const Color(0xFF008CFF),
@@ -44,9 +48,7 @@ Widget interestCard(BuildContext context, UserInfoDto user, List<String> keyword
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: NetworkImage(
-                      user.profileImageUrl,
-                    ),
+                    image: NetworkImage(user.profileImageUrl),
                     fit: BoxFit.cover,
                   ),
                 ),

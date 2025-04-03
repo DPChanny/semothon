@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/host_user_info_dto.dart';
 import 'package:flutter_app/dto/room_info_dto.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/recommended_mentor_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/recommended_room_tab.dart';
 import 'package:flutter_app/widgets/custom_tab_bar.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab.dart';
 
 class MentoringTab extends StatefulWidget {
   const MentoringTab({super.key});
@@ -61,7 +61,6 @@ class _MentoringTabState extends State<MentoringTab> {
               ],
             ),
           ),
-
         ],
       ),
     );
@@ -72,7 +71,11 @@ class RecommendedRoomDetailModal extends StatelessWidget {
   final RoomInfoDto room;
   final HostUserInfoDto hostUser;
 
-  const RecommendedRoomDetailModal({super.key, required this.room, required this.hostUser});
+  const RecommendedRoomDetailModal({
+    super.key,
+    required this.room,
+    required this.hostUser,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +126,7 @@ class RecommendedRoomDetailModal extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20,
-                backgroundImage: NetworkImage(
-                  hostUser.profileImageUrl,
-                ),
+                backgroundImage: NetworkImage(hostUser.profileImageUrl),
               ),
               SizedBox(width: 12),
               Column(

@@ -13,8 +13,7 @@ Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  }
-  catch (e){
+  } catch (e) {
     return (success: false, message: "firebase failure $e", user: null);
   }
 
@@ -43,7 +42,9 @@ Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
       success: true,
       message: "succeed",
       user: UserInfoDto.fromJson(
-        jsonDecode(utf8.decode(response.bodyBytes))['data']?['user']?['userInfo'],
+        jsonDecode(
+          utf8.decode(response.bodyBytes),
+        )['data']?['user']?['userInfo'],
       ),
     );
   } catch (e) {
@@ -56,8 +57,7 @@ Future<({bool success, String message, UserInfoDto? user})> getUser() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  }
-  catch (e){
+  } catch (e) {
     return (success: false, message: "firebase failure $e", user: null);
   }
 
@@ -85,7 +85,9 @@ Future<({bool success, String message, UserInfoDto? user})> getUser() async {
     return (
       success: true,
       message: "succeed",
-      user: UserInfoDto.fromJson(jsonDecode(utf8.decode(response.bodyBytes))['data']?['user']),
+      user: UserInfoDto.fromJson(
+        jsonDecode(utf8.decode(response.bodyBytes))['data']?['user'],
+      ),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", user: null);
@@ -97,8 +99,7 @@ Future<({bool success, String message})> updateUser() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  }
-  catch (e){
+  } catch (e) {
     return (success: false, message: "firebase failure $e");
   }
 
@@ -122,12 +123,12 @@ Future<({bool success, String message})> updateUser() async {
   return (success: true, message: "succeed");
 }
 
-Future<({bool success, String message, String? introText})> updateUserInterest() async {
+Future<({bool success, String message, String? introText})>
+updateUserInterest() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  }
-  catch (e){
+  } catch (e) {
     return (success: false, message: "firebase failure $e", introText: null);
   }
 
@@ -145,15 +146,19 @@ Future<({bool success, String message, String? introText})> updateUserInterest()
   );
 
   if (response.statusCode != 200) {
-    return (success: false, message: "server failure: ${response.body}", introText: null);
+    return (
+      success: false,
+      message: "server failure: ${response.body}",
+      introText: null,
+    );
   }
 
   try {
-    final String text = jsonDecode(utf8.decode(response.bodyBytes))['data']['generatedIntroText'];
-    return (
-    success: true,
-    message: "succeed",
-    introText: text);
+    final String text =
+        jsonDecode(
+          utf8.decode(response.bodyBytes),
+        )['data']['generatedIntroText'];
+    return (success: true, message: "succeed", introText: text);
   } catch (e) {
     return (success: false, message: "parsing failure: $e", introText: null);
   }
@@ -163,8 +168,7 @@ Future<({bool success, String message})> updateUserIntro() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  }
-  catch (e){
+  } catch (e) {
     return (success: false, message: "firebase failure $e");
   }
 
@@ -188,7 +192,8 @@ Future<({bool success, String message})> updateUserIntro() async {
   return (success: true, message: "succeed");
 }
 
-Future<({bool success, String message, GetUserListResponseDto? userList})> getUserList({
+Future<({bool success, String message, GetUserListResponseDto? userList})>
+getUserList({
   String? nicknameKeyword,
   String? departmentKeyword,
   String? introKeyword,
@@ -226,9 +231,12 @@ Future<({bool success, String message, GetUserListResponseDto? userList})> getUs
     if (keyword != null) 'keyword': keyword,
     if (birthdateAfter != null) 'birthdateAfter': birthdateAfter,
     if (birthdateBefore != null) 'birthdateBefore': birthdateBefore,
-    if (interestNames != null && interestNames.isNotEmpty) 'interestNames': interestNames,
-    if (minRecommendationScore != null) 'minRecommendationScore': minRecommendationScore,
-    if (maxRecommendationScore != null) 'maxRecommendationScore': maxRecommendationScore,
+    if (interestNames != null && interestNames.isNotEmpty)
+      'interestNames': interestNames,
+    if (minRecommendationScore != null)
+      'minRecommendationScore': minRecommendationScore,
+    if (maxRecommendationScore != null)
+      'maxRecommendationScore': maxRecommendationScore,
     if (createdAfter != null) 'createdAfter': createdAfter,
     if (createdBefore != null) 'createdBefore': createdBefore,
     if (sortBy != null) 'sortBy': sortBy,
@@ -250,20 +258,16 @@ Future<({bool success, String message, GetUserListResponseDto? userList})> getUs
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    userList: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      userList: null,
     );
   }
 
   try {
     final body = jsonDecode(utf8.decode(response.bodyBytes));
     final userListDto = GetUserListResponseDto.fromJson(body['data']);
-    return (
-    success: true,
-    message: "succeed",
-    userList: userListDto,
-    );
+    return (success: true, message: "succeed", userList: userListDto);
   } catch (e) {
     return (success: false, message: "parsing failure: $e", userList: null);
   }

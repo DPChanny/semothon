@@ -11,9 +11,10 @@ class GetCrawlingListResponseDto {
 
   factory GetCrawlingListResponseDto.fromJson(Map<String, dynamic> json) {
     return GetCrawlingListResponseDto(
-      crawlingList: (json['crawlingList'] as List)
-          .map((e) => CrawlingInfoDto.fromJson(e['crawlingInfo']))
-          .toList(),
+      crawlingList:
+          (json['crawlingList'] as List)
+              .map((e) => CrawlingInfoDto.fromJson(e['crawlingInfo']))
+              .toList(),
       totalCount: json['totalCount'],
     );
   }

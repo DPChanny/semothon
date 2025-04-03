@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'mentoring_room_tab.dart';
-import 'activity_room_tab.dart';
 import 'package:flutter_app/widgets/custom_tab_bar.dart';
+
+import 'activity_room_tab.dart';
+import 'mentoring_room_tab.dart';
 
 class ChatMentoringPage extends StatefulWidget {
   const ChatMentoringPage({super.key});
@@ -9,6 +10,7 @@ class ChatMentoringPage extends StatefulWidget {
   @override
   State<ChatMentoringPage> createState() => _ChatMentoringPageState();
 }
+
 class _ChatMentoringPageState extends State<ChatMentoringPage> {
   int _selectedTabIndex = 0;
 
@@ -35,10 +37,7 @@ class _ChatMentoringPageState extends State<ChatMentoringPage> {
           Expanded(
             child: IndexedStack(
               index: _selectedTabIndex,
-              children: const [
-                MentoringRoomTab(),
-                ActivityRoomTab(),
-              ],
+              children: const [MentoringRoomTab(), ActivityRoomTab()],
             ),
           ),
         ],
@@ -46,4 +45,3 @@ class _ChatMentoringPageState extends State<ChatMentoringPage> {
     );
   }
 }
-

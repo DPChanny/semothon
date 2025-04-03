@@ -7,9 +7,10 @@ class GetUserListResponseDto {
 
   factory GetUserListResponseDto.fromJson(Map<String, dynamic> json) {
     return GetUserListResponseDto(
-      userInfos: List<Map<String, dynamic>>.from(json['userList'])
-          .map((item) => UserInfoDto.fromJson(item['userInfo']))
-          .toList(),
+      userInfos:
+          List<Map<String, dynamic>>.from(
+            json['userList'],
+          ).map((item) => UserInfoDto.fromJson(item['userInfo'])).toList(),
     );
   }
 }

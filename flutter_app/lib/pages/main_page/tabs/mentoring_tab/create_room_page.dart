@@ -41,7 +41,11 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
 
     setState(() {
       _isButtonEnabled =
-          name.isNotEmpty && desc.isNotEmpty && max != null && max > 0 && max <= 10;
+          name.isNotEmpty &&
+          desc.isNotEmpty &&
+          max != null &&
+          max > 0 &&
+          max <= 10;
     });
   }
 
@@ -56,33 +60,32 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
     super.dispose();
   }
 
-  void _handleNext() async{
+  void _handleNext() async {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder:
-          (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
-    final result = await createRoom(RoomUpdateDTO(title: _nameController.text,
-    description: _descController.text,
-    capacity: int.parse(_maxController.text)));
+    final result = await createRoom(
+      RoomUpdateDTO(
+        title: _nameController.text,
+        description: _descController.text,
+        capacity: int.parse(_maxController.text),
+      ),
+    );
 
     if (result.success) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(
-          builder: (context) => const CreateRoomCompletePage(),
-        ),
-          (router) => false
+        MaterialPageRoute(builder: (context) => const CreateRoomCompletePage()),
+        (router) => false,
       );
     } else {
       Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(result.message)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(result.message)));
     }
   }
 
@@ -91,8 +94,8 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
     return node.hasFocus
         ? const Color(0xFFE6F0FA)
         : controller.text.isNotEmpty
-            ? const Color(0xFFF5F5F5)
-            : const Color(0xFFF5F5F5);
+        ? const Color(0xFFF5F5F5)
+        : const Color(0xFFF5F5F5);
   }
 
   @override
@@ -116,7 +119,10 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                const Text("어떤 방인가요?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                const Text(
+                  "어떤 방인가요?",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 24),
 
                 const Text("방 이름", style: TextStyle(fontSize: 14)),
@@ -189,5 +195,4 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
       ),
     );
   }
-
 }

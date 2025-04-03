@@ -24,16 +24,14 @@ class _MentoringRoomTabState extends State<MentoringRoomTab> {
         'message': '우와 그거는 어떻게 하는 거예요?',
         'time': '5:13 PM',
         'date': '25/3/20',
-        'image':
-        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
+        'image': 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
       },
       {
         'title': '위둔 뿌시기',
         'message': 'File: 웹, 이거슨, 언제 끝나나...',
         'time': '4:21 PM',
         'date': '25/3/20',
-        'image':
-        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
+        'image': 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde',
       },
     ];
   }
@@ -78,56 +76,57 @@ class _MentoringRoomTabState extends State<MentoringRoomTab> {
 
         // ✅ 채팅 리스트 or 빈 카드
         Expanded(
-          child: chatRooms.isEmpty
-              ? const _EmptyChatCard()
-              : ListView.separated(
-            itemCount: chatRooms.length,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            separatorBuilder: (_, __) => const Divider(height: 1),
-            itemBuilder: (context, index) {
-              final room = chatRooms[index];
-              return ListTile(
-                contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                leading: CircleAvatar(
-                  radius: 24,
-                  backgroundImage: NetworkImage(room['image']!),
-                ),
-                title: Text(
-                  '${room['title']}  💬 3',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                    fontFamily: 'Noto Sans KR',
+          child:
+              chatRooms.isEmpty
+                  ? const _EmptyChatCard()
+                  : ListView.separated(
+                    itemCount: chatRooms.length,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    separatorBuilder: (_, __) => const Divider(height: 1),
+                    itemBuilder: (context, index) {
+                      final room = chatRooms[index];
+                      return ListTile(
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                        leading: CircleAvatar(
+                          radius: 24,
+                          backgroundImage: NetworkImage(room['image']!),
+                        ),
+                        title: Text(
+                          '${room['title']}  💬 3',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            fontFamily: 'Noto Sans KR',
+                          ),
+                        ),
+                        subtitle: Text(
+                          room['message']!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              room['time']!,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              room['date']!,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                ),
-                subtitle: Text(
-                  room['message']!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                trailing: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      room['time']!,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      room['date']!,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
         ),
       ],
     );
@@ -154,10 +153,7 @@ class _EmptyChatCard extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: const Center(
-                child: Text(
-                  '💡',
-                  style: TextStyle(fontSize: 64),
-                ),
+                child: Text('💡', style: TextStyle(fontSize: 64)),
               ),
             ),
             const SizedBox(height: 24),

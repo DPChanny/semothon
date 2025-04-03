@@ -40,21 +40,20 @@ class UserInfoDto {
       nickname: json['nickname'],
       department: json['department'],
       studentId: json['studentId'],
-      birthdate: json['birthdate'] != null
-          ? DateTime.tryParse(json['birthdate'])
-          : null,
-      gender: json['gender'] != null
-          ? Gender.values.byName(json['gender'])
-          : null,
+      birthdate:
+          json['birthdate'] != null
+              ? DateTime.tryParse(json['birthdate'])
+              : null,
+      gender:
+          json['gender'] != null ? Gender.values.byName(json['gender']) : null,
       profileImageUrl: json['profileImageUrl'] ?? '',
       socialProvider: json['socialProvider'] ?? '',
       socialId: json['socialId'] ?? '',
       introText: json['introText'],
       shortIntro: json['shortIntro'],
       createdAt: DateTime.parse(json['createdAt']),
-      interests: json['interests'] != null
-          ? List<String>.from(json['interests'])
-          : [],
+      interests:
+          json['interests'] != null ? List<String>.from(json['interests']) : [],
     );
   }
 

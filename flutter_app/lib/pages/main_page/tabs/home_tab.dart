@@ -33,51 +33,51 @@ class _HomeTabState extends State<HomeTab> {
     final userResult = await getUser();
 
     if (!userResult.success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(userResult.message)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(userResult.message)));
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginPage,
-            (route) => false,
+        (route) => false,
       );
       return;
     }
 
     if (userResult.user!.interests.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("관심사를 먼저 설정해주세요.")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("관심사를 먼저 설정해주세요.")));
       Navigator.pushNamedAndRemoveUntil(
         context,
         InterestPageRouteNames.interestCategorySelectionPage,
-            (route) => false,
+        (route) => false,
       );
       return;
     }
 
     final mentors = await getUserList(sortBy: "SCORE", limit: 3);
-    if(!mentors.success){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(mentors.message)),
-      );
+    if (!mentors.success) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(mentors.message)));
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginPage,
-            (route) => false,
+        (route) => false,
       );
       return;
     }
 
     final crawlings = await getCrawlingList(sortBy: "SCORE", limit: 10);
-    if(!crawlings.success){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(crawlings.message)),
-      );
+    if (!crawlings.success) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(crawlings.message)));
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginPage,
-            (route) => false,
+        (route) => false,
       );
       return;
     }
@@ -151,7 +151,11 @@ class _HomeTabState extends State<HomeTab> {
                       ),
                       const SizedBox(height: 16),
                       Column(
-                        children: _mentors?.userInfos.map((m) => mentorItem(m)).toList() ?? [],
+                        children:
+                            _mentors?.userInfos
+                                .map((m) => mentorItem(m))
+                                .toList() ??
+                            [],
                       ),
                     ],
                   ),

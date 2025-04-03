@@ -21,7 +21,8 @@ class RoomUserInfoDto {
       nickname: json['nickname'],
       profileImageUrl: json['profileImageUrl'],
       shortIntro: json['shortIntro'],
-      role: json['role'], // 서버에서 문자열로 넘어온다고 가정
+      role: json['role'],
+      // 서버에서 문자열로 넘어온다고 가정
       joinedAt: DateTime.parse(json['joinedAt']),
     );
   }

@@ -22,7 +22,8 @@ class _SearchScreenPageState extends State<SearchScreenPage> {
           elevation: 0,
           titleSpacing: 0,
           title: Padding(
-            padding: const EdgeInsets.only(top:20, right:16, left: 16), // ✅ 양옆 여백 추가
+            padding: const EdgeInsets.only(top: 20, right: 16, left: 16),
+            // ✅ 양옆 여백 추가
             child: Container(
               height: 44,
               decoration: BoxDecoration(
@@ -79,10 +80,7 @@ class _SearchScreenPageState extends State<SearchScreenPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: const Center(
-          child: Text(
-            '검색 결과 또는 힌트를 보여주는 공간',
-            style: TextStyle(fontSize: 16),
-          ),
+          child: Text('검색 결과 또는 힌트를 보여주는 공간', style: TextStyle(fontSize: 16)),
         ),
       ),
     );

@@ -3,11 +3,7 @@ class RoomUpdateDTO {
   String? description;
   int? capacity;
 
-  RoomUpdateDTO({
-    this.title,
-    this.description,
-    this.capacity,
-  });
+  RoomUpdateDTO({this.title, this.description, this.capacity});
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

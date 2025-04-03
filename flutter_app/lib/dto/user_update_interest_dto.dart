@@ -1,5 +1,6 @@
 class UserUpdateInterestIntroDTO {
-  static final UserUpdateInterestIntroDTO instance = UserUpdateInterestIntroDTO();
+  static final UserUpdateInterestIntroDTO instance =
+      UserUpdateInterestIntroDTO();
 
   String? interestCategory;
   List<String> interestNames = [];
@@ -9,14 +10,10 @@ class UserUpdateInterestIntroDTO {
   UserUpdateInterestIntroDTO({this.interestCategory, this.generatedIntroText});
 
   Map<String, dynamic> toInterestJson() {
-    return {
-      'interestNames': interestNames,
-    };
+    return {'interestNames': interestNames};
   }
 
   Map<String, dynamic> toIntroJson() {
-    return {
-      'intro': intro,
-    };
+    return {'intro': intro};
   }
 }

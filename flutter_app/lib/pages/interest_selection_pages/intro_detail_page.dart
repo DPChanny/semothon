@@ -39,10 +39,7 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
             const SizedBox(height: 12),
             const Text(
               'AI가 김세모 님의 관심사를\n다음과 같이 분석했어요.',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 20),
             Container(
@@ -64,14 +61,15 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
             const SizedBox(height: 24),
             Row(
               children: const [
-                Icon(Icons.lightbulb_outline, size: 20, color: Color(0xFF008CFF)),
+                Icon(
+                  Icons.lightbulb_outline,
+                  size: 20,
+                  color: Color(0xFF008CFF),
+                ),
                 SizedBox(width: 6),
                 Text(
                   '더 자세한 분석을 원하시면\n밑에 내용을 추가해 주세요.',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black87,
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.black87),
                 ),
               ],
             ),
@@ -89,10 +87,7 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: '예: 직무와 관련된 관심도 있으면 언급해 주세요!',
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                  ),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
                 ),
               ),
             ),
@@ -106,9 +101,8 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
                     context: context,
                     barrierDismissible: false,
                     builder:
-                        (context) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                        (context) =>
+                            const Center(child: CircularProgressIndicator()),
                   );
 
                   final result = await updateUserIntro();
@@ -119,12 +113,12 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       InterestPageRouteNames.introDetailCompletePage,
-                          (route) => false,
+                      (route) => false,
                     );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(result.message)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(result.message)));
                   }
                 },
                 style: ElevatedButton.styleFrom(

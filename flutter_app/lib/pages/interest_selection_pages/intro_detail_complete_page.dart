@@ -56,7 +56,7 @@ class IntroDetailCompletePage extends StatelessWidget {
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       MainPageRouteNames.mainPage,
-                          (route) => false,
+                      (route) => false,
                     );
                   },
                   style: ElevatedButton.styleFrom(

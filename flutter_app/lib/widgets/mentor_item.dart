@@ -40,9 +40,7 @@ Widget mentorItem(UserInfoDto mentor) {
       children: [
         CircleAvatar(
           radius: 30,
-          backgroundImage: NetworkImage(
-            mentor.profileImageUrl,
-          ),
+          backgroundImage: NetworkImage(mentor.profileImageUrl),
         ),
         const SizedBox(width: 12),
         Expanded(

@@ -10,12 +10,10 @@ class InterestSelectionPage extends StatefulWidget {
   const InterestSelectionPage({super.key});
 
   @override
-  State<InterestSelectionPage> createState() =>
-      _InterestSelectionPageState();
+  State<InterestSelectionPage> createState() => _InterestSelectionPageState();
 }
 
-class _InterestSelectionPageState
-    extends State<InterestSelectionPage> {
+class _InterestSelectionPageState extends State<InterestSelectionPage> {
   Map<String, List<String>> keywords = {};
   final Set<String> selectedKeywords = {};
   String? expandedCategory;
@@ -28,10 +26,13 @@ class _InterestSelectionPageState
   }
 
   Future<void> loadInitialKeywords() async {
-    final String jsonStr = await rootBundle.loadString('assets/interest_categories.json');
+    final String jsonStr = await rootBundle.loadString(
+      'assets/interest_categories.json',
+    );
     final Map<String, dynamic> data = jsonDecode(jsonStr);
 
-    final Map<String, dynamic> subfields = data[UserUpdateInterestIntroDTO.instance.interestCategory];
+    final Map<String, dynamic> subfields =
+        data[UserUpdateInterestIntroDTO.instance.interestCategory];
 
     for (final entry in subfields.entries) {
       final String subfield = entry.key;
@@ -236,39 +237,44 @@ class _InterestSelectionPageState
                   child: ElevatedButton(
                     onPressed:
                         selectedKeywords.isNotEmpty
-                            ? () async{
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder:
-                                (context) => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
+                            ? () async {
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder:
+                                    (context) => const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                              );
 
-                          UserUpdateInterestIntroDTO.instance.interestNames = selectedKeywords.toList();
+                              UserUpdateInterestIntroDTO
+                                  .instance
+                                  .interestNames = selectedKeywords.toList();
 
-                          final result = await updateUserInterest();
+                              final result = await updateUserInterest();
 
-                          Navigator.pop(context); // 로딩 다이얼로그 닫기
+                              Navigator.pop(context); // 로딩 다이얼로그 닫기
 
-                          if (result.success) {
-                            UserUpdateInterestIntroDTO.instance.generatedIntroText = result.introText;
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              InterestPageRouteNames.introDetailPage,
+                              if (result.success) {
+                                UserUpdateInterestIntroDTO
+                                    .instance
+                                    .generatedIntroText = result.introText;
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  InterestPageRouteNames.introDetailPage,
                                   (route) => false,
-                            );
-                          } else {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              InterestPageRouteNames.interestCategorySelectionPage,
+                                );
+                              } else {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  InterestPageRouteNames
+                                      .interestCategorySelectionPage,
                                   (route) => false,
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(result.message)),
-                            );
-                          }
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(result.message)),
+                                );
+                              }
                             }
                             : null,
                     style: ElevatedButton.styleFrom(

@@ -79,7 +79,7 @@ class EmptyChatCard extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

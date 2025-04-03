@@ -11,8 +11,7 @@ Future<({bool success, String message})> createRoom(RoomUpdateDTO room) async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  }
-  catch (e){
+  } catch (e) {
     return (success: false, message: "firebase failure $e");
   }
 
@@ -26,29 +25,23 @@ Future<({bool success, String message})> createRoom(RoomUpdateDTO room) async {
       'Authorization': 'Bearer $idToken',
       'Content-Type': 'application/json',
     },
-    body: jsonEncode(room.toJson())
+    body: jsonEncode(room.toJson()),
   );
 
   if (response.statusCode != 201) {
     final responseBody = response.body;
-    return (
-    success: false,
-    message: "server failure: $responseBody"
-    );
+    return (success: false, message: "server failure: $responseBody");
   }
 
   try {
-    return (
-    success: true,
-    message: "succeed"
-    );
+    return (success: true, message: "succeed");
   } catch (e) {
     return (success: false, message: "parsing failure: $e");
   }
 }
 
-
-Future<({bool success, String message, GetRoomListResponseDto? roomList})> getRoomList({
+Future<({bool success, String message, GetRoomListResponseDto? roomList})>
+getRoomList({
   List<String>? titleKeyword,
   List<String>? descriptionKeyword,
   List<String>? titleOrDescriptionKeyword,
@@ -80,16 +73,23 @@ Future<({bool success, String message, GetRoomListResponseDto? roomList})> getRo
   }
 
   final Map<String, dynamic> queryParams = {
-    if (titleKeyword != null && titleKeyword.isNotEmpty) 'titleKeyword': titleKeyword,
-    if (descriptionKeyword != null && descriptionKeyword.isNotEmpty) 'descriptionKeyword': descriptionKeyword,
-    if (titleOrDescriptionKeyword != null && titleOrDescriptionKeyword.isNotEmpty) 'titleOrDescriptionKeyword': titleOrDescriptionKeyword,
+    if (titleKeyword != null && titleKeyword.isNotEmpty)
+      'titleKeyword': titleKeyword,
+    if (descriptionKeyword != null && descriptionKeyword.isNotEmpty)
+      'descriptionKeyword': descriptionKeyword,
+    if (titleOrDescriptionKeyword != null &&
+        titleOrDescriptionKeyword.isNotEmpty)
+      'titleOrDescriptionKeyword': titleOrDescriptionKeyword,
     if (hostUserId != null) 'hostUserId': hostUserId,
     if (hostNickname != null) 'hostNickname': hostNickname,
-    if (interestNames != null && interestNames.isNotEmpty) 'interestNames': interestNames,
+    if (interestNames != null && interestNames.isNotEmpty)
+      'interestNames': interestNames,
     if (minCapacity != null) 'minCapacity': minCapacity,
     if (maxCapacity != null) 'maxCapacity': maxCapacity,
-    if (minRecommendationScore != null) 'minRecommendationScore': minRecommendationScore,
-    if (maxRecommendationScore != null) 'maxRecommendationScore': maxRecommendationScore,
+    if (minRecommendationScore != null)
+      'minRecommendationScore': minRecommendationScore,
+    if (maxRecommendationScore != null)
+      'maxRecommendationScore': maxRecommendationScore,
     if (joinedOnly != null) 'joinedOnly': joinedOnly,
     if (excludeJoined != null) 'excludeJoined': excludeJoined,
     if (createdAfter != null) 'createdAfter': createdAfter,
@@ -112,20 +112,18 @@ Future<({bool success, String message, GetRoomListResponseDto? roomList})> getRo
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    roomList: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      roomList: null,
     );
   }
 
   try {
     final body = jsonDecode(utf8.decode(response.bodyBytes));
-    final GetRoomListResponseDto roomList = GetRoomListResponseDto.fromJson(body['data']);
-    return (
-    success: true,
-    message: "succeed",
-    roomList: roomList,
+    final GetRoomListResponseDto roomList = GetRoomListResponseDto.fromJson(
+      body['data'],
     );
+    return (success: true, message: "succeed", roomList: roomList);
   } catch (e) {
     return (success: false, message: "parsing failure: $e", roomList: null);
   }

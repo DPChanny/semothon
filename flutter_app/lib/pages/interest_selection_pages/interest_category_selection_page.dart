@@ -7,17 +7,22 @@ class InterestCategorySelectionPage extends StatefulWidget {
   const InterestCategorySelectionPage({super.key});
 
   @override
-  State<InterestCategorySelectionPage> createState() => _InterestCategorySelectionPageState();
+  State<InterestCategorySelectionPage> createState() =>
+      _InterestCategorySelectionPageState();
 }
 
-class _InterestCategorySelectionPageState extends State<InterestCategorySelectionPage> {
+class _InterestCategorySelectionPageState
+    extends State<InterestCategorySelectionPage> {
   String? selectedLabel;
 
   final List<Map<String, String>> interests = [
     {'icon': 'assets/interest_category_icon/book_icon.svg', 'label': '인문계열'},
     {'icon': 'assets/interest_category_icon/social_icon.svg', 'label': '사회계열'},
     {'icon': 'assets/interest_category_icon/edu_icon.svg', 'label': '교육계열'},
-    {'icon': 'assets/interest_category_icon/engineering_icon.svg', 'label': '공학계열'},
+    {
+      'icon': 'assets/interest_category_icon/engineering_icon.svg',
+      'label': '공학계열',
+    },
     {'icon': 'assets/interest_category_icon/science_icon.svg', 'label': '자연계열'},
     {'icon': 'assets/interest_category_icon/medical_icon.svg', 'label': '의학계열'},
     {'icon': 'assets/interest_category_icon/art_icon.svg', 'label': '예체능계열'},
@@ -95,11 +100,12 @@ class _InterestCategorySelectionPageState extends State<InterestCategorySelectio
                     onPressed:
                         selectedLabel != null
                             ? () {
-                              UserUpdateInterestIntroDTO.instance.interestCategory = selectedLabel;
+                              UserUpdateInterestIntroDTO
+                                  .instance
+                                  .interestCategory = selectedLabel;
                               Navigator.pushNamed(
                                 context,
-                                InterestPageRouteNames
-                                    .interestSelectionPage,
+                                InterestPageRouteNames.interestSelectionPage,
                               );
                             }
                             : null,

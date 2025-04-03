@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'create_room_page.dart'; // 첫 화면 파일 import 해줘야 함
 
 class ShortIntroInputCompletePage extends StatelessWidget {
@@ -14,15 +15,15 @@ class ShortIntroInputCompletePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.check_circle_outline,
-                  size: 80, color: Color(0xFF008CFF)),
+              const Icon(
+                Icons.check_circle_outline,
+                size: 80,
+                color: Color(0xFF008CFF),
+              ),
               const SizedBox(height: 24),
               const Text(
                 "멘토 프로필 입력이\n완료되었습니다.",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),

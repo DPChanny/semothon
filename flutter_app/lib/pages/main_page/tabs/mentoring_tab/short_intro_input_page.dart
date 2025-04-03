@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_update_dto.dart';
-
 // 다음 페이지로 이동할 위젯 import (같은 파일에 있어도 됨)
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/short_intro_input_complete_page.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
@@ -18,9 +17,7 @@ class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
 
   void _onTextChanged() {
     setState(() {
-      _isButtonEnabled = _controller.text
-          .trim()
-          .isNotEmpty;
+      _isButtonEnabled = _controller.text.trim().isNotEmpty;
     });
   }
 
@@ -68,53 +65,58 @@ class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
               controller: _controller,
               decoration: InputDecoration(
                 labelText: "소개글",
-                suffixIcon: _controller.text.isNotEmpty
-                    ? IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () => _controller.clear(),
-                )
-                    : null,
+                suffixIcon:
+                    _controller.text.isNotEmpty
+                        ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () => _controller.clear(),
+                        )
+                        : null,
               ),
             ),
             const Spacer(),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: _isButtonEnabled
-                    ? () async {
-                  UserUpdateDTO.instance = UserUpdateDTO(shortIntro: _controller.text);
+                onPressed:
+                    _isButtonEnabled
+                        ? () async {
+                          UserUpdateDTO.instance = UserUpdateDTO(
+                            shortIntro: _controller.text,
+                          );
 
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder:
-                        (context) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder:
+                                (context) => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                          );
 
-                  final result = await updateUser();
+                          final result = await updateUser();
 
-                  if (result.success) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (
-                            context) => const ShortIntroInputCompletePage(),
-                      ),
-                    );
-                  }else{
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(result.message)),
-                    );
-                  }
-                }
-                    : null,
+                          if (result.success) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) =>
+                                        const ShortIntroInputCompletePage(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(result.message)),
+                            );
+                          }
+                        }
+                        : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                  _isButtonEnabled ? Colors.blue : Colors.grey.shade300,
+                      _isButtonEnabled ? Colors.blue : Colors.grey.shade300,
                   foregroundColor:
-                  _isButtonEnabled ? Colors.white : Colors.grey,
+                      _isButtonEnabled ? Colors.white : Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),

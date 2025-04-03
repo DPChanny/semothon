@@ -9,7 +9,8 @@ class CreateRoomCompletePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Center( // ✅ 전체를 수직/수평 가운데 정렬
+        child: Center(
+          // ✅ 전체를 수직/수평 가운데 정렬
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
@@ -20,7 +21,11 @@ class CreateRoomCompletePage extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: const Color(0xFFE6F0FA),
                   radius: 32,
-                  child: const Icon(Icons.check, color: Color(0xFF008CFF), size: 32),
+                  child: const Icon(
+                    Icons.check,
+                    color: Color(0xFF008CFF),
+                    size: 32,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 const Text(

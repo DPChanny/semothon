@@ -62,7 +62,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-    
+
     - assets/interest_category_icon/
 
     - assets/env/

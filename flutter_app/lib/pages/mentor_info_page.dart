@@ -39,7 +39,15 @@ class MyMentorTab extends StatelessWidget {
                   runSpacing: 8,
                   alignment: WrapAlignment.center,
                   children: [
-                    for (final tag in ['개발', 'UX', '프론트', '프로젝트', '코딩', '그래픽 디자인', 'UI'])
+                    for (final tag in [
+                      '개발',
+                      'UX',
+                      '프론트',
+                      '프로젝트',
+                      '코딩',
+                      '그래픽 디자인',
+                      'UI',
+                    ])
                       Chip(
                         label: Text(tag, style: const TextStyle(fontSize: 12)),
                         backgroundColor: const Color(0xFFE7F0FF),
@@ -66,8 +74,13 @@ class MyMentorTab extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF008CFF),
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 14,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
               child: const Text("멘토방 추가하기"),
             ),
