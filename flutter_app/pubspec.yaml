@@ -65,8 +65,6 @@ flutter:
     
     - assets/interest_category_icon/
 
-    - assets/interest_icon/
-
     - assets/env/
 
   fonts:
