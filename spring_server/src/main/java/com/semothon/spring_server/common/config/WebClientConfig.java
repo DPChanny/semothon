@@ -6,8 +6,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class WebClientConfig {
+    
+    @Value("${external.fastapi.url}")
+    private String fastApiBaseUrl;
+
     @Bean
     public WebClient webClient() {
-        return WebClient.builder().build();
+        return WebClient.builder().baseUrl(fastApiBaseUrl).build();
     }
 }

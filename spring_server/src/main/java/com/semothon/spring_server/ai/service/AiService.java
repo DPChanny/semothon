@@ -23,16 +23,11 @@ import java.util.Map;
 public class AiService {
     private final WebClient webClient;
 
-    @Value("${external.fastapi.url}")
-    private String fastApiBaseUrl;
-
     @Transactional(readOnly = true)
     public String generateIntro(String userId) {
-        String apiUrl = fastApiBaseUrl + "/api/ai/intro";
-
         try {
             FastApiIntroResponse response = webClient.post()
-                    .uri(apiUrl)
+                    .uri("/api/ai/intro")
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -50,11 +45,9 @@ public class AiService {
 
     @Transactional
     public String updateInterestByIntroText(String userId) {
-        String apiUrl = fastApiBaseUrl + "/api/ai/interest/user";
-
         try {
             FastApiIntroResponse response = webClient.post()
-                    .uri(apiUrl)
+                    .uri("/api/ai/interest/user")
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -72,11 +65,9 @@ public class AiService {
 
     @Transactional
     public String updateUserRoomRecommendation(String userId) {
-        String apiUrl = fastApiBaseUrl + "/api/ai/recommend/room/by-user";
-
         try {
             FastApiIntroResponse response = webClient.post()
-                    .uri(apiUrl)
+                    .uri("/api/ai/recommend/room/by-user")
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -94,11 +85,9 @@ public class AiService {
 
     @Transactional
     public String updateUserCrawlingRecommendation(String userId) {
-        String apiUrl = fastApiBaseUrl + "/api/ai/recommend/crawling/by-user";
-
         try {
             FastApiIntroResponse response = webClient.post()
-                    .uri(apiUrl)
+                    .uri("/api/ai/recommend/crawling/by-user")
                     .bodyValue(Map.of("user_id", userId))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -116,11 +105,9 @@ public class AiService {
 
     @Transactional
     public String updateInterestByRoomDescription(Long roomId) {
-        String apiUrl = fastApiBaseUrl + "/api/ai/interest/room";
-
         try {
             FastApiIntroResponse response = webClient.post()
-                    .uri(apiUrl)
+                    .uri("/api/ai/interest/room")
                     .bodyValue(Map.of("room_id", String.valueOf(roomId)))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
@@ -139,11 +126,9 @@ public class AiService {
 
     @Transactional
     public String updateAllUserRoomRecommendationByRoom(Long roomId) {
-        String apiUrl = fastApiBaseUrl + "/api/ai/recommend/room/by-room";
-
         try {
             FastApiIntroResponse response = webClient.post()
-                    .uri(apiUrl)
+                    .uri("/api/ai/recommend/room/by-room")
                     .bodyValue(Map.of("room_id", String.valueOf(roomId)))
                     .retrieve()
                     .bodyToMono(FastApiIntroResponse.class)
