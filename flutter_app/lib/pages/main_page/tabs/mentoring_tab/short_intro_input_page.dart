@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_update_dto.dart';
 // 다음 페이지로 이동할 위젯 import (같은 파일에 있어도 됨)
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/short_intro_input_complete_page.dart';
+import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
 class ShortIntroInputPage extends StatefulWidget {
@@ -97,13 +98,10 @@ class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
                           final result = await updateUser();
 
                           if (result.success) {
-                            Navigator.push(
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) =>
-                                        const ShortIntroInputCompletePage(),
-                              ),
+                              MentoringTabRouteNames.shortIntroInputCompletePage,
+                                (routes) => false
                             );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

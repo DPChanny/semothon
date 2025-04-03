@@ -37,7 +37,7 @@ class InputCompletePage extends StatelessWidget {
           );
         }
 
-        final name = snapshot.data!.user!.nickname;
+        final name = snapshot.data!.user!.userInfo.nickname;
 
         return Scaffold(
           backgroundColor: Colors.white,

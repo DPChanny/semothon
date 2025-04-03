@@ -1,57 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/get_user_response_dto.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/become_mentor_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentor_info_page.dart';
+import 'package:flutter_app/services/queries/user_query.dart';
 
-import 'short_intro_input_page.dart';
-
-class MyMentorTab extends StatelessWidget {
+class MyMentorTab extends StatefulWidget {
   const MyMentorTab({super.key});
 
   @override
+  State<MyMentorTab> createState() => _MyMentorTabState();
+}
+
+class _MyMentorTabState extends State<MyMentorTab> {
+  late Future<GetUserResponseDto?> _futureUser;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureUser = _loadUser();
+  }
+
+  Future<GetUserResponseDto?> _loadUser() async {
+    final result = await getUser();
+    if (!result.success || result.user == null) {
+      // 로그 출력이나 에러 처리 가능
+      return null;
+    }
+    return result.user!;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const CircleAvatar(
-            radius: 75,
-            backgroundColor: Color(0xFFE0F3FF),
-            child: Text("🙆‍♂️", style: TextStyle(fontSize: 90)),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            "지금 바로 멘토가 되어 보세요",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 4),
-          const Text(
-            "누구나 멘토가 될 수 있어요",
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-          const SizedBox(height: 15),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ShortIntroInputPage(),
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15), // pill shape
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-            ),
-            child: const Text(
-              "나도 멘토 되기",
-              style: TextStyle(fontSize: 17),
-              selectionColor: Color(0xFFFFFFFF),
-            ), //텍스트 하얀색으로
-          ),
-        ],
-      ),
+    return FutureBuilder<GetUserResponseDto?>(
+      future: _futureUser,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (!snapshot.hasData || snapshot.data == null) {
+          return const Center(child: Text("유저 정보를 불러오지 못했습니다."));
+        }
+
+        final user = snapshot.data!;
+        return user.isHost()
+            ? const MentorInfoPage()
+            : const BecomeMentorPage();
+      },
     );
   }
 }

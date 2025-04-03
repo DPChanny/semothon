@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/dto/RoomUpdateDTO.dart';
+import 'package:flutter_app/dto/room_update_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/create_room_complete_page.dart';
+import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 
 class CreateRoomPage extends StatefulWidget {
@@ -76,9 +77,9 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
     );
 
     if (result.success) {
-      Navigator.pushAndRemoveUntil(
+      Navigator.pushNamedAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const CreateRoomCompletePage()),
+        MentoringTabRouteNames.createRoomCompletePage,
         (router) => false,
       );
     } else {

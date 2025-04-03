@@ -9,11 +9,15 @@ class GetUserResponseDto {
 
   factory GetUserResponseDto.fromJson(Map<String, dynamic> json) {
     return GetUserResponseDto(
-      userInfo: UserInfoDto.fromJson(json['userInfo']),
+      userInfo: UserInfoDto.fromJson(json['user']),
       rooms:
           List<Map<String, dynamic>>.from(
             json['rooms'],
           ).map((roomJson) => UserRoomInfoDto.fromJson(roomJson)).toList(),
     );
+  }
+
+  bool isHost() {
+    return rooms.any((room) => room.role == RoomUserRole.ADMIN);
   }
 }

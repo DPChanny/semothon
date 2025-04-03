@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/get_user_list_response_dto.dart';
+import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/dto/user_update_dto.dart';
 import 'package:flutter_app/dto/user_update_interest_dto.dart';
@@ -53,7 +54,7 @@ Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
 }
 
 // 현재 유저 정보
-Future<({bool success, String message, UserInfoDto? user})> getUser() async {
+Future<({bool success, String message, GetUserResponseDto? user})> getUser() async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
@@ -85,8 +86,8 @@ Future<({bool success, String message, UserInfoDto? user})> getUser() async {
     return (
       success: true,
       message: "succeed",
-      user: UserInfoDto.fromJson(
-        jsonDecode(utf8.decode(response.bodyBytes))['data']?['user'],
+      user: GetUserResponseDto.fromJson(
+        jsonDecode(utf8.decode(response.bodyBytes))['data'],
       ),
     );
   } catch (e) {

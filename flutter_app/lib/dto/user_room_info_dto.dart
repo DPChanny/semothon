@@ -1,4 +1,4 @@
-enum RoomUserRole { MEMBER, HOST } // 필요 시 확장 가능
+enum RoomUserRole { MEMBER, ADMIN } // 필요 시 확장 가능
 
 class UserRoomInfoDto {
   final int roomId;

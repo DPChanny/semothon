@@ -18,7 +18,7 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  ({String message, bool success, UserInfoDto? user})? _user;
+  UserInfoDto? _userInfo;
   GetUserListResponseDto? _mentors;
   List<CrawlingInfoDto> _crawlings = [];
   bool _isLoading = true;
@@ -44,7 +44,7 @@ class _HomeTabState extends State<HomeTab> {
       return;
     }
 
-    if (userResult.user!.interests.isEmpty) {
+    if (userResult.user!.userInfo.interests.isEmpty) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("관심사를 먼저 설정해주세요.")));
@@ -83,7 +83,7 @@ class _HomeTabState extends State<HomeTab> {
     }
 
     setState(() {
-      _user = userResult;
+      _userInfo = userResult.user!.userInfo;
       _mentors = mentors.userList;
       _crawlings = crawlings.crawlingList!.crawlingList;
       _isLoading = false;
@@ -102,7 +102,7 @@ class _HomeTabState extends State<HomeTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          interestCard(context, _user!.user!, _user!.user!.interests),
+          interestCard(context, _userInfo!, _userInfo!.interests),
           Transform.translate(
             offset: const Offset(0, -90),
             child: Column(

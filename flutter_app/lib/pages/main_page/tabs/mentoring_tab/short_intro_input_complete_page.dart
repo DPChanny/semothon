@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 
 import 'create_room_page.dart'; // 첫 화면 파일 import 해줘야 함
 
@@ -36,12 +37,10 @@ class ShortIntroInputCompletePage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // 확인 누르면 방 개설 페이지로 이동
-                    Navigator.push(
+                    Navigator.pushNamedAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const CreateRoomPage(),
-                      ),
+                      MentoringTabRouteNames.createRoomPage,
+                        (routes) => false
                     );
                   },
                   style: ElevatedButton.styleFrom(
