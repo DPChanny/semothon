@@ -8,7 +8,6 @@ import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab.dart';
-import 'package:http/http.dart';
 
 class MentoringTab extends StatefulWidget {
   const MentoringTab({super.key});

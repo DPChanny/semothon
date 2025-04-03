@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/crawling_dto.dart';
+import 'package:flutter_app/dto/crawling_info_dto.dart';
 import 'package:flutter_app/dto/get_user_list_response_dto.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
@@ -20,7 +20,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   ({String message, bool success, UserInfoDto? user})? _user;
   GetUserListResponseDto? _mentors;
-  List<CrawlingDto> _crawlings = [];
+  List<CrawlingInfoDto> _crawlings = [];
   bool _isLoading = true;
 
   @override
@@ -69,12 +69,23 @@ class _HomeTabState extends State<HomeTab> {
       return;
     }
 
-    final crawlings = await fetchCrawlingItems();
+    final crawlings = await getCrawlingList();
+    if(!crawlings.success){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(crawlings.message)),
+      );
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginPageRouteNames.loginPage,
+            (route) => false,
+      );
+      return;
+    }
 
     setState(() {
       _user = userResult;
       _mentors = mentors.userList;
-      _crawlings = crawlings;
+      _crawlings = crawlings.crawlingList!.crawlingList;
       _isLoading = false;
     });
   }

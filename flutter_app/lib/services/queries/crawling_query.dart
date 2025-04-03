@@ -1,25 +1,49 @@
-import 'package:flutter_app/dto/crawling_dto.dart';
+import 'dart:convert';
 
-Future<List<CrawlingDto>> fetchCrawlingItems() async {
-  await Future.delayed(const Duration(seconds: 1));
-  return [
-    CrawlingDto(
-      crawlingId: 1,
-      title: '현대자동차\nH-Startup 공모전',
-      url: 'https://www.hyundai.com/kr/ko/company/newsroom',
-      imageUrl: 'https://picsum.photos/seed/hyundai/500/300',
-      description: '스타트업과 함께하는 현대자동차 공모전!',
-      publishedAt: DateTime.now().add(const Duration(days: 12)),
-      crawledAt: DateTime.now(),
-    ),
-    CrawlingDto(
-      crawlingId: 2,
-      title: '카카오엔터프라이즈\nAI 챌린지',
-      url: 'https://www.kakaoenterprise.com/',
-      imageUrl: 'https://picsum.photos/seed/kakao/500/300',
-      description: 'AI 모델로 문제 해결! 카카오 공모전 참가하세요.',
-      publishedAt: DateTime.now().add(const Duration(days: 18)),
-      crawledAt: DateTime.now(),
-    ),
-  ];
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app/dto/get_crawling_list_response_dto.dart';
+import 'package:flutter_app/services/url.dart';
+import 'package:http/http.dart' as http;
+
+Future<({bool success, String message, GetCrawlingListResponseDto? crawlingList})> getCrawlingList() async {
+  String? idToken;
+  try {
+    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure $e", crawlingList: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", crawlingList: null);
+  }
+
+  final uri = url('/api/crawling'); // 실제 서버 경로에 맞게 수정
+
+  final response = await http.get(
+    uri,
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+    success: false,
+    message: "server failure: ${response.body}",
+    crawlingList: null,
+    );
+  }
+
+  try {
+    final body = jsonDecode(utf8.decode(response.bodyBytes));
+    final GetCrawlingListResponseDto result = GetCrawlingListResponseDto.fromJson(body['data']);
+    return (
+    success: true,
+    message: "succeed",
+    crawlingList: result,
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e", crawlingList: null);
+  }
 }

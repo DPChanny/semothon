@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/crawling_dto.dart';
+import 'package:flutter_app/dto/crawling_info_dto.dart';
 
-Widget crawlingItem(BuildContext context, CrawlingDto item) {
+Widget crawlingItem(BuildContext context, CrawlingInfoDto item) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
     padding: const EdgeInsets.all(12),
@@ -20,7 +20,7 @@ Widget crawlingItem(BuildContext context, CrawlingDto item) {
             constraints: const BoxConstraints(maxWidth: 100, maxHeight: 150),
             child: AspectRatio(
               aspectRatio: 3.25 / 5, // 너비:높이 = 4:5
-              child: Image.network(item.imageUrl ?? '', fit: BoxFit.cover),
+              child: Image.network(item.imageUrl, fit: BoxFit.cover),
             ),
           ),
         ),
@@ -40,7 +40,7 @@ Widget crawlingItem(BuildContext context, CrawlingDto item) {
               ),
               Spacer(),
               Text(
-                '마감일: ${item.publishedAt?.toString().split(' ').first ?? '미정'}',
+                '마감일: ${item.crawledAt.toString().split(' ').first}',
                 style: TextStyle(color: Colors.grey[700]),
               ),
               Text(
