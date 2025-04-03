@@ -500,7 +500,7 @@ public class DataInitializer {
                     .url("https://example.com/articles/ai-music-composition")
                     .imageUrl("https://example.com/images/ai-music.jpg")
                     .description("AI를 활용한 작곡 기술이 음악 산업에 어떤 변화를 가져오는지 소개합니다. 창작의 영역이 어떻게 확장되고 있는지 확인해보세요.")
-                    .publishedAt(LocalDateTime.of(2024, 12, 20, 14, 30))
+                    .deadlinedAt(LocalDateTime.of(2025, 12, 20, 14, 30))
                     .crawledAt(LocalDateTime.now())
                     .build();
 
@@ -509,7 +509,7 @@ public class DataInitializer {
                     .url("https://example.com/news/climate-smart-cities")
                     .imageUrl("https://example.com/images/climate-city.jpg")
                     .description("지속 가능한 도시 개발을 위한 다양한 설계 전략과 그 실제 적용 사례를 분석한 리포트입니다.")
-                    .publishedAt(LocalDateTime.of(2024, 11, 10, 10, 0))
+                    .deadlinedAt(LocalDateTime.of(2024, 11, 10, 10, 0))
                     .crawledAt(LocalDateTime.now())
                     .build();
 
@@ -518,7 +518,7 @@ public class DataInitializer {
                     .url("https://example.com/reports/youth-employment-trends-2025")
                     .imageUrl("https://example.com/images/employment.jpg")
                     .description("변화하는 취업 시장에서 청년들이 어떻게 준비하고 대응해야 할지에 대한 심층 분석.")
-                    .publishedAt(LocalDateTime.of(2025, 1, 5, 9, 0))
+                    .deadlinedAt(LocalDateTime.of(2025, 1, 5, 9, 0))
                     .crawledAt(LocalDateTime.now())
                     .build();
 
@@ -527,7 +527,7 @@ public class DataInitializer {
                     .url("https://example.com/columns/women-in-literature")
                     .imageUrl("https://example.com/images/literature.jpg")
                     .description("문학사에 새롭게 자리 잡은 여성 작가들의 목소리와 그들이 바꿔가는 이야기들에 대해 다룹니다.")
-                    .publishedAt(LocalDateTime.of(2024, 10, 8, 17, 45))
+                    .deadlinedAt(LocalDateTime.of(2025, 10, 8, 17, 45))
                     .crawledAt(LocalDateTime.now())
                     .build();
 
@@ -536,11 +536,13 @@ public class DataInitializer {
                     .url("https://example.com/tech/metaverse-ethics")
                     .imageUrl("https://example.com/images/metaverse.jpg")
                     .description("메타버스의 확장과 함께 떠오르는 프라이버시, 정체성, 커뮤니티의 윤리적 문제를 짚어봅니다.")
-                    .publishedAt(LocalDateTime.of(2024, 9, 15, 12, 15))
+                    .deadlinedAt(LocalDateTime.of(2024, 9, 15, 12, 15))
                     .crawledAt(LocalDateTime.now())
                     .build();
 
             crawlingRepository.saveAll(List.of(crawling1, crawling2, crawling3, crawling4, crawling5));
+
+
 
 
         } else {
