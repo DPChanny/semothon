@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/dto/user_list_dto.dart';
 import 'package:flutter_app/dto/user_update_dto.dart';
 import 'package:flutter_app/dto/user_update_interest_dto.dart';
 import 'package:flutter_app/services/url.dart';
@@ -42,7 +43,7 @@ Future<({bool success, String message, UserDTO? user})> loginUser() async {
       success: true,
       message: "succeed",
       user: UserDTO.fromJson(
-        jsonDecode(response.body)['data']?['user']?['userInfo'],
+        jsonDecode(utf8.decode(response.bodyBytes))['data']?['user']?['userInfo'],
       ),
     );
   } catch (e) {
@@ -84,7 +85,7 @@ Future<({bool success, String message, UserDTO? user})> getUser() async {
     return (
       success: true,
       message: "succeed",
-      user: UserDTO.fromJson(jsonDecode(response.body)['data']?['user']),
+      user: UserDTO.fromJson(jsonDecode(utf8.decode(response.bodyBytes))['data']?['user']),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", user: null);
@@ -148,7 +149,7 @@ Future<({bool success, String message, String? introText})> updateUserInterest()
   }
 
   try {
-    final String text = jsonDecode(response.body)['data']['generatedIntroText'];
+    final String text = jsonDecode(utf8.decode(response.bodyBytes))['data']['generatedIntroText'];
     return (
     success: true,
     message: "succeed",
@@ -185,4 +186,85 @@ Future<({bool success, String message})> updateUserIntro() async {
   }
 
   return (success: true, message: "succeed");
+}
+
+Future<({bool success, String message, UserListDTO? userList})> getUserList({
+  String? nicknameKeyword,
+  String? departmentKeyword,
+  String? introKeyword,
+  String? nameKeyword,
+  String? keyword,
+  String? birthdateAfter,
+  String? birthdateBefore,
+  List<String>? interestNames,
+  double? minRecommendationScore,
+  double? maxRecommendationScore,
+  String? createdAfter,
+  String? createdBefore,
+  String? sortBy,
+  String? sortDirection,
+  int? limit,
+  int? page,
+}) async {
+  String? idToken;
+  try {
+    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure $e", userList: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", userList: null);
+  }
+
+  // ✅ 쿼리 파라미터 정리
+  final Map<String, dynamic> queryParams = {
+    if (nicknameKeyword != null) 'nicknameKeyword': nicknameKeyword,
+    if (departmentKeyword != null) 'departmentKeyword': departmentKeyword,
+    if (introKeyword != null) 'introKeyword': introKeyword,
+    if (nameKeyword != null) 'nameKeyword': nameKeyword,
+    if (keyword != null) 'keyword': keyword,
+    if (birthdateAfter != null) 'birthdateAfter': birthdateAfter,
+    if (birthdateBefore != null) 'birthdateBefore': birthdateBefore,
+    if (interestNames != null && interestNames.isNotEmpty) 'interestNames': interestNames,
+    if (minRecommendationScore != null) 'minRecommendationScore': minRecommendationScore,
+    if (maxRecommendationScore != null) 'maxRecommendationScore': maxRecommendationScore,
+    if (createdAfter != null) 'createdAfter': createdAfter,
+    if (createdBefore != null) 'createdBefore': createdBefore,
+    if (sortBy != null) 'sortBy': sortBy,
+    if (sortDirection != null) 'sortDirection': sortDirection,
+    if (limit != null) 'limit': limit,
+    if (page != null) 'page': page,
+  };
+
+  // ✅ url 함수 활용
+  final uri = url('/api/users', queryParams: queryParams);
+
+  final response = await http.get(
+    uri,
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+    success: false,
+    message: "server failure: ${response.body}",
+    userList: null,
+    );
+  }
+
+  try {
+    final body = jsonDecode(utf8.decode(response.bodyBytes));
+    final userListDto = UserListDTO.fromJson(body);
+    return (
+    success: true,
+    message: "succeed",
+    userList: userListDto,
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e", userList: null);
+  }
 }

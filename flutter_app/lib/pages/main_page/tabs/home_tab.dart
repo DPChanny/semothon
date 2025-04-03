@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/crawling_dto.dart';
 import 'package:flutter_app/dto/user_dto.dart';
+import 'package:flutter_app/dto/user_list_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/services/queries/crawling_query.dart';
-import 'package:flutter_app/services/queries/fetch_mentors.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/widgets/crawling_item.dart';
 import 'package:flutter_app/widgets/interest_card.dart';
@@ -19,7 +19,7 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   ({String message, bool success, UserDTO? user})? _user;
-  List<UserDTO> _mentors = [];
+  UserListDTO? _mentors;
   List<CrawlingDto> _crawlings = [];
   bool _isLoading = true;
 
@@ -50,18 +50,30 @@ class _HomeTabState extends State<HomeTab> {
       );
       Navigator.pushNamedAndRemoveUntil(
         context,
-        InterestPageRouteNames.interestSelectionPage,
+        InterestPageRouteNames.interestCategorySelectionPage,
             (route) => false,
       );
       return;
     }
 
-    final mentors = await fetchMentors(3);
+    final mentors = await getUserList(sortBy: "SCORE", limit: 3);
+    if(!mentors.success){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(mentors.message)),
+      );
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginPageRouteNames.loginPage,
+            (route) => false,
+      );
+      return;
+    }
+
     final crawlings = await fetchCrawlingItems();
 
     setState(() {
       _user = userResult;
-      _mentors = mentors;
+      _mentors = mentors.userList;
       _crawlings = crawlings;
       _isLoading = false;
     });
@@ -128,7 +140,7 @@ class _HomeTabState extends State<HomeTab> {
                       ),
                       const SizedBox(height: 16),
                       Column(
-                        children: _mentors.map((m) => mentorItem(m)).toList(),
+                        children: _mentors?.userList.map((m) => mentorItem(m)).toList() ?? [],
                       ),
                     ],
                   ),

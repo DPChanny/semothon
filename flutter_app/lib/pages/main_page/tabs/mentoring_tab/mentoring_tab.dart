@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/room_dto.dart';
-import 'package:flutter_app/dto/user_dto.dart';
-import 'package:flutter_app/services/queries/dummy_rooms.dart';
-import 'package:flutter_app/services/queries/fetch_mentors.dart';
+import 'package:flutter_app/dto/user_list_dto.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
+import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 import 'package:flutter_app/widgets/recommended_chatroom.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab.dart';
@@ -131,24 +131,36 @@ class MentorListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<UserDTO>>(
-      future: fetchMentors(10),
+    return FutureBuilder<({bool success, String message, UserListDTO? userList})>(
+      future: getUserList(sortBy: "SCORE"),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        if (!snapshot.hasData || !snapshot.data!.success){
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(snapshot.data!.message)),
+          );
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPageRouteNames.loginPage,
+                (route) => false,
+          );
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (!snapshot.hasData || snapshot.data!.userList!.totalCount == 0) {
           return const Center(child: Text('추천 멘토가 없습니다.'));
         }
 
-        final mentors = snapshot.data!;
+        final mentors = snapshot.data!.userList!;
 
         return ListView.builder(
           padding: const EdgeInsets.all(16),
-          itemCount: mentors.length,
+          itemCount: mentors.totalCount,
           itemBuilder: (context, index) {
-            return mentorItem(mentors[index]);
+            return mentorItem(mentors.userList[index]);
           },
         );
       },
@@ -250,7 +262,7 @@ class RecommendedRoomListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rooms = randomRooms(6);
+    final rooms = {};
 
     return ListView.builder(
       itemCount: rooms.length,
