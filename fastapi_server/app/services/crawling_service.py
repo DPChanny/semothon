@@ -1,32 +1,5 @@
-from fastapi import FastAPI, Depends, HTTPException
-from typing import List
-import requests
-from bs4 import BeautifulSoup
-import re
 import time
-import logging
-from sqlalchemy.orm import Session
-
-# database.py에 정의된 SessionLocal, engine, Base 임포트
-from database import SessionLocal, engine, Base
-from models import Crawling
-
-
-Base.metadata.drop_all(bind=engine)
-Base.metadata.create_all(bind=engine)
-
-app = FastAPI()
-logging.basicConfig(level=logging.INFO)
-
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
+from typing import List
 
 def get_activities(url: str) -> List[dict]:
     try:
@@ -50,9 +23,8 @@ def get_activities(url: str) -> List[dict]:
             time.sleep(1)
         return activities
     except requests.exceptions.RequestException as e:
-        logging.error("get_activities error: %s", e)
+        print("get_activities error: %s", e)
         return []
-
 
 def get_image_url(url: str) -> str:
     try:
@@ -69,7 +41,6 @@ def get_image_url(url: str) -> str:
     except requests.exceptions.RequestException as e:
         logging.error("get_image_url error: %s", e)
         return "이미지 없음"
-
 
 def get_description(url: str) -> str:
     try:
@@ -105,43 +76,3 @@ def get_description(url: str) -> str:
         logging.error("get_description error: %s", e)
         return "상세 내용 없음"
 
-
-
-@app.get("/wevity/{page}", response_model=List[dict])
-def get_wevity_data(page: int, db: Session = Depends(get_db)):
-    base_url = 'https://www.wevity.com/?c=find&s=1&gub=1'
-    url = f"{base_url}&spage={page}"
-    activities = get_activities(url)
-    if not activities:
-        raise HTTPException(status_code=404, detail="크롤링된 데이터가 없습니다.")
-
-    logging.info("크롤링된 데이터: %s", activities)
-
-    try:
-        for activity in activities:
-            new_crawling = Crawling(
-                title=activity.get("title", "제목 없음"),
-                url=activity.get("url", "URL 없음"),
-                image_url=activity.get("image_url", "이미지 없음"),
-                description=activity.get("description", "상세 내용 없음")
-            )
-            db.add(new_crawling)
-        db.commit()
-    except Exception as e:
-        db.rollback()
-        logging.error("DB 저장 에러: %s", e)
-        raise HTTPException(status_code=500, detail=f"DB 저장 중 오류 발생: {e}")
-    return activities
-
-
-
-@app.get("/crawlings", response_model=List[dict])
-def read_crawlings(db: Session = Depends(get_db)):
-    crawlings = db.query(Crawling).all()
-    return [{
-        "crawling_id": crawling.crawling_id,
-        "title": crawling.title,
-        "url": crawling.url,
-        "image_url": crawling.image_url,
-        "description": crawling.description
-    } for crawling in crawlings]
