@@ -1,5 +1,7 @@
 package com.semothon.spring_server.common.config;
 
+import com.semothon.spring_server.crawling.entity.Crawling;
+import com.semothon.spring_server.crawling.repository.CrawlingRepository;
 import com.semothon.spring_server.interest.entity.Interest;
 import com.semothon.spring_server.interest.repository.InterestRepository;
 import com.semothon.spring_server.room.dto.CreateRoomRequestDto;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +41,7 @@ public class DataInitializer {
     private final RoomInterestRepository roomInterestRepository;
     private final UserInterestRepository userInterestRepository;
     private final UserRoomRecommendationRepository userRoomRecommendationRepository;
+    private final CrawlingRepository crawlingRepository;
 
     private final RoomService roomService;
 
@@ -491,6 +495,52 @@ public class DataInitializer {
                 }
             }
 
+            Crawling crawling1 = Crawling.builder()
+                    .title("AI로 구현한 새로운 음악 작곡 방식")
+                    .url("https://example.com/articles/ai-music-composition")
+                    .imageUrl("https://example.com/images/ai-music.jpg")
+                    .description("AI를 활용한 작곡 기술이 음악 산업에 어떤 변화를 가져오는지 소개합니다. 창작의 영역이 어떻게 확장되고 있는지 확인해보세요.")
+                    .publishedAt(LocalDateTime.of(2024, 12, 20, 14, 30))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling2 = Crawling.builder()
+                    .title("기후 변화에 대응하는 도시 설계 전략")
+                    .url("https://example.com/news/climate-smart-cities")
+                    .imageUrl("https://example.com/images/climate-city.jpg")
+                    .description("지속 가능한 도시 개발을 위한 다양한 설계 전략과 그 실제 적용 사례를 분석한 리포트입니다.")
+                    .publishedAt(LocalDateTime.of(2024, 11, 10, 10, 0))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling3 = Crawling.builder()
+                    .title("청년 세대를 위한 취업 트렌드 리포트 2025")
+                    .url("https://example.com/reports/youth-employment-trends-2025")
+                    .imageUrl("https://example.com/images/employment.jpg")
+                    .description("변화하는 취업 시장에서 청년들이 어떻게 준비하고 대응해야 할지에 대한 심층 분석.")
+                    .publishedAt(LocalDateTime.of(2025, 1, 5, 9, 0))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling4 = Crawling.builder()
+                    .title("세계 문학을 다시 쓰다 – 여성 작가들의 도전")
+                    .url("https://example.com/columns/women-in-literature")
+                    .imageUrl("https://example.com/images/literature.jpg")
+                    .description("문학사에 새롭게 자리 잡은 여성 작가들의 목소리와 그들이 바꿔가는 이야기들에 대해 다룹니다.")
+                    .publishedAt(LocalDateTime.of(2024, 10, 8, 17, 45))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            Crawling crawling5 = Crawling.builder()
+                    .title("메타버스 속 사회 – 가상공간의 윤리적 고민")
+                    .url("https://example.com/tech/metaverse-ethics")
+                    .imageUrl("https://example.com/images/metaverse.jpg")
+                    .description("메타버스의 확장과 함께 떠오르는 프라이버시, 정체성, 커뮤니티의 윤리적 문제를 짚어봅니다.")
+                    .publishedAt(LocalDateTime.of(2024, 9, 15, 12, 15))
+                    .crawledAt(LocalDateTime.now())
+                    .build();
+
+            crawlingRepository.saveAll(List.of(crawling1, crawling2, crawling3, crawling4, crawling5));
 
 
         } else {
