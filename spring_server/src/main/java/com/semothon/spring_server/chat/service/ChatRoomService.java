@@ -148,6 +148,9 @@ public class ChatRoomService {
         ChatUser chatUser = chatUserRepository.findByChatRoomAndUser(chatRoom, user)
                 .orElseThrow(() -> new InvalidInputException("this user are not joined this chatting room"));
 
+        log.info("charRoom: {}, chatUser: {}", chatRoom, chatUser);
+
+        chatRoom.getChatUsers().remove(chatUser);
         chatUserRepository.delete(chatUser);
 
         return GetChatRoomResponseDto.from(chatRoom);

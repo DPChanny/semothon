@@ -1,10 +1,12 @@
 package com.semothon.spring_server.crawling.service;
 
+import com.semothon.spring_server.chat.dto.ChatRoomInfoDto;
 import com.semothon.spring_server.chat.dto.CreateChatRoomRequestDto;
 import com.semothon.spring_server.chat.dto.GetChatRoomResponseDto;
 import com.semothon.spring_server.chat.dto.UpdateChatRoomRequestDto;
 import com.semothon.spring_server.chat.service.ChatRoomService;
 import com.semothon.spring_server.common.exception.InvalidInputException;
+import com.semothon.spring_server.crawling.dto.CrawlingSearchCondition;
 import com.semothon.spring_server.crawling.dto.GetCrawlingResponseDto;
 import com.semothon.spring_server.crawling.entity.Crawling;
 import com.semothon.spring_server.crawling.repository.CrawlingRepository;
@@ -36,26 +38,24 @@ public class CrawlingService {
     }
 
     @Transactional(readOnly = true)
-    public List<GetCrawlingResponseDto> getCrawlingList(String keyword) {
-        // 마지막에 구현
-        return null;
+    public List<Crawling> getCrawlingList(String userId, CrawlingSearchCondition condition) {
+        return crawlingRepository.searchCrawlingList(condition, userId);
     }
 
-    public Long createChatRoom(String userId, Long crawlingId, CreateChatRoomRequestDto dto) {
+    public GetChatRoomResponseDto createChatRoom(String userId, Long crawlingId, CreateChatRoomRequestDto dto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidInputException("User not found"));
         Crawling crawling = crawlingRepository.findById(crawlingId)
                 .orElseThrow(() -> new InvalidInputException("Crawling not found"));
 
-        GetChatRoomResponseDto crawlingChat = chatRoomService.createCrawlingChat(crawling, user, dto.getTitle(), dto.getDescription(), dto.getCapacity());
-        return crawlingChat.getChatRoomInfo().getChatRoomId();
+        return chatRoomService.createCrawlingChat(crawling, user, dto.getTitle(), dto.getDescription(), dto.getCapacity());
     }
 
-    public void updateChatRoom(String userId, Long crawlingId, Long chatRoomId, UpdateChatRoomRequestDto dto) {
+    public GetChatRoomResponseDto updateChatRoom(String userId, Long crawlingId, Long chatRoomId, UpdateChatRoomRequestDto dto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidInputException("User not found"));
 
-        chatRoomService.updateChatRoom(chatRoomId,user, dto);
+        return chatRoomService.updateChatRoom(chatRoomId,user, dto);
     }
 
     public void deleteChatRoom(String userId, Long crawlingId, Long chatRoomId) {
@@ -65,11 +65,11 @@ public class CrawlingService {
         chatRoomService.deleteChatRoom(chatRoomId, user);
     }
 
-    public void joinChatRoom(String userId, Long crawlingId, Long chatRoomId) {
+    public GetChatRoomResponseDto joinChatRoom(String userId, Long crawlingId, Long chatRoomId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidInputException("User not found"));
 
-        chatRoomService.joinChatRoom(chatRoomId, user);
+        return chatRoomService.joinChatRoom(chatRoomId, user);
     }
 
     public void leaveChatRoom(String userId, Long crawlingId, Long chatRoomId) {

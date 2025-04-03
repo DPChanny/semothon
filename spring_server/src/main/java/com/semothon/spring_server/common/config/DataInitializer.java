@@ -1,7 +1,14 @@
 package com.semothon.spring_server.common.config;
 
+import com.semothon.spring_server.chat.dto.ChatRoomInfoDto;
+import com.semothon.spring_server.chat.dto.CreateChatRoomRequestDto;
+import com.semothon.spring_server.chat.dto.GetChatRoomResponseDto;
 import com.semothon.spring_server.crawling.entity.Crawling;
+import com.semothon.spring_server.crawling.entity.CrawlingInterest;
+import com.semothon.spring_server.crawling.entity.UserCrawlingRecommendation;
 import com.semothon.spring_server.crawling.repository.CrawlingRepository;
+import com.semothon.spring_server.crawling.repository.UserCrawlingRecommendationRepository;
+import com.semothon.spring_server.crawling.service.CrawlingService;
 import com.semothon.spring_server.interest.entity.Interest;
 import com.semothon.spring_server.interest.repository.InterestRepository;
 import com.semothon.spring_server.room.dto.CreateRoomRequestDto;
@@ -42,8 +49,10 @@ public class DataInitializer {
     private final UserInterestRepository userInterestRepository;
     private final UserRoomRecommendationRepository userRoomRecommendationRepository;
     private final CrawlingRepository crawlingRepository;
+    private final UserCrawlingRecommendationRepository userCrawlingRecommendationRepository;
 
     private final RoomService roomService;
+    private final CrawlingService crawlingService;
 
     @Transactional
     @EventListener(ApplicationReadyEvent.class)
@@ -495,6 +504,8 @@ public class DataInitializer {
                 }
             }
 
+
+
             Crawling crawling1 = Crawling.builder()
                     .title("AI로 구현한 새로운 음악 작곡 방식")
                     .url("https://example.com/articles/ai-music-composition")
@@ -509,7 +520,7 @@ public class DataInitializer {
                     .url("https://example.com/news/climate-smart-cities")
                     .imageUrl("https://example.com/images/climate-city.jpg")
                     .description("지속 가능한 도시 개발을 위한 다양한 설계 전략과 그 실제 적용 사례를 분석한 리포트입니다.")
-                    .deadlinedAt(LocalDateTime.of(2024, 11, 10, 10, 0))
+                    .deadlinedAt(LocalDateTime.of(2025, 11, 10, 10, 0))
                     .crawledAt(LocalDateTime.now())
                     .build();
 
@@ -536,13 +547,100 @@ public class DataInitializer {
                     .url("https://example.com/tech/metaverse-ethics")
                     .imageUrl("https://example.com/images/metaverse.jpg")
                     .description("메타버스의 확장과 함께 떠오르는 프라이버시, 정체성, 커뮤니티의 윤리적 문제를 짚어봅니다.")
-                    .deadlinedAt(LocalDateTime.of(2024, 9, 15, 12, 15))
+                    .deadlinedAt(LocalDateTime.of(2025, 9, 15, 12, 15))
                     .crawledAt(LocalDateTime.now())
                     .build();
 
             crawlingRepository.saveAll(List.of(crawling1, crawling2, crawling3, crawling4, crawling5));
 
+            //관심사 추가
+            List<String> crawling1Tags = List.of("머신러닝", "음악이론");
+            List<String> crawling2Tags = List.of("지속가능발전", "도시설계");
+            List<String> crawling3Tags = List.of("진로지도", "직업세계이해");
+            List<String> crawling4Tags = List.of("현대문학", "창작");
+            List<String> crawling5Tags = List.of("AI윤리", "미디어비평");
 
+            List<Crawling> crawlingList = List.of(crawling1, crawling2, crawling3, crawling4, crawling5);
+            List<List<String>> crawlingTagLists = List.of(crawling1Tags, crawling2Tags, crawling3Tags, crawling4Tags, crawling5Tags);
+
+            for (int i = 0; i < crawlingList.size(); i++) {
+                Crawling crawling = crawlingList.get(i);
+                for (String tag : crawlingTagLists.get(i)) {
+                    interestRepository.findByName(tag).ifPresent(interest -> {
+                        CrawlingInterest ci = CrawlingInterest.builder().build();
+                        ci.updateCrawling(crawling);
+                        ci.updateInterest(interest);
+                    });
+                }
+            }
+
+            List<Crawling> crawlings = List.of(crawling1, crawling2, crawling3, crawling4, crawling5);
+
+            for (User user : users) {
+                for (Crawling crawling : crawlings) {
+                    double score = Math.round((random.nextDouble() * 2 - 1) * 100.0) / 100.0; // -1.0 ~ 1.0, 소수점 2자리
+
+                    UserCrawlingRecommendation recommendation = UserCrawlingRecommendation.builder()
+                            .score(score)
+                            .activityScore(score) // 동일한 값으로 설정
+                            .build();
+
+                    recommendation.updateUser(user);
+                    recommendation.updateCrawlingData(crawling);
+
+                    userCrawlingRecommendationRepository.save(recommendation);
+                }
+            }
+
+            GetChatRoomResponseDto chatRoomResponseDto1 = crawlingService.createChatRoom(user6.getUserId(), crawling1.getCrawlingId(),
+                    CreateChatRoomRequestDto.builder()
+                            .title("AI 음악 작곡 토론방")
+                            .description("AI로 작곡한 음악이 정말 예술일까? 음악 산업의 변화와 창작에 대해 이야기해봐요.")
+                            .capacity(10)
+                            .build());
+            Long chatRoom1 = chatRoomResponseDto1.getChatRoomInfo().getChatRoomId();
+            crawlingService.joinChatRoom(user1.getUserId(), crawling1.getCrawlingId(), chatRoom1);
+            crawlingService.joinChatRoom(user2.getUserId(), crawling1.getCrawlingId(), chatRoom1);
+
+            GetChatRoomResponseDto chatRoomResponseDto2 = crawlingService.createChatRoom(user7.getUserId(), crawling2.getCrawlingId(),
+                    CreateChatRoomRequestDto.builder()
+                            .title("기후 변화와 도시 설계")
+                            .description("친환경 도시, 가능할까? 기후 위기에 대응하는 도시의 미래를 함께 고민해요.")
+                            .capacity(15)
+                            .build());
+            Long chatRoom2 = chatRoomResponseDto2.getChatRoomInfo().getChatRoomId();
+            crawlingService.joinChatRoom(user3.getUserId(), crawling2.getCrawlingId(), chatRoom2);
+            crawlingService.joinChatRoom(user4.getUserId(), crawling2.getCrawlingId(), chatRoom2);
+
+            GetChatRoomResponseDto chatRoomResponseDto3 = crawlingService.createChatRoom(user8.getUserId(), crawling3.getCrawlingId(),
+                    CreateChatRoomRequestDto.builder()
+                            .title("취업 트렌드 2025")
+                            .description("요즘 취업시장, 무엇이 달라졌을까? 청년들의 커리어 고민을 함께 나눠요.")
+                            .capacity(12)
+                            .build());
+            Long chatRoom3 = chatRoomResponseDto3.getChatRoomInfo().getChatRoomId();
+            crawlingService.joinChatRoom(user2.getUserId(), crawling3.getCrawlingId(), chatRoom3);
+            crawlingService.joinChatRoom(user6.getUserId(), crawling3.getCrawlingId(), chatRoom3);
+
+            GetChatRoomResponseDto chatRoomResponseDto4 = crawlingService.createChatRoom(user9.getUserId(), crawling4.getCrawlingId(),
+                    CreateChatRoomRequestDto.builder()
+                            .title("여성 작가들의 문학 세계")
+                            .description("문학을 새롭게 써 내려가는 여성 작가들의 이야기를 함께 읽고 나눠요.")
+                            .capacity(8)
+                            .build());
+            Long chatRoom4 = chatRoomResponseDto4.getChatRoomInfo().getChatRoomId();
+            crawlingService.joinChatRoom(user3.getUserId(), crawling4.getCrawlingId(), chatRoom4);
+            crawlingService.joinChatRoom(user1.getUserId(), crawling4.getCrawlingId(), chatRoom4);
+
+            GetChatRoomResponseDto chatRoomResponseDto5 = crawlingService.createChatRoom(user10.getUserId(), crawling5.getCrawlingId(),
+                    CreateChatRoomRequestDto.builder()
+                            .title("메타버스와 윤리")
+                            .description("가상 공간 속 우리는 누구일까? 메타버스 사회에서의 윤리에 대해 토론해요.")
+                            .capacity(10)
+                            .build());
+            Long chatRoom5 = chatRoomResponseDto5.getChatRoomInfo().getChatRoomId();
+            crawlingService.joinChatRoom(user4.getUserId(), crawling5.getCrawlingId(), chatRoom5);
+            crawlingService.joinChatRoom(user7.getUserId(), crawling5.getCrawlingId(), chatRoom5);
 
 
         } else {
