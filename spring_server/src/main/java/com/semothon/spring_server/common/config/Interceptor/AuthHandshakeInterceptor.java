@@ -1,4 +1,4 @@
-package com.semothon.spring_server.common.config.handler;
+package com.semothon.spring_server.common.config.Interceptor;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;

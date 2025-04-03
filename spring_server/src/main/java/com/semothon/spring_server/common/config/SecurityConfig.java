@@ -40,7 +40,8 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/users/check-nickname"
+                                "/api/users/check-nickname",
+                                "/ws-stomp" //ws에 대한 인증은 handshake과정에서 별도로 검증
                         ).permitAll() // 인증없이 접근 가능한 api 목록
                         .requestMatchers(
                                 "/api/private/**"
