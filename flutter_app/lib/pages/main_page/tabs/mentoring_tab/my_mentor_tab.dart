@@ -44,7 +44,7 @@ class _MyMentorTabState extends State<MyMentorTab> {
 
         final user = snapshot.data!;
         return user.isHost()
-            ? const MentorInfoPage()
+            ? MentorInfoPage(userId: user.userInfo.userId)
             : const BecomeMentorPage();
       },
     );

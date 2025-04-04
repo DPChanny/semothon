@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/room_info_dto.dart';
 
-class RecommendedChatRoom extends StatelessWidget {
+class RoomItem extends StatelessWidget {
   final RoomInfoDto room;
   final int index;
 
-  const RecommendedChatRoom({
+  const RoomItem({
     super.key,
     required this.room,
     required this.index,
@@ -32,7 +32,7 @@ class RecommendedChatRoom extends StatelessWidget {
         children: [
           // 번호
           Text(
-            '${(index + 1).toString().padLeft(2, '0')}',
+            (index + 1).toString().padLeft(2, '0'),
             style: const TextStyle(
               color: Colors.blue,
               fontWeight: FontWeight.bold,
@@ -41,17 +41,26 @@ class RecommendedChatRoom extends StatelessWidget {
           ),
           const SizedBox(width: 12),
 
-          // 이미지 (임시 URL 사용)
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              'https://randomuser.me/api/portraits/women/${index + 10}.jpg',
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
+          SizedBox(
+            width: 60,
+            height: 60,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                'https://randomuser.me/api/portraits/women/${index + 10}.jpg',
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey[300],
+                    alignment: Alignment.center,
+                    child: const Icon(Icons.person, color: Colors.grey),
+                  );
+                },
+              ),
             ),
           ),
           const SizedBox(width: 12),
+
 
           // 텍스트 정보
           Expanded(

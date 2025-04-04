@@ -96,6 +96,48 @@ getUser() async {
   }
 }
 
+Future<({bool success, String message, GetUserResponseDto? user})>
+getOtherUser(String userId) async {
+  String? idToken;
+  try {
+    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure $e", user: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", user: null);
+  }
+
+  final response = await http.get(
+    url('/api/users/profile/$userId'),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+    success: false,
+    message: "server failure: ${response.body}",
+    user: null,
+    );
+  }
+
+  try {
+    return (
+    success: true,
+    message: "succeed",
+    user: GetUserResponseDto.fromJson(
+      jsonDecode(utf8.decode(response.bodyBytes))['data'],
+    ),
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e", user: null);
+  }
+}
+
 // 유저 정보 업데이트
 Future<({bool success, String message})> updateUser() async {
   String? idToken;

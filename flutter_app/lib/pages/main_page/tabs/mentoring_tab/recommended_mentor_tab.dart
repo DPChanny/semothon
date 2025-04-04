@@ -40,7 +40,7 @@ class RecommendedMentorTab extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           itemCount: mentors.userInfos.length,
           itemBuilder: (context, index) {
-            return mentorItem(mentors.userInfos[index]);
+            return MentorItem(mentor: mentors.userInfos[index]);
           },
         );
       },

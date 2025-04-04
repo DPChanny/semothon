@@ -153,7 +153,7 @@ class _HomeTabState extends State<HomeTab> {
                       Column(
                         children:
                             _mentors?.userInfos
-                                .map((m) => mentorItem(m))
+                                .map((m) => MentorItem(mentor: m))
                                 .toList() ??
                             [],
                       ),
