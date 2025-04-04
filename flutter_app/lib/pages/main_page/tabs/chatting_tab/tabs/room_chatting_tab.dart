@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class MentoringRoomTab extends StatefulWidget {
-  const MentoringRoomTab({super.key});
+class RoomChattingTab extends StatefulWidget {
+  const RoomChattingTab({super.key});
 
   @override
-  State<MentoringRoomTab> createState() => _MentoringRoomTabState();
+  State<RoomChattingTab> createState() => _RoomChattingTabState();
 }
 
-class _MentoringRoomTabState extends State<MentoringRoomTab> {
+class _RoomChattingTabState extends State<RoomChattingTab> {
   final TextEditingController _searchController = TextEditingController();
   late List<Map<String, String>> chatRooms;
 

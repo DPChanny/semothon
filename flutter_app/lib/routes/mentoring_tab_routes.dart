@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/create_room_complete_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/create_room_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/short_intro_input_complete_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/short_intro_input_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/my_mentor_tab/pages/create_room_complete_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/my_mentor_tab/pages/create_room_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/my_mentor_tab/pages/short_intro_input_complete_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/my_mentor_tab/pages/short_intro_input_page.dart';
 
 class MyMentorTabRouteNames {
   static const createRoomCompletePage = '/create_room_complete_page';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/main_page/tabs/chat_pages/chat_list_card.dart';
-import 'package:flutter_app/pages/main_page/tabs/chat_pages/empty_chat_card.dart';
+import 'package:flutter_app/widgets/chat_list_card.dart';
+import 'package:flutter_app/widgets/empty_chat_card.dart';
 
-class ActivityRoomTab extends StatelessWidget {
-  const ActivityRoomTab({super.key});
+class ActivityChattingTab extends StatelessWidget {
+  const ActivityChattingTab({super.key});
 
   final bool hasChats = true; // 활동 방은 채팅 있다고 가정
 

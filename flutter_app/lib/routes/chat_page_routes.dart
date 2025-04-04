@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/main_page/tabs/chat_pages/chat_mentoring_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/chat_pages/search_screen_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/chatting_tab/chatting_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/search_chatting_tab.dart';
 
 class ChatPageRouteNames {
-  static const ChatMentoringPage = '/chat_mentoring_page';
-  static const SearchScreenPage = '/search_screen_page';
+  static const chatMentoringPage = '/chat_mentoring_page';
+  static const searchScreenPage = '/search_screen_page';
 }
 
 final Map<String, WidgetBuilder> chatPageRoutes = {
-  ChatPageRouteNames.ChatMentoringPage: (context) => const ChatMentoringPage(),
-  ChatPageRouteNames.SearchScreenPage: (context) => const SearchScreenPage(),
+  ChatPageRouteNames.chatMentoringPage: (context) => const ChattingTab(),
+  ChatPageRouteNames.searchScreenPage: (context) => const SearchScreenPage(),
 };

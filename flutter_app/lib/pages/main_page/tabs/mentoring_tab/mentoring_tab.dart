@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/my_mentor_tab.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/recommended_mentor_tab.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/recommended_room_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/my_mentor_tab/my_mentor_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/recommended_mentor_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/recommended_room_tab.dart';
 import 'package:flutter_app/widgets/custom_tab_bar.dart';
 
 class MentoringTab extends StatefulWidget {
