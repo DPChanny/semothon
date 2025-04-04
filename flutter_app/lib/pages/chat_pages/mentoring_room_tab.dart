@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class MentoringRoomTab extends StatefulWidget {
   const MentoringRoomTab({super.key});
@@ -9,15 +10,11 @@ class MentoringRoomTab extends StatefulWidget {
 
 class _MentoringRoomTabState extends State<MentoringRoomTab> {
   final TextEditingController _searchController = TextEditingController();
-
-  // ✅ 여기! chatRooms를 State 안 변수로 선언
   late List<Map<String, String>> chatRooms;
 
   @override
   void initState() {
     super.initState();
-
-    // ✅ 더미 데이터 넣어줌 (여기만 바꾸면 됨)
     chatRooms = [
       {
         'title': '프로토 뿌시기',
@@ -40,7 +37,6 @@ class _MentoringRoomTabState extends State<MentoringRoomTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ✅ 검색창 (채팅방이 있을 때만 보임)
         if (chatRooms.isNotEmpty)
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -73,67 +69,89 @@ class _MentoringRoomTabState extends State<MentoringRoomTab> {
               ),
             ),
           ),
-
-        // ✅ 채팅 리스트 or 빈 카드
         Expanded(
-          child:
-              chatRooms.isEmpty
-                  ? const _EmptyChatCard()
-                  : ListView.separated(
-                    itemCount: chatRooms.length,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    separatorBuilder: (_, __) => const Divider(height: 1),
-                    itemBuilder: (context, index) {
-                      final room = chatRooms[index];
-                      return ListTile(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                        leading: CircleAvatar(
-                          radius: 24,
-                          backgroundImage: NetworkImage(room['image']!),
-                        ),
-                        title: Text(
-                          '${room['title']}  💬 3',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            fontFamily: 'Noto Sans KR',
-                          ),
-                        ),
-                        subtitle: Text(
-                          room['message']!,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        trailing: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              room['time']!,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              room['date']!,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+          child: chatRooms.isEmpty
+              ? const _EmptyChatCard()
+              : ListView.separated(
+            itemCount: chatRooms.length,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            separatorBuilder: (_, __) => const Divider(height: 1),
+            itemBuilder: (context, index) {
+              final room = chatRooms[index];
+              return Slidable(
+                key: ValueKey(room['title']),
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (_) {
+                        setState(() {
+                          chatRooms.removeAt(index);
+                        });
+                      },
+                      backgroundColor: const Color(0xFFFF4D4D),
+                      foregroundColor: Colors.white,
+                      icon: Icons.exit_to_app,
+                      label: '나가기',
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/chat_detail_page',
+                      arguments: room,
+                    );
+                  },
+                  contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                  leading: CircleAvatar(
+                    radius: 24,
+                    backgroundImage: NetworkImage(room['image']!),
                   ),
+                  title: Text(
+                    '${room['title']}  💬 3',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      fontFamily: 'Noto Sans KR',
+                    ),
+                  ),
+                  subtitle: Text(
+                    room['message']!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        room['time']!,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        room['date']!,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
   }
 }
 
-// ✅ 채팅 없을 때 카드
 class _EmptyChatCard extends StatelessWidget {
   const _EmptyChatCard();
 

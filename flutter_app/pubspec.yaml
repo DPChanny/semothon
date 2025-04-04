@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   intl: ^0.19.0
+  flutter_slidable: ^3.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
