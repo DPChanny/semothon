@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/get_user_response_dto.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/become_mentor_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentor_info_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/become_mentor_page.dart';
+import 'package:flutter_app/pages/mentor_info_page.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
 class MyMentorTab extends StatefulWidget {

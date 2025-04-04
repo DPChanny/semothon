@@ -12,5 +12,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   ...inputPageRoutes,
   ...interestPageRoutes,
   ...chatPageRoutes,
-  ...mentoringTabRoutes,
+  ...myMentorTabRoutes,
 };

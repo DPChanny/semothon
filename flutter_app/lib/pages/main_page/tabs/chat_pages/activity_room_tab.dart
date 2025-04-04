@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'chat_list_card.dart';
-import 'empty_chat_card.dart';
+import 'package:flutter_app/pages/main_page/tabs/chat_pages/chat_list_card.dart';
+import 'package:flutter_app/pages/main_page/tabs/chat_pages/empty_chat_card.dart';
 
 class ActivityRoomTab extends StatelessWidget {
   const ActivityRoomTab({super.key});

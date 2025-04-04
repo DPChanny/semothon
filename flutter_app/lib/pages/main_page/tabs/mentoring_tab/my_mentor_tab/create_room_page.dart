@@ -78,7 +78,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
     if (result.success) {
       Navigator.pushNamedAndRemoveUntil(
         context,
-        MentoringTabRouteNames.createRoomCompletePage,
+        MyMentorTabRouteNames.createRoomCompletePage,
         (router) => false,
       );
     } else {

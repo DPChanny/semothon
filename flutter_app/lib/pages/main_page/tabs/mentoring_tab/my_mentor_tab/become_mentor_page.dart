@@ -30,7 +30,7 @@ class BecomeMentorPage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                MentoringTabRouteNames.shortIntroInputPage,
+                MyMentorTabRouteNames.shortIntroInputPage,
               );
             },
             style: ElevatedButton.styleFrom(

@@ -98,7 +98,7 @@ class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
                           if (result.success) {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              MentoringTabRouteNames
+                              MyMentorTabRouteNames
                                   .shortIntroInputCompletePage,
                               (routes) => false,
                             );

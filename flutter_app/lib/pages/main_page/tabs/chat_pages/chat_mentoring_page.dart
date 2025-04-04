@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/main_page/tabs/chat_pages/mentoring_room_tab.dart';
 import 'package:flutter_app/widgets/custom_tab_bar.dart';
 
 import 'activity_room_tab.dart';
-import 'mentoring_room_tab.dart';
 
 class ChatMentoringPage extends StatefulWidget {
   const ChatMentoringPage({super.key});

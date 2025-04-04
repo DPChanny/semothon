@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentor_info_page.dart';
+import 'package:flutter_app/pages/mentor_info_page.dart';
 
 class MentorItem extends StatefulWidget {
   final UserInfoDto mentor;

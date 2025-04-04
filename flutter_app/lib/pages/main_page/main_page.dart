@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/chat_pages/chat_mentoring_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/chat_pages/chat_mentoring_page.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
 

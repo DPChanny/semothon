@@ -37,7 +37,7 @@ class ShortIntroInputCompletePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamedAndRemoveUntil(
                       context,
-                      MentoringTabRouteNames.createRoomPage,
+                      MyMentorTabRouteNames.createRoomPage,
                       (routes) => false,
                     );
                   },

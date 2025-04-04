@@ -171,7 +171,7 @@ class MentorInfoPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(
                           context,
-                          MentoringTabRouteNames.createRoomPage,
+                          MyMentorTabRouteNames.createRoomPage,
                         );
                       },
                       style: ElevatedButton.styleFrom(

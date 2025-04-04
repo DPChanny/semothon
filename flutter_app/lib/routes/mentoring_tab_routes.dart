@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/create_room_complete_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/create_room_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/short_intro_input_complete_page.dart';
-import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/short_intro_input_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/create_room_complete_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/create_room_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/short_intro_input_complete_page.dart';
+import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/my_mentor_tab/short_intro_input_page.dart';
 
-class MentoringTabRouteNames {
+class MyMentorTabRouteNames {
   static const createRoomCompletePage = '/create_room_complete_page';
   static const createRoomPage = '/create_room_page';
   static const shortIntroInputPage = "/short_intro_input_page";
   static const shortIntroInputCompletePage = "/short_intro_input_complete_page";
 }
 
-final Map<String, WidgetBuilder> mentoringTabRoutes = {
-  MentoringTabRouteNames.createRoomCompletePage:
+final Map<String, WidgetBuilder> myMentorTabRoutes = {
+  MyMentorTabRouteNames.createRoomCompletePage:
       (context) => const CreateRoomCompletePage(),
-  MentoringTabRouteNames.createRoomPage: (context) => const CreateRoomPage(),
-  MentoringTabRouteNames.shortIntroInputPage:
+  MyMentorTabRouteNames.createRoomPage: (context) => const CreateRoomPage(),
+  MyMentorTabRouteNames.shortIntroInputPage:
       (context) => const ShortIntroInputPage(),
-  MentoringTabRouteNames.shortIntroInputCompletePage:
+  MyMentorTabRouteNames.shortIntroInputCompletePage:
       (context) => const ShortIntroInputCompletePage(),
 };
