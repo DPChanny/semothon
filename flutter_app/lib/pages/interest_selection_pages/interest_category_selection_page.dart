@@ -19,10 +19,7 @@ class _InterestCategorySelectionPageState
     {'icon': 'assets/interest_category_icon/book_icon.svg', 'label': '인문계열'},
     {'icon': 'assets/interest_category_icon/social_icon.svg', 'label': '사회계열'},
     {'icon': 'assets/interest_category_icon/edu_icon.svg', 'label': '교육계열'},
-    {
-      'icon': 'assets/interest_category_icon/engineering_icon.svg',
-      'label': '공학계열',
-    },
+    {'icon': 'assets/interest_category_icon/engineering_icon.svg', 'label': '공학계열'},
     {'icon': 'assets/interest_category_icon/science_icon.svg', 'label': '자연계열'},
     {'icon': 'assets/interest_category_icon/medical_icon.svg', 'label': '의학계열'},
     {'icon': 'assets/interest_category_icon/art_icon.svg', 'label': '예체능계열'},
@@ -32,6 +29,44 @@ class _InterestCategorySelectionPageState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      bottomNavigationBar: SafeArea(
+        minimum: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+        child: SizedBox(
+          width: double.infinity,
+          height: 47,
+          child: ElevatedButton(
+            onPressed: selectedLabel != null
+                ? () {
+              UserUpdateInterestIntroDTO.instance.interestCategory =
+                  selectedLabel;
+              Navigator.pushNamed(
+                context,
+                InterestPageRouteNames.interestSelectionPage,
+              );
+            }
+                : null,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: selectedLabel != null
+                  ? const Color(0xFF008CFF)
+                  : const Color(0xFFE4E4E4),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(23.5),
+              ),
+            ),
+            child: Text(
+              '다음',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: selectedLabel != null
+                    ? Colors.white
+                    : const Color(0xFFB1B1B1),
+                fontFamily: 'Noto Sans KR',
+              ),
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -55,12 +90,12 @@ class _InterestCategorySelectionPageState
                   Container(
                     height: 4,
                     width: double.infinity,
-                    color: Color(0xFFE4E4E4),
+                    color: const Color(0xFFE4E4E4),
                   ),
                   Container(
                     height: 4,
                     width: MediaQuery.of(context).size.width * 0.33,
-                    color: Color(0xFF008CFF),
+                    color: const Color(0xFF008CFF),
                   ),
                 ],
               ),
@@ -77,63 +112,21 @@ class _InterestCategorySelectionPageState
                 ),
               ),
               const SizedBox(height: 24),
-              Expanded(
+              Flexible(
                 child: GridView.count(
                   crossAxisCount: 3,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 12,
-                  children:
-                      interests.map((item) {
-                        return _buildInterestItem(
-                          item['icon']!,
-                          item['label']!,
-                        );
-                      }).toList(),
+                  childAspectRatio: 0.9,
+                  children: interests.map((item) {
+                    return _buildInterestItem(
+                      item['icon']!,
+                      item['label']!,
+                    );
+                  }).toList(),
                 ),
               ),
               const SizedBox(height: 16),
-              Center(
-                child: SizedBox(
-                  width: 335,
-                  height: 47,
-                  child: ElevatedButton(
-                    onPressed:
-                        selectedLabel != null
-                            ? () {
-                              UserUpdateInterestIntroDTO
-                                  .instance
-                                  .interestCategory = selectedLabel;
-                              Navigator.pushNamed(
-                                context,
-                                InterestPageRouteNames.interestSelectionPage,
-                              );
-                            }
-                            : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          selectedLabel != null
-                              ? const Color(0xFF008CFF)
-                              : const Color(0xFFE4E4E4),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(23.5),
-                      ),
-                    ),
-                    child: Text(
-                      '다음',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                        color:
-                            selectedLabel != null
-                                ? Colors.white
-                                : const Color(0xFFB1B1B1),
-                        fontFamily: 'Noto Sans KR',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 32),
             ],
           ),
         ),
