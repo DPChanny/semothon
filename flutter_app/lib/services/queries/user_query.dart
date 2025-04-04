@@ -96,8 +96,9 @@ getUser() async {
   }
 }
 
-Future<({bool success, String message, GetUserResponseDto? user})>
-getOtherUser(String userId) async {
+Future<({bool success, String message, GetUserResponseDto? user})> getOtherUser(
+  String userId,
+) async {
   String? idToken;
   try {
     idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
@@ -119,19 +120,19 @@ getOtherUser(String userId) async {
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    user: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      user: null,
     );
   }
 
   try {
     return (
-    success: true,
-    message: "succeed",
-    user: GetUserResponseDto.fromJson(
-      jsonDecode(utf8.decode(response.bodyBytes))['data'],
-    ),
+      success: true,
+      message: "succeed",
+      user: GetUserResponseDto.fromJson(
+        jsonDecode(utf8.decode(response.bodyBytes))['data'],
+      ),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", user: null);

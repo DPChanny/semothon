@@ -47,10 +47,7 @@ class RecommendedRoomTab extends StatelessWidget {
                   ),
                   isScrollControlled: true,
                   builder:
-                      (context) => RoomPopUp(
-                        room: room,
-                        hostUser: hostUser,
-                      ),
+                      (context) => RoomPopUp(room: room, hostUser: hostUser),
                 );
               },
               child: RoomItem(room: room, index: index),

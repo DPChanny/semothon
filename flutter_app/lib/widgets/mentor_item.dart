@@ -13,6 +13,7 @@ class MentorItem extends StatefulWidget {
 
 class _MentorItemState extends State<MentorItem> {
   bool _isClicked = false;
+
   void _handleClick() async {
     setState(() => _isClicked = true);
 
@@ -24,20 +25,20 @@ class _MentorItemState extends State<MentorItem> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: const Text("멘토링"),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-          ),
-          body: MentorInfoPage(userId: widget.mentor.userId),
-        ),
+        builder:
+            (context) => Scaffold(
+              appBar: AppBar(
+                title: const Text("멘토링"),
+                centerTitle: true,
+                elevation: 0,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
+              body: MentorInfoPage(userId: widget.mentor.userId),
+            ),
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +96,9 @@ class _MentorItemState extends State<MentorItem> {
             style: ElevatedButton.styleFrom(
               backgroundColor: _isClicked ? Colors.blue : Colors.white70,
               foregroundColor: _isClicked ? Colors.white : Colors.grey,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
               minimumSize: const Size(75, 10),
               elevation: 0,

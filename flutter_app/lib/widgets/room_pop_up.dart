@@ -6,11 +6,7 @@ class RoomPopUp extends StatelessWidget {
   final RoomInfoDto room;
   final HostUserInfoDto hostUser;
 
-  const RoomPopUp({
-    super.key,
-    required this.room,
-    required this.hostUser,
-  });
+  const RoomPopUp({super.key, required this.room, required this.hostUser});
 
   @override
   Widget build(BuildContext context) {

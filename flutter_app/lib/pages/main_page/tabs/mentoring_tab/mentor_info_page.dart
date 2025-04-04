@@ -35,7 +35,6 @@ class KeywordChip extends StatelessWidget {
   }
 }
 
-
 class MentorInfoPage extends StatelessWidget {
   final String userId;
 
@@ -88,12 +87,18 @@ class MentorInfoPage extends StatelessWidget {
                       const SizedBox(height: 12),
                       Text(
                         userInfo.nickname ?? '닉네임 없음',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         '"${userInfo.shortIntro ?? "한 줄 소개가 없습니다."}"',
-                        style: const TextStyle(fontSize: 13, color: Colors.grey),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 12),
@@ -101,11 +106,11 @@ class MentorInfoPage extends StatelessWidget {
                         spacing: 8,
                         runSpacing: 8,
                         alignment: WrapAlignment.center,
-                        children: userInfo.interests.map((tag) {
-                          return KeywordChip(text: tag);
-                        }).toList(),
+                        children:
+                            userInfo.interests.map((tag) {
+                              return KeywordChip(text: tag);
+                            }).toList(),
                       ),
-
                     ],
                   ),
                 ),
@@ -113,11 +118,13 @@ class MentorInfoPage extends StatelessWidget {
                 const SizedBox(height: 32),
 
                 // 📚 멘토링 방 목록
-                FutureBuilder<({
-                bool success,
-                String message,
-                GetRoomListResponseDto? roomList
-                })>(
+                FutureBuilder<
+                  ({
+                    bool success,
+                    String message,
+                    GetRoomListResponseDto? roomList,
+                  })
+                >(
                   future: getRoomList(hostUserId: userInfo.userId),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -162,13 +169,21 @@ class MentorInfoPage extends StatelessWidget {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, MentoringTabRouteNames.createRoomPage);
+                        Navigator.pushNamed(
+                          context,
+                          MentoringTabRouteNames.createRoomPage,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF008CFF),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 14,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                       child: const Text("멘토방 추가하기"),
                     ),
@@ -181,6 +196,7 @@ class MentorInfoPage extends StatelessWidget {
     );
   }
 }
+
 class _MentorRoomItem extends StatelessWidget {
   final int index;
   final RoomInfoDto room;
@@ -217,21 +233,23 @@ class _MentorRoomItem extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: GestureDetector(
-              onTap: isMine
-                  ? null
-                  : () {
-                showModalBottomSheet(
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                  ),
-                  isScrollControlled: true,
-                  builder: (context) => RoomPopUp(
-                    room: room,
-                    hostUser: hostUser,
-                  ),
-                );
-              },
+              onTap:
+                  isMine
+                      ? null
+                      : () {
+                        showModalBottomSheet(
+                          context: context,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
+                          ),
+                          isScrollControlled: true,
+                          builder:
+                              (context) =>
+                                  RoomPopUp(room: room, hostUser: hostUser),
+                        );
+                      },
               child: Text(
                 isMine ? "수정하기" : "알아보기",
                 style: TextStyle(

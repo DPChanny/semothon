@@ -5,11 +5,7 @@ class RoomItem extends StatelessWidget {
   final RoomInfoDto room;
   final int index;
 
-  const RoomItem({
-    super.key,
-    required this.room,
-    required this.index,
-  });
+  const RoomItem({super.key, required this.room, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +56,6 @@ class RoomItem extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-
 
           // 텍스트 정보
           Expanded(
