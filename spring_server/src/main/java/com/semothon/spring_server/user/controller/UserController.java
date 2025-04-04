@@ -33,7 +33,9 @@ public class UserController {
             @AuthenticationPrincipal User user
     ){
         User findUser = userService.getUser(user.getUserId());
-        return BaseResponse.success(Map.of("code", 200, "user", GetUserResponseDto.from(findUser)), "Login successful");
+        GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
+
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms(), "chatRooms", userResponseDto.getChatRooms()), "Login successful");
     }
 
     @PostMapping("/check-nickname")
@@ -56,7 +58,7 @@ public class UserController {
         User findUser = userService.getUser(user.getUserId());
         GetUserResponseDto userResponseDto = GetUserResponseDto.from(findUser);
 
-        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile retrieved successfully");
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms(), "chatRooms", userResponseDto.getChatRooms()), "User profile retrieved successfully");
     }
 
     @GetMapping("/profile/{userId}")
@@ -69,7 +71,7 @@ public class UserController {
 
         GetUserResponseDto userResponseDto = GetUserResponseDto.from(targetUser);
 
-        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "Other user's profile retrieved successfully");
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms(), "chatRooms", userResponseDto.getChatRooms()), "Other user's profile retrieved successfully");
     }
 
     //나중에 다시 점검
@@ -121,7 +123,7 @@ public class UserController {
         GetUserResponseDto userResponseDto = GetUserResponseDto.from(updatedUser);
 
 
-        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms()), "User profile updated successfully");
+        return BaseResponse.success(Map.of("code", 200, "user", userResponseDto.getUserInfo(), "rooms", userResponseDto.getRooms(), "chatRooms", userResponseDto.getChatRooms()), "User profile updated successfully");
     }
 
     @PutMapping("/interests")

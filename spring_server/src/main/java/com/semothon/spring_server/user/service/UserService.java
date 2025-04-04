@@ -173,9 +173,8 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new InvalidInputException("User not found"));
 
-        log.info("updateUserInterestRequestDto.getInterestNames(): {}", updateUserInterestRequestDto.getInterestNames());
-
         // 기존 관심사 제거
+        user.getUserInterests().clear();
         userInterestRepository.deleteAllByUser(user);
 
         List<Interest> interests = interestRepository.findAllByNameIn(updateUserInterestRequestDto.getInterestNames());
