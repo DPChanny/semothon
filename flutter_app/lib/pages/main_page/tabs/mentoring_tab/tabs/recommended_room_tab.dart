@@ -12,7 +12,7 @@ class RecommendedRoomTab extends StatelessWidget {
     return FutureBuilder<
       ({bool success, String message, GetRoomListResponseDto? roomList})
     >(
-      future: getRoomList(),
+      future: getRoomList(sortBy: "SCORE", excludeJoined: true),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

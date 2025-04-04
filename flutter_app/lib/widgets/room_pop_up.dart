@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/host_user_info_dto.dart';
 import 'package:flutter_app/dto/room_info_dto.dart';
+import 'package:flutter_app/services/queries/room_query.dart';
 
 class RoomPopUp extends StatelessWidget {
   final RoomInfoDto room;
@@ -74,7 +75,9 @@ class RoomPopUp extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () async => {
+              await joinRoom(room.roomId)
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
               minimumSize: const Size.fromHeight(45),

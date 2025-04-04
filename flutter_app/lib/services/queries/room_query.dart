@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/get_room_list_response_dto.dart';
+import 'package:flutter_app/dto/get_room_response_dto.dart';
 import 'package:flutter_app/dto/room_update_dto.dart';
 import 'package:http/http.dart' as http;
 
@@ -126,5 +127,92 @@ getRoomList({
     return (success: true, message: "succeed", roomList: roomList);
   } catch (e) {
     return (success: false, message: "parsing failure: $e", roomList: null);
+  }
+}
+
+Future<({bool success, String message, GetRoomResponseDto? room})> getRoom(int roomId) async {
+  String? idToken;
+
+  try {
+    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure: $e", room: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", room: null);
+  }
+
+  final response = await http.get(
+    url("api/rooms/$roomId"),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+    success: false,
+    message: "server failure: ${response.body}",
+    room: null,
+    );
+  }
+
+  try {
+    final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+    final data = decoded['data'];
+
+    return (
+    success: true,
+    message: "succeed",
+    room: GetRoomResponseDto.fromJson(data),
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e", room: null);
+  }
+}
+
+
+Future<({bool success, String message, GetRoomResponseDto? room})> joinRoom(int roomId) async {
+  String? idToken;
+
+  try {
+    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure: $e", room: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", room: null);
+  }
+
+  final response = await http.post(
+    url("api/rooms/$roomId/join"),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+    success: false,
+    message: "server failure: ${response.body}",
+    room: null,
+    );
+  }
+
+  try {
+    final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+    final data = decoded['data'];
+
+    return (
+    success: true,
+    message: "succeed",
+    room: GetRoomResponseDto.fromJson(data),
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e", room: null);
   }
 }

@@ -3,7 +3,7 @@ class RoomUserInfoDto {
   final String nickname;
   final String profileImageUrl;
   final String shortIntro;
-  final String role; // enum이지만 문자열로 처리
+  final String role;
   final DateTime joinedAt;
 
   RoomUserInfoDto({
