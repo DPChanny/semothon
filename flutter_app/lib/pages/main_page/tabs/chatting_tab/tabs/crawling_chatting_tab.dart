@@ -3,9 +3,10 @@ import 'package:flutter_app/dto/chat_room_info_dto.dart';
 import 'package:flutter_app/dto/unread_message_count_dto.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 import 'package:flutter_app/widgets/chat_item.dart';
-import 'package:flutter_app/widgets/empty_chat_card.dart';
 
 class CrawlingChattingTab extends StatelessWidget {
+  final void Function(int) onTabChange;
+
   final List<ChatRoomInfoDto> roomInfos;
   final List<UnreadMessageCountDto> unreadInfos;
 
@@ -13,6 +14,7 @@ class CrawlingChattingTab extends StatelessWidget {
     super.key,
     required this.roomInfos,
     required this.unreadInfos,
+    required this.onTabChange
   });
 
   @override
@@ -65,7 +67,7 @@ class CrawlingChattingTab extends StatelessWidget {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: 버튼 동작 정의
+                  onTabChange(3);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF008CFF),

@@ -5,13 +5,17 @@ import 'package:flutter_app/services/queries/room_query.dart';
 import 'package:flutter_app/widgets/chat_item.dart';
 
 class RoomChattingTab extends StatelessWidget {
+  final void Function(int) onTabChange;
+
   final List<ChatRoomInfoDto> roomInfos;
   final List<UnreadMessageCountDto> unreadInfos;
+
 
   const RoomChattingTab({
     super.key,
     required this.roomInfos,
     required this.unreadInfos,
+    required this.onTabChange
   });
 
   @override
@@ -51,7 +55,7 @@ class RoomChattingTab extends StatelessWidget {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: 버튼 동작 정의
+                  onTabChange(2);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF008CFF),

@@ -4,13 +4,14 @@ import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
 import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
-import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/search_chatting_page.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
 class ChattingTab extends StatefulWidget {
-  const ChattingTab({super.key});
+  final void Function(int) onTabChange;
+
+  const ChattingTab({super.key, required this.onTabChange});
 
   @override
   State<ChattingTab> createState() => _ChattingTabState();
@@ -122,12 +123,12 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                       onTap: () {
                         Navigator.pushNamed(context, ChatPageRouteNames.searchChattingPage);
                       },
-                      child: AbsorbPointer( // ✅ 내부 TextField 상호작용 방지
+                      child: AbsorbPointer(
                         child: TextField(
                           readOnly: true,
                           enabled: false,
                           decoration: InputDecoration(
-                            hintText: '나의 멘토링방 제목으로 검색하기',
+                            hintText: '내가 참여중인 채팅방 검색하기',
                             hintStyle: const TextStyle(
                               color: Color(0xFF999999),
                               fontSize: 14,
@@ -161,10 +162,12 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                     RoomChattingTab(
                       roomInfos: roomChattingRooms,
                       unreadInfos: unreadData.room!.unreadCounts,
+                      onTabChange: widget.onTabChange,
                     ),
                     CrawlingChattingTab(
                       roomInfos: crawlingChattingRooms,
                       unreadInfos: unreadData.room!.unreadCounts,
+                      onTabChange: widget.onTabChange,
                     ),
                   ],
                 ),

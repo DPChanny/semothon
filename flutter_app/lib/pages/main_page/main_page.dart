@@ -20,10 +20,19 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   late int _selectedIndex;
 
+  late final List<Widget> _pages;
+
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.currentIndex;
+
+    _pages = [
+      HomeTab(onTabChange: _onTap),
+      ChattingTab(onTabChange: _onTap),
+      const MentoringTab(),
+      const CrawlingTab(),
+    ];
   }
 
   void _onTap(int index) {
@@ -32,13 +41,6 @@ class _MainPageState extends State<MainPage> {
       _selectedIndex = index;
     });
   }
-
-  final List<Widget> _pages = const [
-    HomeTab(),
-    ChattingTab(),
-    MentoringTab(),
-    CrawlingTab(),
-  ];
 
   @override
   Widget build(BuildContext context) {
