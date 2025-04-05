@@ -21,6 +21,8 @@ public class ChatRoomInfoDto {
     private Long crawlingId;
     private Integer currentMemberCount;
     private LocalDateTime createdAt;
+    private String profileImageUrl;
+    private String hostUserId;
 
     public static ChatRoomInfoDto from(ChatRoom chatRoom) {
         return ChatRoomInfoDto.builder()
@@ -33,6 +35,8 @@ public class ChatRoomInfoDto {
                 .roomId(chatRoom.getRoom() != null ? chatRoom.getRoom().getRoomId() : null)
                 .crawlingId(chatRoom.getCrawling() != null ? chatRoom.getCrawling().getCrawlingId() : null)
                 .createdAt(DateTimeUtil.convertUTCToKST(chatRoom.getCreatedAt()))
+                .profileImageUrl(chatRoom.getHost().getProfileImageUrl())
+                .hostUserId(chatRoom.getHost().getUserId())
                 .build();
     }
 }
