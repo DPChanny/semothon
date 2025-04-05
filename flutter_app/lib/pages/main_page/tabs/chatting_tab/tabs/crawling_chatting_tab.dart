@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/empty_chat_card.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
-import 'package:flutter_app/dto/chat_room_info_dto.dart'; // ChatRoomInfoDto가 정의된 파일 import
+import 'package:flutter_app/dto/chat_room_info_dto.dart'; // ChatRoomInfoDto 정의한 파일
 
-class RoomChattingTab extends StatelessWidget {
+class CrawlingChattingTab extends StatelessWidget {
   final List<ChatRoomInfoDto> roomInfos;
 
-  const RoomChattingTab({super.key, required this.roomInfos});
+  const CrawlingChattingTab({super.key, required this.roomInfos});
 
   @override
   Widget build(BuildContext context) {
     if (roomInfos.isEmpty) {
       return const EmptyChatCard(
-        emoji: '💡',
-        title: '멘토링을 통해\n다양한 정보를 얻어보세요',
-        subtitle: '맞춤 추천 해드려요!',
-        buttonText: '멘토링 참여하기',
+        emoji: '👊',
+        title: '다른 사람과 함께\n공모전을 도전해보세요',
+        subtitle: '으싸으싸 화이팅!',
+        buttonText: '공모전 알아보기',
       );
     }
 
@@ -34,7 +34,7 @@ class RoomChattingTab extends StatelessWidget {
             children: [
               SlidableAction(
                 onPressed: (_) {
-                  // 나가기 처리 등은 필요 시 콜백으로 받아서 전달 가능
+                  // 나가기 처리 등은 필요 시 콜백으로 전달 가능
                 },
                 backgroundColor: const Color(0xFFFF4D4D),
                 foregroundColor: Colors.white,

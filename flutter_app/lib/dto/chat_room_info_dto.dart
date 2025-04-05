@@ -8,6 +8,8 @@ class ChatRoomInfoDto {
   final int? crawlingId;
   final int currentMemberCount;
   final DateTime createdAt;
+  final String profileImageUrl;
+  final String hostUserId;
 
   ChatRoomInfoDto({
     required this.chatRoomId,
@@ -19,6 +21,8 @@ class ChatRoomInfoDto {
     this.crawlingId,
     required this.currentMemberCount,
     required this.createdAt,
+    required this.profileImageUrl,
+    required this.hostUserId,
   });
 
   factory ChatRoomInfoDto.fromJson(Map<String, dynamic> json) {
@@ -32,6 +36,8 @@ class ChatRoomInfoDto {
       crawlingId: json['crawlingId'],
       currentMemberCount: json['currentMemberCount'],
       createdAt: DateTime.parse(json['createdAt']),
+      profileImageUrl: json['profileImageUrl'],
+      hostUserId:json['hostUserId'],
     );
   }
 }

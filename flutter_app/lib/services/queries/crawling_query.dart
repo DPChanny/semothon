@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/get_crawling_list_response_dto.dart';
+import 'package:flutter_app/dto/get_crawling_response_dto.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -93,5 +94,52 @@ getCrawlingList({
     return (success: true, message: "succeed", crawlingList: result);
   } catch (e) {
     return (success: false, message: "parsing failure: $e", crawlingList: null);
+  }
+}
+
+Future<({bool success, String message, GetCrawlingResponseDto? crawling})> getCrawling(int crawlingId) async {
+  String? idToken;
+
+  try {
+    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure: $e", crawling: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", crawling: null);
+  }
+
+  final response = await http.get(
+    url("api/crawling/$crawlingId"),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+    success: false,
+    message: "server failure: ${response.body}",
+    crawling: null,
+    );
+  }
+
+  try {
+    final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+    final data = decoded['data']['crawling'];
+
+    return (
+    success: true,
+    message: "succeed",
+    crawling: GetCrawlingResponseDto.fromJson(data),
+    );
+  } catch (e) {
+    return (
+    success: false,
+    message: "parsing failure: $e",
+    crawling: null,
+    );
   }
 }
