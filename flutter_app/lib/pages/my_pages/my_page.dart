@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/routes/my_page_routes.dart';
+import 'package:flutter_app/services/auth.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
@@ -232,7 +235,7 @@ class _MyPageState extends State<MyPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       padding: const EdgeInsets.symmetric(horizontal: 20)),
-                  child: const Text("나도 멘토 되기"),
+                  child: const Text("나도 멘토 되기", style: TextStyle(color: Colors.white),),
                 )
               ],
             ),
@@ -292,7 +295,7 @@ class _MyPageState extends State<MyPage> {
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -336,7 +339,10 @@ Widget _buildActivitySection(BuildContext context) {
                       Navigator.pushNamedAndRemoveUntil(context, MainPageRouteNames.mainPage, (e) => false,
                       arguments: 3);
                     },
-                    child: const Text("보러가기"),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsets.symmetric(horizontal: 20)),
+                    child: const Text("보러가기", style: TextStyle(color: Colors.white),),
                   )
                 ],
               )
@@ -365,6 +371,54 @@ Widget _buildActivitySection(BuildContext context) {
                   },
                 ),
               ),
+            SizedBox(height: 20,),
+            TextButton(
+              onPressed: () async {
+                final googleSignIn = getGoogleSignIn();
+                if (await googleSignIn.isSignedIn()) {
+                await googleSignIn.signOut();
+                }
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushNamedAndRemoveUntil(context, LoginPageRouteNames.loginPage, (routes) => false);
+              },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                minimumSize: const Size(0, 30),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                alignment: Alignment.centerLeft,
+              ),
+              child: const Text(
+                '로그아웃',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontFamily: 'Noto Sans KR',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () async {
+                await deleteUser();
+                Navigator.pushNamedAndRemoveUntil(context, LoginPageRouteNames.loginPage, (routes) => false);
+              },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                minimumSize: const Size(0, 30),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                alignment: Alignment.centerLeft,
+              ),
+              child: const Text(
+                '탈퇴',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontFamily: 'Noto Sans KR',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
           ],
         ),
       );

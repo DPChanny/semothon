@@ -100,8 +100,6 @@ class _HomeTabState extends State<HomeTab> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    final pageController = PageController(viewportFraction: 0.85);
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

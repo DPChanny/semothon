@@ -36,11 +36,6 @@ class _NameInputPageState extends State<NameInputPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
         centerTitle: true,
         title: const Text(
           '사용자 정보',

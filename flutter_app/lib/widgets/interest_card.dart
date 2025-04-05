@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
+import 'package:flutter_app/routes/my_page_routes.dart';
 import 'package:flutter_app/widgets/keyword_chip.dart';
 
 Widget interestCard(
@@ -78,28 +79,7 @@ Widget interestCard(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text('관심분야 수정'),
-                          content: const Text('관심분야를 수정하시겠습니까?'),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('취소'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                // TODO: 수정 로직
-                              },
-                              child: const Text('확인'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    Navigator.pushNamed(context, MyPageRouteNames.myInterestPage);
                   },
                   child: const Icon(
                     Icons.arrow_forward_ios,
