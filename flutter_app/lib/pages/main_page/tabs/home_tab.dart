@@ -13,7 +13,9 @@ import 'package:flutter_app/widgets/interest_card.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({super.key});
+  final void Function(int) onTabChange;
+
+  const HomeTab({super.key, required this.onTabChange});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -142,7 +144,9 @@ class _HomeTabState extends State<HomeTab> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              widget.onTabChange(2);
+                            },
                             child: const Icon(
                               Icons.arrow_forward_ios,
                               size: 20,
@@ -165,7 +169,7 @@ class _HomeTabState extends State<HomeTab> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: Row(
-                    children: const [
+                    children: [
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,10 +192,16 @@ class _HomeTabState extends State<HomeTab> {
                           ],
                         ),
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
-                        color: Colors.blue,
+
+                      GestureDetector(
+                        onTap: () {
+                          widget.onTabChange(3);
+                        },
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                          color: Colors.blue,
+                        ),
                       ),
                     ],
                   ),
