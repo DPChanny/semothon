@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/crawling_update_dto.dart';
 import 'package:flutter_app/dto/get_crawling_list_response_dto.dart';
 import 'package:flutter_app/dto/get_crawling_response_dto.dart';
+import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,13 +27,7 @@ getCrawlingList({
   int? limit,
   int? page,
 }) async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", crawlingList: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", crawlingList: null);
   }
@@ -100,14 +95,7 @@ getCrawlingList({
 
 Future<({bool success, String message, GetCrawlingResponseDto? crawling})>
 getCrawling(int crawlingId) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e", crawling: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", crawling: null);
   }
@@ -144,13 +132,7 @@ getCrawling(int crawlingId) async {
 
 
 Future<({bool success, String message})> createCrawling(CrawlingUpdateDto crawling) async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e");
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure");
   }
@@ -179,14 +161,7 @@ Future<({bool success, String message})> createCrawling(CrawlingUpdateDto crawli
 Future<({bool success, String message, GetCrawlingResponseDto? room})> joinCrawling(
     int crawlingId, int chatRoomId
     ) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e", room: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", room: null);
   }
@@ -222,14 +197,7 @@ Future<({bool success, String message, GetCrawlingResponseDto? room})> joinCrawl
 }
 
 Future<({bool success, String message})> leaveCrawling(int crawlingId, int chatRoomId) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e");
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure");
   }
