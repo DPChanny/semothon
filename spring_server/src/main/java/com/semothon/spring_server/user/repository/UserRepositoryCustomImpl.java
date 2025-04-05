@@ -34,15 +34,15 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<User> searchUserList(UserSearchCondition condition, String currentUserId) {
-        List<UserWithScoreDto> results =  queryFactory
+    public List<UserWithScoreDto> searchUserList(UserSearchCondition condition, String currentUserId) {
+        List<UserWithScoreDto> rawResults = queryFactory
                 .select(Projections.constructor(UserWithScoreDto.class, user, userRoomRecommendation.score))
                 .from(user)
                 .join(user.hostedRooms, room)
                 .leftJoin(user.userInterests, userInterest)
                 .leftJoin(userInterest.interest, interest)
                 .leftJoin(userRoomRecommendation)
-                    .on(userRoomRecommendation.user.userId.eq(currentUserId)
+                .on(userRoomRecommendation.user.userId.eq(currentUserId)
                         .and(userRoomRecommendation.room.host.eq(user)))
                 .where(
                         user.userId.ne(currentUserId),
@@ -62,19 +62,19 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
                 .limit(condition.getLimit())
                 .fetch();
 
-        List<User> users = results.stream()
-                .map(UserWithScoreDto::user)
+        // ✅ 유저 중복 제거 (userId 기준)
+        List<UserWithScoreDto> deduplicated = rawResults.stream()
                 .collect(Collectors.collectingAndThen(
                         Collectors.toMap(
-                                User::getUserId,
-                                u -> u,
+                                dto -> dto.user().getUserId(), // key: userId
+                                dto -> dto,                   // value: dto
                                 (existing, replacement) -> existing,
-                                LinkedHashMap::new // ✅ 순서를 보장!
+                                LinkedHashMap::new            // 순서 유지
                         ),
                         m -> new ArrayList<>(m.values())
                 ));
 
-        return users;
+        return deduplicated;
     }
 
     private BooleanExpression nicknameContains(String keyword) {

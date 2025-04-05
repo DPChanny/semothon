@@ -72,11 +72,11 @@ public class RoomController {
             condition.setCreatedBefore(DateTimeUtil.convertKSTToUTC(condition.getCreatedBefore()));
         }
 
-        List<Room> roomList = roomService.getRoomList(user.getUserId(), condition);
+        List<RoomWithScoreDto> roomList = roomService.getRoomList(user.getUserId(), condition);
 
         List<GetRoomListResponseDto> roomListResponseDtos =
                 roomList.stream()
-                .map(GetRoomListResponseDto::from)
+                        .map(r -> GetRoomListResponseDto.from(r.room(), r.score()))
                         .toList();
 
         return BaseResponse.success(Map.of("code", 200, "totalCount", roomListResponseDtos.size(), "roomList", roomListResponseDtos), "Search results retrieved successfully");

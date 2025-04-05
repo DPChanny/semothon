@@ -6,6 +6,7 @@ import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/websocket.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatelessWidget {
@@ -74,23 +75,18 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,       // 세로 가운데 정렬
+          crossAxisAlignment: CrossAxisAlignment.center,     // 가로 가운데 정렬
           children: [
-            const SizedBox(height: 80),
             Center(
-              child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  image: const DecorationImage(
-                    image: AssetImage('assets/logo.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              child: SvgPicture.asset(
+                'assets/logo.svg', // 👈 로고 경로 (예시, 네 파일 이름에 맞게)
+                width: 150, // ✅ 너가 원하는 2배 크기
+                fit: BoxFit.contain, // ✅ 비율 유지
+              )
             ),
 
-            const SizedBox(height: 60),
+            const SizedBox(height: 30),
 
             const Text(
               '회원가입',
@@ -101,19 +97,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 12),
-
-            const Text(
-              '학교 계정으로 회원가입 해주세요.',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Noto Sans KR',
-                color: Colors.black,
-              ),
-            ),
-
-            const SizedBox(height: 36),
+            const SizedBox(height: 30),
 
             // ✅ Google 버튼 (팝업 띄움)
             Material(
@@ -157,6 +141,8 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
+
+            const SizedBox(height: 30),
           ],
         ),
       ),

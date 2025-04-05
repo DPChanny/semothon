@@ -58,6 +58,7 @@ class _ChattingPageState extends State<ChattingPage> {
     room = ModalRoute.of(context)?.settings.arguments as ChatRoomInfoDto;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       key: _scaffoldKey,
       endDrawer: buildDrawer(),
       appBar: buildAppBar(),

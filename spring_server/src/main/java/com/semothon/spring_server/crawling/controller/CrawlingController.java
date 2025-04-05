@@ -70,9 +70,9 @@ public class CrawlingController {
             condition.setDeadlinedBefore(DateTimeUtil.convertKSTToUTC(condition.getDeadlinedBefore()));
         }
 
-        List<Crawling> crawlingList = crawlingService.getCrawlingList(user.getUserId(), condition);
+        List<CrawlingWithScoreDto> crawlingList = crawlingService.getCrawlingList(user.getUserId(), condition);
         List<GetCrawlingListResponseDto> result = crawlingList.stream()
-                .map(GetCrawlingListResponseDto::from)
+                .map(c -> GetCrawlingListResponseDto.from(c.crawling(), c.score()))
                 .toList();
 
         return BaseResponse.success(Map.of("code", 200, "totalCount", result.size(),"crawlingList", result), "Crawling list retrieved successfully");

@@ -11,6 +11,7 @@ import com.semothon.spring_server.interest.repository.InterestRepository;
 import com.semothon.spring_server.user.dto.UpdateUserInterestRequestDto;
 import com.semothon.spring_server.user.dto.UpdateUserProfileRequestDto;
 import com.semothon.spring_server.user.dto.UserSearchCondition;
+import com.semothon.spring_server.user.dto.UserWithScoreDto;
 import com.semothon.spring_server.user.entity.User;
 import com.semothon.spring_server.user.entity.UserInterest;
 import com.semothon.spring_server.user.repository.UserInterestRepository;
@@ -165,7 +166,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<User> getUserList(String userId, UserSearchCondition condition) {
+    public List<UserWithScoreDto> getUserList(String userId, UserSearchCondition condition) {
         return userRepository.searchUserList(condition, userId);
     }
 

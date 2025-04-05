@@ -111,48 +111,6 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                   }),
                 ),
               ),
-
-              // 🔍 검색창 (멘토링 방에서만 표시)
-              AnimatedBuilder(
-                animation: _tabController,
-                builder: (_, __) {
-                  return _tabController.index == 0
-                      ? Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, ChatPageRouteNames.searchChattingPage);
-                      },
-                      child: AbsorbPointer(
-                        child: TextField(
-                          readOnly: true,
-                          enabled: false,
-                          decoration: InputDecoration(
-                            hintText: '내가 참여중인 채팅방 검색하기',
-                            hintStyle: const TextStyle(
-                              color: Color(0xFF999999),
-                              fontSize: 14,
-                              fontFamily: 'Noto Sans KR',
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: -0.24,
-                            ),
-                            prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                            filled: true,
-                            fillColor: const Color(0xFFF5F6F8),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide.none,
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                  : const SizedBox.shrink();
-                },
-              ),
-
               // 📄 탭별 콘텐츠
               Expanded(
                 child: TabBarView(
