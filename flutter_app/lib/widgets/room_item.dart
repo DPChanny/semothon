@@ -82,6 +82,8 @@ class RoomItem extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   room.description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 13, color: Colors.black87),
                 ),
               ],
