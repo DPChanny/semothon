@@ -1,6 +1,7 @@
 package com.semothon.spring_server.chat.service;
 
 import com.semothon.spring_server.chat.dto.ChatMessageResponseDto;
+import com.semothon.spring_server.chat.dto.ChatRoomSearchCondition;
 import com.semothon.spring_server.chat.dto.GetChatRoomResponseDto;
 import com.semothon.spring_server.chat.dto.UpdateChatRoomRequestDto;
 import com.semothon.spring_server.chat.entity.*;
@@ -177,5 +178,10 @@ public class ChatRoomService {
                 .map(ChatMessageResponseDto::from)
                 .collect(Collectors.toList());
 
+    }
+
+    @Transactional(readOnly = true)
+    public List<ChatRoom> getChatRoomList(String userId, ChatRoomSearchCondition condition) {
+        return chatRoomRepository.searchChatRoomList(condition, userId);
     }
 }

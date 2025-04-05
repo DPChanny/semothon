@@ -1,5 +1,6 @@
 package com.semothon.spring_server.chat.dto;
 
+import com.semothon.spring_server.chat.entity.ChatMessage;
 import com.semothon.spring_server.chat.entity.ChatRoom;
 import com.semothon.spring_server.chat.entity.ChatRoomType;
 import com.semothon.spring_server.common.service.DateTimeUtil;
@@ -23,6 +24,7 @@ public class ChatRoomInfoDto {
     private LocalDateTime createdAt;
     private String profileImageUrl;
     private String hostUserId;
+    private ChatMessageResponseDto lastMessage;
 
     public static ChatRoomInfoDto from(ChatRoom chatRoom) {
         return ChatRoomInfoDto.builder()
@@ -37,6 +39,20 @@ public class ChatRoomInfoDto {
                 .createdAt(DateTimeUtil.convertUTCToKST(chatRoom.getCreatedAt()))
                 .profileImageUrl(chatRoom.getHost().getProfileImageUrl())
                 .hostUserId(chatRoom.getHost().getUserId())
+                .lastMessage(getLastMessage(chatRoom))
                 .build();
+    }
+
+    private static ChatMessageResponseDto getLastMessage(ChatRoom chatRoom) {
+        if (chatRoom.getChatMessages() == null || chatRoom.getChatMessages().isEmpty()) {
+            return null;
+        }
+
+        ChatMessage last = chatRoom.getChatMessages()
+                .stream()
+                .max((m1, m2) -> m1.getCreatedAt().compareTo(m2.getCreatedAt()))
+                .orElse(null);
+
+        return last != null ? ChatMessageResponseDto.from(last) : null;
     }
 }

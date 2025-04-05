@@ -3,6 +3,9 @@ package com.semothon.spring_server.common.config;
 import com.semothon.spring_server.chat.dto.ChatRoomInfoDto;
 import com.semothon.spring_server.chat.dto.CreateChatRoomRequestDto;
 import com.semothon.spring_server.chat.dto.GetChatRoomResponseDto;
+import com.semothon.spring_server.chat.entity.ChatMessage;
+import com.semothon.spring_server.chat.repository.ChatMessageRepository;
+import com.semothon.spring_server.chat.repository.ChatRoomRepository;
 import com.semothon.spring_server.crawling.entity.Crawling;
 import com.semothon.spring_server.crawling.entity.CrawlingInterest;
 import com.semothon.spring_server.crawling.entity.UserCrawlingRecommendation;
@@ -50,6 +53,8 @@ public class DataInitializer {
     private final UserRoomRecommendationRepository userRoomRecommendationRepository;
     private final CrawlingRepository crawlingRepository;
     private final UserCrawlingRecommendationRepository userCrawlingRecommendationRepository;
+    private final ChatMessageRepository chatMessageRepository;
+    private final ChatRoomRepository chatRoomRepository;
 
     private final RoomService roomService;
     private final CrawlingService crawlingService;
@@ -641,6 +646,27 @@ public class DataInitializer {
             Long chatRoom5 = chatRoomResponseDto5.getChatRoomInfo().getChatRoomId();
             crawlingService.joinChatRoom(user4.getUserId(), crawling5.getCrawlingId(), chatRoom5);
             crawlingService.joinChatRoom(user7.getUserId(), crawling5.getCrawlingId(), chatRoom5);
+
+            List<User> messageAuthors = List.of(user1, user2, user3, user4, user5);
+            List<String> sampleMessages = List.of(
+                    "안녕하세요, 이 주제 너무 흥미롭네요!",
+                    "AI로 음악을 만든다는 게 정말 신기해요.",
+                    "저는 클래식 작곡에 AI가 어떻게 쓰일 수 있을지 궁금해요.",
+                    "요즘 생성형 AI로 음악도 만들 수 있더라고요.",
+                    "실제로 들어본 적 있는데 꽤 괜찮았어요!"
+            );
+
+            for (int i = 0; i < messageAuthors.size(); i++) {
+                ChatMessage message = ChatMessage.builder()
+                        .message(sampleMessages.get(i))
+                        .createdAt(LocalDateTime.now().minusMinutes(10L * (5 - i))) // 예: 10분 간격 과거 시간
+                        .build();
+                message.updateUser(messageAuthors.get(i));
+                message.updateChatRoom(chatRoomRepository.findById(Long.valueOf(1)).orElseThrow());
+
+                chatMessageRepository.save(message);
+            }
+
 
 
         } else {
