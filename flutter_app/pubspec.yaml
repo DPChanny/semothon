@@ -41,11 +41,18 @@ dependencies:
   google_sign_in: ^6.1.0
   flutter_native_splash: ^2.3.1 # 예시 버전
   flutter_svg: ^2.0.7
+  url_launcher: ^6.2.5
   http: ^1.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
 
 dev_dependencies:
   flutter_test:

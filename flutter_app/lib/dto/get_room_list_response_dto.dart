@@ -28,12 +28,4 @@ class GetRoomListResponseDto {
       hostInfos: hostInfos,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'totalCount': totalCount,
-      'roomInfos': roomInfos.map((e) => e.toJson()).toList(),
-      'hostInfos': hostInfos.map((e) => e.toJson()).toList(),
-    };
-  }
 }

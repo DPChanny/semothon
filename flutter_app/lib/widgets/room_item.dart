@@ -32,7 +32,7 @@ class RoomItem extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
-                'https://randomuser.me/api/portraits/women/${index + 10}.jpg',
+                room.profileImageUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(

@@ -75,7 +75,10 @@ class RoomPopUp extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () async => {await joinRoom(room.roomId)},
+            onPressed: () async {
+              await joinRoom(room.roomId);
+              Navigator.pop(context);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
               minimumSize: const Size.fromHeight(45),

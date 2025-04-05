@@ -131,14 +131,14 @@ getCrawling(int crawlingId) async {
 }
 
 
-Future<({bool success, String message})> createCrawling(CrawlingUpdateDto crawling) async {
+Future<({bool success, String message})> createCrawling(int crawlingId, CrawlingUpdateDto crawling) async {
   String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure");
   }
 
   final response = await http.post(
-    url('/api/crawlings'),
+    url('/api/crawlings/$crawlingId/chats'),
     headers: {
       'Authorization': 'Bearer $idToken',
       'Content-Type': 'application/json',
