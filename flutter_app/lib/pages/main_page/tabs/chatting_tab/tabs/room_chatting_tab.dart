@@ -27,10 +27,23 @@ class RoomChattingTab extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                'assets/electric_light_bulb_icon.png', // 🔹 이미지 경로
-                width: 83,
-                height: 109,
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: 141,
+                    height: 141,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFE8F4FF), // 연하늘색
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  Image.asset(
+                    'assets/electric_light_bulb_icon.png',
+                    width: 96,
+                    height: 96,
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               const Text(
