@@ -18,9 +18,10 @@ class GetChatResponseDto {
     return GetChatResponseDto(
       chatRoomInfo: ChatRoomInfoDto.fromJson(json['chatRoomInfo']),
       host: HostUserInfoDto.fromJson(json['host']),
-      members: (json['members'] as List)
-          .map((e) => RoomUserInfoDto.fromJson(e))
-          .toList(),
+      members:
+          (json['members'] as List)
+              .map((e) => RoomUserInfoDto.fromJson(e))
+              .toList(),
     );
   }
 }

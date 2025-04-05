@@ -12,7 +12,7 @@ class ChatRoomInfoDto {
   final DateTime createdAt;
   final String profileImageUrl;
   final String hostUserId;
-  final MessageInfoDto lastMessage;
+  final MessageInfoDto? lastMessage;
 
   ChatRoomInfoDto({
     required this.chatRoomId,
@@ -41,8 +41,11 @@ class ChatRoomInfoDto {
       currentMemberCount: json['currentMemberCount'],
       createdAt: DateTime.parse(json['createdAt']),
       profileImageUrl: json['profileImageUrl'],
-      hostUserId:json['hostUserId'],
-      lastMessage: MessageInfoDto.fromJson(json['lastMessage']),
+      hostUserId: json['hostUserId'],
+      lastMessage:
+          json['lastMessage'] != null
+              ? MessageInfoDto.fromJson(json['lastMessage'])
+              : null,
     );
   }
 }

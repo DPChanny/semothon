@@ -28,7 +28,7 @@ public class ChatMessageResponseDto {
                 .senderProfileImageUrl(chatMessage.getUser().getProfileImageUrl())
                 .message(chatMessage.getMessage())
                 .imageUrl(chatMessage.getImageUrl())
-                .createdAt(chatMessage.getCreatedAt())
+                .createdAt(DateTimeUtil.convertUTCToKST(chatMessage.getCreatedAt()))
                 .build();
     }
 }

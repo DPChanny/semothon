@@ -61,10 +61,7 @@ class _ChattingPageState extends State<ChattingPage> {
       endDrawer: buildDrawer(),
       appBar: buildAppBar(),
       body: Column(
-        children: [
-          Expanded(child: buildMessageList()),
-          buildInputBar(),
-        ],
+        children: [Expanded(child: buildMessageList()), buildInputBar()],
       ),
     );
   }
@@ -79,9 +76,15 @@ class _ChattingPageState extends State<ChattingPage> {
           children: [
             Image.network(room.profileImageUrl, width: 96, height: 96),
             const SizedBox(height: 16),
-            Text(room.title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(
+              room.title,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
-            const Text('대화를 시작해 보세요!', style: TextStyle(fontSize: 14, color: Colors.black54)),
+            const Text(
+              '대화를 시작해 보세요!',
+              style: TextStyle(fontSize: 14, color: Colors.black54),
+            ),
           ],
         ),
       ),
@@ -97,9 +100,19 @@ class _ChattingPageState extends State<ChattingPage> {
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(room.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),
+          Text(
+            room.title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
           const SizedBox(width: 4),
-          Text('${room.currentMemberCount}', style: const TextStyle(fontSize: 14, color: Colors.grey)),
+          Text(
+            '${room.currentMemberCount}',
+            style: const TextStyle(fontSize: 14, color: Colors.grey),
+          ),
         ],
       ),
       leading: IconButton(
@@ -126,11 +139,12 @@ class _ChattingPageState extends State<ChattingPage> {
         final bool isMe = msg.senderId == currentUser?.uid;
         final DateTime time = msg.createdAt;
 
-        bool showDateSeparator = index == 0 ||
-            !isSameDay(messages[index - 1].createdAt, time);
+        bool showDateSeparator =
+            index == 0 || !isSameDay(messages[index - 1].createdAt, time);
 
         final messageWidget = Row(
-          mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+          mainAxisAlignment:
+              isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (!isMe)
@@ -142,16 +156,26 @@ class _ChattingPageState extends State<ChattingPage> {
                 ),
               ),
             Column(
-              crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 if (!isMe)
-                  Text(msg.senderNickname, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                  Text(
+                    msg.senderNickname,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
                 Container(
                   margin: const EdgeInsets.only(top: 4),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   constraints: const BoxConstraints(maxWidth: 280),
                   decoration: BoxDecoration(
-                    color: isMe ? const Color(0xFF008CFF) : const Color(0xFFF2F2F2),
+                    color:
+                        isMe
+                            ? const Color(0xFF008CFF)
+                            : const Color(0xFFF2F2F2),
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(16),
                       topRight: const Radius.circular(16),
@@ -161,7 +185,10 @@ class _ChattingPageState extends State<ChattingPage> {
                   ),
                   child: Text(
                     msg.message,
-                    style: TextStyle(color: isMe ? Colors.white : Colors.black, fontSize: 14),
+                    style: TextStyle(
+                      color: isMe ? Colors.white : Colors.black,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -194,7 +221,10 @@ class _ChattingPageState extends State<ChattingPage> {
       ),
       child: Row(
         children: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle_outline)),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.add_circle_outline),
+          ),
           IconButton(onPressed: () {}, icon: const Icon(Icons.insert_emoticon)),
           Expanded(
             child: Container(
@@ -219,9 +249,14 @@ class _ChattingPageState extends State<ChattingPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF008CFF),
               minimumSize: const Size(48, 36),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
             ),
-            child: const Text('전송', style: TextStyle(fontSize: 14, color: Colors.white)),
+            child: const Text(
+              '전송',
+              style: TextStyle(fontSize: 14, color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -239,22 +274,22 @@ class _ChattingPageState extends State<ChattingPage> {
       'imageUrl': null,
     };
 
-    StompService.instance.send(
-      '/pub/chat/message',
-      jsonEncode(msg),
-    );
+    StompService.instance.send('/pub/chat/message', jsonEncode(msg));
 
     _controller.clear();
   }
 
   Widget buildDateSeparator(DateTime date) {
-    final formatted = "${date.year}년 ${date.month}월 ${date.day}일 ${_getWeekday(date.weekday)}";
+    final formatted =
+        "${date.year}년 ${date.month}월 ${date.day}일 ${_getWeekday(date.weekday)}";
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          const Expanded(child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6)),
+          const Expanded(
+            child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6),
+          ),
           const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
@@ -274,7 +309,9 @@ class _ChattingPageState extends State<ChattingPage> {
             ),
           ),
           const SizedBox(width: 8),
-          const Expanded(child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6)),
+          const Expanded(
+            child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6),
+          ),
         ],
       ),
     );

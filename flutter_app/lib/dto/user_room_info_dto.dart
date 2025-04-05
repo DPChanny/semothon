@@ -1,5 +1,3 @@
-
-
 class UserRoomInfoDto {
   final int roomId;
   final DateTime joinedAt;

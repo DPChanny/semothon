@@ -97,7 +97,8 @@ getCrawlingList({
   }
 }
 
-Future<({bool success, String message, GetCrawlingResponseDto? crawling})> getCrawling(int crawlingId) async {
+Future<({bool success, String message, GetCrawlingResponseDto? crawling})>
+getCrawling(int crawlingId) async {
   String? idToken;
 
   try {
@@ -120,9 +121,9 @@ Future<({bool success, String message, GetCrawlingResponseDto? crawling})> getCr
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    crawling: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      crawling: null,
     );
   }
 
@@ -131,15 +132,11 @@ Future<({bool success, String message, GetCrawlingResponseDto? crawling})> getCr
     final data = decoded['data']['crawling'];
 
     return (
-    success: true,
-    message: "succeed",
-    crawling: GetCrawlingResponseDto.fromJson(data),
+      success: true,
+      message: "succeed",
+      crawling: GetCrawlingResponseDto.fromJson(data),
     );
   } catch (e) {
-    return (
-    success: false,
-    message: "parsing failure: $e",
-    crawling: null,
-    );
+    return (success: false, message: "parsing failure: $e", crawling: null);
   }
 }

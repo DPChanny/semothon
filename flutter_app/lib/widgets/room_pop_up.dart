@@ -48,7 +48,7 @@ class RoomPopUp extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                '${room.capacity} / 10',
+                '${room.currentMemberCount} / ${room.capacity}',
                 style: const TextStyle(fontSize: 14, color: Colors.grey),
               ),
             ],
@@ -75,9 +75,7 @@ class RoomPopUp extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () async => {
-              await joinRoom(room.roomId)
-            },
+            onPressed: () async => {await joinRoom(room.roomId)},
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue,
               minimumSize: const Size.fromHeight(45),

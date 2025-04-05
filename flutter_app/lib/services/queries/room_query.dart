@@ -130,7 +130,9 @@ getRoomList({
   }
 }
 
-Future<({bool success, String message, GetRoomResponseDto? room})> getRoom(int roomId) async {
+Future<({bool success, String message, GetRoomResponseDto? room})> getRoom(
+  int roomId,
+) async {
   String? idToken;
 
   try {
@@ -153,9 +155,9 @@ Future<({bool success, String message, GetRoomResponseDto? room})> getRoom(int r
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    room: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      room: null,
     );
   }
 
@@ -164,17 +166,18 @@ Future<({bool success, String message, GetRoomResponseDto? room})> getRoom(int r
     final data = decoded['data'];
 
     return (
-    success: true,
-    message: "succeed",
-    room: GetRoomResponseDto.fromJson(data),
+      success: true,
+      message: "succeed",
+      room: GetRoomResponseDto.fromJson(data),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", room: null);
   }
 }
 
-
-Future<({bool success, String message, GetRoomResponseDto? room})> joinRoom(int roomId) async {
+Future<({bool success, String message, GetRoomResponseDto? room})> joinRoom(
+  int roomId,
+) async {
   String? idToken;
 
   try {
@@ -197,9 +200,9 @@ Future<({bool success, String message, GetRoomResponseDto? room})> joinRoom(int 
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    room: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      room: null,
     );
   }
 
@@ -208,11 +211,43 @@ Future<({bool success, String message, GetRoomResponseDto? room})> joinRoom(int 
     final data = decoded['data'];
 
     return (
-    success: true,
-    message: "succeed",
-    room: GetRoomResponseDto.fromJson(data),
+      success: true,
+      message: "succeed",
+      room: GetRoomResponseDto.fromJson(data),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", room: null);
+  }
+}
+
+Future<({bool success, String message})> leaveRoom(int roomId) async {
+  String? idToken;
+
+  try {
+    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure: $e");
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure");
+  }
+
+  final response = await http.post(
+    url("api/rooms/$roomId/leave"),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (success: false, message: "server failure: ${response.body}");
+  }
+
+  try {
+    return (success: true, message: "succeed");
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e");
   }
 }
