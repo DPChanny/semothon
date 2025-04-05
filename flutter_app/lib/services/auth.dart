@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -13,4 +14,22 @@ GoogleSignIn getGoogleSignIn() {
   }
 
   return googleSignIn;
+}
+
+Future<String?> getSafeIdToken() async {
+  try {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return null;
+
+    String? token = await user.getIdToken(false);
+
+    if (token == null || token.isEmpty) {
+      token = await user.getIdToken(true);
+    }
+
+    return token;
+  } catch (e) {
+    print('🔴 Token fetch error: $e');
+    return null;
+  }
 }

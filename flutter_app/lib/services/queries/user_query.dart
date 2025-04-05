@@ -6,18 +6,13 @@ import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/dto/user_update_dto.dart';
 import 'package:flutter_app/dto/user_update_interest_dto.dart';
+import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
 //로그인 후 유저 정보 조회
 Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", user: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", user: null);
   }
@@ -54,13 +49,7 @@ Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
 // 현재 유저 정보
 Future<({bool success, String message, GetUserResponseDto? user})>
 getUser() async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", user: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", user: null);
   }
@@ -97,13 +86,7 @@ getUser() async {
 Future<({bool success, String message, GetUserResponseDto? user})> getOtherUser(
   String userId,
 ) async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", user: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", user: null);
   }
@@ -139,13 +122,7 @@ Future<({bool success, String message, GetUserResponseDto? user})> getOtherUser(
 
 // 유저 정보 업데이트
 Future<({bool success, String message})> updateUser() async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e");
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure");
   }
@@ -168,13 +145,7 @@ Future<({bool success, String message})> updateUser() async {
 
 Future<({bool success, String message, String? introText})>
 updateUserInterest() async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", introText: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", introText: null);
   }
@@ -208,13 +179,7 @@ updateUserInterest() async {
 }
 
 Future<({bool success, String message})> updateUserIntro() async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e");
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure");
   }
@@ -254,13 +219,7 @@ getUserList({
   int? limit,
   int? page,
 }) async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", userList: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", userList: null);
   }

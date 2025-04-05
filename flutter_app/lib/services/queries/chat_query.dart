@@ -5,11 +5,12 @@ import 'package:flutter_app/dto/get_chat_list_response_dto.dart';
 import 'package:flutter_app/dto/get_chat_response_dto.dart';
 import 'package:flutter_app/dto/get_message_response_dto.dart';
 import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
+import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
 Future<({bool success, String message, GetChatListResponseDto? roomList})>
-getRoomList({
+getChatList({
   List<String>? titleKeyword,
   List<String>? descriptionKeyword,
   List<String>? titleOrDescriptionKeyword,
@@ -29,13 +30,7 @@ getRoomList({
   int? limit,
   int? page,
 }) async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", roomList: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", roomList: null);
   }
@@ -100,14 +95,7 @@ getRoomList({
 Future<({bool success, String message, GetChatResponseDto? room})> getChat(
   int chatId,
 ) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e", room: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", room: null);
   }
@@ -144,14 +132,7 @@ Future<({bool success, String message, GetChatResponseDto? room})> getChat(
 
 Future<({bool success, String message, GetMessageResponseDto? room})>
 getChatMessage(int chatId) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e", room: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", room: null);
   }
@@ -188,14 +169,7 @@ getChatMessage(int chatId) async {
 
 Future<({bool success, String message, GetUnreadMessageCountResponseDto? room})>
 getUnreadMessageCount() async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e", room: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", room: null);
   }

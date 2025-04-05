@@ -90,19 +90,13 @@ class CrawlingChattingTab extends StatelessWidget {
     }
 
 
-    return ListView.separated(
+    return ListView.builder(
       itemCount: roomInfos.length,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      separatorBuilder: (_, __) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final room = roomInfos[index];
         final unread = unreadInfos.firstWhere(
           (item) => item.chatRoomId == room.chatRoomId,
-          orElse:
-              () => UnreadMessageCountDto(
-                chatRoomId: room.chatRoomId,
-                unreadCount: 0,
-              ),
         );
 
         return ChatItem(
