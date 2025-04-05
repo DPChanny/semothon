@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app/dto/crawling_update_dto.dart';
 import 'package:flutter_app/dto/get_crawling_list_response_dto.dart';
 import 'package:flutter_app/dto/get_crawling_response_dto.dart';
 import 'package:flutter_app/services/url.dart';
@@ -112,7 +113,7 @@ getCrawling(int crawlingId) async {
   }
 
   final response = await http.get(
-    url("api/crawling/$crawlingId"),
+    url("api/crawlings/$crawlingId"),
     headers: {
       'Authorization': 'Bearer $idToken',
       'Content-Type': 'application/json',
@@ -138,5 +139,116 @@ getCrawling(int crawlingId) async {
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", crawling: null);
+  }
+}
+
+
+Future<({bool success, String message})> createCrawling(CrawlingUpdateDto crawling) async {
+  String? idToken;
+  try {
+    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure $e");
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure");
+  }
+
+  final response = await http.post(
+    url('/api/crawlings'),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(crawling.toJson()),
+  );
+
+  if (response.statusCode != 201) {
+    final responseBody = response.body;
+    return (success: false, message: "server failure: $responseBody");
+  }
+
+  try {
+    return (success: true, message: "succeed");
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e");
+  }
+}
+
+Future<({bool success, String message, GetCrawlingResponseDto? room})> joinCrawling(
+    int crawlingId, int chatRoomId
+    ) async {
+  String? idToken;
+
+  try {
+    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure: $e", room: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", room: null);
+  }
+
+  final response = await http.post(
+    url("api/rooms/$crawlingId/chats/$chatRoomId/join"),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+    success: false,
+    message: "server failure: ${response.body}",
+    room: null,
+    );
+  }
+
+  try {
+    final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+    final data = decoded['data'];
+
+    return (
+    success: true,
+    message: "succeed",
+    room: GetCrawlingResponseDto.fromJson(data),
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e", room: null);
+  }
+}
+
+Future<({bool success, String message})> leaveCrawling(int crawlingId, int chatRoomId) async {
+  String? idToken;
+
+  try {
+    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure: $e");
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure");
+  }
+
+  final response = await http.post(
+    url("api/crawlings/$crawlingId/chats/$chatRoomId/leave"),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (success: false, message: "server failure: ${response.body}");
+  }
+
+  try {
+    return (success: true, message: "succeed");
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e");
   }
 }

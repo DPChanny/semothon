@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ✅ 데이터 모델
 class Activity {
   final String title;
   final String description;
@@ -14,28 +15,29 @@ class Activity {
   });
 }
 
+// ✅ 예시 데이터
 final List<Activity> recommendedList = [
   Activity(
-    title: 'Cat Contest',
-    description: 'Show off your cute cat!',
+    title: '고양이 공모전',
+    description: '귀여운 고양이를 자랑해 보세요!',
     imageUrl: 'https://placekitten.com/200/200',
-    tags: ['cat', 'contest'],
+    tags: ['고양이', '공모전'],
   ),
   Activity(
-    title: 'Cute Paw Competition',
-    description: 'Find the world’s cutest paw!',
+    title: '고양이 발바닥 공모전',
+    description: '세상에서 가장 귀여운 발바닥을 찾아요',
     imageUrl: 'https://placekitten.com/201/200',
-    tags: ['cat', 'cute'],
+    tags: ['고양이', '귀여움'],
   ),
 ];
 
-final List<Activity> latestActivities = [
+final List<Activity> latestList = [
   Activity(
-    title: 'Cat Contest',
+    title: '고양이 공모전',
     description:
-    'Cats are cute. Because they are. I’m cute too, but not as much as cats... So...',
+    '고양이는 귀엽다. 왜냐면 귀엽기 때문이다. 나도 귀엽다. 하지만 너는 고양이만큼은 아니다... 그래서...',
     imageUrl: 'https://placekitten.com/300/200',
-    tags: ['coding', 'challenge'],
+    tags: ['코딩', '챌린지'],
   ),
 ];
 
@@ -45,24 +47,13 @@ class CrawlingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Recommended Activities'),
-        centerTitle: false,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0.5,
-        actions: const [
-          Icon(Icons.search),
-          SizedBox(width: 16),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildPersonalRecommendation(),
             const SizedBox(height: 24),
-            _buildLatestActivities(),
+            _buildLatestRecommendation(),
             const SizedBox(height: 32),
           ],
         ),
@@ -70,7 +61,7 @@ class CrawlingTab extends StatelessWidget {
     );
   }
 
-  // ✅ Personal recommendation section
+  // ✅ 개인화 추천
   Widget _buildPersonalRecommendation() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +75,7 @@ class CrawlingTab extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Semo Kim',
+                        text: '김세모',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
@@ -92,7 +83,7 @@ class CrawlingTab extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: ', these activities are just for you!',
+                        text: '님에게 딱 맞는 활동은?',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -115,7 +106,7 @@ class CrawlingTab extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             itemCount: recommendedList.length,
             itemBuilder: (context, index) {
-              final activity = recommendedList[index];
+              final item = recommendedList[index];
               return Container(
                 width: 140,
                 margin: const EdgeInsets.only(right: 12),
@@ -126,20 +117,21 @@ class CrawlingTab extends StatelessWidget {
                       aspectRatio: 1,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: Image.network(activity.imageUrl, fit: BoxFit.cover),
+                        child: Image.network(item.imageUrl, fit: BoxFit.cover),
                       ),
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      activity.title,
+                      item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '#${activity.tags.first}',
-                      style: const TextStyle(fontSize: 12, color: Colors.black54),
+                      '#${item.tags.first}',
+                      style:
+                      const TextStyle(fontSize: 12, color: Colors.black54),
                     ),
                   ],
                 ),
@@ -151,8 +143,8 @@ class CrawlingTab extends StatelessWidget {
     );
   }
 
-  // ✅ Latest activity section
-  Widget _buildLatestActivities() {
+  // ✅ 최신 추천
+  Widget _buildLatestRecommendation() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -176,7 +168,7 @@ class CrawlingTab extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            'Check out the latest recommended activities',
+            '최신순으로 추천 활동을 확인해 보세요',
             style: TextStyle(fontSize: 13, color: Colors.grey),
           ),
         ),
@@ -185,9 +177,9 @@ class CrawlingTab extends StatelessWidget {
           height: 200,
           child: PageView.builder(
             controller: PageController(viewportFraction: 0.85),
-            itemCount: latestActivities.length,
+            itemCount: latestList.length,
             itemBuilder: (context, index) {
-              final activity = latestActivities[index];
+              final item = latestList[index];
               return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 8),
                 padding: const EdgeInsets.all(16),
@@ -199,7 +191,7 @@ class CrawlingTab extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      activity.title,
+                      item.title,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -209,7 +201,7 @@ class CrawlingTab extends StatelessWidget {
                     const SizedBox(height: 6),
                     Expanded(
                       child: Text(
-                        activity.description,
+                        item.description,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -220,7 +212,7 @@ class CrawlingTab extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      '#${activity.tags.join(" #")}',
+                      '#${item.tags.join(" #")}',
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.white70,
