@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/dto/chat_room_info_dto.dart';
+import 'package:flutter_app/services/queries/crawling_query.dart';
 
 Future<bool> isCurrentUserHost() async {
   final result = await getUser();
@@ -83,14 +84,14 @@ class _MyPageHeaderState extends State<MyPageHeader> {
                       ),
                       child: Column(
                         children: [
-                          const SizedBox(height: 38),
+                          const SizedBox(height: 70),
                           // 닉네임
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 widget.user.nickname ?? '닉네임 없음',
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(width: 4),
                               const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.blue),
@@ -161,7 +162,9 @@ class _MyPageHeaderState extends State<MyPageHeader> {
                           else
                             _buildBecomeMentorSection(),
 
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 20),
+
+                          _buildActivitySection(context)
                         ],
                       ),
                     ),
@@ -171,7 +174,7 @@ class _MyPageHeaderState extends State<MyPageHeader> {
                         alignment: Alignment.bottomRight,
                         children: [
                           CircleAvatar(
-                            radius: 50,
+                            radius: 70,
                             backgroundImage: NetworkImage(widget.user.profileImageUrl),
                           ),
                           Positioned(
@@ -277,4 +280,74 @@ class _MyPageHeaderState extends State<MyPageHeader> {
       ),
     );
   }
+}
+
+
+
+Widget _buildActivitySection(BuildContext context) {
+  return FutureBuilder(
+    future: getCrawlingList(limit: 4), // 예: 최근 4개만 가져오기
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return const CircularProgressIndicator();
+      }
+
+      final result = snapshot.data!;
+      final crawlingList = result.crawlingList?.crawlingList ?? [];
+
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("참여한 활동", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 12),
+            if (crawlingList.isEmpty)
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text("😎", style: TextStyle(fontSize: 40)),
+                      SizedBox(width: 8),
+                      Text("나에게 딱 맞는\n활동을 찾아보세요", textAlign: TextAlign.center),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: () {
+                      // TODO: 활동 보러가기 화면으로 이동
+                    },
+                    child: const Text("보러가기"),
+                  )
+                ],
+              )
+            else
+              SizedBox(
+                height: 100,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: crawlingList.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  itemBuilder: (context, index) {
+                    final item = crawlingList[index];
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        item.imageUrl,
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.broken_image),
+                      ),
+                    );
+                  },
+                ),
+              ),
+          ],
+        ),
+      );
+    },
+  );
 }
