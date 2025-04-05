@@ -5,6 +5,7 @@ import com.semothon.spring_server.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -42,6 +43,10 @@ public class ChatUser {
     @Column(nullable = false, length = 20)
     private ChatUserRole role;
 
+    @Column(name = "last_read_at", columnDefinition = "TIMESTAMP")
+    @Builder.Default
+    private LocalDateTime lastReadAt = LocalDateTime.now();
+
     public void updateUser(User user){
         this.user = user;
         user.addChatUser(this);
@@ -50,5 +55,9 @@ public class ChatUser {
     public void updateChatRoom(ChatRoom chatRoom){
         this.chatRoom = chatRoom;
         chatRoom.addChatUser(this);
+    }
+
+    public void updateLastReadAt(LocalDateTime time) {
+        this.lastReadAt = time;
     }
 }
