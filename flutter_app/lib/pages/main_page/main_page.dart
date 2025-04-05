@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/chatting_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
 
@@ -36,7 +37,7 @@ class _MainPageState extends State<MainPage> {
     HomeTab(),
     ChattingTab(),
     MentoringTab(),
-    Center(child: Text("추천 활동")),
+    CrawlingTab(),
   ];
 
   @override
