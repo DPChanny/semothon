@@ -103,11 +103,11 @@ public class UserController {
             condition.setCreatedBefore(DateTimeUtil.convertKSTToUTC(condition.getCreatedBefore()));
         }
 
-        List<User> userList = userService.getUserList(user.getUserId(), condition);
+        List<UserWithScoreDto> userList = userService.getUserList(user.getUserId(), condition);
 
         List<GetUserListResponseDto> userListResponseDtos =
                 userList.stream()
-                        .map(GetUserListResponseDto::from)
+                        .map(u -> GetUserListResponseDto.from(u.user(), u.score()))
                         .toList();
 
         return BaseResponse.success(Map.of("code", 200, "totalCount", userListResponseDtos.size(), "userList", userListResponseDtos), "Search results retrieved successfully");

@@ -16,7 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.semothon.spring_server.interest.entity.QInterest.interest;
 import static com.semothon.spring_server.room.entity.QRoom.room;
@@ -32,8 +35,8 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
     @Override
-    public List<Room> searchRoomList(RoomSearchCondition condition, String currentUserId) {
-        List<RoomWithScoreDto> results = queryFactory
+    public List<RoomWithScoreDto> searchRoomList(RoomSearchCondition condition, String currentUserId) {
+        List<RoomWithScoreDto> rawResults = queryFactory
                 .select(Projections.constructor(RoomWithScoreDto.class, room, userRoomRecommendation.score))
                 .from(room)
                 .leftJoin(room.host, user).fetchJoin()
@@ -41,7 +44,7 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
                 .leftJoin(room.roomInterests, roomInterest)
                 .leftJoin(roomInterest.interest, interest)
                 .leftJoin(room.userRoomRecommendations, userRoomRecommendation)
-                    .on(userRoomRecommendation.user.userId.eq(currentUserId))
+                .on(userRoomRecommendation.user.userId.eq(currentUserId))
                 .where(
                         titleKeywordIn(condition.getTitleKeyword()),
                         descriptionKeywordIn(condition.getDescriptionKeyword()),
@@ -61,11 +64,19 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
                 .limit(condition.getLimit())
                 .fetch();
 
-        List<Room> rooms = results.stream()
-                .map(RoomWithScoreDto::room)
-                .toList();
+        // ✅ roomId 기준 중복 제거
+        List<RoomWithScoreDto> deduplicated = rawResults.stream()
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toMap(
+                                dto -> dto.room().getRoomId(),
+                                dto -> dto,
+                                (existing, replacement) -> existing,
+                                LinkedHashMap::new
+                        ),
+                        m -> new ArrayList<>(m.values())
+                ));
 
-        return rooms;
+        return deduplicated;
     }
 
     private BooleanExpression titleKeywordIn(List<String> keywords) {
@@ -110,7 +121,6 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
         return null;
     }
 
-    //추후 운영 과정 검증 필요
     private BooleanExpression recommendationScoreBetween(Double min, Double max) {
         if (min != null && max != null) return userRoomRecommendation.score.between(min, max);
         else if (min != null) return userRoomRecommendation.score.goe(min);
@@ -136,7 +146,6 @@ public class RoomRepositoryCustomImpl implements RoomRepositoryCustom{
                 .notExists();
     }
 
-    //추후 운영 검증 필요
     private BooleanExpression createdAtBetween(LocalDateTime start, LocalDateTime end) {
         if (start != null && end != null) return room.createdAt.between(start, end);
         else if (start != null) return room.createdAt.goe(start);

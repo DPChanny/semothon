@@ -7,6 +7,7 @@ import com.semothon.spring_server.chat.dto.UpdateChatRoomRequestDto;
 import com.semothon.spring_server.chat.service.ChatRoomService;
 import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.crawling.dto.CrawlingSearchCondition;
+import com.semothon.spring_server.crawling.dto.CrawlingWithScoreDto;
 import com.semothon.spring_server.crawling.dto.GetCrawlingResponseDto;
 import com.semothon.spring_server.crawling.entity.Crawling;
 import com.semothon.spring_server.crawling.repository.CrawlingRepository;
@@ -38,7 +39,7 @@ public class CrawlingService {
     }
 
     @Transactional(readOnly = true)
-    public List<Crawling> getCrawlingList(String userId, CrawlingSearchCondition condition) {
+    public List<CrawlingWithScoreDto> getCrawlingList(String userId, CrawlingSearchCondition condition) {
         return crawlingRepository.searchCrawlingList(condition, userId);
     }
 
