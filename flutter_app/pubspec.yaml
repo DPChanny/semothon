@@ -68,6 +68,7 @@ flutter:
     - assets/interest_category_icon/
 
     - assets/env/
+    - assets/widget_icon/
 
   fonts:
     - family: Noto Sans KR

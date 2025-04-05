@@ -15,7 +15,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.semothon.spring_server.interest.entity.QInterest.interest;
 import static com.semothon.spring_server.room.entity.QRoom.room;
@@ -61,7 +64,15 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
 
         List<User> users = results.stream()
                 .map(UserWithScoreDto::user)
-                .toList();
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toMap(
+                                User::getUserId,
+                                u -> u,
+                                (existing, replacement) -> existing,
+                                LinkedHashMap::new // ✅ 순서를 보장!
+                        ),
+                        m -> new ArrayList<>(m.values())
+                ));
 
         return users;
     }

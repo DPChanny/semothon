@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/crawling_info_dto.dart';
 import 'package:flutter_app/dto/get_user_list_response_dto.dart';
@@ -56,7 +58,7 @@ class _HomeTabState extends State<HomeTab> {
       return;
     }
 
-    final mentors = await getUserList(sortBy: "SCORE", limit: 3);
+    final mentors = await getUserList(sortBy: "SCORE");
     if (!mentors.success) {
       ScaffoldMessenger.of(
         context,
@@ -69,7 +71,7 @@ class _HomeTabState extends State<HomeTab> {
       return;
     }
 
-    final crawlings = await getCrawlingList(sortBy: "SCORE", limit: 10);
+    final crawlings = await getCrawlingList(sortBy: "SCORE");
     if (!crawlings.success) {
       ScaffoldMessenger.of(
         context,
@@ -152,7 +154,7 @@ class _HomeTabState extends State<HomeTab> {
                       const SizedBox(height: 16),
                       Column(
                         children:
-                            _mentors?.userInfos
+                            _mentors?.userInfos.sublist(0, min(_mentors!.userInfos.length, 3))
                                 .map((m) => MentorItem(mentor: m))
                                 .toList() ??
                             [],
@@ -199,7 +201,7 @@ class _HomeTabState extends State<HomeTab> {
                   height: 200,
                   child: PageView.builder(
                     controller: pageController,
-                    itemCount: _crawlings.length,
+                    itemCount: min(_crawlings.length, 5),
                     itemBuilder: (context, index) {
                       return crawlingItem(context, _crawlings[index]);
                     },
