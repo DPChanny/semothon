@@ -7,6 +7,7 @@ class RoomInfoDto {
   final int currentMemberCount;
   final int? chatRoomId;
   final List<String> interests;
+  final String profileImageUrl;
 
   RoomInfoDto({
     required this.roomId,
@@ -17,6 +18,7 @@ class RoomInfoDto {
     required this.currentMemberCount,
     required this.chatRoomId,
     required this.interests,
+    required this.profileImageUrl,
   });
 
   factory RoomInfoDto.fromJson(Map<String, dynamic> json) {
@@ -29,19 +31,7 @@ class RoomInfoDto {
       currentMemberCount: json['currentMemberCount'],
       chatRoomId: json['chatRoomId'],
       interests: List<String>.from(json['interests']),
+      profileImageUrl: json['profileImageUrl'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'roomId': roomId,
-      'title': title,
-      'description': description,
-      'capacity': capacity,
-      'createdAt': createdAt.toIso8601String(),
-      'currentMemberCount': currentMemberCount,
-      'chatRoomId': chatRoomId,
-      'interests': interests,
-    };
   }
 }

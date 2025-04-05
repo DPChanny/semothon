@@ -1,255 +1,226 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/main_page/tabs/crawling_tab/recommend_crawling.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/dto/crawling_info_dto.dart';
+import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_detail.dart';
+import 'package:flutter_app/services/queries/crawling_query.dart';
 
-class Activity {
-  final String title;
-  final String description;
-  final String imageUrl;
-  final List<String> tags;
+enum SortType { recommendation, recent }
 
-  Activity({
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-    required this.tags,
-  });
-}
-
-CrawlingInfoDto convertToCrawlingInfoDto(Activity activity) {
-  return CrawlingInfoDto(
-    crawlingId: 0,
-    title: activity.title,
-    url: '',
-    imageUrl: activity.imageUrl,
-    description: activity.description,
-    deadlinedAt: DateTime.now().add(const Duration(days: 30)),
-    crawledAt: DateTime.now(),
-    chatRoomsId: [],
-    interests: activity.tags,
-  );
-}
-
-final List<Activity> recommendedList = [
-  Activity(
-    title: '고양이 공모전',
-    description: '귀여운 고양이를 자랑해 보세요!',
-    imageUrl: 'https://placekitten.com/200/200',
-    tags: ['고양이', '공모전'],
-  ),
-  Activity(
-    title: '고양이 발바닥 공모전',
-    description: '세상에서 가장 귀여운 발바닥을 찾아요',
-    imageUrl: 'https://placekitten.com/201/200',
-    tags: ['고양이', '귀여움'],
-  ),
-];
-
-final List<Activity> latestList = [
-  Activity(
-    title: '고양이 공모전',
-    description:
-        '고양이는 귀엽다. 왜냐면 귀엽기 때문이다. 나도 귀엽다. 하지만 너는 고양이만큼은 아니다... 그래서...',
-    imageUrl: 'https://placekitten.com/300/200',
-    tags: ['코딩', '챌린지'],
-  ),
-];
-
-class CrawlingTab extends StatelessWidget {
+class CrawlingTab extends StatefulWidget {
   const CrawlingTab({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPersonalRecommendation(context),
-            const SizedBox(height: 24),
-            _buildLatestRecommendation(),
-            const SizedBox(height: 32),
-          ],
+  State<CrawlingTab> createState() => _CrawlingTabState();
+}
+
+class _CrawlingTabState extends State<CrawlingTab> {
+  List<CrawlingInfoDto> items = [];
+  SortType selectedSort = SortType.recommendation;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCrawlings(); // 초기 로딩 (추천순)
+  }
+
+  Future<void> _fetchCrawlings() async {
+    final sortBy = selectedSort == SortType.recommendation ? 'SCORE' : 'CRAWLED_AT';
+    final result = await getCrawlingList(sortBy: sortBy);
+
+    if (result.success && result.crawlingList != null) {
+      setState(() {
+        items = result.crawlingList!.crawlingList.take(10).toList();
+      });
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(result.message)),
+        );
+      }
+    }
+  }
+
+  Widget _buildRecommendationCard(CrawlingInfoDto crawling) {
+    return _buildGenericCard(crawling);
+  }
+
+  Widget _buildRecentCard(CrawlingInfoDto crawling) {
+    return _buildGenericCard(crawling);
+  }
+
+  Widget _buildGenericCard(CrawlingInfoDto crawling) {
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => CrawlingDetailPage(dto: crawling),
+          ),);
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 4,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  crawling.imageUrl,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    width: 100,
+                    height: 100,
+                    color: Colors.grey[300],
+                    child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      crawling.title,
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      crawling.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: crawling.interests.map((interest) {
+                        return Text(
+                          '#$interest',
+                          style: const TextStyle(
+                            color: Color(0xFF007BFF),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildPersonalRecommendation(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              const Expanded(
-                child: Text.rich(
-                  TextSpan(
+  @override
+  Widget build(BuildContext context) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 20, 16, 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'AI의 맞춤 추천',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Row(
                     children: [
-                      TextSpan(
-                        text: '김세모',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          fontSize: 18,
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedSort = SortType.recommendation;
+                          });
+                          _fetchCrawlings();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: selectedSort == SortType.recommendation
+                                ? const Color(0xFF007BFF)
+                                : const Color(0xFFF1F1F1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          child: Text(
+                            '추천순',
+                            style: TextStyle(
+                              color: selectedSort == SortType.recommendation
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
                         ),
                       ),
-                      TextSpan(
-                        text: '님에게 딱 맞는 활동은?',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 18,
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedSort = SortType.recent;
+                          });
+                          _fetchCrawlings();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: selectedSort == SortType.recent
+                                ? const Color(0xFF007BFF)
+                                : const Color(0xFFF1F1F1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          child: Text(
+                            '최신순',
+                            style: TextStyle(
+                              color: selectedSort == SortType.recent
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
+                ],
               ),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.blue),
-                onPressed: () {
-                  final crawlingDtos = recommendedList
-                      .map((e) => convertToCrawlingInfoDto(e))
-                      .toList();
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => RecommendationPage(crawlingItems: crawlingDtos),
-                    ),
-                  );
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: items.length,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemBuilder: (context, index) {
+                  final dto = items[index];
+                  return selectedSort == SortType.recommendation
+                      ? _buildRecommendationCard(dto)
+                      : _buildRecentCard(dto);
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        const SizedBox(height: 12),
-        SizedBox(
-          height: 180,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: recommendedList.length,
-            itemBuilder: (context, index) {
-              final item = recommendedList[index];
-              return Container(
-                width: 140,
-                margin: const EdgeInsets.only(right: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(item.imageUrl, fit: BoxFit.cover),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      item.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      '#${item.tags.first}',
-                      style: const TextStyle(fontSize: 12, color: Colors.black54),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLatestRecommendation() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: const [
-              Expanded(
-                child: Text(
-                  'New',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Icon(Icons.arrow_forward_ios, size: 16, color: Colors.blue),
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            '최신순으로 추천 활동을 확인해 보세요',
-            style: TextStyle(fontSize: 13, color: Colors.grey),
-          ),
-        ),
-        const SizedBox(height: 12),
-        SizedBox(
-          height: 200,
-          child: PageView.builder(
-            controller: PageController(viewportFraction: 0.85),
-            itemCount: latestList.length,
-            itemBuilder: (context, index) {
-              final item = latestList[index];
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8),
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Expanded(
-                      child: Text(
-                        item.description,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      '#${item.tags.join(" #")}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
