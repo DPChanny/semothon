@@ -6,6 +6,8 @@ import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 
+import 'my_page_routes.dart';
+
 final Map<String, WidgetBuilder> appRoutes = {
   ...mainPageRoutes,
   ...loginPageRoutes,
@@ -13,4 +15,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   ...interestPageRoutes,
   ...chatPageRoutes,
   ...myMentorTabRoutes,
+  ...myPageRoutes
 };

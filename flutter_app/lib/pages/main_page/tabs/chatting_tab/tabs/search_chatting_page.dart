@@ -49,7 +49,7 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
       setState(() {
         _roomResults = rooms;
         _crawlingResults = crawlings;
-        _unreadResults = result2.room!.unreadCounts;
+        _unreadResults = result2.room?.unreadCounts ?? [];
         _isLoading = false;
       });
     } else {
@@ -67,6 +67,15 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
       _crawlingResults = [];
       _error = "";
     });
+  }
+
+  int _getUnreadCount(int roomId) {
+    return _unreadResults
+        .firstWhere(
+          (item) => item.chatRoomId == roomId,
+      orElse: () => UnreadMessageCountDto(chatRoomId: roomId, unreadCount: 0),
+    )
+        .unreadCount;
   }
 
   @override
@@ -93,7 +102,10 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
                   const Center(child: Text('검색 결과가 없습니다'))
                 else ...[
                     if (_roomResults.isNotEmpty) ...[
-                      const Text('멘토링 방', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      const Text(
+                        '멘토링 방',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(height: 8),
                       ListView.builder(
                         shrinkWrap: true,
@@ -103,16 +115,17 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
                           final room = _roomResults[index];
                           return ChatItem(
                             room: room,
-                            unreadCount: _unreadResults.firstWhere(
-                                  (item) => item.chatRoomId == room.chatRoomId,
-                            ).unreadCount,
+                            unreadCount: _getUnreadCount(room.chatRoomId),
                           );
                         },
                       ),
                       const SizedBox(height: 24),
                     ],
                     if (_crawlingResults.isNotEmpty) ...[
-                      const Text('활동 방', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      const Text(
+                        '활동 방',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(height: 8),
                       ListView.builder(
                         shrinkWrap: true,
@@ -122,9 +135,7 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
                           final room = _crawlingResults[index];
                           return ChatItem(
                             room: room,
-                            unreadCount: _unreadResults.firstWhere(
-                                  (item) => item.chatRoomId == room.chatRoomId,
-                            ).unreadCount,
+                            unreadCount: _getUnreadCount(room.chatRoomId),
                           );
                         },
                       ),

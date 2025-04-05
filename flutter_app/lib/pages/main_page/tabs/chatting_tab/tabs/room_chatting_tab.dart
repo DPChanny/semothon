@@ -95,13 +95,13 @@ class RoomChattingTab extends StatelessWidget {
             final result = await leaveRoom(room.roomId!);
 
             if (context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    result.success ? '채팅방을 나갔습니다' : '나가기 실패: ${result.message}',
+              if (!result.success) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(result.message),
                   ),
-                ),
-              );
+                );
+              }
             }
           },
         );

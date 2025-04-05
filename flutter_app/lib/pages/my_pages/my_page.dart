@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/main_page_routes.dart';
+import 'package:flutter_app/routes/mentoring_tab_routes.dart';
+import 'package:flutter_app/routes/my_page_routes.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
@@ -11,17 +14,17 @@ Future<bool> isCurrentUserHost() async {
   return result.user!.isHost();
 }
 
-class MyPageHeader extends StatefulWidget {
+class MyPage extends StatefulWidget {
   final UserInfoDto user;
   final List<ChatRoomInfoDto> chatRooms;
 
-  const MyPageHeader({Key? key, required this.user, required this.chatRooms}) : super(key: key);
+  const MyPage({super.key, required this.user, required this.chatRooms});
 
   @override
-  State<MyPageHeader> createState() => _MyPageHeaderState();
+  State<MyPage> createState() => _MyPageState();
 }
 
-class _MyPageHeaderState extends State<MyPageHeader> {
+class _MyPageState extends State<MyPage> {
   bool? _isHost;
 
   @override
@@ -58,12 +61,6 @@ class _MyPageHeaderState extends State<MyPageHeader> {
             Navigator.pop(context);
           },
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Icon(Icons.person),
-          )
-        ],
       ),
       body: Stack(
         children: [
@@ -127,10 +124,19 @@ class _MyPageHeaderState extends State<MyPageHeader> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16.0),
                             child: Row(
-                              children: const [
+                              children: [
                                 Text('나의 관심분야', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                                 SizedBox(width: 8),
-                                Icon(Icons.arrow_forward_ios, size: 14),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, MyPageRouteNames.myInterestPage);
+                                  },
+                                  child: const Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 14,
+                                    color: Colors.blue,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -220,7 +226,9 @@ class _MyPageHeaderState extends State<MyPageHeader> {
                     style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 8),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyMentorTabRouteNames.shortIntroInputPage);
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       padding: const EdgeInsets.symmetric(horizontal: 20)),
@@ -243,10 +251,19 @@ class _MyPageHeaderState extends State<MyPageHeader> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: const [
+            children: [
               Text("My 멘토", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               SizedBox(width: 8),
-              Icon(Icons.arrow_forward_ios, size: 14, color: Colors.blue),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, MainPageRouteNames.mainPage, arguments: 2);
+                },
+                child: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                  color: Colors.blue,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 15),
@@ -316,7 +333,8 @@ Widget _buildActivitySection(BuildContext context) {
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
-                      // TODO: 활동 보러가기 화면으로 이동
+                      Navigator.pushNamedAndRemoveUntil(context, MainPageRouteNames.mainPage, (e) => false,
+                      arguments: 3);
                     },
                     child: const Text("보러가기"),
                   )
@@ -331,15 +349,17 @@ Widget _buildActivitySection(BuildContext context) {
                   separatorBuilder: (_, __) => const SizedBox(width: 8),
                   itemBuilder: (context, index) {
                     final item = crawlingList[index];
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        item.imageUrl,
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(Icons.broken_image),
+                    return  SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8), // 필요 시
+                        child: Image.network(
+                          item.imageUrl,
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     );
                   },
