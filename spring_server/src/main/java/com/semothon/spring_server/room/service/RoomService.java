@@ -4,10 +4,7 @@ import com.semothon.spring_server.chat.dto.UpdateChatRoomRequestDto;
 import com.semothon.spring_server.chat.service.ChatRoomService;
 import com.semothon.spring_server.common.exception.ForbiddenException;
 import com.semothon.spring_server.common.exception.InvalidInputException;
-import com.semothon.spring_server.room.dto.CreateRoomRequestDto;
-import com.semothon.spring_server.room.dto.GetRoomResponseDto;
-import com.semothon.spring_server.room.dto.RoomSearchCondition;
-import com.semothon.spring_server.room.dto.UpdateRoomRequestDto;
+import com.semothon.spring_server.room.dto.*;
 import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.room.entity.RoomUser;
 import com.semothon.spring_server.room.entity.RoomUserRole;
@@ -140,7 +137,7 @@ public class RoomService {
     }
 
     @Transactional(readOnly = true)
-    public List<Room> getRoomList(String userId, RoomSearchCondition condition) {
+    public List<RoomWithScoreDto> getRoomList(String userId, RoomSearchCondition condition) {
         return roomRepository.searchRoomList(condition, userId);
     }
 
