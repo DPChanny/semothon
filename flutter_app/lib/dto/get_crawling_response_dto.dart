@@ -20,9 +20,10 @@ class GetCrawlingResponseDto {
     return GetCrawlingResponseDto(
       crawlingInfo: CrawlingInfoDto.fromJson(json['crawlingInfo']),
       chatRooms: ChatRoomInfoDto.fromJson(json['chatRooms']['chatRoomInfo']),
-      members: (json['chatRooms']['members'] as List<dynamic>)
-          .map((e) => RoomUserInfoDto.fromJson(e))
-          .toList(),
+      members:
+          (json['chatRooms']['members'] as List<dynamic>)
+              .map((e) => RoomUserInfoDto.fromJson(e))
+              .toList(),
       host: HostUserInfoDto.fromJson(json['chatRooms']['host']),
     );
   }

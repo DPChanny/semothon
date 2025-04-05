@@ -1,5 +1,3 @@
-enum Gender { MALE, FEMALE }
-
 class UserInfoDto {
   final String userId;
   final String? name;
@@ -7,7 +5,7 @@ class UserInfoDto {
   final String? department;
   final String? studentId;
   final DateTime? birthdate;
-  final Gender? gender;
+  final String? gender;
   final String profileImageUrl;
   final String socialProvider;
   final String socialId;
@@ -44,8 +42,7 @@ class UserInfoDto {
           json['birthdate'] != null
               ? DateTime.tryParse(json['birthdate'])
               : null,
-      gender:
-          json['gender'] != null ? Gender.values.byName(json['gender']) : null,
+      gender: json['gender'],
       profileImageUrl: json['profileImageUrl'] ?? '',
       socialProvider: json['socialProvider'] ?? '',
       socialId: json['socialId'] ?? '',
@@ -64,7 +61,7 @@ class UserInfoDto {
     'department': department,
     'studentId': studentId,
     'birthdate': birthdate?.toIso8601String(),
-    'gender': gender?.name,
+    'gender': gender,
     'profileImageUrl': profileImageUrl,
     'socialProvider': socialProvider,
     'socialId': socialId,

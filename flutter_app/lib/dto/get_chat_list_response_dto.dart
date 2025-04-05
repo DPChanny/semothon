@@ -12,9 +12,10 @@ class GetChatListResponseDto {
   factory GetChatListResponseDto.fromJson(Map<String, dynamic> json) {
     return GetChatListResponseDto(
       totalCount: json['totalCount'],
-      chatRoomList: (json['chatRoomList'] as List)
-          .map((e) => ChatRoomInfoDto.fromJson(e))
-          .toList(),
+      chatRoomList:
+          (json['chatRoomList'] as List)
+              .map((e) => ChatRoomInfoDto.fromJson(e))
+              .toList(),
     );
   }
 }

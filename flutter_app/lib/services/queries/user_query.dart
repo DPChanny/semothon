@@ -43,9 +43,7 @@ Future<({bool success, String message, UserInfoDto? user})> loginUser() async {
       success: true,
       message: "succeed",
       user: UserInfoDto.fromJson(
-        jsonDecode(
-          utf8.decode(response.bodyBytes),
-        )['data']?['user'],
+        jsonDecode(utf8.decode(response.bodyBytes))['data']?['user'],
       ),
     );
   } catch (e) {

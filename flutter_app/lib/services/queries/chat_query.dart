@@ -1,10 +1,10 @@
-
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/get_chat_list_response_dto.dart';
 import 'package:flutter_app/dto/get_chat_response_dto.dart';
 import 'package:flutter_app/dto/get_message_response_dto.dart';
+import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -80,9 +80,9 @@ getRoomList({
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    roomList: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      roomList: null,
     );
   }
 
@@ -97,7 +97,9 @@ getRoomList({
   }
 }
 
-Future<({bool success, String message, GetChatResponseDto? room})> getChat(int chatId) async {
+Future<({bool success, String message, GetChatResponseDto? room})> getChat(
+  int chatId,
+) async {
   String? idToken;
 
   try {
@@ -120,9 +122,9 @@ Future<({bool success, String message, GetChatResponseDto? room})> getChat(int c
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    room: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      room: null,
     );
   }
 
@@ -131,16 +133,17 @@ Future<({bool success, String message, GetChatResponseDto? room})> getChat(int c
     final data = decoded['data'];
 
     return (
-    success: true,
-    message: "succeed",
-    room: GetChatResponseDto.fromJson(data),
+      success: true,
+      message: "succeed",
+      room: GetChatResponseDto.fromJson(data),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", room: null);
   }
 }
 
-Future<({bool success, String message, GetMessageResponseDto? room})> getChatMessage(int chatId) async {
+Future<({bool success, String message, GetMessageResponseDto? room})>
+getChatMessage(int chatId) async {
   String? idToken;
 
   try {
@@ -163,9 +166,9 @@ Future<({bool success, String message, GetMessageResponseDto? room})> getChatMes
 
   if (response.statusCode != 200) {
     return (
-    success: false,
-    message: "server failure: ${response.body}",
-    room: null,
+      success: false,
+      message: "server failure: ${response.body}",
+      room: null,
     );
   }
 
@@ -174,9 +177,53 @@ Future<({bool success, String message, GetMessageResponseDto? room})> getChatMes
     final data = decoded['data'];
 
     return (
-    success: true,
-    message: "succeed",
-    room: GetMessageResponseDto.fromJson(data),
+      success: true,
+      message: "succeed",
+      room: GetMessageResponseDto.fromJson(data),
+    );
+  } catch (e) {
+    return (success: false, message: "parsing failure: $e", room: null);
+  }
+}
+
+Future<({bool success, String message, GetUnreadMessageCountResponseDto? room})>
+getUnreadMessageCount() async {
+  String? idToken;
+
+  try {
+    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
+  } catch (e) {
+    return (success: false, message: "firebase failure: $e", room: null);
+  }
+
+  if (idToken == null) {
+    return (success: false, message: "token failure", room: null);
+  }
+
+  final response = await http.get(
+    url("api/chats/unread-count"),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (
+      success: false,
+      message: "server failure: ${response.body}",
+      room: null,
+    );
+  }
+
+  try {
+    final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+    final data = decoded['data'];
+
+    return (
+      success: true,
+      message: "succeed",
+      room: GetUnreadMessageCountResponseDto.fromJson(data),
     );
   } catch (e) {
     return (success: false, message: "parsing failure: $e", room: null);

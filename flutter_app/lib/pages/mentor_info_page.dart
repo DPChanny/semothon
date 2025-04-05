@@ -40,20 +40,21 @@ class MentorInfoPage extends StatelessWidget {
 
   const MentorInfoPage({super.key, required this.userId});
 
-  Future<(String uid, GetUserResponseDto? user)> _fetchUserAndRooms() async {
+  Future<(String uid, GetUserResponseDto? user, String message)>
+  _fetchUserAndRooms() async {
     final currentUid = FirebaseAuth.instance.currentUser?.uid ?? '';
 
     final result = await getOtherUser(userId);
     if (!result.success || result.user == null) {
-      return (currentUid, null);
+      return (currentUid, null, result.message);
     }
 
-    return (currentUid, result.user!);
+    return (currentUid, result.user!, result.message);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<(String, GetUserResponseDto?)>(
+    return FutureBuilder<(String, GetUserResponseDto?, String)>(
       future: _fetchUserAndRooms(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

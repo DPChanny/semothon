@@ -8,7 +8,7 @@ class GetRoomResponseDto {
   final RoomInfoDto room;
   final List<RoomUserInfoDto> members;
   final HostUserInfoDto host;
-  final ChatRoomInfoDto chatRoom; 
+  final ChatRoomInfoDto chatRoom;
 
   GetRoomResponseDto({
     required this.room,

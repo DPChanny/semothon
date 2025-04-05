@@ -11,9 +11,9 @@ class GetUserResponseDto {
     return GetUserResponseDto(
       userInfo: UserInfoDto.fromJson(json['user']),
       chatRooms:
-      List<Map<String, dynamic>>.from(
-        json['chatRooms'],
-      ).map((chatRoomJson) => ChatRoomInfoDto.fromJson(chatRoomJson)).toList(),
+          List<Map<String, dynamic>>.from(json['chatRooms'])
+              .map((chatRoomJson) => ChatRoomInfoDto.fromJson(chatRoomJson))
+              .toList(),
     );
   }
 

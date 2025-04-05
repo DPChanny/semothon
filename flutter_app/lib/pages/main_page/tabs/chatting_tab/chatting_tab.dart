@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
 import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
+import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/widgets/custom_tab_bar.dart';
 
@@ -16,12 +18,18 @@ class ChattingTab extends StatefulWidget {
 class _ChattingTabState extends State<ChattingTab> {
   int _selectedTabIndex = 0;
 
-  late Future<({bool success, String message, GetUserResponseDto? user})> _userFuture;
+  late Future<({bool success, String message, GetUserResponseDto? user})>
+  _userFuture;
+  late Future<
+    ({bool success, String message, GetUnreadMessageCountResponseDto? room})
+  >
+  _unreadFuture;
 
   @override
   void initState() {
     super.initState();
     _userFuture = getUser();
+    _unreadFuture = getUnreadMessageCount();
   }
 
   void _onTabSelected(int index) {
@@ -37,18 +45,43 @@ class _ChattingTabState extends State<ChattingTab> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: FutureBuilder(
-        future: _userFuture,
+        future: Future.wait([_userFuture, _unreadFuture]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          } else if (!snapshot.hasData || !(snapshot.data?.success ?? false)) {
+          } else if (!snapshot.hasData ||
+              !(snapshot.data![0]
+                      as ({
+                        bool success,
+                        String message,
+                        GetUserResponseDto? user,
+                      }))
+                  .success ||
+              !(snapshot.data![1]
+                      as ({
+                        bool success,
+                        String message,
+                        GetUnreadMessageCountResponseDto? room,
+                      }))
+                  .success) {
             return const Center(child: Text('유저 정보를 불러올 수 없습니다.'));
           }
+
+          final userData =
+              snapshot.data![0]
+                  as ({bool success, String message, GetUserResponseDto? user});
+          final unreadData =
+              snapshot.data![1]
+                  as ({
+                    bool success,
+                    String message,
+                    GetUnreadMessageCountResponseDto? room,
+                  });
 
           final crawlingChattingRooms = <ChatRoomInfoDto>[];
           final roomChattingRooms = <ChatRoomInfoDto>[];
 
-          for (var room in snapshot.data!.user!.chatRooms) {
+          for (var room in userData.user!.chatRooms) {
             if (room.type == 'CRAWLING') {
               crawlingChattingRooms.add(room);
             } else if (room.type == 'ROOM') {
@@ -98,8 +131,14 @@ class _ChattingTabState extends State<ChattingTab> {
                 child: IndexedStack(
                   index: _selectedTabIndex,
                   children: [
-                    RoomChattingTab(roomInfos: roomChattingRooms),
-                    CrawlingChattingTab(roomInfos: crawlingChattingRooms),
+                    RoomChattingTab(
+                      roomInfos: roomChattingRooms,
+                      unreadInfos: unreadData.room!.unreadCounts,
+                    ),
+                    CrawlingChattingTab(
+                      roomInfos: crawlingChattingRooms,
+                      unreadInfos: unreadData.room!.unreadCounts,
+                    ),
                   ],
                 ),
               ),

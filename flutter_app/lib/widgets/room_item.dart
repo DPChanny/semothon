@@ -74,7 +74,7 @@ class RoomItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${room.capacity}/10',
+                      '${room.currentMemberCount}/${room.capacity}',
                       style: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ],
