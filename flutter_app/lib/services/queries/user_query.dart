@@ -274,3 +274,24 @@ getUserList({
     return (success: false, message: "parsing failure: $e", userList: null);
   }
 }
+
+Future<({bool success, String message})> deleteUser() async {
+  String? idToken = await getSafeIdToken();
+  if (idToken == null) {
+    return (success: false, message: "token failure");
+  }
+
+  final response = await http.delete(
+    url('/api/users/prifile'),
+    headers: {
+      'Authorization': 'Bearer $idToken',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode != 200) {
+    return (success: false, message: "server failure: ${response.body}");
+  }
+
+  return (success: true, message: "succeed");
+}

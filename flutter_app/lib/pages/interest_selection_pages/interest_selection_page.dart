@@ -259,10 +259,9 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
                                 UserUpdateInterestIntroDTO
                                     .instance
                                     .generatedIntroText = result.introText;
-                                Navigator.pushNamedAndRemoveUntil(
+                                Navigator.pushNamed(
                                   context,
                                   InterestPageRouteNames.introDetailPage,
-                                  (route) => false,
                                 );
                               } else {
                                 Navigator.pushNamedAndRemoveUntil(

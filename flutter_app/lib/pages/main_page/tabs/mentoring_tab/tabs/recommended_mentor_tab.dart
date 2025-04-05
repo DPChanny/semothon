@@ -33,16 +33,17 @@ class RecommendedMentorTab extends StatelessWidget {
         if (!snapshot.hasData || snapshot.data!.userList!.userInfos.isEmpty) {
           return const Center(child: Text('추천 멘토가 없습니다.'));
         }
+        else {
+          final mentors = snapshot.data!.userList!;
 
-        final mentors = snapshot.data!.userList!;
-
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: mentors.userInfos.length,
-          itemBuilder: (context, index) {
-            return MentorItem(mentor: mentors.userInfos[index]);
-          },
-        );
+          return ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: mentors.userInfos.length,
+            itemBuilder: (context, index) {
+              return MentorItem(mentor: mentors.userInfos[index]);
+            },
+          );
+        }
       },
     );
   }
