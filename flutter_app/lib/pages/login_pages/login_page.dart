@@ -5,6 +5,8 @@ import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
+import 'package:flutter_app/websocket.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatelessWidget {
@@ -48,6 +50,7 @@ class LoginPage extends StatelessWidget {
     Navigator.pop(context);
 
     if (result.user!.introText != null) {
+      await StompService.instance.connect();
       Navigator.pushNamedAndRemoveUntil(
         context,
         MainPageRouteNames.mainPage,
