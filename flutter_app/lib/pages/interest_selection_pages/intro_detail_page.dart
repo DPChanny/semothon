@@ -61,52 +61,6 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
             ),
             backgroundColor: Colors.white,
             resizeToAvoidBottomInset: true,
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-              child: SizedBox(
-                height: 48,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => const Center(child: CircularProgressIndicator()),
-                    );
-
-                    UserUpdateInterestIntroDTO.instance.intro = _controller.text;
-
-                    final result = await updateUserIntro();
-
-                    Navigator.pop(context);
-
-                    if (result.success) {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        InterestPageRouteNames.introDetailCompletePage,
-                            (route) => false,
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(result.message)),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF008CFF),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                  ),
-                  child: const Text(
-                    '다음',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
             body: SafeArea(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
@@ -190,6 +144,52 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
                             fontWeight: FontWeight.w400,
                             height: 1.60,
                             letterSpacing: -0.26,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16), // 버튼 위 여백
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48, // 높이는 필요시 유지
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => const Center(child: CircularProgressIndicator()),
+                          );
+
+                          UserUpdateInterestIntroDTO.instance.intro = _controller.text;
+
+                          final result = await updateUserIntro();
+
+                          Navigator.pop(context);
+
+                          if (result.success) {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              InterestPageRouteNames.introDetailCompletePage,
+                                  (route) => false,
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(result.message)),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF008CFF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                        ),
+                        child: const Text(
+                          '다음',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
                           ),
                         ),
                       ),
