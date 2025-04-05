@@ -26,7 +26,7 @@ class LoginCompletePage extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               const Text(
-                '당신의 진로를 Pathagora와 함께 시작해보세요!',
+                '당신의 진로를 UNUS와 함께 시작해보세요!',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, fontFamily: 'Noto Sans KR'),
               ),

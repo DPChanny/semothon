@@ -28,7 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter_native_splash: ^2.3.5
   intl: ^0.19.0
   flutter_slidable: ^3.0.0
   flutter:
@@ -40,6 +39,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   stomp_dart_client: ^0.4.4
   google_sign_in: ^6.1.0
+  flutter_native_splash: ^2.3.1 # 예시 버전
   flutter_svg: ^2.0.7
   http: ^1.2.0
 
@@ -65,7 +65,6 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-    - assets/splash/splash.png
 
     - assets/interest_category_icon/
 

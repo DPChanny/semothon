@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [Locale('ko', ''), Locale('en', '')],
-      initialRoute: '/login_page',
+      initialRoute: '/splash_screen_page',
       routes: appRoutes,
       title: 'Semothon',
       debugShowCheckedModeBanner: false,
