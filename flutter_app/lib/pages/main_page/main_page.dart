@@ -121,13 +121,13 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/mentoring_icon.svg',
+              'assets/widget_icon/mentoring_icon.svg',
               width: 27,
               height: 27,
               colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
             ),
             activeIcon: SvgPicture.asset(
-              'assets/mentoring_icon.svg',
+              'assets/widget_icon/mentoring_icon.svg',
               width: 27,
               height: 27,
               colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
@@ -136,13 +136,13 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/recommended_icon.svg',
+              'assets/widget_icon/recommended_icon.svg',
               width: 27,
               height: 27,
               colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
             ),
             activeIcon: SvgPicture.asset(
-              'assets/recommended_icon.svg',
+              'assets/widget_icon/recommended_icon.svg',
               width: 27,
               height: 27,
               colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
