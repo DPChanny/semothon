@@ -261,6 +261,27 @@ public class DataInitializer {
             roomService.joinRoom(user7.getUserId(), room5Id);
             roomService.joinRoom(user6.getUserId(), room5Id);
 
+            Long room11Id = roomService.createRoom(user1.getUserId(), CreateRoomRequestDto.builder()
+                    .title("UX/UI 디자이너들의 감성 충전소")
+                    .description("디자인 트렌드, 포트폴리오 피드백, 브랜딩 아이디어를 나누는 디자이너 전용 공간입니다. 감각 있는 대화를 나누고 협업의 기회를 만들어보세요.")
+                    .capacity(50)
+                    .build());
+            Room room11 = roomRepository.findById(room11Id).get();
+
+            Long room12Id = roomService.createRoom(user1.getUserId(), CreateRoomRequestDto.builder()
+                    .title("사이드 프로젝트 같이 할 사람~?")
+                    .description("기획자, 디자이너, 개발자 모두 모여서 진짜 서비스 하나 같이 만들어보는 공간입니다. 아이디어만 있어도, 코드만 짜도 환영이에요!")
+                    .capacity(50)
+                    .build());
+            Room room12 = roomRepository.findById(room12Id).get();
+
+            Long room13Id = roomService.createRoom(user1.getUserId(), CreateRoomRequestDto.builder()
+                    .title("지구과학 덕후 클럽")
+                    .description("화산, 지진, 기후변화 등 지구과학에 관심 있는 사람들 모여라! 최신 논문 공유부터 자연 다큐 감상까지, 지구를 깊이 탐구하는 공간입니다.")
+                    .capacity(50)
+                    .build());
+            Room room13 = roomRepository.findById(room13Id).get();
+
             List<String> topics = List.of(
                     // 인문계열
                     "윤리학", "형이상학", "존재론", "논리학", "동양철학", "서양철학", "종교철학", "미학", "사회철학", "언어철학",
