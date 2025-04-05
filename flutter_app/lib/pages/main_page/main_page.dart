@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MainPage extends StatefulWidget {
   final int currentIndex;
@@ -56,10 +57,6 @@ class _MainPageState extends State<MainPage> {
             icon: const Icon(Icons.person, color: Colors.grey),
             onPressed: () {},
           ),
-          IconButton(
-            icon: const Icon(Icons.settings, color: Colors.grey),
-            onPressed: () {},
-          ),
         ],
       ),
       body: _pages[_selectedIndex],
@@ -69,11 +66,67 @@ class _MainPageState extends State<MainPage> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: '채팅'),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: '멘토링'),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: '추천 활동'),
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/widget_icon/home_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/widget_icon/home_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+            ),
+            label: '홈',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/widget_icon/chat_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/widget_icon/chat_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+            ),
+            label: '채팅',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/mentoring_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/mentoring_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+            ),
+            label: '멘토링',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/recommended_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/recommended_icon.svg',
+              width: 27,
+              height: 27,
+              colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+            ),
+            label: '추천 활동',
+          ),
         ],
       ),
     );

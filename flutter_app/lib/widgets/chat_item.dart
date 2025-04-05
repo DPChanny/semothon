@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/chat_room_info_dto.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -19,21 +20,20 @@ class ChatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(room.roomId),
-      endActionPane:
-          onLeave != null
-              ? ActionPane(
-                motion: const ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    onPressed: (_) => onLeave!(),
-                    backgroundColor: const Color(0xFFFF4D4D),
-                    foregroundColor: Colors.white,
-                    icon: Icons.exit_to_app,
-                    label: '나가기',
-                  ),
-                ],
-              )
-              : null,
+      endActionPane: onLeave != null
+          ? ActionPane(
+        motion: const ScrollMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (_) => onLeave!(),
+            backgroundColor: const Color(0xFF008CFF),
+            foregroundColor: Colors.white,
+            icon: Icons.exit_to_app,
+            label: '나가기',
+          ),
+        ],
+      )
+          : null,
       child: ListTile(
         onTap: () {
           Navigator.pushNamed(
@@ -47,18 +47,44 @@ class ChatItem extends StatelessWidget {
           radius: 24,
           backgroundImage: NetworkImage(room.profileImageUrl),
         ),
-        title: Text(
-          '${room.title}  👥 ${room.currentMemberCount}${unreadCount > 0 ? " 🔴 $unreadCount" : ""}',
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            fontFamily: 'Noto Sans KR',
-          ),
+        title: Row(
+          children: [
+            Text(
+              room.title,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontFamily: 'Noto Sans KR',
+                fontWeight: FontWeight.w500,
+                letterSpacing: -0.26,
+              ),
+            ),
+            const SizedBox(width: 10),
+            SvgPicture.asset(
+              'assets/widget_icon/mentoring_icon.svg', // 👤 SVG 아이콘
+              width: 14,
+              height: 14,
+            ),
+            const SizedBox(width: 2),
+            Text(
+              '${room.currentMemberCount}',
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+          ],
         ),
         subtitle: Text(
           room.lastMessage?.message ?? room.description,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            color: const Color(0xFF999999),
+            fontSize: 12,
+            fontFamily: 'Noto Sans KR',
+            fontWeight: FontWeight.w400,
+            height: 1.25,
+            letterSpacing: -0.20,
+          ),
         ),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -68,10 +94,25 @@ class ChatItem extends StatelessWidget {
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
             const SizedBox(height: 4),
-            Text(
-              _formatDate(room.createdAt),
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
-            ),
+            if (unreadCount > 0)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF008CFF),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                constraints: const BoxConstraints(minWidth: 24, minHeight: 20),
+                child: Text(
+                  unreadCount >  999 ? '999+' : '$unreadCount',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Noto Sans KR',
+                  ),
+                ),
+              ),
           ],
         ),
       ),
