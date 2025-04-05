@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/main_page/tabs/crawling_tab/recommend_crawling.dart';
+import 'package:flutter_app/dto/crawling_info_dto.dart';
 
-// ✅ 데이터 모델
 class Activity {
   final String title;
   final String description;
@@ -15,7 +16,20 @@ class Activity {
   });
 }
 
-// ✅ 예시 데이터
+CrawlingInfoDto convertToCrawlingInfoDto(Activity activity) {
+  return CrawlingInfoDto(
+    crawlingId: 0,
+    title: activity.title,
+    url: '',
+    imageUrl: activity.imageUrl,
+    description: activity.description,
+    deadlinedAt: DateTime.now().add(const Duration(days: 30)),
+    crawledAt: DateTime.now(),
+    chatRoomsId: [],
+    interests: activity.tags,
+  );
+}
+
 final List<Activity> recommendedList = [
   Activity(
     title: '고양이 공모전',
@@ -35,7 +49,7 @@ final List<Activity> latestList = [
   Activity(
     title: '고양이 공모전',
     description:
-    '고양이는 귀엽다. 왜냐면 귀엽기 때문이다. 나도 귀엽다. 하지만 너는 고양이만큼은 아니다... 그래서...',
+        '고양이는 귀엽다. 왜냐면 귀엽기 때문이다. 나도 귀엽다. 하지만 너는 고양이만큼은 아니다... 그래서...',
     imageUrl: 'https://placekitten.com/300/200',
     tags: ['코딩', '챌린지'],
   ),
@@ -51,7 +65,7 @@ class CrawlingTab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildPersonalRecommendation(),
+            _buildPersonalRecommendation(context),
             const SizedBox(height: 24),
             _buildLatestRecommendation(),
             const SizedBox(height: 32),
@@ -61,16 +75,15 @@ class CrawlingTab extends StatelessWidget {
     );
   }
 
-  // ✅ 개인화 추천
-  Widget _buildPersonalRecommendation() {
+  Widget _buildPersonalRecommendation(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
-            children: const [
-              Expanded(
+            children: [
+              const Expanded(
                 child: Text.rich(
                   TextSpan(
                     children: [
@@ -94,7 +107,21 @@ class CrawlingTab extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(Icons.arrow_forward_ios, size: 16, color: Colors.blue),
+              IconButton(
+                icon: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.blue),
+                onPressed: () {
+                  final crawlingDtos = recommendedList
+                      .map((e) => convertToCrawlingInfoDto(e))
+                      .toList();
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => RecommendationPage(crawlingItems: crawlingDtos),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -130,8 +157,7 @@ class CrawlingTab extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       '#${item.tags.first}',
-                      style:
-                      const TextStyle(fontSize: 12, color: Colors.black54),
+                      style: const TextStyle(fontSize: 12, color: Colors.black54),
                     ),
                   ],
                 ),
@@ -143,7 +169,6 @@ class CrawlingTab extends StatelessWidget {
     );
   }
 
-  // ✅ 최신 추천
   Widget _buildLatestRecommendation() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
