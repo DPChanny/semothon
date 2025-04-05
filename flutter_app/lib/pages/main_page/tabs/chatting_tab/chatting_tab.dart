@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/chat_room_info_dto.dart';
 import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
@@ -44,7 +45,16 @@ class _ChattingTabState extends State<ChattingTab> {
             return const Center(child: Text('유저 정보를 불러올 수 없습니다.'));
           }
 
-          final user = snapshot.data!.user!;
+          final crawlingChattingRooms = <ChatRoomInfoDto>[];
+          final roomChattingRooms = <ChatRoomInfoDto>[];
+
+          for (var room in snapshot.data!.user!.chatRooms) {
+            if (room.type == 'CRAWLING') {
+              crawlingChattingRooms.add(room);
+            } else if (room.type == 'ROOM') {
+              roomChattingRooms.add(room);
+            }
+          }
 
           return Column(
             children: [
@@ -88,8 +98,8 @@ class _ChattingTabState extends State<ChattingTab> {
                 child: IndexedStack(
                   index: _selectedTabIndex,
                   children: [
-                    RoomChattingTab(),
-                    CrawlingChattingTab(),
+                    RoomChattingTab(roomInfos: roomChattingRooms),
+                    CrawlingChattingTab(roomInfos: crawlingChattingRooms),
                   ],
                 ),
               ),
