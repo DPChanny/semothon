@@ -197,16 +197,27 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                SizedBox(
-                  height: 200,
-                  child: PageView.builder(
-                    controller: pageController,
-                    itemCount: min(_crawlings.length, 5),
-                    itemBuilder: (context, index) {
-                      return crawlingItem(context, _crawlings[index]);
-                    },
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: SizedBox(
+                    height: 170.44, // 🟡 아이템 크기와 정확히 맞춤
+                    width: MediaQuery.of(context).size.width,
+                    child: PageView.builder(
+                      controller: PageController(
+                        viewportFraction: 107.4 / MediaQuery.of(context).size.width, // 🔹 아이템 너비 / 화면 너비
+                      ),
+                      padEnds: false, // ✅ 맨 앞 빈 공간 제거
+                      itemCount: min(_crawlings.length, 5),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8), // 카드 사이 여백
+                          child: crawlingItem(context, _crawlings[index]),
+                        );
+                      },
+                    ),
                   ),
                 ),
+
               ],
             ),
           ),
