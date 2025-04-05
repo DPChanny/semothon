@@ -45,43 +45,41 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          title: const Text(
-            "브랜드이름",
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: const Text(
+          "브랜드이름",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.person, color: Colors.grey),
-              onPressed: () async {
-                final result = await getUser();
+        ),
+        actions: [
+        IconButton(
+          icon: const Icon(Icons.person, color: Colors.grey),
+          onPressed: () async {
+            final result = await getUser();
 
-                if (!result.success || result.user == null) {
-                  // 실패 처리 (예: 에러 토스트 등)
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("유저 정보를 불러오지 못했습니다.")),
-                  );
-                  return;
-                }
+            if (!result.success || result.user == null) {
+              // 실패 처리 (예: 에러 토스트 등)
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("유저 정보를 불러오지 못했습니다.")),
+              );
+              return;
+            }
 
-                // 유저 정보 가져오기에 성공하면 페이지 이동
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        MyPageHeader(user: result.user!.userInfo,
-                          chatRooms: result.user!.chatRooms,),
-                  ),
-                );
-              },
-            ),
-          ]
+            // 유저 정보 가져오기에 성공하면 페이지 이동
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyPageHeader(user: result.user!.userInfo, chatRooms: result.user!.chatRooms,),
+              ),
+            );
+          },
+        ),
+        ]
       ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
