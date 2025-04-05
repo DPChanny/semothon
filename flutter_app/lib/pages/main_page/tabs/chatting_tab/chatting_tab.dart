@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/chat_room_info_dto.dart';
 import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
@@ -15,26 +14,26 @@ class ChattingTab extends StatefulWidget {
   State<ChattingTab> createState() => _ChattingTabState();
 }
 
-class _ChattingTabState extends State<ChattingTab> {
-  int _selectedTabIndex = 0;
-
+class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
   late Future<({bool success, String message, GetUserResponseDto? user})> _userFuture;
   late Future<({bool success, String message, GetUnreadMessageCountResponseDto? room})> _unreadFuture;
+
+  final labels = ['멘토링 방', '활동 방'];
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: labels.length, vsync: this);
     _userFuture = getUser();
     _unreadFuture = getUnreadMessageCount();
   }
 
-  void _onTabSelected(int index) {
-    setState(() {
-      _selectedTabIndex = index;
-    });
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
-
-  final labels = ['멘토링 방', '활동 방'];
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +66,7 @@ class _ChattingTabState extends State<ChattingTab> {
 
           return Column(
             children: [
-              // Custom styled tab bar
+              // 🔷 Custom styled tab bar
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 padding: const EdgeInsets.all(4),
@@ -77,27 +76,32 @@ class _ChattingTabState extends State<ChattingTab> {
                 ),
                 child: Row(
                   children: List.generate(labels.length, (index) {
-                    final isSelected = _selectedTabIndex == index;
-
+                    final isSelected = _tabController.index == index;
                     return Expanded(
                       child: GestureDetector(
-                        onTap: () => _onTabSelected(index),
-                        child: Container(
-                          height: 40,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: isSelected ? const Color(0xFF008CFF) : Colors.transparent,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            labels[index],
-                            style: TextStyle(
-                              color: isSelected ? Colors.white : const Color(0xFFB1B1B1),
-                              fontSize: 15,
-                              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
-                              fontFamily: 'Noto Sans KR',
-                            ),
-                          ),
+                        onTap: () => _tabController.animateTo(index),
+                        child: AnimatedBuilder(
+                          animation: _tabController.animation!,
+                          builder: (_, __) {
+                            final selected = _tabController.index == index;
+                            return Container(
+                              height: 40,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: selected ? const Color(0xFF008CFF) : Colors.transparent,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                labels[index],
+                                style: TextStyle(
+                                  color: selected ? Colors.white : const Color(0xFFB1B1B1),
+                                  fontSize: 15,
+                                  fontWeight: selected ? FontWeight.w700 : FontWeight.w400,
+                                  fontFamily: 'Noto Sans KR',
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     );
@@ -105,42 +109,52 @@ class _ChattingTabState extends State<ChattingTab> {
                 ),
               ),
 
-              if (_selectedTabIndex == 0)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/search_screen_page');
-                    },
-                    child: Container(
-                      height: 34,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F8),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        children: const [
-                          Icon(Icons.search, color: Colors.grey),
-                          SizedBox(width: 8),
-                          Text(
-                            '나의 멘토링방 제목으로 검색하기',
-                            style: TextStyle(
-                              color: const Color(0xFF999999),
-                              fontSize: 14,
-                              fontFamily: 'Noto Sans KR',
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: -0.24,
-                            ),
-                          )
-                        ],
+              // 🔍 검색창 (멘토링 방에서만 표시)
+              AnimatedBuilder(
+                animation: _tabController,
+                builder: (_, __) {
+                  return _tabController.index == 0
+                      ? Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/search_screen_page');
+                      },
+                      child: Container(
+                        height: 34,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF5F6F8),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          children: const [
+                            Icon(Icons.search, color: Colors.grey),
+                            SizedBox(width: 8),
+                            Text(
+                              '나의 멘토링방 제목으로 검색하기',
+                              style: TextStyle(
+                                color: Color(0xFF999999),
+                                fontSize: 14,
+                                fontFamily: 'Noto Sans KR',
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: -0.24,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  )
+                      : const SizedBox.shrink();
+                },
+              ),
+
+              // 📄 탭별 콘텐츠
               Expanded(
-                child: IndexedStack(
-                  index: _selectedTabIndex,
+                child: TabBarView(
+                  controller: _tabController,
+                  physics: const BouncingScrollPhysics(),
                   children: [
                     RoomChattingTab(
                       roomInfos: roomChattingRooms,
