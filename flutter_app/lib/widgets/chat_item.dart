@@ -24,13 +24,26 @@ class ChatItem extends StatelessWidget {
           ? ActionPane(
         motion: const ScrollMotion(),
         children: [
-          SlidableAction(
+          CustomSlidableAction(
             onPressed: (_) => onLeave!(),
             backgroundColor: const Color(0xFF008CFF),
-            foregroundColor: Colors.white,
-            icon: Icons.exit_to_app,
-            label: '나가기',
+            child: Container(
+              width: 40, // 🔹 너비 직접 지정
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.exit_to_app, color: Colors.white),
+                  SizedBox(height: 4),
+                  Text(
+                    '나가기',
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
           ),
+
         ],
       )
           : null,

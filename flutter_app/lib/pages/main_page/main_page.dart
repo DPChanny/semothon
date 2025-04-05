@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/chatting_tab.dart';
-import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/search_chatting_page.dart';
 import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
 
-import 'package:flutter_app/pages/my_page.dart';
+import 'package:flutter_app/pages/my_pages/my_page.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
@@ -30,6 +29,15 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _selectedIndex = widget.currentIndex;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final args = ModalRoute.of(context)?.settings.arguments;
+      if (args is int) {
+        setState(() {
+          _selectedIndex = args;
+        });
+      }
+    });
 
     _pages = [
       HomeTab(onTabChange: _onTap),
@@ -113,7 +121,7 @@ class _MainPageState extends State<MainPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MyPageHeader(user: result.user!.userInfo, chatRooms: result.user!.chatRooms,),
+                builder: (context) => MyPage(user: result.user!.userInfo, chatRooms: result.user!.chatRooms,),
               ),
             );
           },

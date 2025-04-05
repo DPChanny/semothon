@@ -11,14 +11,14 @@ from services.recommend_crawling_service import recommend_crawling_by_crawling_s
 
 crawling_router = APIRouter()
 
-@crawling_router.get("/wevity")
+@crawling_router.get("/api/wevity")
 def get_wevity_data(db: Session = Depends(get_db)):
     base_url = 'https://www.wevity.com/?c=find&s=1&gub=1'
     success_count = 0  # 성공적으로 저장된 활동 수
 
     try:
-        for page in range(1, 11):  # 1~10 페이지까지
-            url = f"{base_url}&spage={page}"
+        for page in range(2, 10):  # 2~9 페이지까지
+            url = f"{base_url}&gp={page}"
             activities = get_activities(url)
 
             if not activities:
@@ -57,7 +57,7 @@ def get_wevity_data(db: Session = Depends(get_db)):
                 crawling_interest_service(new_crawling.crawling_id, db)
                 recommend_crawling_by_crawling_service(new_crawling.crawling_id, db)
 
-        return {"message": f"1~10페이지 크롤링 및 저장 완료 (총 {success_count}건 저장됨)"}
+        return {"message": f"2~9페이지 크롤링 및 저장 완료 (총 {success_count}건 저장됨)"}
 
     except Exception as e:
         db.rollback()
