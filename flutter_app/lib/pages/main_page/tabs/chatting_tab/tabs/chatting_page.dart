@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/message_info_dto.dart';
+import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/websocket.dart';
 import 'package:intl/intl.dart';
 
@@ -16,7 +18,7 @@ class ChattingPage extends StatefulWidget {
 class _ChattingPageState extends State<ChattingPage> {
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<Map<String, dynamic>> messages = [];
+  final List<MessageInfoDto> messages = [];
 
   late ChatRoomInfoDto room;
   final currentUser = FirebaseAuth.instance.currentUser;
@@ -26,17 +28,19 @@ class _ChattingPageState extends State<ChattingPage> {
     super.initState();
 
     Future.microtask(() async {
+      final result = await getChatMessage(room.chatRoomId);
+      if (result.success && result.room != null) {
+        setState(() {
+          messages.addAll(result.room!.chatMessages);
+        });
+      }
+
       StompService.instance.subscribe('/sub/chat/${room.chatRoomId}', (frame) {
         final data = jsonDecode(frame.body!);
+        final message = MessageInfoDto.fromJson(data);
 
         setState(() {
-          messages.add({
-            'user': data['senderNickname'],
-            'text': data['message'],
-            'time': DateTime.parse(data['createdAt']),
-            'isMe': data['senderId'] == currentUser?.uid,
-            'profileImageUrl': data['senderProfileImageUrl'],
-          });
+          messages.add(message);
         });
       });
     });
@@ -119,11 +123,11 @@ class _ChattingPageState extends State<ChattingPage> {
       itemBuilder: (context, index) {
         final msg = messages[index];
 
-        final DateTime time = msg['time'];
-        final bool isMe = msg['isMe'];
+        final bool isMe = msg.senderId == currentUser?.uid;
+        final DateTime time = msg.createdAt;
 
         bool showDateSeparator = index == 0 ||
-            !isSameDay(messages[index - 1]['time'] as DateTime, time);
+            !isSameDay(messages[index - 1].createdAt, time);
 
         final messageWidget = Row(
           mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -134,14 +138,14 @@ class _ChattingPageState extends State<ChattingPage> {
                 padding: const EdgeInsets.only(right: 8),
                 child: CircleAvatar(
                   radius: 18,
-                  backgroundImage: NetworkImage(msg['profileImageUrl'] ?? room.profileImageUrl),
+                  backgroundImage: NetworkImage(msg.senderProfileImageUrl),
                 ),
               ),
             Column(
               crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 if (!isMe)
-                  Text(msg['user'], style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                  Text(msg.senderNickname, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                 Container(
                   margin: const EdgeInsets.only(top: 4),
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -156,7 +160,7 @@ class _ChattingPageState extends State<ChattingPage> {
                     ),
                   ),
                   child: Text(
-                    msg['text'],
+                    msg.message,
                     style: TextStyle(color: isMe ? Colors.white : Colors.black, fontSize: 14),
                   ),
                 ),
@@ -224,19 +228,23 @@ class _ChattingPageState extends State<ChattingPage> {
     );
   }
 
-  void sendMessage() {
+  void sendMessage() async {
     if (_controller.text.trim().isEmpty) return;
 
     final text = _controller.text.trim();
+
     final msg = {
       'chatRoomId': room.chatRoomId,
       'message': text,
       'imageUrl': null,
     };
+
     StompService.instance.send(
       '/pub/chat/message',
       jsonEncode(msg),
     );
+
+    _controller.clear();
   }
 
   Widget buildDateSeparator(DateTime date) {

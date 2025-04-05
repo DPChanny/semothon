@@ -65,7 +65,7 @@ class RoomChattingTab extends StatelessWidget {
               ),
             ),
             subtitle: Text(
-              room.description,
+              room.lastMessage.message,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
