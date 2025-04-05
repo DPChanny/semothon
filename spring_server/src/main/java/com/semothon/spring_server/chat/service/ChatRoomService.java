@@ -1,11 +1,10 @@
 package com.semothon.spring_server.chat.service;
 
+import com.semothon.spring_server.chat.dto.ChatMessageResponseDto;
 import com.semothon.spring_server.chat.dto.GetChatRoomResponseDto;
 import com.semothon.spring_server.chat.dto.UpdateChatRoomRequestDto;
-import com.semothon.spring_server.chat.entity.ChatRoom;
-import com.semothon.spring_server.chat.entity.ChatRoomType;
-import com.semothon.spring_server.chat.entity.ChatUser;
-import com.semothon.spring_server.chat.entity.ChatUserRole;
+import com.semothon.spring_server.chat.entity.*;
+import com.semothon.spring_server.chat.repository.ChatMessageRepository;
 import com.semothon.spring_server.chat.repository.ChatRoomRepository;
 import com.semothon.spring_server.chat.repository.ChatUserRepository;
 import com.semothon.spring_server.common.exception.ForbiddenException;
@@ -13,10 +12,14 @@ import com.semothon.spring_server.common.exception.InvalidInputException;
 import com.semothon.spring_server.crawling.entity.Crawling;
 import com.semothon.spring_server.room.entity.Room;
 import com.semothon.spring_server.user.entity.User;
+import com.semothon.spring_server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -31,6 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
     private final ChatUserRepository chatUserRepository;
+    private final UserRepository userRepository;
+    private final ChatMessageRepository chatMessageRepository;
 
     // room 기반 chatRoom 생성
     public GetChatRoomResponseDto createRoomChat(Room room){
@@ -154,5 +159,23 @@ public class ChatRoomService {
         chatUserRepository.delete(chatUser);
 
         return GetChatRoomResponseDto.from(chatRoom);
+    }
+
+    public List<ChatMessageResponseDto> getMessages(Long chatRoomId, String currentUserId) {
+        User user = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new InvalidInputException("user not found"));
+
+        ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
+                .orElseThrow(() -> new InvalidInputException("chatRoom not found"));
+
+        ChatUser chatUser = chatUserRepository.findByChatRoomAndUser(chatRoom, user)
+                .orElseThrow(() -> new InvalidInputException("this user are not joined this chatting room"));
+
+        List<ChatMessage> messages = chatMessageRepository.findAllByChatRoom_ChatRoomIdOrderByCreatedAtAsc(chatRoom.getChatRoomId());
+
+        return messages.stream()
+                .map(ChatMessageResponseDto::from)
+                .collect(Collectors.toList());
+
     }
 }
