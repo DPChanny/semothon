@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
       HomeTab(onTabChange: _onTap),
       ChattingTab(onTabChange: _onTap),
       const MentoringTab(),
-      const CrawlingTab(),
+      CrawlingTab(),
     ];
 
     _onSearchPressedHandlers = [

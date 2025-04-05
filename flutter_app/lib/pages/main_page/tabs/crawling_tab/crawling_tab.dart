@@ -1,58 +1,27 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
-
-// ✅ 데이터 모델
-class Activity {
-  final String title;
-  final String description;
-  final String imageUrl;
-  final List<String> tags;
-
-  Activity({
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-    required this.tags,
-  });
-}
-
-// ✅ 예시 데이터
-final List<Activity> recommendedList = [
-  Activity(
-    title: '고양이 공모전',
-    description: '귀여운 고양이를 자랑해 보세요!',
-    imageUrl: 'https://placekitten.com/200/200',
-    tags: ['고양이', '공모전'],
-  ),
-  Activity(
-    title: '고양이 발바닥 공모전',
-    description: '세상에서 가장 귀여운 발바닥을 찾아요',
-    imageUrl: 'https://placekitten.com/201/200',
-    tags: ['고양이', '귀여움'],
-  ),
-];
-
-final List<Activity> latestList = [
-  Activity(
-    title: '고양이 공모전',
-    description:
-    '고양이는 귀엽다. 왜냐면 귀엽기 때문이다. 나도 귀엽다. 하지만 너는 고양이만큼은 아니다... 그래서...',
-    imageUrl: 'https://placekitten.com/300/200',
-    tags: ['코딩', '챌린지'],
-  ),
-];
+import 'package:flutter_app/dto/crawling_info_dto.dart';
+import 'package:flutter_app/widgets/crawling_item.dart';
 
 class CrawlingTab extends StatelessWidget {
-  const CrawlingTab({super.key});
+  List<CrawlingInfoDto>? crawlings;
+
+  CrawlingTab({
+    super.key,
+    this.crawlings,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildPersonalRecommendation(),
             const SizedBox(height: 24),
+            _buildPersonalRecommendation(context),
+            const SizedBox(height: 32),
             _buildLatestRecommendation(),
             const SizedBox(height: 32),
           ],
@@ -61,8 +30,8 @@ class CrawlingTab extends StatelessWidget {
     );
   }
 
-  // ✅ 개인화 추천
-  Widget _buildPersonalRecommendation() {
+  // ✅ 추천 활동 (PageView + crawlingItem)
+  Widget _buildPersonalRecommendation(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -99,132 +68,39 @@ class CrawlingTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        SizedBox(
-          height: 180,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: recommendedList.length,
-            itemBuilder: (context, index) {
-              final item = recommendedList[index];
-              return Container(
-                width: 140,
-                margin: const EdgeInsets.only(right: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(item.imageUrl, fit: BoxFit.cover),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      item.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      '#${item.tags.first}',
-                      style:
-                      const TextStyle(fontSize: 12, color: Colors.black54),
-                    ),
-                  ],
-                ),
-              );
-            },
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SizedBox(
+            height: 170.44, // 🟡 아이템 크기와 정확히 맞춤
+            width: MediaQuery.of(context).size.width,
+            child: PageView.builder(
+              controller: PageController(
+                viewportFraction:
+                107.4 / MediaQuery.of(context).size.width, // 정확한 비율
+              ),
+              padEnds: false, // ✅ 맨 앞 빈 공간 제거
+              itemCount: min(crawlings!.length, 5),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: crawlingItem(context, crawlings![index]),
+                );
+              },
+            ),
           ),
         ),
       ],
     );
   }
 
-  // ✅ 최신 추천
+  // ✅ 최신 추천 (예시용, 필요 없으면 삭제 가능)
   Widget _buildLatestRecommendation() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: const [
-              Expanded(
-                child: Text(
-                  'New',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Icon(Icons.arrow_forward_ios, size: 16, color: Colors.blue),
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            '최신순으로 추천 활동을 확인해 보세요',
-            style: TextStyle(fontSize: 13, color: Colors.grey),
-          ),
-        ),
-        const SizedBox(height: 12),
-        SizedBox(
-          height: 200,
-          child: PageView.builder(
-            controller: PageController(viewportFraction: 0.85),
-            itemCount: latestList.length,
-            itemBuilder: (context, index) {
-              final item = latestList[index];
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8),
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Expanded(
-                      child: Text(
-                        item.description,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      '#${item.tags.join(" #")}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-      ],
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Text(
+        '최신순으로 추천 활동을 확인해 보세요',
+        style: TextStyle(fontSize: 13, color: Colors.grey),
+      ),
     );
   }
 }
