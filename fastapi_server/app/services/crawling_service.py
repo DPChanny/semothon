@@ -15,7 +15,7 @@ def get_activities(url: str) -> List[dict]:
 
         activities = []
         items = soup.select('.tit a')
-        for item in items[:10]:
+        for item in items:
             title = item.text.strip()
             wevity_url = 'https://www.wevity.com' + item['href']
             image_url = get_image_url(wevity_url)

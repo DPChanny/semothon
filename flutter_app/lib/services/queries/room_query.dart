@@ -4,9 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/get_room_list_response_dto.dart';
 import 'package:flutter_app/dto/get_room_response_dto.dart';
 import 'package:flutter_app/dto/room_update_dto.dart';
+import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
-
-import '../url.dart';
 
 Future<({bool success, String message})> createRoom(RoomUpdateDTO room) async {
   String? idToken;
