@@ -1,20 +1,14 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_app/dto/get_room_list_response_dto.dart';
 import 'package:flutter_app/dto/get_room_response_dto.dart';
 import 'package:flutter_app/dto/room_update_dto.dart';
+import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/url.dart';
 import 'package:http/http.dart' as http;
 
 Future<({bool success, String message})> createRoom(RoomUpdateDTO room) async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e");
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure");
   }
@@ -61,13 +55,7 @@ getRoomList({
   int? limit,
   int? page,
 }) async {
-  String? idToken;
-  try {
-    idToken = await FirebaseAuth.instance.currentUser!.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure $e", roomList: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", roomList: null);
   }
@@ -132,14 +120,7 @@ getRoomList({
 Future<({bool success, String message, GetRoomResponseDto? room})> getRoom(
   int roomId,
 ) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e", room: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", room: null);
   }
@@ -177,14 +158,7 @@ Future<({bool success, String message, GetRoomResponseDto? room})> getRoom(
 Future<({bool success, String message, GetRoomResponseDto? room})> joinRoom(
   int roomId,
 ) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e", room: null);
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure", room: null);
   }
@@ -220,14 +194,7 @@ Future<({bool success, String message, GetRoomResponseDto? room})> joinRoom(
 }
 
 Future<({bool success, String message})> leaveRoom(int roomId) async {
-  String? idToken;
-
-  try {
-    idToken = await FirebaseAuth.instance.currentUser?.getIdToken(true);
-  } catch (e) {
-    return (success: false, message: "firebase failure: $e");
-  }
-
+  String? idToken = await getSafeIdToken();
   if (idToken == null) {
     return (success: false, message: "token failure");
   }

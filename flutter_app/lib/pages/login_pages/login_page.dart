@@ -46,8 +46,6 @@ class LoginPage extends StatelessWidget {
       return;
     }
 
-    Navigator.pop(context);
-
     if (result.user!.introText != null) {
       await StompService.instance.connect();
       Navigator.pushNamedAndRemoveUntil(

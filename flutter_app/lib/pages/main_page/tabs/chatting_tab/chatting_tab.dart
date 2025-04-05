@@ -4,6 +4,8 @@ import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
 import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/search_chatting_page.dart';
+import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
@@ -118,35 +120,35 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/search_screen_page');
+                        Navigator.pushNamed(context, ChatPageRouteNames.searchChattingPage);
                       },
-                      child: Container(
-                        height: 34,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF5F6F8),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: const [
-                            Icon(Icons.search, color: Colors.grey),
-                            SizedBox(width: 8),
-                            Text(
-                              '나의 멘토링방 제목으로 검색하기',
-                              style: TextStyle(
-                                color: Color(0xFF999999),
-                                fontSize: 14,
-                                fontFamily: 'Noto Sans KR',
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: -0.24,
-                              ),
-                            )
-                          ],
+                      child: AbsorbPointer( // ✅ 내부 TextField 상호작용 방지
+                        child: TextField(
+                          readOnly: true,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            hintText: '나의 멘토링방 제목으로 검색하기',
+                            hintStyle: const TextStyle(
+                              color: Color(0xFF999999),
+                              fontSize: 14,
+                              fontFamily: 'Noto Sans KR',
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -0.24,
+                            ),
+                            prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                            filled: true,
+                            fillColor: const Color(0xFFF5F6F8),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(6),
+                              borderSide: BorderSide.none,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                          ),
                         ),
                       ),
                     ),
                   )
-                      : const SizedBox.shrink();
+                  : const SizedBox.shrink();
                 },
               ),
 
