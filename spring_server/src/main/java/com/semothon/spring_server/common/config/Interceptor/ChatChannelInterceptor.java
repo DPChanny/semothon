@@ -17,6 +17,7 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -37,7 +38,7 @@ public class ChatChannelInterceptor implements ChannelInterceptor {
 
         if (accessor == null) return message;
 
-        // 구독 요청만 필터링
+        // SUBSCRIBE 요청 핸들링
         if (StompCommand.SUBSCRIBE.equals(accessor.getCommand())) {
             String destination = accessor.getDestination(); // 구독할 목적지 ex) /sub/chat/1
             String userId = (String) accessor.getSessionAttributes().get("userId");
@@ -64,11 +65,40 @@ public class ChatChannelInterceptor implements ChannelInterceptor {
                 throw new ForbiddenException("User is not a participant of this chat room");
             }
 
+            accessor.getSessionAttributes().put(accessor.getSubscriptionId(), destination);
             log.info("SUBSCRIBE ALLOWED: userId={}, chatRoomId={}", userId, chatRoomId);
+        }
+
+        // UNSUBSCRIBE 요청 핸들링
+        if (StompCommand.UNSUBSCRIBE.equals(accessor.getCommand())) {
+            log.info("handling UNSUBSCRIBE...");
+            String userId = (String) accessor.getSessionAttributes().get("userId");
+            String id = accessor.getSubscriptionId();
+            String destination = (String) accessor.getSessionAttributes().get(id);
+
+
+            if (userId != null && destination != null && destination.startsWith("/sub/chat/")) {
+                Long chatRoomId = parseChatRoomId(destination);
+                log.info("handling UNSUBSCRIBE... chatRoomId {}", chatRoomId);
+                if (chatRoomId != null) {
+                    chatRoomRepository.findById(chatRoomId).ifPresent(chatRoom -> {
+                        userRepository.findById(userId).ifPresent(user -> {
+                            chatUserRepository.findByChatRoomAndUser(chatRoom, user).ifPresent(chatUser -> {
+                                log.info("handling UNSUBSCRIBE... chatUser {}", chatUser);
+                                chatUser.updateLastReadAt(LocalDateTime.now());
+                                chatUserRepository.save(chatUser); // 변경사항 반영
+                                log.info("lastReadAt updated for userId={}, chatRoomId={}", userId, chatRoomId);
+                            });
+                        });
+                    });
+                }
+            }
         }
 
         return message;
     }
+
+
 
     private Long parseChatRoomId(String destination) {
         try {

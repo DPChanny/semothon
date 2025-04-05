@@ -19,6 +19,7 @@ public class ChatUserInfoDto {
     private String shortIntro;
     private ChatUserRole role;
     private LocalDateTime joinedAt;
+    private LocalDateTime lastReadAt;
 
     public static ChatUserInfoDto from(ChatUser chatUser) {
         User user = chatUser.getUser();
@@ -30,6 +31,7 @@ public class ChatUserInfoDto {
                 .shortIntro(user.getShortIntro())
                 .role(chatUser.getRole())
                 .joinedAt(DateTimeUtil.convertUTCToKST(chatUser.getJoinedAt()))
+                .lastReadAt(chatUser.getLastReadAt())
                 .build();
     }
 

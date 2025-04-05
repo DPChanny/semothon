@@ -2,8 +2,10 @@ package com.semothon.spring_server.chat.service;
 
 import com.semothon.spring_server.chat.dto.ChatMessageRequestDto;
 import com.semothon.spring_server.chat.dto.ChatMessageResponseDto;
+import com.semothon.spring_server.chat.dto.UnreadMessageCountDto;
 import com.semothon.spring_server.chat.entity.ChatMessage;
 import com.semothon.spring_server.chat.entity.ChatRoom;
+import com.semothon.spring_server.chat.entity.ChatUser;
 import com.semothon.spring_server.chat.repository.ChatMessageRepository;
 import com.semothon.spring_server.chat.repository.ChatRoomRepository;
 import com.semothon.spring_server.chat.repository.ChatUserRepository;
@@ -15,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -60,5 +65,23 @@ import org.springframework.transaction.annotation.Transactional;
             case OPEN -> true;
             default -> false;
         };
+    }
+
+    @Transactional(readOnly = true)
+    public List<UnreadMessageCountDto> getUnreadMessageSummary(String userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new InvalidInputException("User not found"));
+
+        List<ChatUser> chatUsers = chatUserRepository.findByUser(user);
+
+        return chatUsers.stream()
+                .map(chatUser -> {
+                    Long chatRoomId = chatUser.getChatRoom().getChatRoomId();
+                    LocalDateTime lastReadAt = chatUser.getLastReadAt();
+                    long count = chatMessageRepository.countUnreadMessages(chatRoomId, lastReadAt);
+                    return new UnreadMessageCountDto(chatRoomId, count);
+                })
+                .toList();
+
     }
 }

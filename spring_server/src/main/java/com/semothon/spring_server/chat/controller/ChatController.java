@@ -110,4 +110,16 @@ public class ChatController {
                 "Chat room search results retrieved successfully"
         );
     }
+
+    @GetMapping("/api/chats/unread-count")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse getUnreadMessageCount(
+            @AuthenticationPrincipal User user
+    ){
+        List<UnreadMessageCountDto> unreadCounts = chatService.getUnreadMessageSummary(user.getUserId());
+        return BaseResponse.success(
+                Map.of("code", 200, "unreadCounts", unreadCounts),
+                "Unread message summary retrieved"
+        );
+    }
 }
