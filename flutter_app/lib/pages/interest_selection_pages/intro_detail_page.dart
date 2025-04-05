@@ -105,6 +105,8 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
                             const Center(child: CircularProgressIndicator()),
                   );
 
+                  UserUpdateInterestIntroDTO.instance.intro = _controller.text;
+
                   final result = await updateUserIntro();
 
                   Navigator.pop(context); // 로딩 다이얼로그 닫기
