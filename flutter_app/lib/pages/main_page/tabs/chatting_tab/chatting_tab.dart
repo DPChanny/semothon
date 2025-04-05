@@ -4,13 +4,14 @@ import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
 import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
-import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/search_chatting_page.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
 class ChattingTab extends StatefulWidget {
-  const ChattingTab({super.key});
+  final void Function(int) onTabChange;
+
+  const ChattingTab({super.key, required this.onTabChange});
 
   @override
   State<ChattingTab> createState() => _ChattingTabState();
@@ -110,48 +111,6 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                   }),
                 ),
               ),
-
-              // 🔍 검색창 (멘토링 방에서만 표시)
-              AnimatedBuilder(
-                animation: _tabController,
-                builder: (_, __) {
-                  return _tabController.index == 0
-                      ? Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, ChatPageRouteNames.searchChattingPage);
-                      },
-                      child: AbsorbPointer( // ✅ 내부 TextField 상호작용 방지
-                        child: TextField(
-                          readOnly: true,
-                          enabled: false,
-                          decoration: InputDecoration(
-                            hintText: '나의 멘토링방 제목으로 검색하기',
-                            hintStyle: const TextStyle(
-                              color: Color(0xFF999999),
-                              fontSize: 14,
-                              fontFamily: 'Noto Sans KR',
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: -0.24,
-                            ),
-                            prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                            filled: true,
-                            fillColor: const Color(0xFFF5F6F8),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide.none,
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                  : const SizedBox.shrink();
-                },
-              ),
-
               // 📄 탭별 콘텐츠
               Expanded(
                 child: TabBarView(
@@ -161,10 +120,12 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                     RoomChattingTab(
                       roomInfos: roomChattingRooms,
                       unreadInfos: unreadData.room!.unreadCounts,
+                      onTabChange: widget.onTabChange,
                     ),
                     CrawlingChattingTab(
                       roomInfos: crawlingChattingRooms,
                       unreadInfos: unreadData.room!.unreadCounts,
+                      onTabChange: widget.onTabChange,
                     ),
                   ],
                 ),

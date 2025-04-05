@@ -14,7 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.semothon.spring_server.crawling.entity.QCrawling.crawling;
 import static com.semothon.spring_server.crawling.entity.QCrawlingInterest.crawlingInterest;
@@ -29,14 +32,14 @@ public class CrawlingRepositoryCustomImpl implements CrawlingRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Crawling> searchCrawlingList(CrawlingSearchCondition condition, String currentUserId) {
+    public List<CrawlingWithScoreDto> searchCrawlingList(CrawlingSearchCondition condition, String currentUserId) {
         List<CrawlingWithScoreDto> results = queryFactory
                 .select(Projections.constructor(CrawlingWithScoreDto.class, crawling, userCrawlingRecommendation.score))
                 .from(crawling)
                 .leftJoin(crawling.crawlingInterests, crawlingInterest)
                 .leftJoin(crawlingInterest.interest, interest)
                 .leftJoin(crawling.userCrawlingRecommendations, userCrawlingRecommendation)
-                    .on(userCrawlingRecommendation.user.userId.eq(currentUserId))
+                .on(userCrawlingRecommendation.user.userId.eq(currentUserId))
                 .where(
                         titleKeywordIn(condition.getTitleKeyword()),
                         descriptionKeywordIn(condition.getDescriptionKeyword()),
@@ -52,9 +55,18 @@ public class CrawlingRepositoryCustomImpl implements CrawlingRepositoryCustom {
                 .limit(condition.getLimit())
                 .fetch();
 
-        return results.stream()
-                .map(CrawlingWithScoreDto::crawling)
-                .toList();
+        List<CrawlingWithScoreDto> deduplicated = results.stream()
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toMap(
+                                dto -> dto.crawling().getCrawlingId(),
+                                dto -> dto,
+                                (existing, replacement) -> existing,
+                                LinkedHashMap::new
+                        ),
+                        m -> new ArrayList<>(m.values())
+                ));
+
+        return deduplicated;
     }
 
     private BooleanExpression titleKeywordIn(List<String> keywords) {

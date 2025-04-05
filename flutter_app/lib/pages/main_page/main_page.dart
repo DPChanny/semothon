@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/chatting_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/search_chatting_page.dart';
 import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
 
 import 'package:flutter_app/pages/my_page.dart';
+import 'package:flutter_app/routes/chat_page_routes.dart';
+import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,10 +23,31 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   late int _selectedIndex;
 
+  late final List<Widget> _pages;
+  late final List<VoidCallback?> _onSearchPressedHandlers;
+
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.currentIndex;
+
+    _pages = [
+      HomeTab(onTabChange: _onTap),
+      ChattingTab(onTabChange: _onTap),
+      const MentoringTab(),
+      const CrawlingTab(),
+    ];
+
+    _onSearchPressedHandlers = [
+      null,
+          () {
+        Navigator.pushNamed(context, ChatPageRouteNames.searchChattingPage);
+      },
+          () {
+        Navigator.pushNamed(context, MyMentorTabRouteNames.searchPage);
+      },
+      null
+    ];
   }
 
   void _onTap(int index) {
@@ -33,12 +57,16 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  final List<Widget> _pages = const [
-    HomeTab(),
-    ChattingTab(),
-    MentoringTab(),
-    CrawlingTab(),
+  final List<String> _appBarTitles = [
+    "",
+    "채팅",
+    "멘토링",
+    "추천 활동",
   ];
+
+  String _getAppBarTitle(int index) {
+    return _appBarTitles[index];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +76,27 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: const Text(
-          "브랜드이름",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+          title: _selectedIndex == 0
+              ? SvgPicture.asset(
+            'assets/logo.svg', // 👈 로고 경로 (예시, 네 파일 이름에 맞게)
+            height: 24,
+          )
+              : Text(
+            _getAppBarTitle(_selectedIndex),
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
           ),
-        ),
         actions: [
+          if (_onSearchPressedHandlers[_selectedIndex] != null)
+            IconButton(
+              icon: const Icon(Icons.search, color: Colors.grey),
+              onPressed: () {
+                _onSearchPressedHandlers[_selectedIndex]!.call();
+              },
+            ),
         IconButton(
           icon: const Icon(Icons.person, color: Colors.grey),
           onPressed: () async {
@@ -69,7 +109,6 @@ class _MainPageState extends State<MainPage> {
               );
               return;
             }
-
             // 유저 정보 가져오기에 성공하면 페이지 이동
             Navigator.push(
               context,
