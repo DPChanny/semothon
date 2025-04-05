@@ -21,6 +21,7 @@ public class RoomInfoDto {
     private Integer currentMemberCount;
     private Long chatRoomId;
     private List<String> interests;
+    private String profileImageUrl;
 
     public static RoomInfoDto from(Room room){
         return RoomInfoDto.builder()
@@ -34,6 +35,7 @@ public class RoomInfoDto {
                 .interests(room.getRoomInterests().stream()
                         .map(roomInterest -> roomInterest.getInterest().getName())
                         .collect(Collectors.toList()))
+                .profileImageUrl(room.getHost().getProfileImageUrl())
                 .build();
     }
 }
