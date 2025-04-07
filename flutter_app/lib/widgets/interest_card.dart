@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user/user_info_dto.dart';
 import 'package:flutter_app/routes/my_page_routes.dart';
-import 'package:flutter_app/widgets/keyword_chip.dart';
+import 'package:flutter_app/widgets/Interest_chip.dart';
 
 Widget interestCard(
-  BuildContext context,
-  UserInfoDto user,
-  List<String> keywords,
-) {
+    BuildContext context,
+    UserInfoDto? user,
+    ) {
+  if (user == null) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFF008CFF),
+      padding: const EdgeInsets.fromLTRB(45, 25, 45, 100),
+      child: const Center(
+        child: CircularProgressIndicator(color: Colors.white),
+      ),
+    );
+  }
+
   return Container(
     width: double.infinity,
     color: const Color(0xFF008CFF),
@@ -15,41 +25,39 @@ Widget interestCard(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 상단 텍스트와 프로필
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 텍스트
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     '나의 관심분야는?',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 27,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     '나의 현재 관심사를 확인하고\n수정해 보세요.',
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 50),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Container(
                 width: 75,
                 height: 75,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: NetworkImage(user.profileImageUrl),
+                    image: NetworkImage('https://via.placeholder.com/75'), // fallback
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -61,19 +69,16 @@ Widget interestCard(
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            // ✅ 키워드 Wrap (고정된 너비)
             SizedBox(
               width: MediaQuery.of(context).size.width - 150,
               child: Wrap(
                 spacing: 4,
                 runSpacing: 4,
-                children:
-                    keywords
-                        .map((keyword) => KeywordChip(text: keyword))
-                        .toList(),
+                children: user.interests
+                    .map((interest) => InterestChip(text: interest))
+                    .toList(),
               ),
             ),
-            // ✅ 아이콘을 오른쪽 끝으로 보내기
             Expanded(
               child: Align(
                 alignment: Alignment.bottomRight,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user/host_user_info_dto.dart';
 import 'package:flutter_app/dto/room/room_info_dto.dart';
@@ -49,8 +51,6 @@ class _SearchPageState extends State<SearchPage> {
         _roomResult = roomList.roomInfos;
         _hostResult = roomList.hostInfos;
         _userResult = userList.userInfos;
-        showAllMentors = _userResult.isNotEmpty;
-        showAllRooms = _roomResult.isNotEmpty;
       });
     } catch (e) {
       setState(() {
@@ -85,7 +85,6 @@ class _SearchPageState extends State<SearchPage> {
               ),
               const SizedBox(height: 16),
 
-              // 🔽 결과 영역
               Expanded(
                 child:
                     _isLoading
@@ -142,9 +141,7 @@ class _SearchPageState extends State<SearchPage> {
                       itemCount:
                           showAllMentors
                               ? _userResult.length
-                              : (_userResult.length > 3
-                                  ? 3
-                                  : _userResult.length),
+                              : min(_userResult.length, 3),
                       itemBuilder: (context, index) {
                         return MentorItem(mentor: _userResult[index]);
                       },
@@ -212,9 +209,7 @@ class _SearchPageState extends State<SearchPage> {
                       itemCount:
                           showAllRooms
                               ? _roomResult.length
-                              : (_roomResult.length > 3
-                                  ? 3
-                                  : _roomResult.length),
+                              : min(_roomResult.length, 3),
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
@@ -235,7 +230,6 @@ class _SearchPageState extends State<SearchPage> {
                           },
                           child: RoomItem(
                             room: _roomResult[index],
-                            index: index,
                           ),
                         );
                       },

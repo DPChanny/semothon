@@ -25,71 +25,98 @@ class _HomeTabState extends State<HomeTab> {
   UserInfoDto? _userInfo;
   GetUserListResponseDto? _mentors;
   List<CrawlingInfoDto> _crawlings = [];
-  bool _isLoading = true;
+
+  bool _isMentorLoading = true;
+  bool _isCrawlingLoading = true;
+
+  late final PageController _crawlingPageController;
 
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final screenWidth = MediaQuery
+          .of(context)
+          .size
+          .width;
+      _crawlingPageController = PageController(
+        viewportFraction: 107.4 / screenWidth,
+      );
+    });
+
     _loadData();
+  }
+
+  @override
+  void dispose() {
+    _crawlingPageController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadData() async {
     try {
       final user = await getUser();
+      if (!mounted) return;
 
       if (user.userInfo.interests.isEmpty) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text("관심사를 먼저 설정해주세요.")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("관심사를 먼저 설정해주세요.")),
+        );
         Navigator.pushNamedAndRemoveUntil(
           context,
           InterestPageRouteNames.interestCategorySelectionPage,
-          (route) => false,
+              (route) => false,
         );
         return;
       }
 
-      final mentorList = await getUserList(sortBy: "SCORE");
-      final crawlingList = await getCrawlingList(sortBy: "SCORE");
-
       setState(() {
         _userInfo = user.userInfo;
-        _mentors = mentorList;
-        _crawlings = crawlingList.crawlingList;
-        _isLoading = false;
+      });
+
+      getUserList(sortBy: "SCORE").then((mentorList) {
+        if (!mounted) return;
+        setState(() {
+          _mentors = mentorList;
+          _isMentorLoading = false;
+        });
+      });
+
+      getCrawlingList(sortBy: "SCORE").then((crawlingList) {
+        if (!mounted) return;
+        setState(() {
+          _crawlings = crawlingList.crawlingList;
+          _isCrawlingLoading = false;
+        });
       });
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.toString())));
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginPage,
-        (route) => false,
+            (route) => false,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          interestCard(context, _userInfo!, _userInfo!.interests),
+          interestCard(context, _userInfo),
           Transform.translate(
             offset: const Offset(0, -90),
             child: Column(
               children: [
                 Container(
                   margin: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
+                      horizontal: 16, vertical: 16),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -118,9 +145,7 @@ class _HomeTabState extends State<HomeTab> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              widget.onTabChange(2);
-                            },
+                            onTap: () => widget.onTabChange(2),
                             child: const Icon(
                               Icons.arrow_forward_ios,
                               size: 20,
@@ -130,12 +155,13 @@ class _HomeTabState extends State<HomeTab> {
                         ],
                       ),
                       const SizedBox(height: 16),
-                      Column(
-                        children:
-                            _mentors?.userInfos
-                                .sublist(0, min(_mentors!.userInfos.length, 3))
-                                .map((m) => MentorItem(mentor: m))
-                                .toList() ??
+                      _isMentorLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : Column(
+                        children: _mentors?.userInfos
+                            .sublist(0, min(_mentors!.userInfos.length, 3))
+                            .map((m) => MentorItem(mentor: m))
+                            .toList() ??
                             [],
                       ),
                     ],
@@ -148,7 +174,7 @@ class _HomeTabState extends State<HomeTab> {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const [
                             Text(
                               '추천 활동',
                               style: TextStyle(
@@ -167,11 +193,8 @@ class _HomeTabState extends State<HomeTab> {
                           ],
                         ),
                       ),
-
                       GestureDetector(
-                        onTap: () {
-                          widget.onTabChange(3);
-                        },
+                        onTap: () => widget.onTabChange(3),
                         child: const Icon(
                           Icons.arrow_forward_ios,
                           size: 20,
@@ -185,21 +208,20 @@ class _HomeTabState extends State<HomeTab> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: SizedBox(
-                    height: 170.44, // 🟡 아이템 크기와 정확히 맞춤
-                    width: MediaQuery.of(context).size.width,
-                    child: PageView.builder(
-                      controller: PageController(
-                        viewportFraction:
-                            107.4 /
-                            MediaQuery.of(
-                              context,
-                            ).size.width, // 🔹 아이템 너비 / 화면 너비
-                      ),
-                      padEnds: false, // ✅ 맨 앞 빈 공간 제거
+                    height: 170.44,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
+                    child: _isCrawlingLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : PageView.builder(
+                      controller: _crawlingPageController,
+                      padEnds: false,
                       itemCount: min(_crawlings.length, 5),
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(right: 8), // 카드 사이 여백
+                          padding: const EdgeInsets.only(right: 8),
                           child: crawlingItem(context, _crawlings[index]),
                         );
                       },

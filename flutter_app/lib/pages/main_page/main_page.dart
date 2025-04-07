@@ -10,24 +10,28 @@ import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MainPage extends StatefulWidget {
-  final int currentIndex;
-
-  const MainPage({super.key, this.currentIndex = 0});
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  late int _selectedIndex;
+  late int _selectedIndex = 0;
 
   late final List<Widget> _pages;
+  late final List<Widget> _appBarWidgets;
   late final List<VoidCallback?> _onSearchPressedHandlers;
+
+  final _titleStyle = const TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+  );
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.currentIndex;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final args = ModalRoute.of(context)?.settings.arguments;
@@ -47,13 +51,20 @@ class _MainPageState extends State<MainPage> {
 
     _onSearchPressedHandlers = [
       null,
-      () {
+          () {
         Navigator.pushNamed(context, ChatPageRouteNames.searchChattingPage);
       },
-      () {
+          () {
         Navigator.pushNamed(context, MyMentorTabRouteNames.searchPage);
       },
       null,
+    ];
+
+    _appBarWidgets = [
+      SvgPicture.asset('assets/logo.svg', height: 24),
+      Text("채팅", style: _titleStyle),
+      Text("멘토링", style: _titleStyle),
+      Text("활동", style: _titleStyle),
     ];
   }
 
@@ -64,10 +75,28 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  final List<String> _appBarTitles = ["", "채팅", "멘토링", "추천 활동"];
+  void _handleUserInfoNavigation() async {
+    try {
+      final user = await getUser();
 
-  String _getAppBarTitle(int index) {
-    return _appBarTitles[index];
+      if (!mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyPage(
+            user: user.userInfo,
+            chatRooms: user.chatRooms,
+          ),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("유저 정보를 불러오지 못했습니다.")),
+      );
+    }
   }
 
   @override
@@ -78,50 +107,16 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title:
-            _selectedIndex == 0
-                ? SvgPicture.asset(
-                  'assets/logo.svg', // 👈 로고 경로 (예시, 네 파일 이름에 맞게)
-                  height: 24,
-                )
-                : Text(
-                  _getAppBarTitle(_selectedIndex),
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
+        title: _appBarWidgets[_selectedIndex],
         actions: [
           if (_onSearchPressedHandlers[_selectedIndex] != null)
             IconButton(
               icon: const Icon(Icons.search, color: Colors.grey),
-              onPressed: () {
-                _onSearchPressedHandlers[_selectedIndex]!.call();
-              },
+              onPressed: () => _onSearchPressedHandlers[_selectedIndex]!.call(),
             ),
           IconButton(
             icon: const Icon(Icons.person, color: Colors.grey),
-            onPressed: () async {
-              try {
-                final user = await getUser();
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => MyPage(
-                          user: user.userInfo,
-                          chatRooms: user.chatRooms,
-                        ),
-                  ),
-                );
-              } catch (e) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text("유저 정보를 불러오지 못했습니다.")));
-              }
-            },
+            onPressed: () => _handleUserInfoNavigation(),
           ),
         ],
       ),

@@ -3,9 +3,9 @@ import 'package:flutter_app/dto/room/room_info_dto.dart';
 
 class RoomItem extends StatelessWidget {
   final RoomInfoDto room;
-  final int index;
+  final int? index;
 
-  const RoomItem({super.key, required this.room, required this.index});
+  const RoomItem({super.key, required this.room, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +15,17 @@ class RoomItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 번호
-          Text(
-            (index + 1).toString().padLeft(2, '0'),
-            style: const TextStyle(
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+          if (index != null) ...[
+            Text(
+              (index! + 1).toString().padLeft(2, '0'),
+              style: const TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-
+            const SizedBox(width: 12),
+          ],
           SizedBox(
             width: 60,
             height: 60,

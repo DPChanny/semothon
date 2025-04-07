@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user/user_info_dto.dart';
 import 'package:flutter_app/pages/mentor_info_page.dart';
@@ -48,7 +50,7 @@ class MentorItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    mentor.nickname ?? "",
+                    mentor.nickname!,
                     style: const TextStyle(
                       fontFamily: 'Noto Sans KR',
                       fontWeight: FontWeight.w400,
@@ -57,7 +59,7 @@ class MentorItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${mentor.department ?? ""} ${mentor.studentId ?? ""}학번",
+                    "${mentor.department ?? "학과 없음"} ${mentor.studentId?.substring(2, min(4, mentor.studentId!.length)) ?? "??"}학번",
                     style: const TextStyle(
                       color: Color(0xFF888888),
                       fontSize: 12,
@@ -67,7 +69,9 @@ class MentorItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    mentor.shortIntro ?? "",
+                    mentor.shortIntro!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Color(0xFF888888),
                       fontSize: 12,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class KeywordChip extends StatelessWidget {
+class InterestChip extends StatelessWidget {
   final String text;
 
-  const KeywordChip({super.key, required this.text});
+  const InterestChip({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

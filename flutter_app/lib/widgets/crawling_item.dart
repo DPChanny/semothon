@@ -4,8 +4,8 @@ import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_detail.da
 
 Widget crawlingItem(BuildContext context, CrawlingInfoDto item) {
   return SizedBox(
-    width: 107.4,
-    height: 170.44,
+    width: 150,
+    height: 170,
     child: Material(
       color: Colors.white,
       borderRadius: BorderRadius.circular(4),
@@ -38,10 +38,9 @@ Widget crawlingItem(BuildContext context, CrawlingInfoDto item) {
                 child: Image.network(item.imageUrl, fit: BoxFit.cover),
               ),
             ),
-
             // 🔵 파란 정보 영역
             Container(
-              height: 70.44,
+              height: 50,
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               decoration: const BoxDecoration(color: Color(0xFF008CFF)),
