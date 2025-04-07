@@ -86,7 +86,7 @@ class RoomPopUp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text("입장하기", style: TextStyle(color: Colors.white),),
+            child: const Text("입장하기", style: TextStyle(color: Colors.white)),
           ),
         ],
       ),

@@ -14,7 +14,7 @@ class CrawlingChattingTab extends StatelessWidget {
     super.key,
     required this.roomInfos,
     required this.unreadInfos,
-    required this.onTabChange
+    required this.onTabChange,
   });
 
   @override
@@ -37,11 +37,7 @@ class CrawlingChattingTab extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Image.asset(
-                    'assets/fist.png',
-                    width: 96,
-                    height: 96,
-                  ),
+                  Image.asset('assets/fist.png', width: 96, height: 96),
                 ],
               ),
               const SizedBox(height: 16),
@@ -84,13 +80,12 @@ class CrawlingChattingTab extends StatelessWidget {
                     fontFamily: 'Noto Sans KR',
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       );
     }
-
 
     return ListView.builder(
       itemCount: roomInfos.length,
@@ -109,15 +104,15 @@ class CrawlingChattingTab extends StatelessWidget {
               await leaveRoom(room.roomId!);
 
               if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('채팅방을 나갔습니다')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text('채팅방을 나갔습니다')));
               }
             } catch (e) {
               if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('나가기 실패: $e')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text('나가기 실패: $e')));
               }
             }
           },

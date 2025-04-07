@@ -35,9 +35,9 @@ class _ChattingPageState extends State<ChattingPage> {
           messages.addAll(result.chatMessages);
         });
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.toString())));
       }
 
       StompService.instance.subscribe('/sub/chat/${room.chatRoomId}', (frame) {
@@ -49,7 +49,6 @@ class _ChattingPageState extends State<ChattingPage> {
         });
       });
     });
-
   }
 
   @override
@@ -68,10 +67,7 @@ class _ChattingPageState extends State<ChattingPage> {
       endDrawer: buildDrawer(),
       appBar: buildAppBar(),
       body: Column(
-        children: [
-          Expanded(child: buildMessageList()),
-          buildInputBar(),
-        ],
+        children: [Expanded(child: buildMessageList()), buildInputBar()],
       ),
     );
   }
@@ -96,7 +92,10 @@ class _ChattingPageState extends State<ChattingPage> {
                     const SizedBox(height: 12),
                     Text(
                       room.title,
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -105,7 +104,11 @@ class _ChattingPageState extends State<ChattingPage> {
 
               // 사진
               ListTile(
-                leading: SvgPicture.asset('assets/image_icon.svg', width: 24, height: 24),
+                leading: SvgPicture.asset(
+                  'assets/image_icon.svg',
+                  width: 24,
+                  height: 24,
+                ),
                 title: const Text('사진'),
                 onTap: () {},
               ),
@@ -117,11 +120,12 @@ class _ChattingPageState extends State<ChattingPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   separatorBuilder: (_, __) => const SizedBox(width: 8),
-                  itemBuilder: (_, i) => Container(
-                    width: 60,
-                    height: 60,
-                    color: Colors.grey.shade300,
-                  ),
+                  itemBuilder:
+                      (_, i) => Container(
+                        width: 60,
+                        height: 60,
+                        color: Colors.grey.shade300,
+                      ),
                 ),
               ),
 
@@ -129,7 +133,11 @@ class _ChattingPageState extends State<ChattingPage> {
 
               // 파일, 수정
               ListTile(
-                leading: SvgPicture.asset('assets/clip_icon.svg', width: 24, height: 24),
+                leading: SvgPicture.asset(
+                  'assets/clip_icon.svg',
+                  width: 24,
+                  height: 24,
+                ),
                 title: const Text('파일'),
                 onTap: () {},
               ),
@@ -147,9 +155,15 @@ class _ChattingPageState extends State<ChattingPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    const Text('참여자', style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text(
+                      '참여자',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(width: 6),
-                    Text('${room.currentMemberCount}', style: const TextStyle(color: Colors.grey)),
+                    Text(
+                      '${room.currentMemberCount}',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
                   ],
                 ),
               ),
@@ -171,7 +185,9 @@ class _ChattingPageState extends State<ChattingPage> {
                   return ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: const CircleAvatar(
-                      backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+                      backgroundImage: NetworkImage(
+                        'https://via.placeholder.com/150',
+                      ),
                       radius: 18,
                     ),
                     title: Row(
@@ -180,16 +196,22 @@ class _ChattingPageState extends State<ChattingPage> {
                         const SizedBox(width: 4),
                         if (m['role'] != '')
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: const Color(0xFF008CFF),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
                               m['role']!,
-                              style: const TextStyle(fontSize: 10, color: Colors.white),
+                              style: const TextStyle(
+                                fontSize: 10,
+                                color: Colors.white,
+                              ),
                             ),
-                          )
+                          ),
                       ],
                     ),
                   );
@@ -199,7 +221,10 @@ class _ChattingPageState extends State<ChattingPage> {
               const Divider(height: 1, color: Color(0xFFD9D9D9)),
 
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 16,
+                ),
                 child: Container(
                   width: double.infinity,
                   height: 46,
@@ -211,87 +236,106 @@ class _ChattingPageState extends State<ChattingPage> {
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (_) => AlertDialog(
-                          contentPadding: const EdgeInsets.all(0),
-                          insetPadding: const EdgeInsets.symmetric(horizontal: 40),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23.5)),
-                          content: Container(
-                            width: 335,
-                            padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Text(
-                                  '정말 나가시겠어요?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 24,
-                                    fontFamily: 'Noto Sans KR',
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.42,
-                                    letterSpacing: -0.41,
-                                  ),
+                        builder:
+                            (_) => AlertDialog(
+                              contentPadding: const EdgeInsets.all(0),
+                              insetPadding: const EdgeInsets.symmetric(
+                                horizontal: 40,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(23.5),
+                              ),
+                              content: Container(
+                                width: 335,
+                                padding: const EdgeInsets.fromLTRB(
+                                  24,
+                                  20,
+                                  24,
+                                  12,
                                 ),
-                                const SizedBox(height: 12),
-                                const Text(
-                                  '해당 버튼 선택 시, 채팅방 정보가 \n모두 삭제되며 복구되지 않습니다.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17,
-                                    fontFamily: 'Noto Sans KR',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.65,
-                                    letterSpacing: -0.29,
-                                  ),
-                                ),
-                                const SizedBox(height: 24),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                      '정말 나가시겠어요?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 24,
+                                        fontFamily: 'Noto Sans KR',
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.42,
+                                        letterSpacing: -0.41,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    const Text(
+                                      '해당 버튼 선택 시, 채팅방 정보가 \n모두 삭제되며 복구되지 않습니다.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontFamily: 'Noto Sans KR',
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.65,
+                                        letterSpacing: -0.29,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 24),
 
-                                // ✅ 버튼 세로 배치로 수정
-                                ElevatedButton(
-                                  onPressed: () {
-                                    // 나가기 로직
-                                    Navigator.pop(context);
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF008CFF),
-                                    minimumSize: const Size.fromHeight(48),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                  ),
-                                  child: const Text(
-                                    '확인',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17,
-                                      fontFamily: 'Noto Sans KR',
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.29,
+                                    // ✅ 버튼 세로 배치로 수정
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // 나가기 로직
+                                        Navigator.pop(context);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color(
+                                          0xFF008CFF,
+                                        ),
+                                        minimumSize: const Size.fromHeight(48),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        '확인',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17,
+                                          fontFamily: 'Noto Sans KR',
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: -0.29,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text(
-                                    '취소',
-                                    style: TextStyle(
-                                      color: Color(0xFF999999),
-                                      fontSize: 17,
-                                      fontFamily: 'Noto Sans KR',
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.29,
+                                    const SizedBox(height: 8),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text(
+                                        '취소',
+                                        style: TextStyle(
+                                          color: Color(0xFF999999),
+                                          fontSize: 17,
+                                          fontFamily: 'Noto Sans KR',
+                                          fontWeight: FontWeight.w700,
+                                          letterSpacing: -0.29,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
                       );
-
                     },
-                    icon: const Icon(Icons.logout, color: Color(0xFF999999), size: 18),
+                    icon: const Icon(
+                      Icons.logout,
+                      color: Color(0xFF999999),
+                      size: 18,
+                    ),
                     label: const Text(
                       '채팅 나가기',
                       style: TextStyle(
@@ -325,9 +369,19 @@ class _ChattingPageState extends State<ChattingPage> {
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(room.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),
+          Text(
+            room.title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
           const SizedBox(width: 4),
-          Text('${room.currentMemberCount}', style: const TextStyle(fontSize: 14, color: Colors.grey)),
+          Text(
+            '${room.currentMemberCount}',
+            style: const TextStyle(fontSize: 14, color: Colors.grey),
+          ),
         ],
       ),
       leading: IconButton(
@@ -357,7 +411,8 @@ class _ChattingPageState extends State<ChattingPage> {
             index == 0 || !isSameDay(messages[index - 1].createdAt, time);
 
         final messageWidget = Row(
-          mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+          mainAxisAlignment:
+              isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (!isMe)
@@ -369,16 +424,26 @@ class _ChattingPageState extends State<ChattingPage> {
                 ),
               ),
             Column(
-              crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 if (!isMe)
-                  Text(msg.senderNickname, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                  Text(
+                    msg.senderNickname,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
                 Container(
                   margin: const EdgeInsets.only(top: 4),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   constraints: const BoxConstraints(maxWidth: 280),
                   decoration: BoxDecoration(
-                    color: isMe ? const Color(0xFF008CFF) : const Color(0xFFF2F2F2),
+                    color:
+                        isMe
+                            ? const Color(0xFF008CFF)
+                            : const Color(0xFFF2F2F2),
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(16),
                       topRight: const Radius.circular(16),
@@ -388,7 +453,10 @@ class _ChattingPageState extends State<ChattingPage> {
                   ),
                   child: Text(
                     msg.message,
-                    style: TextStyle(color: isMe ? Colors.white : Colors.black, fontSize: 14),
+                    style: TextStyle(
+                      color: isMe ? Colors.white : Colors.black,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -446,9 +514,14 @@ class _ChattingPageState extends State<ChattingPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF008CFF),
               minimumSize: const Size(48, 36),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
             ),
-            child: const Text('전송', style: TextStyle(fontSize: 14, color: Colors.white)),
+            child: const Text(
+              '전송',
+              style: TextStyle(fontSize: 14, color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -466,22 +539,22 @@ class _ChattingPageState extends State<ChattingPage> {
       'imageUrl': null,
     };
 
-    StompService.instance.send(
-      '/pub/chat/message',
-      jsonEncode(msg),
-    );
+    StompService.instance.send('/pub/chat/message', jsonEncode(msg));
 
     _controller.clear();
   }
 
   Widget buildDateSeparator(DateTime date) {
-    final formatted = "${date.year}년 ${date.month}월 ${date.day}일 ${_getWeekday(date.weekday)}";
+    final formatted =
+        "${date.year}년 ${date.month}월 ${date.day}일 ${_getWeekday(date.weekday)}";
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          const Expanded(child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6)),
+          const Expanded(
+            child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6),
+          ),
           const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
@@ -501,7 +574,9 @@ class _ChattingPageState extends State<ChattingPage> {
             ),
           ),
           const SizedBox(width: 8),
-          const Expanded(child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6)),
+          const Expanded(
+            child: Divider(color: Color(0xFFD9D9D9), thickness: 0.6),
+          ),
         ],
       ),
     );

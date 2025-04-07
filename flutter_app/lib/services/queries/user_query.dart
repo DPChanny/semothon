@@ -15,14 +15,14 @@ Future<UserInfoDto> loginUser() {
 Future<GetUserResponseDto> getUser() {
   return queryGet<GetUserResponseDto>(
     '/api/users/profile',
-        (json) => GetUserResponseDto.fromJson(json),
+    (json) => GetUserResponseDto.fromJson(json),
   );
 }
 
 Future<GetUserResponseDto> getOtherUser(String userId) {
   return queryGet<GetUserResponseDto>(
     '/api/users/profile/$userId',
-        (json) => GetUserResponseDto.fromJson(json),
+    (json) => GetUserResponseDto.fromJson(json),
   );
 }
 
@@ -74,9 +74,12 @@ Future<GetUserListResponseDto> getUserList({
     if (keyword != null) 'keyword': keyword,
     if (birthdateAfter != null) 'birthdateAfter': birthdateAfter,
     if (birthdateBefore != null) 'birthdateBefore': birthdateBefore,
-    if (interestNames != null && interestNames.isNotEmpty) 'interestNames': interestNames,
-    if (minRecommendationScore != null) 'minRecommendationScore': minRecommendationScore,
-    if (maxRecommendationScore != null) 'maxRecommendationScore': maxRecommendationScore,
+    if (interestNames != null && interestNames.isNotEmpty)
+      'interestNames': interestNames,
+    if (minRecommendationScore != null)
+      'minRecommendationScore': minRecommendationScore,
+    if (maxRecommendationScore != null)
+      'maxRecommendationScore': maxRecommendationScore,
     if (createdAfter != null) 'createdAfter': createdAfter,
     if (createdBefore != null) 'createdBefore': createdBefore,
     if (sortBy != null) 'sortBy': sortBy,
@@ -87,13 +90,11 @@ Future<GetUserListResponseDto> getUserList({
 
   return queryGet<GetUserListResponseDto>(
     '/api/users',
-        (json) => GetUserListResponseDto.fromJson(json),
+    (json) => GetUserListResponseDto.fromJson(json),
     queryParams: queryParams,
   );
 }
 
 Future<void> deleteUser() {
-  return queryDelete<void>(
-    '/api/users/prifile',
-  );
+  return queryDelete<void>('/api/users/prifile');
 }

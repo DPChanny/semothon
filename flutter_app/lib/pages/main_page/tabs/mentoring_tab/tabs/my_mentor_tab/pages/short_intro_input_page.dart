@@ -80,40 +80,40 @@ class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
                 onPressed:
                     _isButtonEnabled
                         ? () async {
-                      UserUpdateDTO.instance = UserUpdateDTO(
-                        shortIntro: _controller.text,
-                      );
-
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) =>
-                        const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-
-                      try {
-                        await updateUser();
-
-                        if (!context.mounted) return;
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          MyMentorTabRouteNames.shortIntroInputCompletePage,
-                              (routes) => false,
-                        );
-                      } catch (e) {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(e.toString())),
+                          UserUpdateDTO.instance = UserUpdateDTO(
+                            shortIntro: _controller.text,
                           );
+
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder:
+                                (context) => const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                          );
+
+                          try {
+                            await updateUser();
+
+                            if (!context.mounted) return;
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              MyMentorTabRouteNames.shortIntroInputCompletePage,
+                              (routes) => false,
+                            );
+                          } catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(e.toString())),
+                              );
+                            }
+                          } finally {
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                            }
+                          }
                         }
-                      } finally {
-                        if (context.mounted) {
-                          Navigator.pop(context);
-                        }
-                      }
-                    }
                         : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor:

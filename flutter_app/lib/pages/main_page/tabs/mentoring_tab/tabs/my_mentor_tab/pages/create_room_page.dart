@@ -80,14 +80,14 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
       Navigator.pushNamedAndRemoveUntil(
         context,
         MyMentorTabRouteNames.createRoomCompletePage,
-            (router) => false,
+        (router) => false,
       );
     } catch (e) {
       if (mounted) {
         Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.toString())));
       }
     }
   }

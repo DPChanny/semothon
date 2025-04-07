@@ -15,7 +15,8 @@ class ChattingTab extends StatefulWidget {
   State<ChattingTab> createState() => _ChattingTabState();
 }
 
-class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStateMixin {
+class _ChattingTabState extends State<ChattingTab>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late Future<void> _loadFuture;
 
@@ -79,7 +80,10 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
           return Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF6F7F9),
@@ -99,15 +103,24 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                               height: 40,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: selected ? const Color(0xFF008CFF) : Colors.transparent,
+                                color:
+                                    selected
+                                        ? const Color(0xFF008CFF)
+                                        : Colors.transparent,
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
                                 labels[index],
                                 style: TextStyle(
-                                  color: selected ? Colors.white : const Color(0xFFB1B1B1),
+                                  color:
+                                      selected
+                                          ? Colors.white
+                                          : const Color(0xFFB1B1B1),
                                   fontSize: 15,
-                                  fontWeight: selected ? FontWeight.w700 : FontWeight.w400,
+                                  fontWeight:
+                                      selected
+                                          ? FontWeight.w700
+                                          : FontWeight.w400,
                                   fontFamily: 'Noto Sans KR',
                                 ),
                               ),

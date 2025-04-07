@@ -11,16 +11,17 @@ class MentorItem extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => Scaffold(
-          appBar: AppBar(
-            title: const Text("멘토링"),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-          ),
-          body: MentorInfoPage(userId: mentor.userId),
-        ),
+        builder:
+            (_) => Scaffold(
+              appBar: AppBar(
+                title: const Text("멘토링"),
+                centerTitle: true,
+                elevation: 0,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
+              body: MentorInfoPage(userId: mentor.userId),
+            ),
       ),
     );
   }
@@ -33,9 +34,7 @@ class MentorItem extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

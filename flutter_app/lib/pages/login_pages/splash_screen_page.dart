@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/login_pages/login_page.dart'; // 👈 MainPage 경로 맞게 수정해줘!
 
@@ -34,19 +35,13 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               width: 184.95,
               height: 176.44,
-              child: Image.asset(
-                'assets/intro_1.png',
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset('assets/intro_1.png', fit: BoxFit.contain),
             ),
             const SizedBox(height: 12), // 두 이미지 사이 간격
             SizedBox(
               width: 147,
               height: 78,
-              child: Image.asset(
-                'assets/intro_2.png',
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset('assets/intro_2.png', fit: BoxFit.contain),
             ),
           ],
         ),

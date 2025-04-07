@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_app/dto/chat_room_info_dto.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatItem extends StatelessWidget {
   final ChatRoomInfoDto room;
@@ -20,33 +20,33 @@ class ChatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(room.roomId),
-      endActionPane: onLeave != null
-          ? ActionPane(
-        motion: const ScrollMotion(),
-        children: [
-          CustomSlidableAction(
-            onPressed: (_) => onLeave!(),
-            backgroundColor: const Color(0xFF008CFF),
-            child: Container(
-              width: 40, // 🔹 너비 직접 지정
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.exit_to_app, color: Colors.white),
-                  SizedBox(height: 4),
-                  Text(
-                    '나가기',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
+      endActionPane:
+          onLeave != null
+              ? ActionPane(
+                motion: const ScrollMotion(),
+                children: [
+                  CustomSlidableAction(
+                    onPressed: (_) => onLeave!(),
+                    backgroundColor: const Color(0xFF008CFF),
+                    child: Container(
+                      width: 40, // 🔹 너비 직접 지정
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.exit_to_app, color: Colors.white),
+                          SizedBox(height: 4),
+                          Text(
+                            '나가기',
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
-              ),
-            ),
-          ),
-
-        ],
-      )
-          : null,
+              )
+              : null,
       child: ListTile(
         onTap: () {
           Navigator.pushNamed(
@@ -116,7 +116,7 @@ class ChatItem extends StatelessWidget {
                 ),
                 constraints: const BoxConstraints(minWidth: 24, minHeight: 20),
                 child: Text(
-                  unreadCount >  999 ? '999+' : '$unreadCount',
+                  unreadCount > 999 ? '999+' : '$unreadCount',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 12,

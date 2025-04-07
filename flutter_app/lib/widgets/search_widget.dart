@@ -78,10 +78,7 @@ class _SearchWidgetState extends State<SearchWidget> {
           onPressed: () => Navigator.pop(context),
           child: const Text(
             '취소',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-            ),
+            style: TextStyle(color: Colors.black, fontSize: 14),
           ),
         ),
       ],

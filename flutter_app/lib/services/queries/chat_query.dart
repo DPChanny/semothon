@@ -25,16 +25,23 @@ Future<GetChatListResponseDto> getChatList({
   int? page,
 }) {
   final queryParams = <String, dynamic>{
-    if (titleKeyword != null && titleKeyword.isNotEmpty) 'titleKeyword': titleKeyword,
-    if (descriptionKeyword != null && descriptionKeyword.isNotEmpty) 'descriptionKeyword': descriptionKeyword,
-    if (titleOrDescriptionKeyword != null && titleOrDescriptionKeyword.isNotEmpty) 'titleOrDescriptionKeyword': titleOrDescriptionKeyword,
+    if (titleKeyword != null && titleKeyword.isNotEmpty)
+      'titleKeyword': titleKeyword,
+    if (descriptionKeyword != null && descriptionKeyword.isNotEmpty)
+      'descriptionKeyword': descriptionKeyword,
+    if (titleOrDescriptionKeyword != null &&
+        titleOrDescriptionKeyword.isNotEmpty)
+      'titleOrDescriptionKeyword': titleOrDescriptionKeyword,
     if (hostUserId != null) 'hostUserId': hostUserId,
     if (hostNickname != null) 'hostNickname': hostNickname,
-    if (interestNames != null && interestNames.isNotEmpty) 'interestNames': interestNames,
+    if (interestNames != null && interestNames.isNotEmpty)
+      'interestNames': interestNames,
     if (minCapacity != null) 'minCapacity': minCapacity,
     if (maxCapacity != null) 'maxCapacity': maxCapacity,
-    if (minRecommendationScore != null) 'minRecommendationScore': minRecommendationScore,
-    if (maxRecommendationScore != null) 'maxRecommendationScore': maxRecommendationScore,
+    if (minRecommendationScore != null)
+      'minRecommendationScore': minRecommendationScore,
+    if (maxRecommendationScore != null)
+      'maxRecommendationScore': maxRecommendationScore,
     if (joinedOnly != null) 'joinedOnly': joinedOnly,
     if (excludeJoined != null) 'excludeJoined': excludeJoined,
     if (createdAfter != null) 'createdAfter': createdAfter,
@@ -47,7 +54,7 @@ Future<GetChatListResponseDto> getChatList({
 
   return queryGet<GetChatListResponseDto>(
     '/api/chats',
-        (json) => GetChatListResponseDto.fromJson(json),
+    (json) => GetChatListResponseDto.fromJson(json),
     queryParams: queryParams,
   );
 }
@@ -55,20 +62,20 @@ Future<GetChatListResponseDto> getChatList({
 Future<GetMessageResponseDto> getChatMessage(int chatRoomId) {
   return queryGet<GetMessageResponseDto>(
     'api/chats/$chatRoomId/messages',
-        (json) => GetMessageResponseDto.fromJson(json),
+    (json) => GetMessageResponseDto.fromJson(json),
   );
 }
 
 Future<GetChatResponseDto> getChat(int chatId) {
   return queryGet<GetChatResponseDto>(
     'api/chats/$chatId',
-        (json) => GetChatResponseDto.fromJson(json),
+    (json) => GetChatResponseDto.fromJson(json),
   );
 }
 
 Future<GetUnreadMessageCountResponseDto> getUnreadMessageCount() {
   return queryGet<GetUnreadMessageCountResponseDto>(
     'api/chats/unread-count',
-        (json) => GetUnreadMessageCountResponseDto.fromJson(json),
+    (json) => GetUnreadMessageCountResponseDto.fromJson(json),
   );
 }

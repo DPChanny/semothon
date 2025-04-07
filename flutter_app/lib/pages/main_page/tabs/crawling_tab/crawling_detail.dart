@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/crawling_info_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/crawling_tab/create_crawling_chat_room.dart';
-import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CrawlingDetailPage extends StatelessWidget {
@@ -35,12 +34,13 @@ class CrawlingDetailPage extends StatelessWidget {
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.broken_image),
-                    ),
+                    errorBuilder:
+                        (context, error, stackTrace) => Container(
+                          width: 100,
+                          height: 100,
+                          color: Colors.grey[300],
+                          child: const Icon(Icons.broken_image),
+                        ),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -59,13 +59,18 @@ class CrawlingDetailPage extends StatelessWidget {
                       Wrap(
                         spacing: 8,
                         runSpacing: 4,
-                        children: dto.interests.map((tag) => Text(
-                          '#$tag',
-                          style: const TextStyle(
-                            color: Color(0xFF007BFF),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )).toList(),
+                        children:
+                            dto.interests
+                                .map(
+                                  (tag) => Text(
+                                    '#$tag',
+                                    style: const TextStyle(
+                                      color: Color(0xFF007BFF),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                       ),
                     ],
                   ),
@@ -87,16 +92,10 @@ class CrawlingDetailPage extends StatelessWidget {
                 children: [
                   const Text(
                     '상세 내용',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    dto.description,
-                    style: const TextStyle(fontSize: 14),
-                  ),
+                  Text(dto.description, style: const TextStyle(fontSize: 14)),
                   const SizedBox(height: 12),
                   if (dto.url.isNotEmpty)
                     Column(
@@ -150,14 +149,26 @@ class CrawlingDetailPage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 12,
+                      ),
                     ),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => CreateCrawlingChatRoom(crawlingId: dto.crawlingId,),
-                      ),);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => CreateCrawlingChatRoom(
+                                crawlingId: dto.crawlingId,
+                              ),
+                        ),
+                      );
                     },
-                    child: const Text('방 만들기', style: TextStyle(color: Colors.white),),
+                    child: const Text(
+                      '방 만들기',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

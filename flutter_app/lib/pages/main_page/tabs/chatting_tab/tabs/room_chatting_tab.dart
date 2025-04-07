@@ -10,12 +10,11 @@ class RoomChattingTab extends StatelessWidget {
   final List<ChatRoomInfoDto> roomInfos;
   final List<UnreadMessageCountDto> unreadInfos;
 
-
   const RoomChattingTab({
     super.key,
     required this.roomInfos,
     required this.unreadInfos,
-    required this.onTabChange
+    required this.onTabChange,
   });
 
   @override
@@ -85,7 +84,7 @@ class RoomChattingTab extends StatelessWidget {
                     fontFamily: 'Noto Sans KR',
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -98,7 +97,7 @@ class RoomChattingTab extends StatelessWidget {
       itemBuilder: (context, index) {
         final room = roomInfos[index];
         final unread = unreadInfos.firstWhere(
-              (item) => item.chatRoomId == room.chatRoomId,
+          (item) => item.chatRoomId == room.chatRoomId,
         );
 
         return ChatItem(
@@ -109,18 +108,17 @@ class RoomChattingTab extends StatelessWidget {
               await leaveRoom(room.roomId!);
 
               if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('채팅방을 나갔습니다')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text('채팅방을 나갔습니다')));
               }
             } catch (e) {
               if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('나가기 실패: $e')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text('나가기 실패: $e')));
               }
             }
-
           },
         );
       },

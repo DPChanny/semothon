@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/my_mentor_tab/my_mentor_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/recommended_mentor_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/tabs/recommended_room_tab.dart';
-import 'package:flutter_app/widgets/custom_tab_bar.dart';
 
 class MentoringTab extends StatefulWidget {
   const MentoringTab({super.key});
@@ -46,7 +45,9 @@ class _MentoringTabState extends State<MentoringTab> {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
+                                isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                             color: isSelected ? Colors.blue : Colors.black54,
                           ),
                           child: Text(tabLabels[index]),
@@ -54,7 +55,10 @@ class _MentoringTabState extends State<MentoringTab> {
                         const SizedBox(height: 6),
                         Container(
                           height: 2,
-                          color: isSelected ? const Color(0xFF008CFF) : Colors.transparent,
+                          color:
+                              isSelected
+                                  ? const Color(0xFF008CFF)
+                                  : Colors.transparent,
                         ),
                       ],
                     ),

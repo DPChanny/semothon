@@ -1,14 +1,15 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter_app/services/auth.dart';
 import 'package:flutter_app/services/url.dart';
+import 'package:http/http.dart' as http;
 
 Future<T> queryGet<T>(
-    String path,
-    T Function(Map<String, dynamic>) fromJson, {
-      Map<String, dynamic>? queryParams,
-      int expectedStatusCode = 200,
-    }) async {
+  String path,
+  T Function(Map<String, dynamic>) fromJson, {
+  Map<String, dynamic>? queryParams,
+  int expectedStatusCode = 200,
+}) async {
   final idToken = await getIdToken();
   if (idToken == null) throw Exception("token failure");
 
@@ -29,12 +30,12 @@ Future<T> queryGet<T>(
 }
 
 Future<T> queryPost<T>(
-    String path, {
-      dynamic body,
-      Map<String, dynamic>? queryParams,
-      T Function(Map<String, dynamic>)? fromJson,
-      int expectedStatusCode = 200,
-    }) async {
+  String path, {
+  dynamic body,
+  Map<String, dynamic>? queryParams,
+  T Function(Map<String, dynamic>)? fromJson,
+  int expectedStatusCode = 200,
+}) async {
   final idToken = await getIdToken();
   if (idToken == null) throw Exception("token failure");
 
@@ -60,12 +61,12 @@ Future<T> queryPost<T>(
 }
 
 Future<T> queryPut<T>(
-    String path, {
-      dynamic body,
-      Map<String, dynamic>? queryParams,
-      T Function(Map<String, dynamic>)? fromJson,
-      int expectedStatusCode = 200,
-    }) async {
+  String path, {
+  dynamic body,
+  Map<String, dynamic>? queryParams,
+  T Function(Map<String, dynamic>)? fromJson,
+  int expectedStatusCode = 200,
+}) async {
   final idToken = await getIdToken();
   if (idToken == null) throw Exception("token failure");
 
@@ -91,12 +92,12 @@ Future<T> queryPut<T>(
 }
 
 Future<T> queryPatch<T>(
-    String path, {
-      dynamic body,
-      Map<String, dynamic>? queryParams,
-      T Function(Map<String, dynamic>)? fromJson,
-      int expectedStatusCode = 200,
-    }) async {
+  String path, {
+  dynamic body,
+  Map<String, dynamic>? queryParams,
+  T Function(Map<String, dynamic>)? fromJson,
+  int expectedStatusCode = 200,
+}) async {
   final idToken = await getIdToken();
   if (idToken == null) throw Exception("token failure");
 
@@ -122,11 +123,11 @@ Future<T> queryPatch<T>(
 }
 
 Future<T> queryDelete<T>(
-    String path, {
-      Map<String, dynamic>? queryParams,
-      int expectedStatusCode = 200,
-      T Function(Map<String, dynamic>)? fromJson,
-    }) async {
+  String path, {
+  Map<String, dynamic>? queryParams,
+  int expectedStatusCode = 200,
+  T Function(Map<String, dynamic>)? fromJson,
+}) async {
   final idToken = await getIdToken();
   if (idToken == null) throw Exception("token failure");
 

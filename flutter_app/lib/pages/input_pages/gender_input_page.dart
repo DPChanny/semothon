@@ -65,46 +65,48 @@ class _GenderInputPageState extends State<GenderInputPage> {
                 height: 47,
                 child: ElevatedButton(
                   onPressed:
-                  _selectedGender != null
-                      ? () async {
-                    UserUpdateDTO.instance.gender =
-                    _selectedGender == '남' ? 'MALE' : 'FEMALE';
+                      _selectedGender != null
+                          ? () async {
+                            UserUpdateDTO.instance.gender =
+                                _selectedGender == '남' ? 'MALE' : 'FEMALE';
 
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) =>
-                      const Center(child: CircularProgressIndicator()),
-                    );
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder:
+                                  (context) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                            );
 
-                    try {
-                      await updateUser(); // 성공 시 예외 없음
-                      if (context.mounted) {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          InputPageRouteNames.inputCompletePage,
-                              (route) => false,
-                        );
-                      }
-                    } catch (e) {
-                      if (context.mounted) {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          LoginPageRouteNames.loginPage,
-                              (route) => false,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(e.toString())),
-                        );
-                      }
-                    }
-                  }
-                      : null,
+                            try {
+                              await updateUser(); // 성공 시 예외 없음
+                              if (context.mounted) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  InputPageRouteNames.inputCompletePage,
+                                  (route) => false,
+                                );
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  LoginPageRouteNames.loginPage,
+                                  (route) => false,
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.toString())),
+                                );
+                              }
+                            }
+                          }
+                          : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                    _selectedGender != null
-                        ? const Color(0xFF008CFF)
-                        : const Color(0xFFE4E4E4),
+                        _selectedGender != null
+                            ? const Color(0xFF008CFF)
+                            : const Color(0xFFE4E4E4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(23.50),
                     ),
@@ -113,9 +115,9 @@ class _GenderInputPageState extends State<GenderInputPage> {
                     '완료',
                     style: TextStyle(
                       color:
-                      _selectedGender != null
-                          ? Colors.white
-                          : const Color(0xFFB1B1B1),
+                          _selectedGender != null
+                              ? Colors.white
+                              : const Color(0xFFB1B1B1),
                       fontSize: 17,
                       fontFamily: 'Noto Sans KR',
                       fontWeight: FontWeight.w700,

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/get_room_list_response_dto.dart';
 import 'package:flutter_app/dto/get_user_response_dto.dart';
 import 'package:flutter_app/dto/host_user_info_dto.dart';
 import 'package:flutter_app/dto/room_info_dto.dart';
@@ -40,7 +39,8 @@ class MentorInfoPage extends StatelessWidget {
 
   const MentorInfoPage({super.key, required this.userId});
 
-  Future<(String uid, GetUserResponseDto? user, String? error)> _fetchUserAndRooms() async {
+  Future<(String uid, GetUserResponseDto? user, String? error)>
+  _fetchUserAndRooms() async {
     final currentUid = FirebaseAuth.instance.currentUser?.uid ?? '';
 
     try {

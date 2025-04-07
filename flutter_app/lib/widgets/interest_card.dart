@@ -79,7 +79,10 @@ Widget interestCard(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, MyPageRouteNames.myInterestPage);
+                    Navigator.pushNamed(
+                      context,
+                      MyPageRouteNames.myInterestPage,
+                    );
                   },
                   child: const Icon(
                     Icons.arrow_forward_ios,

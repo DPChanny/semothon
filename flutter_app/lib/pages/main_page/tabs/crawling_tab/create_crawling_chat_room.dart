@@ -44,10 +44,10 @@ class _CreateCrawlingChatRoomState extends State<CreateCrawlingChatRoom> {
     setState(() {
       _isButtonEnabled =
           name.isNotEmpty &&
-              desc.isNotEmpty &&
-              max != null &&
-              max > 0 &&
-              max <= 10;
+          desc.isNotEmpty &&
+          max != null &&
+          max > 0 &&
+          max <= 10;
     });
   }
 
@@ -83,14 +83,14 @@ class _CreateCrawlingChatRoomState extends State<CreateCrawlingChatRoom> {
       Navigator.pushNamedAndRemoveUntil(
         context,
         MyMentorTabRouteNames.createRoomCompletePage,
-            (router) => false,
+        (router) => false,
       );
     } catch (e) {
       if (mounted) {
         Navigator.pop(context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.toString())));
       }
     }
   }

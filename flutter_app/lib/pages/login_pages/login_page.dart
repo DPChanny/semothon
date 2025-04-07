@@ -46,26 +46,26 @@ class LoginPage extends StatelessWidget {
         Navigator.pushNamedAndRemoveUntil(
           context,
           MainPageRouteNames.mainPage,
-              (route) => false,
+          (route) => false,
         );
       } else if (user.name != null) {
         Navigator.pushNamedAndRemoveUntil(
           context,
           InputPageRouteNames.inputCompletePage,
-              (route) => false,
+          (route) => false,
         );
       } else {
         Navigator.pushNamedAndRemoveUntil(
           context,
           LoginPageRouteNames.loginCompletePage,
-              (route) => false,
+          (route) => false,
         );
       }
     } catch (e) {
       Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -75,15 +75,15 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,       // 세로 가운데 정렬
-          crossAxisAlignment: CrossAxisAlignment.center,     // 가로 가운데 정렬
+          mainAxisAlignment: MainAxisAlignment.center, // 세로 가운데 정렬
+          crossAxisAlignment: CrossAxisAlignment.center, // 가로 가운데 정렬
           children: [
             Center(
               child: SvgPicture.asset(
                 'assets/logo.svg', // 👈 로고 경로 (예시, 네 파일 이름에 맞게)
                 width: 150, // ✅ 너가 원하는 2배 크기
                 fit: BoxFit.contain, // ✅ 비율 유지
-              )
+              ),
             ),
 
             const SizedBox(height: 30),

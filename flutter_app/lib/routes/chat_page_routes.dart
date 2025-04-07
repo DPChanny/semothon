@@ -8,6 +8,7 @@ class ChatPageRouteNames {
 }
 
 final Map<String, WidgetBuilder> chatPageRoutes = {
-  ChatPageRouteNames.searchChattingPage: (context) => const SearchChattingPage(),
+  ChatPageRouteNames.searchChattingPage:
+      (context) => const SearchChattingPage(),
   ChatPageRouteNames.chattingPage: (context) => const ChattingPage(),
 };

@@ -21,6 +21,5 @@ final Map<String, WidgetBuilder> myMentorTabRoutes = {
       (context) => const ShortIntroInputPage(),
   MyMentorTabRouteNames.shortIntroInputCompletePage:
       (context) => const ShortIntroInputCompletePage(),
-  MyMentorTabRouteNames.searchPage:
-  (context) => const SearchPage(),
+  MyMentorTabRouteNames.searchPage: (context) => const SearchPage(),
 };

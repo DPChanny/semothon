@@ -38,13 +38,13 @@ class _HomeTabState extends State<HomeTab> {
       final user = await getUser();
 
       if (user.userInfo.interests.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("관심사를 먼저 설정해주세요.")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("관심사를 먼저 설정해주세요.")));
         Navigator.pushNamedAndRemoveUntil(
           context,
           InterestPageRouteNames.interestCategorySelectionPage,
-              (route) => false,
+          (route) => false,
         );
         return;
       }
@@ -59,13 +59,13 @@ class _HomeTabState extends State<HomeTab> {
         _isLoading = false;
       });
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginPage,
-            (route) => false,
+        (route) => false,
       );
     }
   }
@@ -132,7 +132,8 @@ class _HomeTabState extends State<HomeTab> {
                       const SizedBox(height: 16),
                       Column(
                         children:
-                            _mentors?.userInfos.sublist(0, min(_mentors!.userInfos.length, 3))
+                            _mentors?.userInfos
+                                .sublist(0, min(_mentors!.userInfos.length, 3))
                                 .map((m) => MentorItem(mentor: m))
                                 .toList() ??
                             [],
@@ -188,7 +189,11 @@ class _HomeTabState extends State<HomeTab> {
                     width: MediaQuery.of(context).size.width,
                     child: PageView.builder(
                       controller: PageController(
-                        viewportFraction: 107.4 / MediaQuery.of(context).size.width, // 🔹 아이템 너비 / 화면 너비
+                        viewportFraction:
+                            107.4 /
+                            MediaQuery.of(
+                              context,
+                            ).size.width, // 🔹 아이템 너비 / 화면 너비
                       ),
                       padEnds: false, // ✅ 맨 앞 빈 공간 제거
                       itemCount: min(_crawlings.length, 5),
@@ -201,7 +206,6 @@ class _HomeTabState extends State<HomeTab> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

@@ -24,7 +24,8 @@ class _CrawlingTabState extends State<CrawlingTab> {
   }
 
   Future<void> _fetchCrawlings() async {
-    final sortBy = selectedSort == SortType.recommendation ? 'SCORE' : 'CRAWLED_AT';
+    final sortBy =
+        selectedSort == SortType.recommendation ? 'SCORE' : 'CRAWLED_AT';
 
     try {
       final crawlingList = await getCrawlingList(sortBy: sortBy);
@@ -33,9 +34,9 @@ class _CrawlingTabState extends State<CrawlingTab> {
       });
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.toString())));
       }
     }
   }
@@ -55,9 +56,12 @@ class _CrawlingTabState extends State<CrawlingTab> {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => CrawlingDetailPage(dto: crawling),
-          ),);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CrawlingDetailPage(dto: crawling),
+            ),
+          );
         },
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
@@ -83,12 +87,17 @@ class _CrawlingTabState extends State<CrawlingTab> {
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    width: 100,
-                    height: 100,
-                    color: Colors.grey[300],
-                    child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
-                  ),
+                  errorBuilder:
+                      (context, error, stackTrace) => Container(
+                        width: 100,
+                        height: 100,
+                        color: Colors.grey[300],
+                        child: const Icon(
+                          Icons.broken_image,
+                          size: 40,
+                          color: Colors.grey,
+                        ),
+                      ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -98,7 +107,10 @@ class _CrawlingTabState extends State<CrawlingTab> {
                   children: [
                     Text(
                       crawling.title,
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -111,15 +123,16 @@ class _CrawlingTabState extends State<CrawlingTab> {
                     Wrap(
                       spacing: 8,
                       runSpacing: 4,
-                      children: crawling.interests.map((interest) {
-                        return Text(
-                          '#$interest',
-                          style: const TextStyle(
-                            color: Color(0xFF007BFF),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        );
-                      }).toList(),
+                      children:
+                          crawling.interests.map((interest) {
+                            return Text(
+                              '#$interest',
+                              style: const TextStyle(
+                                color: Color(0xFF007BFF),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          }).toList(),
                     ),
                   ],
                 ),
@@ -159,18 +172,23 @@ class _CrawlingTabState extends State<CrawlingTab> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: selectedSort == SortType.recommendation
-                                ? const Color(0xFF007BFF)
-                                : const Color(0xFFF1F1F1),
+                            color:
+                                selectedSort == SortType.recommendation
+                                    ? const Color(0xFF007BFF)
+                                    : const Color(0xFFF1F1F1),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           child: Text(
                             '추천순',
                             style: TextStyle(
-                              color: selectedSort == SortType.recommendation
-                                  ? Colors.white
-                                  : Colors.black,
+                              color:
+                                  selectedSort == SortType.recommendation
+                                      ? Colors.white
+                                      : Colors.black,
                             ),
                           ),
                         ),
@@ -185,18 +203,23 @@ class _CrawlingTabState extends State<CrawlingTab> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: selectedSort == SortType.recent
-                                ? const Color(0xFF007BFF)
-                                : const Color(0xFFF1F1F1),
+                            color:
+                                selectedSort == SortType.recent
+                                    ? const Color(0xFF007BFF)
+                                    : const Color(0xFFF1F1F1),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
                           child: Text(
                             '최신순',
                             style: TextStyle(
-                              color: selectedSort == SortType.recent
-                                  ? Colors.white
-                                  : Colors.black,
+                              color:
+                                  selectedSort == SortType.recent
+                                      ? Colors.white
+                                      : Colors.black,
                             ),
                           ),
                         ),

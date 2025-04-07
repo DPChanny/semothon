@@ -17,11 +17,7 @@ class RecommendedRoomTab extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              '방 목록을 불러오지 못했어요: ${snapshot.error}',
-            ),
-          );
+          return Center(child: Text('방 목록을 불러오지 못했어요: ${snapshot.error}'));
         }
 
         final rooms = snapshot.data!.roomInfos;
@@ -42,7 +38,8 @@ class RecommendedRoomTab extends StatelessWidget {
                     ),
                   ),
                   isScrollControlled: true,
-                  builder: (context) => RoomPopUp(room: room, hostUser: hostUser),
+                  builder:
+                      (context) => RoomPopUp(room: room, hostUser: hostUser),
                 );
               },
               child: RoomItem(room: room, index: index),

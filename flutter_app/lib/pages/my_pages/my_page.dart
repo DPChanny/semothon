@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/routes/my_page_routes.dart';
 import 'package:flutter_app/services/auth.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_app/dto/user_info_dto.dart';
-import 'package:flutter_app/services/queries/user_query.dart';
-import 'package:flutter_app/dto/chat_room_info_dto.dart';
 import 'package:flutter_app/services/queries/crawling_query.dart';
+import 'package:flutter_app/services/queries/user_query.dart';
+import 'package:intl/intl.dart';
 
 Future<bool> isCurrentUserHost() async {
   try {
@@ -59,7 +59,10 @@ class _MyPageState extends State<MyPage> {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('마이페이지', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          '마이페이지',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -83,7 +86,9 @@ class _MyPageState extends State<MyPage> {
                       padding: const EdgeInsets.only(top: 20, bottom: 60),
                       decoration: const BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(32),
+                        ),
                       ),
                       child: Column(
                         children: [
@@ -94,10 +99,17 @@ class _MyPageState extends State<MyPage> {
                             children: [
                               Text(
                                 widget.user.nickname ?? '닉네임 없음',
-                                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(width: 4),
-                              const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.blue),
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 14,
+                                color: Colors.blue,
+                              ),
                             ],
                           ),
                           const SizedBox(height: 8),
@@ -107,19 +119,39 @@ class _MyPageState extends State<MyPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('${widget.user.name ?? ''} (${widget.user.gender ?? ''})',
-                                      style: TextStyle(fontSize: 10, color: Colors.grey[700])),
-                                  Text(_formatBirthdate(widget.user.birthdate),
-                                      style: TextStyle(fontSize: 10, color: Colors.grey[700])),
+                                  Text(
+                                    '${widget.user.name ?? ''} (${widget.user.gender ?? ''})',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  Text(
+                                    _formatBirthdate(widget.user.birthdate),
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
                                 ],
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(widget.user.department ?? '',
-                                      style: TextStyle(fontSize: 10, color: Colors.grey[700])),
-                                  Text(widget.user.studentId ?? '',
-                                      style: TextStyle(fontSize: 10, color: Colors.grey[700])),
+                                  Text(
+                                    widget.user.department ?? '',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.user.studentId ?? '',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -128,14 +160,25 @@ class _MyPageState extends State<MyPage> {
 
                           // 관심 분야
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
                             child: Row(
                               children: [
-                                Text('나의 관심분야', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                                Text(
+                                  '나의 관심분야',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                                 SizedBox(width: 8),
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.pushNamed(context, MyPageRouteNames.myInterestPage);
+                                    Navigator.pushNamed(
+                                      context,
+                                      MyPageRouteNames.myInterestPage,
+                                    );
                                   },
                                   child: const Icon(
                                     Icons.arrow_forward_ios,
@@ -150,19 +193,26 @@ class _MyPageState extends State<MyPage> {
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
-                            children: widget.user.interests.map((interest) {
-                              return Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue[600],
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  interest,
-                                  style: const TextStyle(fontSize: 10, color: Colors.white),
-                                ),
-                              );
-                            }).toList(),
+                            children:
+                                widget.user.interests.map((interest) {
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue[600],
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      interest,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
                           ),
                           const SizedBox(height: 40),
 
@@ -176,7 +226,7 @@ class _MyPageState extends State<MyPage> {
 
                           const SizedBox(height: 20),
 
-                          _buildActivitySection(context)
+                          _buildActivitySection(context),
                         ],
                       ),
                     ),
@@ -187,7 +237,9 @@ class _MyPageState extends State<MyPage> {
                         children: [
                           CircleAvatar(
                             radius: 70,
-                            backgroundImage: NetworkImage(widget.user.profileImageUrl),
+                            backgroundImage: NetworkImage(
+                              widget.user.profileImageUrl,
+                            ),
                           ),
                           Positioned(
                             bottom: 4,
@@ -226,20 +278,31 @@ class _MyPageState extends State<MyPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("지금 바로 멘토가 되어 보세요",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const Text("누구나 멘토가 될 수 있어요",
-                    style: TextStyle(color: Colors.grey)),
+                const Text(
+                  "지금 바로 멘토가 되어 보세요",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  "누구나 멘토가 될 수 있어요",
+                  style: TextStyle(color: Colors.grey),
+                ),
                 const SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, MyMentorTabRouteNames.shortIntroInputPage);
+                    Navigator.pushNamed(
+                      context,
+                      MyMentorTabRouteNames.shortIntroInputPage,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      padding: const EdgeInsets.symmetric(horizontal: 20)),
-                  child: const Text("나도 멘토 되기", style: TextStyle(color: Colors.white),),
-                )
+                    backgroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                  ),
+                  child: const Text(
+                    "나도 멘토 되기",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ],
             ),
           ),
@@ -249,7 +312,8 @@ class _MyPageState extends State<MyPage> {
   }
 
   Widget _buildMentorSection(List<ChatRoomInfoDto> chatRooms) {
-    final mentorIntro = chatRooms.isNotEmpty ? chatRooms.first.description : '멘토 소개글이 없습니다.';
+    final mentorIntro =
+        chatRooms.isNotEmpty ? chatRooms.first.description : '멘토 소개글이 없습니다.';
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -258,11 +322,18 @@ class _MyPageState extends State<MyPage> {
         children: [
           Row(
             children: [
-              Text("My 멘토", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(
+                "My 멘토",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               SizedBox(width: 8),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, MainPageRouteNames.mainPage, arguments: 2);
+                  Navigator.pushNamed(
+                    context,
+                    MainPageRouteNames.mainPage,
+                    arguments: 2,
+                  );
                 },
                 child: const Icon(
                   Icons.arrow_forward_ios,
@@ -273,12 +344,18 @@ class _MyPageState extends State<MyPage> {
             ],
           ),
           const SizedBox(height: 15),
-          const Text("멘토 소개글", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-          
+          const Text(
+            "멘토 소개글",
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+
           Text("“$mentorIntro”", style: const TextStyle(fontSize: 12)),
           const SizedBox(height: 15),
-          const Text("멘토방", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-        
+          const Text(
+            "멘토방",
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          ),
+
           ...chatRooms.asMap().entries.map((entry) {
             final index = entry.key + 1;
             final room = entry.value;
@@ -286,15 +363,22 @@ class _MyPageState extends State<MyPage> {
               padding: const EdgeInsets.only(bottom: 6),
               child: Row(
                 children: [
-                  Text(index.toString().padLeft(2, '0'),
-                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text(
+                    index.toString().padLeft(2, '0'),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(width: 8),
                   Text(room.title, style: const TextStyle(fontSize: 12)),
                   const SizedBox(width: 8),
                   const Icon(Icons.group, size: 16, color: Colors.grey),
                   const SizedBox(width: 4),
-                  Text("${room.currentMemberCount}/${room.capacity}",
-                      style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                  Text(
+                    "${room.currentMemberCount}/${room.capacity}",
+                    style: const TextStyle(fontSize: 10, color: Colors.grey),
+                  ),
                 ],
               ),
             );
@@ -305,8 +389,6 @@ class _MyPageState extends State<MyPage> {
   }
 }
 
-
-
 Widget _buildActivitySection(BuildContext context) {
   return FutureBuilder(
     future: getCrawlingList(limit: 4), // 예: 최근 4개만 가져오기
@@ -316,9 +398,7 @@ Widget _buildActivitySection(BuildContext context) {
       }
 
       if (snapshot.hasError) {
-        return Center(
-          child: Text('데이터를 불러오는 데 실패했습니다.'),
-        );
+        return Center(child: Text('데이터를 불러오는 데 실패했습니다.'));
       }
 
       if (!snapshot.hasData) {
@@ -332,7 +412,10 @@ Widget _buildActivitySection(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("참여한 활동", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Text(
+              "참여한 활동",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 12),
             if (crawlingList.isEmpty)
               Column(
@@ -348,14 +431,22 @@ Widget _buildActivitySection(BuildContext context) {
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(context, MainPageRouteNames.mainPage, (e) => false,
-                      arguments: 3);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        MainPageRouteNames.mainPage,
+                        (e) => false,
+                        arguments: 3,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        padding: const EdgeInsets.symmetric(horizontal: 20)),
-                    child: const Text("보러가기", style: TextStyle(color: Colors.white),),
-                  )
+                      backgroundColor: Colors.blue,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                    ),
+                    child: const Text(
+                      "보러가기",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ],
               )
             else
@@ -367,7 +458,7 @@ Widget _buildActivitySection(BuildContext context) {
                   separatorBuilder: (_, __) => const SizedBox(width: 8),
                   itemBuilder: (context, index) {
                     final item = crawlingList[index];
-                    return  SizedBox(
+                    return SizedBox(
                       width: 100,
                       height: 100,
                       child: ClipRRect(
@@ -383,15 +474,19 @@ Widget _buildActivitySection(BuildContext context) {
                   },
                 ),
               ),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             TextButton(
               onPressed: () async {
                 final googleSignIn = getGoogleSignIn();
                 if (await googleSignIn.isSignedIn()) {
-                await googleSignIn.signOut();
+                  await googleSignIn.signOut();
                 }
                 await FirebaseAuth.instance.signOut();
-                Navigator.pushNamedAndRemoveUntil(context, LoginPageRouteNames.loginPage, (routes) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  LoginPageRouteNames.loginPage,
+                  (routes) => false,
+                );
               },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
@@ -413,7 +508,11 @@ Widget _buildActivitySection(BuildContext context) {
             TextButton(
               onPressed: () async {
                 await deleteUser();
-                Navigator.pushNamedAndRemoveUntil(context, LoginPageRouteNames.loginPage, (routes) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  LoginPageRouteNames.loginPage,
+                  (routes) => false,
+                );
               },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,

@@ -3,7 +3,6 @@ import 'package:flutter_app/pages/main_page/tabs/chatting_tab/chatting_tab.dart'
 import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/home_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/mentoring_tab/mentoring_tab.dart';
-
 import 'package:flutter_app/pages/my_pages/my_page.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
@@ -48,13 +47,13 @@ class _MainPageState extends State<MainPage> {
 
     _onSearchPressedHandlers = [
       null,
-          () {
+      () {
         Navigator.pushNamed(context, ChatPageRouteNames.searchChattingPage);
       },
-          () {
+      () {
         Navigator.pushNamed(context, MyMentorTabRouteNames.searchPage);
       },
-      null
+      null,
     ];
   }
 
@@ -65,12 +64,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  final List<String> _appBarTitles = [
-    "",
-    "채팅",
-    "멘토링",
-    "추천 활동",
-  ];
+  final List<String> _appBarTitles = ["", "채팅", "멘토링", "추천 활동"];
 
   String _getAppBarTitle(int index) {
     return _appBarTitles[index];
@@ -84,19 +78,20 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
-          title: _selectedIndex == 0
-              ? SvgPicture.asset(
-            'assets/logo.svg', // 👈 로고 경로 (예시, 네 파일 이름에 맞게)
-            height: 24,
-          )
-              : Text(
-            _getAppBarTitle(_selectedIndex),
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
+        title:
+            _selectedIndex == 0
+                ? SvgPicture.asset(
+                  'assets/logo.svg', // 👈 로고 경로 (예시, 네 파일 이름에 맞게)
+                  height: 24,
+                )
+                : Text(
+                  _getAppBarTitle(_selectedIndex),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
         actions: [
           if (_onSearchPressedHandlers[_selectedIndex] != null)
             IconButton(
@@ -105,29 +100,30 @@ class _MainPageState extends State<MainPage> {
                 _onSearchPressedHandlers[_selectedIndex]!.call();
               },
             ),
-        IconButton(
-          icon: const Icon(Icons.person, color: Colors.grey),
-          onPressed: () async {
-            try {
-              final user = await getUser();
+          IconButton(
+            icon: const Icon(Icons.person, color: Colors.grey),
+            onPressed: () async {
+              try {
+                final user = await getUser();
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MyPage(
-                    user: user.userInfo,
-                    chatRooms: user.chatRooms,
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => MyPage(
+                          user: user.userInfo,
+                          chatRooms: user.chatRooms,
+                        ),
                   ),
-                ),
-              );
-            } catch (e) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("유저 정보를 불러오지 못했습니다.")),
-              );
-            }
-          },
-        ),
-        ]
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text("유저 정보를 불러오지 못했습니다.")));
+              }
+            },
+          ),
+        ],
       ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

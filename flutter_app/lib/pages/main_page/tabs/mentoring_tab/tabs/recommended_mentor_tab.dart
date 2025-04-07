@@ -18,13 +18,13 @@ class RecommendedMentorTab extends StatelessWidget {
 
         if (snapshot.hasError) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(snapshot.error.toString())),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(snapshot.error.toString())));
             Navigator.pushNamedAndRemoveUntil(
               context,
               LoginPageRouteNames.loginPage,
-                  (route) => false,
+              (route) => false,
             );
           });
 

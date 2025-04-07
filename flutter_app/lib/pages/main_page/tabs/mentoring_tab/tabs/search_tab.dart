@@ -61,7 +61,6 @@ class _SearchPageState extends State<SearchPage> {
         _isLoading = false;
       });
     }
-
   }
 
   @override
@@ -88,13 +87,14 @@ class _SearchPageState extends State<SearchPage> {
 
               // 🔽 결과 영역
               Expanded(
-                child: _isLoading
-                    ? const Center(child: CircularProgressIndicator())
-                    : _error.isNotEmpty
-                    ? Center(child: Text('오류 발생: $_error'))
-                    : (_roomResult.isEmpty && _userResult.isEmpty)
-                    ? const Center(child: Text('검색 결과가 없습니다'))
-                    : _buildResultList(),
+                child:
+                    _isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : _error.isNotEmpty
+                        ? Center(child: Text('오류 발생: $_error'))
+                        : (_roomResult.isEmpty && _userResult.isEmpty)
+                        ? const Center(child: Text('검색 결과가 없습니다'))
+                        : _buildResultList(),
               ),
             ],
           ),
@@ -126,7 +126,10 @@ class _SearchPageState extends State<SearchPage> {
             ),
             if (!showAllRooms)
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF7F7F7),
                   borderRadius: BorderRadius.circular(12),
@@ -136,7 +139,12 @@ class _SearchPageState extends State<SearchPage> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: showAllMentors ? _userResult.length : (_userResult.length > 3 ? 3 : _userResult.length),
+                      itemCount:
+                          showAllMentors
+                              ? _userResult.length
+                              : (_userResult.length > 3
+                                  ? 3
+                                  : _userResult.length),
                       itemBuilder: (context, index) {
                         return MentorItem(mentor: _userResult[index]);
                       },
@@ -159,7 +167,10 @@ class _SearchPageState extends State<SearchPage> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: const Text('더 보기', style: TextStyle(color: Colors.white)),
+                            child: const Text(
+                              '더 보기',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
@@ -185,7 +196,10 @@ class _SearchPageState extends State<SearchPage> {
             ),
             if (!showAllMentors)
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF7F7F7),
                   borderRadius: BorderRadius.circular(12),
@@ -195,23 +209,34 @@ class _SearchPageState extends State<SearchPage> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: showAllRooms ? _roomResult.length : (_roomResult.length > 3 ? 3 : _roomResult.length),
+                      itemCount:
+                          showAllRooms
+                              ? _roomResult.length
+                              : (_roomResult.length > 3
+                                  ? 3
+                                  : _roomResult.length),
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
                               shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                ),
                               ),
                               isScrollControlled: true,
-                              builder: (context) => RoomPopUp(
-                                room: _roomResult[index],
-                                hostUser: _hostResult[index],
-                              ),
+                              builder:
+                                  (context) => RoomPopUp(
+                                    room: _roomResult[index],
+                                    hostUser: _hostResult[index],
+                                  ),
                             );
                           },
-                          child: RoomItem(room: _roomResult[index], index: index),
+                          child: RoomItem(
+                            room: _roomResult[index],
+                            index: index,
+                          ),
                         );
                       },
                     ),
@@ -233,7 +258,10 @@ class _SearchPageState extends State<SearchPage> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: const Text('더 보기', style: TextStyle(color: Colors.white)),
+                            child: const Text(
+                              '더 보기',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),

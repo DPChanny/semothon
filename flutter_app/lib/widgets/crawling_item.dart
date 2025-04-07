@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/crawling_info_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_detail.dart';
+
 Widget crawlingItem(BuildContext context, CrawlingInfoDto item) {
   return SizedBox(
     width: 107.4,
     height: 170.44,
     child: Material(
       color: Colors.white,
-      borderRadius: BorderRadius.circular(4), // 원하는 정도로 조정
+      borderRadius: BorderRadius.circular(4),
+      // 원하는 정도로 조정
       elevation: 2,
       shadowColor: Colors.black12,
       child: InkWell(
@@ -33,10 +35,7 @@ Widget crawlingItem(BuildContext context, CrawlingInfoDto item) {
               child: SizedBox(
                 width: double.infinity,
                 height: 100,
-                child: Image.network(
-                  item.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.network(item.imageUrl, fit: BoxFit.cover),
               ),
             ),
 
@@ -45,9 +44,7 @@ Widget crawlingItem(BuildContext context, CrawlingInfoDto item) {
               height: 70.44,
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: const BoxDecoration(
-                color: Color(0xFF008CFF),
-              ),
+              decoration: const BoxDecoration(color: Color(0xFF008CFF)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

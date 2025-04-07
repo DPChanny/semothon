@@ -20,17 +20,25 @@ Future<GetCrawlingListResponseDto> getCrawlingList({
   int? page,
 }) {
   final queryParams = <String, dynamic>{
-    if (titleKeyword != null && titleKeyword.isNotEmpty) 'titleKeyword': titleKeyword,
-    if (descriptionKeyword != null && descriptionKeyword.isNotEmpty) 'descriptionKeyword': descriptionKeyword,
-    if (titleOrDescriptionKeyword != null && titleOrDescriptionKeyword.isNotEmpty)
+    if (titleKeyword != null && titleKeyword.isNotEmpty)
+      'titleKeyword': titleKeyword,
+    if (descriptionKeyword != null && descriptionKeyword.isNotEmpty)
+      'descriptionKeyword': descriptionKeyword,
+    if (titleOrDescriptionKeyword != null &&
+        titleOrDescriptionKeyword.isNotEmpty)
       'titleOrDescriptionKeyword': titleOrDescriptionKeyword,
-    if (interestNames != null && interestNames.isNotEmpty) 'interestNames': interestNames,
-    if (deadlinedAfter != null) 'deadlinedAfter': deadlinedAfter.toIso8601String(),
-    if (deadlinedBefore != null) 'deadlinedBefore': deadlinedBefore.toIso8601String(),
+    if (interestNames != null && interestNames.isNotEmpty)
+      'interestNames': interestNames,
+    if (deadlinedAfter != null)
+      'deadlinedAfter': deadlinedAfter.toIso8601String(),
+    if (deadlinedBefore != null)
+      'deadlinedBefore': deadlinedBefore.toIso8601String(),
     if (crawledAfter != null) 'crawledAfter': crawledAfter.toIso8601String(),
     if (crawledBefore != null) 'crawledBefore': crawledBefore.toIso8601String(),
-    if (minRecommendationScore != null) 'minRecommendationScore': minRecommendationScore,
-    if (maxRecommendationScore != null) 'maxRecommendationScore': maxRecommendationScore,
+    if (minRecommendationScore != null)
+      'minRecommendationScore': minRecommendationScore,
+    if (maxRecommendationScore != null)
+      'maxRecommendationScore': maxRecommendationScore,
     if (sortBy != null) 'sortBy': sortBy,
     if (sortDirection != null) 'sortDirection': sortDirection,
     if (limit != null) 'limit': limit,
@@ -39,7 +47,7 @@ Future<GetCrawlingListResponseDto> getCrawlingList({
 
   return queryGet<GetCrawlingListResponseDto>(
     '/api/crawlings',
-        (json) => GetCrawlingListResponseDto.fromJson(json),
+    (json) => GetCrawlingListResponseDto.fromJson(json),
     queryParams: queryParams,
   );
 }
@@ -47,7 +55,7 @@ Future<GetCrawlingListResponseDto> getCrawlingList({
 Future<GetCrawlingResponseDto> getCrawling(int crawlingId) {
   return queryGet<GetCrawlingResponseDto>(
     'api/crawlings/$crawlingId',
-        (json) => GetCrawlingResponseDto.fromJson(json['crawling']),
+    (json) => GetCrawlingResponseDto.fromJson(json['crawling']),
   );
 }
 
@@ -67,7 +75,5 @@ Future<GetCrawlingResponseDto> joinCrawling(int crawlingId, int chatRoomId) {
 }
 
 Future<void> leaveCrawling(int crawlingId, int chatRoomId) {
-  return queryPost<void>(
-    'api/crawlings/$crawlingId/chats/$chatRoomId/leave',
-  );
+  return queryPost<void>('api/crawlings/$crawlingId/chats/$chatRoomId/leave');
 }

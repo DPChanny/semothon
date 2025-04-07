@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dto/user_info_dto.dart';
 import 'package:flutter_app/pages/mentor_info_page.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
-import 'package:flutter_app/dto/user_info_dto.dart';
 
 class MyInterestPage extends StatefulWidget {
   const MyInterestPage({super.key});
@@ -31,9 +31,9 @@ class _MyInterestPageState extends State<MyInterestPage> {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -121,9 +121,8 @@ class _MyInterestPageState extends State<MyInterestPage> {
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: keywords
-                    .map((tag) => KeywordChip(text: tag))
-                    .toList(),
+                children:
+                    keywords.map((tag) => KeywordChip(text: tag)).toList(),
               ),
               const Spacer(),
               SizedBox(
@@ -148,7 +147,7 @@ class _MyInterestPageState extends State<MyInterestPage> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

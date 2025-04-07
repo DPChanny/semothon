@@ -32,7 +32,9 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
     });
 
     try {
-      final chatList = await getChatList(titleOrDescriptionKeyword: rawInput.split(' '));
+      final chatList = await getChatList(
+        titleOrDescriptionKeyword: rawInput.split(' '),
+      );
       final unreadInfo = await getUnreadMessageCount();
 
       final roomResults = <ChatRoomInfoDto>[];
@@ -58,7 +60,6 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
         _isLoading = false;
       });
     }
-
   }
 
   void _clearSearch() {
@@ -74,8 +75,9 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
     return _unreadResults
         .firstWhere(
           (item) => item.chatRoomId == roomId,
-      orElse: () => UnreadMessageCountDto(chatRoomId: roomId, unreadCount: 0),
-    )
+          orElse:
+              () => UnreadMessageCountDto(chatRoomId: roomId, unreadCount: 0),
+        )
         .unreadCount;
   }
 
@@ -100,48 +102,48 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
               else if (_error.isNotEmpty)
                 Center(child: Text('오류: $_error'))
               else if (_roomResults.isEmpty && _crawlingResults.isEmpty)
-                  const Center(child: Text('검색 결과가 없습니다'))
-                else ...[
-                    if (_roomResults.isNotEmpty) ...[
-                      const Text(
-                        '멘토링 방',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 8),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: _roomResults.length,
-                        itemBuilder: (context, index) {
-                          final room = _roomResults[index];
-                          return ChatItem(
-                            room: room,
-                            unreadCount: _getUnreadCount(room.chatRoomId),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 24),
-                    ],
-                    if (_crawlingResults.isNotEmpty) ...[
-                      const Text(
-                        '활동 방',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 8),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: _crawlingResults.length,
-                        itemBuilder: (context, index) {
-                          final room = _crawlingResults[index];
-                          return ChatItem(
-                            room: room,
-                            unreadCount: _getUnreadCount(room.chatRoomId),
-                          );
-                        },
-                      ),
-                    ]
-                  ],
+                const Center(child: Text('검색 결과가 없습니다'))
+              else ...[
+                if (_roomResults.isNotEmpty) ...[
+                  const Text(
+                    '멘토링 방',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _roomResults.length,
+                    itemBuilder: (context, index) {
+                      final room = _roomResults[index];
+                      return ChatItem(
+                        room: room,
+                        unreadCount: _getUnreadCount(room.chatRoomId),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                ],
+                if (_crawlingResults.isNotEmpty) ...[
+                  const Text(
+                    '활동 방',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _crawlingResults.length,
+                    itemBuilder: (context, index) {
+                      final room = _crawlingResults[index];
+                      return ChatItem(
+                        room: room,
+                        unreadCount: _getUnreadCount(room.chatRoomId),
+                      );
+                    },
+                  ),
+                ],
+              ],
             ],
           ),
         ),
