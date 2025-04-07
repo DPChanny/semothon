@@ -1,8 +1,8 @@
-import 'package:flutter_app/dto/get_user_list_response_dto.dart';
-import 'package:flutter_app/dto/get_user_response_dto.dart';
-import 'package:flutter_app/dto/user_info_dto.dart';
-import 'package:flutter_app/dto/user_update_dto.dart';
-import 'package:flutter_app/dto/user_update_interest_dto.dart';
+import 'package:flutter_app/dto/user/user_info_dto.dart';
+import 'package:flutter_app/dto/wrapper/user/get_user_list_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/user/get_user_response_dto.dart';
+import 'package:flutter_app/dto/user/user_update_dto.dart';
+import 'package:flutter_app/dto/user/user_update_interest_dto.dart';
 import 'package:flutter_app/services/queries/query.dart';
 
 Future<UserInfoDto> loginUser() {

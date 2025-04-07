@@ -1,8 +1,7 @@
-import 'package:flutter_app/dto/chat_room_info_dto.dart';
-
-import 'host_user_info_dto.dart';
-import 'room_info_dto.dart';
-import 'room_user_info_dto.dart';
+import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/user/host_user_info_dto.dart';
+import 'package:flutter_app/dto/room/room_info_dto.dart';
+import 'package:flutter_app/dto/room/room_user_info_dto.dart';
 
 class GetRoomResponseDto {
   final RoomInfoDto room;

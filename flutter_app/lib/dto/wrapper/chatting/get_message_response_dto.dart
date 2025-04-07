@@ -1,4 +1,4 @@
-import 'package:flutter_app/dto/message_info_dto.dart';
+import 'package:flutter_app/dto/chatting/message_info_dto.dart';
 
 class GetMessageResponseDto {
   final List<MessageInfoDto> chatMessages;

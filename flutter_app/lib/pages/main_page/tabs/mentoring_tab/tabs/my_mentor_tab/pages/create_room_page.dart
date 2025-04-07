@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/dto/room_update_dto.dart';
+import 'package:flutter_app/dto/room/room_update_dto.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 

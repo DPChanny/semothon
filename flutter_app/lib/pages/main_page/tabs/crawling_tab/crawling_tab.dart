@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/dto/crawling_info_dto.dart';
+import 'package:flutter_app/dto/crawling/crawling_info_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/crawling_tab/crawling_detail.dart';
 import 'package:flutter_app/services/queries/crawling_query.dart';
 

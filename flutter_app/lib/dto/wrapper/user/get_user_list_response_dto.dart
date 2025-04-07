@@ -1,4 +1,4 @@
-import 'package:flutter_app/dto/user_info_dto.dart';
+import 'package:flutter_app/dto/user/user_info_dto.dart';
 
 class GetUserListResponseDto {
   final List<UserInfoDto> userInfos;

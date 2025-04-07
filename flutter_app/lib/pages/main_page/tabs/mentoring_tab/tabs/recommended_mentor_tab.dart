@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/get_user_list_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/user/get_user_list_response_dto.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 import 'package:flutter_app/widgets/mentor_item.dart';

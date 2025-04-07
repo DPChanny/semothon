@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/crawling_info_dto.dart';
-import 'package:flutter_app/dto/get_user_list_response_dto.dart';
-import 'package:flutter_app/dto/user_info_dto.dart';
+import 'package:flutter_app/dto/crawling/crawling_info_dto.dart';
+import 'package:flutter_app/dto/user/user_info_dto.dart';
+import 'package:flutter_app/dto/wrapper/user/get_user_list_response_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/services/queries/crawling_query.dart';

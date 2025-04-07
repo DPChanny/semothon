@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
 import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -91,7 +91,7 @@ class ChatItem extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
-            color: const Color(0xFF999999),
+            color: Color(0xFF999999),
             fontSize: 12,
             fontFamily: 'Noto Sans KR',
             fontWeight: FontWeight.w400,
@@ -131,9 +131,6 @@ class ChatItem extends StatelessWidget {
       ),
     );
   }
-
-  String _formatDate(DateTime dt) =>
-      '${dt.year % 100}/${dt.month}/${dt.day.toString().padLeft(2, '0')}';
 
   String _formatTime(DateTime dt) {
     final hour = dt.hour > 12 ? dt.hour - 12 : dt.hour;

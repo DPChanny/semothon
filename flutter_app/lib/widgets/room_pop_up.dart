@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/host_user_info_dto.dart';
-import 'package:flutter_app/dto/room_info_dto.dart';
+import 'package:flutter_app/dto/user/host_user_info_dto.dart';
+import 'package:flutter_app/dto/room/room_info_dto.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 
 class RoomPopUp extends StatelessWidget {

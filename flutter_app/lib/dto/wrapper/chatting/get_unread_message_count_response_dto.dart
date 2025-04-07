@@ -1,4 +1,4 @@
-import 'package:flutter_app/dto/unread_message_count_dto.dart';
+import 'package:flutter_app/dto/chatting/unread_message_count_dto.dart';
 
 class GetUnreadMessageCountResponseDto {
   final List<UnreadMessageCountDto> unreadCounts;

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/chat_room_info_dto.dart';
-import 'package:flutter_app/dto/message_info_dto.dart';
+import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/chatting/message_info_dto.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/websocket.dart';
 import 'package:flutter_svg/svg.dart';

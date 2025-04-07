@@ -1,6 +1,6 @@
-import 'package:flutter_app/dto/crawling_update_dto.dart';
-import 'package:flutter_app/dto/get_crawling_list_response_dto.dart';
-import 'package:flutter_app/dto/get_crawling_response_dto.dart';
+import 'package:flutter_app/dto/crawling/crawling_update_dto.dart';
+import 'package:flutter_app/dto/wrapper/crawling/get_crawling_list_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/crawling/get_crawling_response_dto.dart';
 import 'package:flutter_app/services/queries/query.dart';
 
 Future<GetCrawlingListResponseDto> getCrawlingList({

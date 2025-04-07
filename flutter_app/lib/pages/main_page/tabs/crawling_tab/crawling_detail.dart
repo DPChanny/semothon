@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/crawling_info_dto.dart';
+import 'package:flutter_app/dto/crawling/crawling_info_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/crawling_tab/create_crawling_chat_room.dart';
 import 'package:url_launcher/url_launcher.dart';
 

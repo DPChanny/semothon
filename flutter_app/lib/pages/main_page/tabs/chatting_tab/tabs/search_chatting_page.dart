@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/chat_room_info_dto.dart';
-import 'package:flutter_app/dto/unread_message_count_dto.dart';
+import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/chatting/unread_message_count_dto.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/widgets/chat_item.dart';
 import 'package:flutter_app/widgets/search_widget.dart';
@@ -34,6 +34,7 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
     try {
       final chatList = await getChatList(
         titleOrDescriptionKeyword: rawInput.split(' '),
+        joinedOnly: true
       );
       final unreadInfo = await getUnreadMessageCount();
 

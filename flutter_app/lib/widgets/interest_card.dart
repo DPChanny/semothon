@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_info_dto.dart';
+import 'package:flutter_app/dto/user/user_info_dto.dart';
 import 'package:flutter_app/routes/my_page_routes.dart';
 import 'package:flutter_app/widgets/keyword_chip.dart';
 

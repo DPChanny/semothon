@@ -1,7 +1,7 @@
-import 'package:flutter_app/dto/get_chat_list_response_dto.dart';
-import 'package:flutter_app/dto/get_chat_response_dto.dart';
-import 'package:flutter_app/dto/get_message_response_dto.dart';
-import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/chatting/get_chat_list_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/chatting/get_chat_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/chatting/get_message_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/chatting/get_unread_message_count_response_dto.dart';
 import 'package:flutter_app/services/queries/query.dart';
 
 Future<GetChatListResponseDto> getChatList({

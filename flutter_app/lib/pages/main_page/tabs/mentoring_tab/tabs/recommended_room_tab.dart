@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/get_room_list_response_dto.dart';
+import 'package:flutter_app/dto/wrapper/room/get_room_list_response_dto.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 import 'package:flutter_app/widgets/room_item.dart';
 import 'package:flutter_app/widgets/room_pop_up.dart';

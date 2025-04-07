@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/get_user_response_dto.dart';
-import 'package:flutter_app/dto/host_user_info_dto.dart';
-import 'package:flutter_app/dto/room_info_dto.dart';
+import 'package:flutter_app/dto/wrapper/user/get_user_response_dto.dart';
+import 'package:flutter_app/dto/user/host_user_info_dto.dart';
+import 'package:flutter_app/dto/room/room_info_dto.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';

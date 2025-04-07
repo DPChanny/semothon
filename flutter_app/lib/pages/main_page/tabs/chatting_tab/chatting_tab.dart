@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/chat_room_info_dto.dart';
-import 'package:flutter_app/dto/unread_message_count_dto.dart';
+import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/chatting/unread_message_count_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';

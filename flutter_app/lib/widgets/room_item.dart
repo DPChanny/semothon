@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/room_info_dto.dart';
+import 'package:flutter_app/dto/room/room_info_dto.dart';
 
 class RoomItem extends StatelessWidget {
   final RoomInfoDto room;

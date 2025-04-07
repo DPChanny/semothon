@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/chat_room_info_dto.dart';
-import 'package:flutter_app/dto/user_info_dto.dart';
+import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
+import 'package:flutter_app/dto/user/user_info_dto.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/routes/main_page_routes.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';

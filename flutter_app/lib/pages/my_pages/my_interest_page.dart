@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user_info_dto.dart';
+import 'package:flutter_app/dto/user/user_info_dto.dart';
 import 'package:flutter_app/pages/mentor_info_page.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
