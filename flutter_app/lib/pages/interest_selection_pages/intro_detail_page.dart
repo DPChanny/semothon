@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/user_update_interest_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
-import 'package:flutter_app/dto/user_update_dto.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 
 class IntroDetailPage extends StatefulWidget {
@@ -27,9 +26,10 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
             );
           }
 
-          if (!snapshot.hasData || !snapshot.data!.success || snapshot.data!.user == null) {
+          if (snapshot.hasError || !snapshot.hasData) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(snapshot.data!.message)));
+              final errorMessage = snapshot.error?.toString() ?? 'Unknown error';
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 LoginPageRouteNames.loginPage,
@@ -42,7 +42,7 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
             );
           }
 
-          final nickname = snapshot.data!.user!.userInfo.nickname;
+          final nickname = snapshot.data!.userInfo.nickname;
 
           return Scaffold(
             appBar: AppBar(
@@ -162,19 +162,18 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
 
                           UserUpdateInterestIntroDTO.instance.intro = _controller.text;
 
-                          final result = await updateUserIntro();
-
-                          Navigator.pop(context);
-
-                          if (result.success) {
+                          try {
+                            await updateUserIntro();
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               InterestPageRouteNames.introDetailCompletePage,
                                   (route) => false,
                             );
-                          } else {
+                          } catch (e) {
+                            Navigator.pop(context);
+
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(result.message)),
+                              SnackBar(content: Text(e.toString())),
                             );
                           }
                         },

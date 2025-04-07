@@ -34,64 +34,40 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   Future<void> _loadData() async {
-    final userResult = await getUser();
+    try {
+      final user = await getUser();
 
-    if (!userResult.success) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(userResult.message)));
+      if (user.userInfo.interests.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("관심사를 먼저 설정해주세요.")),
+        );
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          InterestPageRouteNames.interestCategorySelectionPage,
+              (route) => false,
+        );
+        return;
+      }
+
+      final mentorList = await getUserList(sortBy: "SCORE");
+      final crawlingList = await getCrawlingList(sortBy: "SCORE");
+
+      setState(() {
+        _userInfo = user.userInfo;
+        _mentors = mentorList;
+        _crawlings = crawlingList.crawlingList;
+        _isLoading = false;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
       Navigator.pushNamedAndRemoveUntil(
         context,
         LoginPageRouteNames.loginPage,
-        (route) => false,
+            (route) => false,
       );
-      return;
     }
-
-    if (userResult.user!.userInfo.interests.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("관심사를 먼저 설정해주세요.")));
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        InterestPageRouteNames.interestCategorySelectionPage,
-        (route) => false,
-      );
-      return;
-    }
-
-    final mentors = await getUserList(sortBy: "SCORE");
-    if (!mentors.success) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(mentors.message)));
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        LoginPageRouteNames.loginPage,
-        (route) => false,
-      );
-      return;
-    }
-
-    final crawlings = await getCrawlingList(sortBy: "SCORE");
-    if (!crawlings.success) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(crawlings.message)));
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        LoginPageRouteNames.loginPage,
-        (route) => false,
-      );
-      return;
-    }
-
-    setState(() {
-      _userInfo = userResult.user!.userInfo;
-      _mentors = mentors.userList;
-      _crawlings = crawlings.crawlingList!.crawlingList;
-      _isLoading = false;
-    });
   }
 
   @override

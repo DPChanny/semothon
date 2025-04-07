@@ -69,25 +69,29 @@ class _CreateCrawlingChatRoomState extends State<CreateCrawlingChatRoom> {
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
-    final result = await createCrawling(widget.crawlingId,
-      CrawlingUpdateDto(
-        title: _nameController.text,
-        description: _descController.text,
-        capacity: int.parse(_maxController.text),
-      ),
-    );
+    try {
+      await createCrawling(
+        widget.crawlingId,
+        CrawlingUpdateDto(
+          title: _nameController.text,
+          description: _descController.text,
+          capacity: int.parse(_maxController.text),
+        ),
+      );
 
-    if (result.success) {
+      if (!mounted) return;
       Navigator.pushNamedAndRemoveUntil(
         context,
         MyMentorTabRouteNames.createRoomCompletePage,
             (router) => false,
       );
-    } else {
-      Navigator.pop(context);
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(result.message)));
+    } catch (e) {
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
     }
   }
 

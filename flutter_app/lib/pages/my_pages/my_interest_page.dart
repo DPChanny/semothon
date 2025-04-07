@@ -21,18 +21,18 @@ class _MyInterestPageState extends State<MyInterestPage> {
   }
 
   Future<void> _loadUser() async {
-    final result = await getUser();
-    if (result.success && result.user != null) {
+    try {
+      final user = await getUser();
       setState(() {
-        _userInfo = result.user!.userInfo;
+        _userInfo = user.userInfo;
         _isLoading = false;
       });
-    } else {
+    } catch (e) {
       setState(() {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(result.message)),
+        SnackBar(content: Text(e.toString())),
       );
     }
   }

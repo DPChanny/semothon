@@ -12,27 +12,10 @@ class MyMentorTab extends StatefulWidget {
 }
 
 class _MyMentorTabState extends State<MyMentorTab> {
-  late Future<GetUserResponseDto?> _futureUser;
-
-  @override
-  void initState() {
-    super.initState();
-    _futureUser = _loadUser();
-  }
-
-  Future<GetUserResponseDto?> _loadUser() async {
-    final result = await getUser();
-    if (!result.success || result.user == null) {
-      // 로그 출력이나 에러 처리 가능
-      return null;
-    }
-    return result.user!;
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<GetUserResponseDto?>(
-      future: _futureUser,
+      future: getUser(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

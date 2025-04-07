@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/chat_room_info_dto.dart';
-import 'package:flutter_app/dto/get_unread_message_count_response_dto.dart';
-import 'package:flutter_app/dto/get_user_response_dto.dart';
+import 'package:flutter_app/dto/unread_message_count_dto.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
 import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
-import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
@@ -19,8 +17,11 @@ class ChattingTab extends StatefulWidget {
 
 class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late Future<({bool success, String message, GetUserResponseDto? user})> _userFuture;
-  late Future<({bool success, String message, GetUnreadMessageCountResponseDto? room})> _unreadFuture;
+  late Future<void> _loadFuture;
+
+  List<ChatRoomInfoDto> roomChattingRooms = [];
+  List<ChatRoomInfoDto> crawlingChattingRooms = [];
+  List<UnreadMessageCountDto> unreadCounts = [];
 
   final labels = ['멘토링 방', '활동 방'];
 
@@ -28,8 +29,30 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
   void initState() {
     super.initState();
     _tabController = TabController(length: labels.length, vsync: this);
-    _userFuture = getUser();
-    _unreadFuture = getUnreadMessageCount();
+    _loadFuture = loadData();
+  }
+
+  Future<void> loadData() async {
+    final user = await getUser();
+    final unread = await getUnreadMessageCount();
+
+    final rooms = user.chatRooms;
+    final crawls = <ChatRoomInfoDto>[];
+    final mentos = <ChatRoomInfoDto>[];
+
+    for (var room in rooms) {
+      if (room.type == 'CRAWLING') {
+        crawls.add(room);
+      } else if (room.type == 'ROOM') {
+        mentos.add(room);
+      }
+    }
+
+    setState(() {
+      roomChattingRooms = mentos;
+      crawlingChattingRooms = crawls;
+      unreadCounts = unread.unreadCounts;
+    });
   }
 
   @override
@@ -43,33 +66,18 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
     return Scaffold(
       backgroundColor: Colors.white,
       body: FutureBuilder(
-        future: Future.wait([_userFuture, _unreadFuture]),
+        future: _loadFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          } else if (!snapshot.hasData ||
-              !(snapshot.data![0] as ({bool success, String message, GetUserResponseDto? user})).success ||
-              !(snapshot.data![1] as ({bool success, String message, GetUnreadMessageCountResponseDto? room})).success) {
-            return const Center(child: Text('유저 정보를 불러올 수 없습니다.'));
           }
 
-          final userData = snapshot.data![0] as ({bool success, String message, GetUserResponseDto? user});
-          final unreadData = snapshot.data![1] as ({bool success, String message, GetUnreadMessageCountResponseDto? room});
-
-          final crawlingChattingRooms = <ChatRoomInfoDto>[];
-          final roomChattingRooms = <ChatRoomInfoDto>[];
-
-          for (var room in userData.user!.chatRooms) {
-            if (room.type == 'CRAWLING') {
-              crawlingChattingRooms.add(room);
-            } else if (room.type == 'ROOM') {
-              roomChattingRooms.add(room);
-            }
+          if (snapshot.hasError) {
+            return const Center(child: Text('유저 정보를 불러올 수 없습니다.'));
           }
 
           return Column(
             children: [
-              // 🔷 Custom styled tab bar
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 padding: const EdgeInsets.all(4),
@@ -111,7 +119,6 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                   }),
                 ),
               ),
-              // 📄 탭별 콘텐츠
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
@@ -119,12 +126,12 @@ class _ChattingTabState extends State<ChattingTab> with SingleTickerProviderStat
                   children: [
                     RoomChattingTab(
                       roomInfos: roomChattingRooms,
-                      unreadInfos: unreadData.room!.unreadCounts,
+                      unreadInfos: unreadCounts,
                       onTabChange: widget.onTabChange,
                     ),
                     CrawlingChattingTab(
                       roomInfos: crawlingChattingRooms,
-                      unreadInfos: unreadData.room!.unreadCounts,
+                      unreadInfos: unreadCounts,
                       onTabChange: widget.onTabChange,
                     ),
                   ],

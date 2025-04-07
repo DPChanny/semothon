@@ -29,11 +29,15 @@ class _ChattingPageState extends State<ChattingPage> {
     super.initState();
 
     Future.microtask(() async {
-      final result = await getChatMessage(room.chatRoomId);
-      if (result.success && result.room != null) {
+      try {
+        final result = await getChatMessage(room.chatRoomId);
         setState(() {
-          messages.addAll(result.room!.chatMessages);
+          messages.addAll(result.chatMessages);
         });
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
       }
 
       StompService.instance.subscribe('/sub/chat/${room.chatRoomId}', (frame) {
@@ -45,6 +49,7 @@ class _ChattingPageState extends State<ChattingPage> {
         });
       });
     });
+
   }
 
   @override

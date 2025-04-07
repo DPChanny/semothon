@@ -108,22 +108,23 @@ class _MainPageState extends State<MainPage> {
         IconButton(
           icon: const Icon(Icons.person, color: Colors.grey),
           onPressed: () async {
-            final result = await getUser();
+            try {
+              final user = await getUser();
 
-            if (!result.success || result.user == null) {
-              // 실패 처리 (예: 에러 토스트 등)
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyPage(
+                    user: user.userInfo,
+                    chatRooms: user.chatRooms,
+                  ),
+                ),
+              );
+            } catch (e) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("유저 정보를 불러오지 못했습니다.")),
               );
-              return;
             }
-            // 유저 정보 가져오기에 성공하면 페이지 이동
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MyPage(user: result.user!.userInfo, chatRooms: result.user!.chatRooms,),
-              ),
-            );
           },
         ),
         ]

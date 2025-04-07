@@ -67,25 +67,28 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
-    final result = await createRoom(
-      RoomUpdateDTO(
-        title: _nameController.text,
-        description: _descController.text,
-        capacity: int.parse(_maxController.text),
-      ),
-    );
+    try {
+      await createRoom(
+        RoomUpdateDTO(
+          title: _nameController.text,
+          description: _descController.text,
+          capacity: int.parse(_maxController.text),
+        ),
+      );
 
-    if (result.success) {
+      if (!mounted) return;
       Navigator.pushNamedAndRemoveUntil(
         context,
         MyMentorTabRouteNames.createRoomCompletePage,
-        (router) => false,
+            (router) => false,
       );
-    } else {
-      Navigator.pop(context);
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(result.message)));
+    } catch (e) {
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
     }
   }
 

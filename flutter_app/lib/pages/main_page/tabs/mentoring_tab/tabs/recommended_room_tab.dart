@@ -9,27 +9,23 @@ class RecommendedRoomTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<
-      ({bool success, String message, GetRoomListResponseDto? roomList})
-    >(
+    return FutureBuilder<GetRoomListResponseDto>(
       future: getRoomList(sortBy: "SCORE", excludeJoined: true),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (!snapshot.hasData ||
-            !snapshot.data!.success ||
-            snapshot.data!.roomList == null) {
+        if (snapshot.hasError) {
           return Center(
             child: Text(
-              '방 목록을 불러오지 못했어요: ${snapshot.data?.message ?? '알 수 없는 오류'}',
+              '방 목록을 불러오지 못했어요: ${snapshot.error}',
             ),
           );
         }
 
-        final rooms = snapshot.data!.roomList!.roomInfos;
-        final hostInfos = snapshot.data!.roomList!.hostInfos;
+        final rooms = snapshot.data!.roomInfos;
+        final hostInfos = snapshot.data!.hostInfos;
 
         return ListView.builder(
           itemCount: rooms.length,
@@ -46,8 +42,7 @@ class RecommendedRoomTab extends StatelessWidget {
                     ),
                   ),
                   isScrollControlled: true,
-                  builder:
-                      (context) => RoomPopUp(room: room, hostUser: hostUser),
+                  builder: (context) => RoomPopUp(room: room, hostUser: hostUser),
                 );
               },
               child: RoomItem(room: room, index: index),

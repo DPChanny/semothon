@@ -41,28 +41,27 @@ class _SearchPageState extends State<SearchPage> {
       showAllRooms = false;
     });
 
-    final roomResult = await getRoomList(titleOrDescriptionKeyword: keywords);
-    final userResult = await getUserList(keyword: keywords.join(','));
+    try {
+      final roomList = await getRoomList(titleOrDescriptionKeyword: keywords);
+      final userList = await getUserList(keyword: keywords.join(','));
 
-    setState(() {
-      _isLoading = false;
+      setState(() {
+        _roomResult = roomList.roomInfos;
+        _hostResult = roomList.hostInfos;
+        _userResult = userList.userInfos;
+        showAllMentors = _userResult.isNotEmpty;
+        showAllRooms = _roomResult.isNotEmpty;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString();
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
 
-      if (roomResult.success && roomResult.roomList != null) {
-        _roomResult = roomResult.roomList!.roomInfos;
-        _hostResult = roomResult.roomList!.hostInfos;
-      } else {
-        _error = roomResult.message;
-      }
-
-      if (userResult.success && userResult.userList != null) {
-        _userResult = userResult.userList!.userInfos;
-      } else {
-        _error = userResult.message;
-      }
-
-      if (_userResult.isEmpty) showAllMentors = false;
-      if (_roomResult.isEmpty) showAllRooms = false;
-    });
   }
 
   @override

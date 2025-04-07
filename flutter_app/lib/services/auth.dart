@@ -16,7 +16,7 @@ GoogleSignIn getGoogleSignIn() {
   return googleSignIn;
 }
 
-Future<String?> getSafeIdToken() async {
+Future<String?> getIdToken() async {
   try {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return null;

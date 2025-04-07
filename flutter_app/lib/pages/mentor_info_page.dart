@@ -40,21 +40,20 @@ class MentorInfoPage extends StatelessWidget {
 
   const MentorInfoPage({super.key, required this.userId});
 
-  Future<(String uid, GetUserResponseDto? user, String message)>
-  _fetchUserAndRooms() async {
+  Future<(String uid, GetUserResponseDto? user, String? error)> _fetchUserAndRooms() async {
     final currentUid = FirebaseAuth.instance.currentUser?.uid ?? '';
 
-    final result = await getOtherUser(userId);
-    if (!result.success || result.user == null) {
-      return (currentUid, null, result.message);
+    try {
+      final user = await getOtherUser(userId);
+      return (currentUid, user, null);
+    } catch (e) {
+      return (currentUid, null, e.toString());
     }
-
-    return (currentUid, result.user!, result.message);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<(String, GetUserResponseDto?, String)>(
+    return FutureBuilder<(String, GetUserResponseDto?, String?)>(
       future: _fetchUserAndRooms(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -62,7 +61,8 @@ class MentorInfoPage extends StatelessWidget {
         }
 
         if (!snapshot.hasData || snapshot.data!.$2 == null) {
-          return const Center(child: Text("유저 정보를 불러올 수 없습니다."));
+          final error = snapshot.data?.$3 ?? '유저 정보를 불러올 수 없습니다.';
+          return Center(child: Text(error));
         }
 
         final currentUid = snapshot.data!.$1;
@@ -118,28 +118,20 @@ class MentorInfoPage extends StatelessWidget {
 
                 const SizedBox(height: 32),
 
-                // 📚 멘토링 방 목록
-                FutureBuilder<
-                  ({
-                    bool success,
-                    String message,
-                    GetRoomListResponseDto? roomList,
-                  })
-                >(
+                FutureBuilder(
                   future: getRoomList(hostUserId: userInfo.userId),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     }
 
-                    if (!snapshot.hasData ||
-                        !snapshot.data!.success ||
-                        snapshot.data!.roomList == null) {
+                    if (snapshot.hasError || !snapshot.hasData) {
                       return const Center(child: Text("멘토링 방 목록을 불러올 수 없습니다."));
                     }
 
-                    final rooms = snapshot.data!.roomList!.roomInfos;
-                    final hosts = snapshot.data!.roomList!.hostInfos;
+                    final roomList = snapshot.data!;
+                    final rooms = roomList.roomInfos;
+                    final hosts = roomList.hostInfos;
 
                     if (rooms.isEmpty) {
                       return const Center(child: Text("개설한 멘토링 방이 없습니다."));

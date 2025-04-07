@@ -18,17 +18,16 @@ class InputCompletePage extends StatelessWidget {
           );
         }
 
-        if (!snapshot.hasData ||
-            !snapshot.data!.success ||
-            snapshot.data!.user == null) {
+        if (snapshot.hasError || !snapshot.hasData) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(snapshot.data!.message)));
+            final message = snapshot.hasError
+                ? snapshot.error.toString()
+                : "알 수 없는 오류가 발생했습니다.";
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
             Navigator.pushNamedAndRemoveUntil(
               context,
               LoginPageRouteNames.loginPage,
-              (route) => false,
+                  (route) => false,
             );
           });
 
@@ -37,7 +36,7 @@ class InputCompletePage extends StatelessWidget {
           );
         }
 
-        final name = snapshot.data!.user!.userInfo.nickname;
+        final name = snapshot.data!.userInfo.nickname;
 
         return Scaffold(
           backgroundColor: Colors.white,

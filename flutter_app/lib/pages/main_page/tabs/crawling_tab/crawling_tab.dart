@@ -25,16 +25,16 @@ class _CrawlingTabState extends State<CrawlingTab> {
 
   Future<void> _fetchCrawlings() async {
     final sortBy = selectedSort == SortType.recommendation ? 'SCORE' : 'CRAWLED_AT';
-    final result = await getCrawlingList(sortBy: sortBy);
 
-    if (result.success && result.crawlingList != null) {
+    try {
+      final crawlingList = await getCrawlingList(sortBy: sortBy);
       setState(() {
-        items = result.crawlingList!.crawlingList.take(10).toList();
+        items = crawlingList.crawlingList.take(10).toList();
       });
-    } else {
+    } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(result.message)),
+          SnackBar(content: Text(e.toString())),
         );
       }
     }

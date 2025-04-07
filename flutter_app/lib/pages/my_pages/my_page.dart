@@ -12,9 +12,12 @@ import 'package:flutter_app/dto/chat_room_info_dto.dart';
 import 'package:flutter_app/services/queries/crawling_query.dart';
 
 Future<bool> isCurrentUserHost() async {
-  final result = await getUser();
-  if (!result.success || result.user == null) return false;
-  return result.user!.isHost();
+  try {
+    final user = await getUser();
+    return user.isHost();
+  } catch (e) {
+    return false;
+  }
 }
 
 class MyPage extends StatefulWidget {
@@ -308,12 +311,21 @@ Widget _buildActivitySection(BuildContext context) {
   return FutureBuilder(
     future: getCrawlingList(limit: 4), // 예: 최근 4개만 가져오기
     builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return const CircularProgressIndicator();
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
       }
 
-      final result = snapshot.data!;
-      final crawlingList = result.crawlingList?.crawlingList ?? [];
+      if (snapshot.hasError) {
+        return Center(
+          child: Text('데이터를 불러오는 데 실패했습니다.'),
+        );
+      }
+
+      if (!snapshot.hasData) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      final crawlingList = snapshot.data!.crawlingList ?? [];
 
       return Padding(
         padding: const EdgeInsets.all(16.0),

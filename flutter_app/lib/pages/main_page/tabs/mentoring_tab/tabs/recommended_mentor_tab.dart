@@ -9,41 +9,40 @@ class RecommendedMentorTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<
-      ({bool success, String message, GetUserListResponseDto? userList})
-    >(
+    return FutureBuilder<GetUserListResponseDto>(
       future: getUserList(sortBy: "SCORE"),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (!snapshot.hasData || !snapshot.data!.success) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(snapshot.data!.message)));
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            LoginPageRouteNames.loginPage,
-            (route) => false,
-          );
+        if (snapshot.hasError) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(snapshot.error.toString())),
+            );
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              LoginPageRouteNames.loginPage,
+                  (route) => false,
+            );
+          });
+
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (!snapshot.hasData || snapshot.data!.userList!.userInfos.isEmpty) {
+        final mentors = snapshot.data!;
+        if (mentors.userInfos.isEmpty) {
           return const Center(child: Text('추천 멘토가 없습니다.'));
         }
-        else {
-          final mentors = snapshot.data!.userList!;
 
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: mentors.userInfos.length,
-            itemBuilder: (context, index) {
-              return MentorItem(mentor: mentors.userInfos[index]);
-            },
-          );
-        }
+        return ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: mentors.userInfos.length,
+          itemBuilder: (context, index) {
+            return MentorItem(mentor: mentors.userInfos[index]);
+          },
+        );
       },
     );
   }

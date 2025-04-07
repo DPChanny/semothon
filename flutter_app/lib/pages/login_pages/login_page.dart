@@ -38,33 +38,33 @@ class LoginPage extends StatelessWidget {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
 
-    final result = await loginUser();
-    if (!result.success) {
-      Navigator.pop(context);
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(result.message)));
-      return;
-    }
+    try {
+      final user = await loginUser();
 
-    if (result.user!.introText != null) {
-      await StompService.instance.connect();
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        MainPageRouteNames.mainPage,
-        (route) => false,
-      );
-    } else if (result.user!.name != null) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        InputPageRouteNames.inputCompletePage,
-        (route) => false,
-      );
-    } else {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        LoginPageRouteNames.loginCompletePage,
-        (route) => false,
+      if (user.introText != null) {
+        await StompService.instance.connect();
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          MainPageRouteNames.mainPage,
+              (route) => false,
+        );
+      } else if (user.name != null) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          InputPageRouteNames.inputCompletePage,
+              (route) => false,
+        );
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          LoginPageRouteNames.loginCompletePage,
+              (route) => false,
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
       );
     }
   }

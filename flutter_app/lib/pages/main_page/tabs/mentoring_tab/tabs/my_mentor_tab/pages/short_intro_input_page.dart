@@ -80,33 +80,40 @@ class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
                 onPressed:
                     _isButtonEnabled
                         ? () async {
-                          UserUpdateDTO.instance = UserUpdateDTO(
-                            shortIntro: _controller.text,
-                          );
+                      UserUpdateDTO.instance = UserUpdateDTO(
+                        shortIntro: _controller.text,
+                      );
 
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder:
-                                (context) => const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                          );
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) =>
+                        const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
 
-                          final result = await updateUser();
+                      try {
+                        await updateUser();
 
-                          if (result.success) {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              MyMentorTabRouteNames.shortIntroInputCompletePage,
+                        if (!context.mounted) return;
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          MyMentorTabRouteNames.shortIntroInputCompletePage,
                               (routes) => false,
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(result.message)),
-                            );
-                          }
+                        );
+                      } catch (e) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e.toString())),
+                          );
                         }
+                      } finally {
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      }
+                    }
                         : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor:

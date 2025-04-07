@@ -31,33 +31,34 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
       _error = "";
     });
 
-    final result = await getChatList(titleOrDescriptionKeyword: rawInput.split(' '));
-    final result2 = await getUnreadMessageCount();
+    try {
+      final chatList = await getChatList(titleOrDescriptionKeyword: rawInput.split(' '));
+      final unreadInfo = await getUnreadMessageCount();
 
-    if (result.success && result.roomList != null) {
-      final rooms = <ChatRoomInfoDto>[];
-      final crawlings = <ChatRoomInfoDto>[];
+      final roomResults = <ChatRoomInfoDto>[];
+      final crawlingResults = <ChatRoomInfoDto>[];
 
-      for (var room in result.roomList!.chatRoomList) {
-        if (room.type == 'ROOM') {
-          rooms.add(room);
-        } else if (room.type == 'CRAWLING') {
-          crawlings.add(room);
+      for (var chatRoom in chatList.chatRoomList) {
+        if (chatRoom.type == 'ROOM') {
+          roomResults.add(chatRoom);
+        } else if (chatRoom.type == 'CRAWLING') {
+          crawlingResults.add(chatRoom);
         }
       }
 
       setState(() {
-        _roomResults = rooms;
-        _crawlingResults = crawlings;
-        _unreadResults = result2.room?.unreadCounts ?? [];
+        _roomResults = roomResults;
+        _crawlingResults = crawlingResults;
+        _unreadResults = unreadInfo.unreadCounts;
         _isLoading = false;
       });
-    } else {
+    } catch (e) {
       setState(() {
-        _error = result.message;
+        _error = e.toString();
         _isLoading = false;
       });
     }
+
   }
 
   void _clearSearch() {
