@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user/user_update_dto.dart';
+import 'package:flutter_app/dto/user/update_user_dto.dart';
 import 'package:flutter_app/routes/input_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -113,7 +113,7 @@ class _NameInputPageState extends State<NameInputPage> {
                   onPressed:
                       _isButtonEnabled
                           ? () {
-                            UserUpdateDTO.instance.name = _controller.text;
+                            UpdateUserDTO.instance.name = _controller.text;
                             Navigator.pushNamed(
                               context,
                               InputPageRouteNames.nicknameInputPage,

@@ -5,7 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatItem extends StatelessWidget {
-  final ChatRoomInfoDto room;
+  final ChatRoomInfoDTO room;
   final int unreadCount;
   final VoidCallback? onLeave;
 

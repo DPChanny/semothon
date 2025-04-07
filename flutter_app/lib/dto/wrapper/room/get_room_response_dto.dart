@@ -1,13 +1,13 @@
 import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
 import 'package:flutter_app/dto/user/host_user_info_dto.dart';
 import 'package:flutter_app/dto/room/room_info_dto.dart';
-import 'package:flutter_app/dto/room/room_user_info_dto.dart';
+import 'package:flutter_app/dto/user/room_user_info_dto.dart';
 
 class GetRoomResponseDto {
   final RoomInfoDto room;
   final List<RoomUserInfoDto> members;
   final HostUserInfoDto host;
-  final ChatRoomInfoDto chatRoom;
+  final ChatRoomInfoDTO chatRoom;
 
   GetRoomResponseDto({
     required this.room,
@@ -24,7 +24,7 @@ class GetRoomResponseDto {
             json['members'],
           ).map((e) => RoomUserInfoDto.fromJson(e)).toList(),
       host: HostUserInfoDto.fromJson(json['host']),
-      chatRoom: ChatRoomInfoDto.fromJson(json['chatRoom']['chatRoomInfo']),
+      chatRoom: ChatRoomInfoDTO.fromJson(json['chatRoom']['chatRoomInfo']),
     );
   }
 }

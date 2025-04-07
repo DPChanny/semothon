@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user/user_update_dto.dart';
+import 'package:flutter_app/dto/user/update_user_dto.dart';
 import 'package:flutter_app/routes/mentoring_tab_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
@@ -80,7 +80,7 @@ class _ShortIntroInputPageState extends State<ShortIntroInputPage> {
                 onPressed:
                     _isButtonEnabled
                         ? () async {
-                          UserUpdateDTO.instance = UserUpdateDTO(
+                          UpdateUserDTO.instance = UpdateUserDTO(
                             shortIntro: _controller.text,
                           );
 

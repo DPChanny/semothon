@@ -1,6 +1,6 @@
 import 'package:flutter_app/dto/chatting/message_info_dto.dart';
 
-class ChatRoomInfoDto {
+class ChatRoomInfoDTO {
   final int chatRoomId;
   final String type;
   final String title;
@@ -12,9 +12,9 @@ class ChatRoomInfoDto {
   final DateTime createdAt;
   final String profileImageUrl;
   final String hostUserId;
-  final MessageInfoDto? lastMessage;
+  final MessageInfoDTO? lastMessage;
 
-  ChatRoomInfoDto({
+  ChatRoomInfoDTO({
     required this.chatRoomId,
     required this.type,
     required this.title,
@@ -29,8 +29,8 @@ class ChatRoomInfoDto {
     required this.lastMessage,
   });
 
-  factory ChatRoomInfoDto.fromJson(Map<String, dynamic> json) {
-    return ChatRoomInfoDto(
+  factory ChatRoomInfoDTO.fromJson(Map<String, dynamic> json) {
+    return ChatRoomInfoDTO(
       chatRoomId: json['chatRoomId'],
       type: json['type'],
       title: json['title'],
@@ -44,7 +44,7 @@ class ChatRoomInfoDto {
       hostUserId: json['hostUserId'],
       lastMessage:
           json['lastMessage'] != null
-              ? MessageInfoDto.fromJson(json['lastMessage'])
+              ? MessageInfoDTO.fromJson(json['lastMessage'])
               : null,
     );
   }

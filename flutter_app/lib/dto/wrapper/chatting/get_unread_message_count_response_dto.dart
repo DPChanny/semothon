@@ -1,7 +1,7 @@
 import 'package:flutter_app/dto/chatting/unread_message_count_dto.dart';
 
 class GetUnreadMessageCountResponseDto {
-  final List<UnreadMessageCountDto> unreadCounts;
+  final List<UnreadMessageCountDTO> unreadCounts;
 
   GetUnreadMessageCountResponseDto({required this.unreadCounts});
 
@@ -10,7 +10,7 @@ class GetUnreadMessageCountResponseDto {
       unreadCounts:
           List<Map<String, dynamic>>.from(
             json['unreadCounts'],
-          ).map((e) => UnreadMessageCountDto.fromJson(e)).toList(),
+          ).map((e) => UnreadMessageCountDTO.fromJson(e)).toList(),
     );
   }
 }

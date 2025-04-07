@@ -1,7 +1,7 @@
 import '../../chatting/chat_room_info_dto.dart';
 
 class GetChatListResponseDto {
-  final List<ChatRoomInfoDto> chatRoomList;
+  final List<ChatRoomInfoDTO> chatRoomList;
 
   GetChatListResponseDto({
     required this.chatRoomList,
@@ -11,7 +11,7 @@ class GetChatListResponseDto {
     return GetChatListResponseDto(
       chatRoomList:
           (json['chatRoomList'] as List)
-              .map((e) => ChatRoomInfoDto.fromJson(e))
+              .map((e) => ChatRoomInfoDTO.fromJson(e))
               .toList(),
     );
   }

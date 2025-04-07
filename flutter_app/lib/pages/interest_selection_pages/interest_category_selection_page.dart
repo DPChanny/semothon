@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user/user_update_interest_dto.dart';
+import 'package:flutter_app/dto/user/update_user_interest_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -41,7 +41,7 @@ class _InterestCategorySelectionPageState
             onPressed:
                 selectedLabel != null
                     ? () {
-                      UserUpdateInterestIntroDTO.instance.interestCategory =
+                      UpdateUserInterestDTO.instance.interestCategory =
                           selectedLabel;
                       Navigator.pushNamed(
                         context,

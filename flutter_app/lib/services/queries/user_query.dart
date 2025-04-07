@@ -1,8 +1,8 @@
 import 'package:flutter_app/dto/user/user_info_dto.dart';
 import 'package:flutter_app/dto/wrapper/user/get_user_list_response_dto.dart';
 import 'package:flutter_app/dto/wrapper/user/get_user_response_dto.dart';
-import 'package:flutter_app/dto/user/user_update_dto.dart';
-import 'package:flutter_app/dto/user/user_update_interest_dto.dart';
+import 'package:flutter_app/dto/user/update_user_dto.dart';
+import 'package:flutter_app/dto/user/update_user_interest_dto.dart';
 import 'package:flutter_app/services/queries/query.dart';
 
 Future<UserInfoDto> loginUser() {
@@ -29,14 +29,14 @@ Future<GetUserResponseDto> getOtherUser(String userId) {
 Future<void> updateUser() {
   return queryPatch<void>(
     '/api/users/profile',
-    body: UserUpdateDTO.instance.toJson(),
+    body: UpdateUserDTO.instance.toJson(),
   );
 }
 
 Future<String> updateUserInterest() {
   return queryPut<String>(
     '/api/users/interests',
-    body: UserUpdateInterestIntroDTO.instance.toInterestJson(),
+    body: UpdateUserInterestDTO.instance.toInterestJson(),
     fromJson: (json) => json['generatedIntroText'],
   );
 }
@@ -44,7 +44,7 @@ Future<String> updateUserInterest() {
 Future<void> updateUserIntro() {
   return queryPut<void>(
     '/api/users/intro',
-    body: UserUpdateInterestIntroDTO.instance.toIntroJson(),
+    body: UpdateUserInterestDTO.instance.toIntroJson(),
   );
 }
 

@@ -22,7 +22,7 @@ Future<bool> isCurrentUserHost() async {
 
 class MyPage extends StatefulWidget {
   final UserInfoDto user;
-  final List<ChatRoomInfoDto> chatRooms;
+  final List<ChatRoomInfoDTO> chatRooms;
 
   const MyPage({super.key, required this.user, required this.chatRooms});
 
@@ -311,7 +311,7 @@ class _MyPageState extends State<MyPage> {
     );
   }
 
-  Widget _buildMentorSection(List<ChatRoomInfoDto> chatRooms) {
+  Widget _buildMentorSection(List<ChatRoomInfoDTO> chatRooms) {
     final mentorIntro =
         chatRooms.isNotEmpty ? chatRooms.first.description : '멘토 소개글이 없습니다.';
 

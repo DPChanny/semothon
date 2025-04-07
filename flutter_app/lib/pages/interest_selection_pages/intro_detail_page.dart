@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dto/user/user_update_interest_dto.dart';
+import 'package:flutter_app/dto/user/update_user_interest_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_app/routes/login_page_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
@@ -104,7 +104,7 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      UserUpdateInterestIntroDTO.instance.generatedIntroText ??
+                      UpdateUserInterestDTO.instance.generatedIntroText ??
                           "",
                       style: const TextStyle(
                         fontSize: 15,
@@ -177,7 +177,7 @@ class _IntroDetailPageState extends State<IntroDetailPage> {
                               ),
                         );
 
-                        UserUpdateInterestIntroDTO.instance.intro =
+                        UpdateUserInterestDTO.instance.intro =
                             _controller.text;
 
                         try {

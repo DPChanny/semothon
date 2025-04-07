@@ -1,7 +1,7 @@
 import 'package:flutter_app/dto/chatting/message_info_dto.dart';
 
 class GetMessageResponseDto {
-  final List<MessageInfoDto> chatMessages;
+  final List<MessageInfoDTO> chatMessages;
 
   GetMessageResponseDto({required this.chatMessages});
 
@@ -9,7 +9,7 @@ class GetMessageResponseDto {
     return GetMessageResponseDto(
       chatMessages:
           (json['chatMessages'] as List)
-              .map((e) => MessageInfoDto.fromJson(e))
+              .map((e) => MessageInfoDTO.fromJson(e))
               .toList(),
     );
   }

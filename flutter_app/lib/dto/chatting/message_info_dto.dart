@@ -1,4 +1,4 @@
-class MessageInfoDto {
+class MessageInfoDTO {
   final int chatMessageId;
   final int chatRoomId;
   final String senderId;
@@ -8,7 +8,7 @@ class MessageInfoDto {
   final String? imageUrl;
   final DateTime createdAt;
 
-  MessageInfoDto({
+  MessageInfoDTO({
     required this.chatMessageId,
     required this.chatRoomId,
     required this.senderId,
@@ -19,8 +19,8 @@ class MessageInfoDto {
     required this.createdAt,
   });
 
-  factory MessageInfoDto.fromJson(Map<String, dynamic> json) {
-    return MessageInfoDto(
+  factory MessageInfoDTO.fromJson(Map<String, dynamic> json) {
+    return MessageInfoDTO(
       chatMessageId: json['chatMessageId'],
       chatRoomId: json['chatRoomId'],
       senderId: json['senderId'],

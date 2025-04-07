@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/dto/user/user_update_interest_dto.dart';
+import 'package:flutter_app/dto/user/update_user_interest_dto.dart';
 import 'package:flutter_app/routes/interest_page_routes.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
@@ -32,7 +32,7 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
     final Map<String, dynamic> data = jsonDecode(jsonStr);
 
     final Map<String, dynamic> subfields =
-        data[UserUpdateInterestIntroDTO.instance.interestCategory];
+        data[UpdateUserInterestDTO.instance.interestCategory];
 
     for (final entry in subfields.entries) {
       final String subfield = entry.key;
@@ -245,13 +245,13 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
                                     ),
                               );
 
-                              UserUpdateInterestIntroDTO
+                              UpdateUserInterestDTO
                                   .instance
                                   .interestNames = selectedKeywords.toList();
 
                               try {
                                 final introText = await updateUserInterest();
-                                UserUpdateInterestIntroDTO
+                                UpdateUserInterestDTO
                                     .instance
                                     .generatedIntroText = introText;
 

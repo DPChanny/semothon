@@ -14,9 +14,9 @@ class SearchChattingPage extends StatefulWidget {
 
 class _SearchChattingPageState extends State<SearchChattingPage> {
   final TextEditingController _controller = TextEditingController();
-  List<ChatRoomInfoDto> _roomResults = [];
-  List<ChatRoomInfoDto> _crawlingResults = [];
-  List<UnreadMessageCountDto> _unreadResults = [];
+  List<ChatRoomInfoDTO> _roomResults = [];
+  List<ChatRoomInfoDTO> _crawlingResults = [];
+  List<UnreadMessageCountDTO> _unreadResults = [];
   bool _isLoading = false;
   String _error = "";
 
@@ -38,8 +38,8 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
       );
       final unreadInfo = await getUnreadMessageCount();
 
-      final roomResults = <ChatRoomInfoDto>[];
-      final crawlingResults = <ChatRoomInfoDto>[];
+      final roomResults = <ChatRoomInfoDTO>[];
+      final crawlingResults = <ChatRoomInfoDTO>[];
 
       for (var chatRoom in chatList.chatRoomList) {
         if (chatRoom.type == 'ROOM') {
@@ -77,7 +77,7 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
         .firstWhere(
           (item) => item.chatRoomId == roomId,
           orElse:
-              () => UnreadMessageCountDto(chatRoomId: roomId, unreadCount: 0),
+              () => UnreadMessageCountDTO(chatRoomId: roomId, unreadCount: 0),
         )
         .unreadCount;
   }

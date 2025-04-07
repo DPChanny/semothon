@@ -19,9 +19,9 @@ class ChattingPage extends StatefulWidget {
 class _ChattingPageState extends State<ChattingPage> {
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<MessageInfoDto> messages = [];
+  final List<MessageInfoDTO> messages = [];
 
-  late ChatRoomInfoDto room;
+  late ChatRoomInfoDTO room;
   final currentUser = FirebaseAuth.instance.currentUser;
 
   @override
@@ -42,7 +42,7 @@ class _ChattingPageState extends State<ChattingPage> {
 
       StompService.instance.subscribe('/sub/chat/${room.chatRoomId}', (frame) {
         final data = jsonDecode(frame.body!);
-        final message = MessageInfoDto.fromJson(data);
+        final message = MessageInfoDTO.fromJson(data);
 
         setState(() {
           messages.add(message);
@@ -59,7 +59,7 @@ class _ChattingPageState extends State<ChattingPage> {
 
   @override
   Widget build(BuildContext context) {
-    room = ModalRoute.of(context)?.settings.arguments as ChatRoomInfoDto;
+    room = ModalRoute.of(context)?.settings.arguments as ChatRoomInfoDTO;
 
     return Scaffold(
       backgroundColor: Colors.white,

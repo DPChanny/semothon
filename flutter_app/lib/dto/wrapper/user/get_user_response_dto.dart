@@ -3,7 +3,7 @@ import 'package:flutter_app/dto/user/user_info_dto.dart';
 
 class GetUserResponseDto {
   final UserInfoDto userInfo;
-  final List<ChatRoomInfoDto> chatRooms;
+  final List<ChatRoomInfoDTO> chatRooms;
 
   GetUserResponseDto({required this.userInfo, required this.chatRooms});
 
@@ -12,7 +12,7 @@ class GetUserResponseDto {
       userInfo: UserInfoDto.fromJson(json['user']),
       chatRooms:
           List<Map<String, dynamic>>.from(json['chatRooms'])
-              .map((chatRoomJson) => ChatRoomInfoDto.fromJson(chatRoomJson))
+              .map((chatRoomJson) => ChatRoomInfoDTO.fromJson(chatRoomJson))
               .toList(),
     );
   }

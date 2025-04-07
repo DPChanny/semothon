@@ -20,9 +20,9 @@ class _ChattingTabState extends State<ChattingTab>
   late TabController _tabController;
   late Future<void> _loadFuture;
 
-  List<ChatRoomInfoDto> roomChattingRooms = [];
-  List<ChatRoomInfoDto> crawlingChattingRooms = [];
-  List<UnreadMessageCountDto> unreadCounts = [];
+  List<ChatRoomInfoDTO> roomChattingRooms = [];
+  List<ChatRoomInfoDTO> crawlingChattingRooms = [];
+  List<UnreadMessageCountDTO> unreadCounts = [];
 
   final labels = ['멘토링 방', '활동 방'];
 
@@ -38,8 +38,8 @@ class _ChattingTabState extends State<ChattingTab>
     final unread = await getUnreadMessageCount();
 
     final rooms = user.chatRooms;
-    final crawls = <ChatRoomInfoDto>[];
-    final mentos = <ChatRoomInfoDto>[];
+    final crawls = <ChatRoomInfoDTO>[];
+    final mentos = <ChatRoomInfoDTO>[];
 
     for (var room in rooms) {
       if (room.type == 'CRAWLING') {

@@ -7,8 +7,8 @@ import 'package:flutter_app/widgets/chat_item.dart';
 class CrawlingChattingTab extends StatelessWidget {
   final void Function(int) onTabChange;
 
-  final List<ChatRoomInfoDto> roomInfos;
-  final List<UnreadMessageCountDto> unreadInfos;
+  final List<ChatRoomInfoDTO> roomInfos;
+  final List<UnreadMessageCountDTO> unreadInfos;
 
   const CrawlingChattingTab({
     super.key,

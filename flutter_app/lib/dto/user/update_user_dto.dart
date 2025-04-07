@@ -1,5 +1,5 @@
-class UserUpdateDTO {
-  static UserUpdateDTO instance = UserUpdateDTO();
+class UpdateUserDTO {
+  static UpdateUserDTO instance = UpdateUserDTO();
 
   String? name;
   String? nickname;
@@ -11,7 +11,7 @@ class UserUpdateDTO {
   String? shortIntro;
   String? profileImageUrl;
 
-  UserUpdateDTO({
+  UpdateUserDTO({
     this.name,
     this.nickname,
     this.department,

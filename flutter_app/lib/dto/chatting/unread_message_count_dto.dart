@@ -1,11 +1,11 @@
-class UnreadMessageCountDto {
+class UnreadMessageCountDTO {
   final int chatRoomId;
   final int unreadCount;
 
-  UnreadMessageCountDto({required this.chatRoomId, required this.unreadCount});
+  UnreadMessageCountDTO({required this.chatRoomId, required this.unreadCount});
 
-  factory UnreadMessageCountDto.fromJson(Map<String, dynamic> json) {
-    return UnreadMessageCountDto(
+  factory UnreadMessageCountDTO.fromJson(Map<String, dynamic> json) {
+    return UnreadMessageCountDTO(
       chatRoomId: json['chatRoomId'],
       unreadCount: json['unreadCount'],
     );
