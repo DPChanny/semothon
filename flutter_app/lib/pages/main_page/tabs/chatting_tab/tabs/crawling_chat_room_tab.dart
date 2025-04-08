@@ -1,25 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
 import 'package:flutter_app/dto/chatting/unread_message_count_dto.dart';
-import 'package:flutter_app/services/queries/room_query.dart';
+import 'package:flutter_app/services/queries/crawling_query.dart';
 import 'package:flutter_app/widgets/chat_item.dart';
 
-class CrawlingChattingTab extends StatelessWidget {
+class CrawlingChatRoomTab extends StatelessWidget {
   final void Function(int) onTabChange;
 
-  final List<ChatRoomInfoDTO> roomInfos;
+  final List<ChatRoomInfoDTO> chatRoomInfos;
   final List<UnreadMessageCountDTO> unreadInfos;
 
-  const CrawlingChattingTab({
+  const CrawlingChatRoomTab({
     super.key,
-    required this.roomInfos,
+    required this.chatRoomInfos,
     required this.unreadInfos,
     required this.onTabChange,
   });
 
+  void _handleLeaveCrawlingChatRoom(BuildContext context, ChatRoomInfoDTO room) async {
+    try {
+      await leaveCrawlingChatRoom(room.crawlingId!, room.chatRoomId);
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('채팅방을 나갔습니다')),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('나가기 실패: $e')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (roomInfos.isEmpty) {
+    if (chatRoomInfos.isEmpty) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -33,7 +51,7 @@ class CrawlingChattingTab extends StatelessWidget {
                     width: 141,
                     height: 141,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFE8F4FF), // 연하늘색
+                      color: Color(0xFFE8F4FF),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -88,34 +106,17 @@ class CrawlingChattingTab extends StatelessWidget {
     }
 
     return ListView.builder(
-      itemCount: roomInfos.length,
+      itemCount: chatRoomInfos.length,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       itemBuilder: (context, index) {
-        final room = roomInfos[index];
+        final room = chatRoomInfos[index];
         final unread = unreadInfos.firstWhere(
           (item) => item.chatRoomId == room.chatRoomId,
         );
-
-        return ChatItem(
-          room: room,
+        return ChatRoomItem(
+          chatRoom: room,
           unreadCount: unread.unreadCount,
-          onLeave: () async {
-            try {
-              await leaveRoom(room.roomId!);
-
-              if (context.mounted) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('채팅방을 나갔습니다')));
-              }
-            } catch (e) {
-              if (context.mounted) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text('나가기 실패: $e')));
-              }
-            }
-          },
+          onLeave:  () => _handleLeaveCrawlingChatRoom(context, room)
         );
       },
     );

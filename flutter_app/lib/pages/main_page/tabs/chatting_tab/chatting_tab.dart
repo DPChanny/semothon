@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dto/chatting/chat_room_info_dto.dart';
 import 'package:flutter_app/dto/chatting/unread_message_count_dto.dart';
-import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chatting_tab.dart';
-import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chatting_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/crawling_chat_room_tab.dart';
+import 'package:flutter_app/pages/main_page/tabs/chatting_tab/tabs/room_chat_room_tab.dart';
 import 'package:flutter_app/services/queries/chat_query.dart';
 import 'package:flutter_app/services/queries/user_query.dart';
 
@@ -91,7 +91,6 @@ class _ChattingTabState extends State<ChattingTab>
                 ),
                 child: Row(
                   children: List.generate(labels.length, (index) {
-                    final isSelected = _tabController.index == index;
                     return Expanded(
                       child: GestureDetector(
                         onTap: () => _tabController.animateTo(index),
@@ -137,13 +136,13 @@ class _ChattingTabState extends State<ChattingTab>
                   controller: _tabController,
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    RoomChattingTab(
-                      roomInfos: roomChattingRooms,
+                    RoomChatRoomTab(
+                      chatRoomInfos: roomChattingRooms,
                       unreadInfos: unreadCounts,
                       onTabChange: widget.onTabChange,
                     ),
-                    CrawlingChattingTab(
-                      roomInfos: crawlingChattingRooms,
+                    CrawlingChatRoomTab(
+                      chatRoomInfos: crawlingChattingRooms,
                       unreadInfos: unreadCounts,
                       onTabChange: widget.onTabChange,
                     ),

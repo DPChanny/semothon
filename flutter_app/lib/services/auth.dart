@@ -29,7 +29,6 @@ Future<String?> getIdToken() async {
 
     return token;
   } catch (e) {
-    print('🔴 Token fetch error: $e');
-    return null;
+    throw Exception('Token fetch error: $e');
   }
 }

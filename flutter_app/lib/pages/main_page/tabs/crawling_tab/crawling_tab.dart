@@ -41,14 +41,6 @@ class _CrawlingTabState extends State<CrawlingTab> {
     }
   }
 
-  Widget _buildRecommendationCard(CrawlingInfoDto crawling) {
-    return _buildGenericCard(crawling);
-  }
-
-  Widget _buildRecentCard(CrawlingInfoDto crawling) {
-    return _buildGenericCard(crawling);
-  }
-
   Widget _buildGenericCard(CrawlingInfoDto crawling) {
     return Material(
       color: Colors.transparent,
@@ -235,9 +227,7 @@ class _CrawlingTabState extends State<CrawlingTab> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemBuilder: (context, index) {
                   final dto = items[index];
-                  return selectedSort == SortType.recommendation
-                      ? _buildRecommendationCard(dto)
-                      : _buildRecentCard(dto);
+                  return _buildGenericCard(dto);
                 },
               ),
             ),

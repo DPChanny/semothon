@@ -1,7 +1,7 @@
 import 'package:flutter_app/dto/room/room_update_dto.dart';
 import 'package:flutter_app/dto/wrapper/room/get_room_list_response_dto.dart';
 import 'package:flutter_app/dto/wrapper/room/get_room_response_dto.dart';
-import 'package:flutter_app/services/queries/query.dart';
+import 'package:flutter_app/services/query.dart';
 
 Future<void> createRoom(RoomUpdateDTO room) {
   return queryPost<void>('/api/rooms', body: room, expectedStatusCode: 201);

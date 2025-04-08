@@ -4,22 +4,39 @@ import 'package:flutter_app/dto/chatting/unread_message_count_dto.dart';
 import 'package:flutter_app/services/queries/room_query.dart';
 import 'package:flutter_app/widgets/chat_item.dart';
 
-class RoomChattingTab extends StatelessWidget {
+class RoomChatRoomTab extends StatelessWidget {
   final void Function(int) onTabChange;
-
-  final List<ChatRoomInfoDTO> roomInfos;
+  final List<ChatRoomInfoDTO> chatRoomInfos;
   final List<UnreadMessageCountDTO> unreadInfos;
 
-  const RoomChattingTab({
+  const RoomChatRoomTab({
     super.key,
-    required this.roomInfos,
+    required this.chatRoomInfos,
     required this.unreadInfos,
     required this.onTabChange,
   });
 
+  void _handleLeaveRoom(BuildContext context, ChatRoomInfoDTO room) async {
+    try {
+      await leaveRoom(room.roomId!);
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('채팅방을 나갔습니다')),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('나가기 실패: $e')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (roomInfos.isEmpty) {
+    if (chatRoomInfos.isEmpty) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -33,7 +50,7 @@ class RoomChattingTab extends StatelessWidget {
                     width: 141,
                     height: 141,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFE8F4FF), // 연하늘색
+                      color: Color(0xFFE8F4FF),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -92,34 +109,18 @@ class RoomChattingTab extends StatelessWidget {
     }
 
     return ListView.builder(
-      itemCount: roomInfos.length,
+      itemCount: chatRoomInfos.length,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       itemBuilder: (context, index) {
-        final room = roomInfos[index];
+        final room = chatRoomInfos[index];
         final unread = unreadInfos.firstWhere(
-          (item) => item.chatRoomId == room.chatRoomId,
+              (item) => item.chatRoomId == room.chatRoomId,
         );
 
-        return ChatItem(
-          room: room,
+        return ChatRoomItem(
+          chatRoom: room,
           unreadCount: unread.unreadCount,
-          onLeave: () async {
-            try {
-              await leaveRoom(room.roomId!);
-
-              if (context.mounted) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('채팅방을 나갔습니다')));
-              }
-            } catch (e) {
-              if (context.mounted) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text('나가기 실패: $e')));
-              }
-            }
-          },
+          onLeave: () => _handleLeaveRoom(context, room),
         );
       },
     );

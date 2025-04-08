@@ -1,7 +1,7 @@
 import 'package:flutter_app/dto/crawling/crawling_update_dto.dart';
 import 'package:flutter_app/dto/wrapper/crawling/get_crawling_list_response_dto.dart';
 import 'package:flutter_app/dto/wrapper/crawling/get_crawling_response_dto.dart';
-import 'package:flutter_app/services/queries/query.dart';
+import 'package:flutter_app/services/query.dart';
 
 Future<GetCrawlingListResponseDto> getCrawlingList({
   List<String>? titleKeyword,
@@ -74,6 +74,6 @@ Future<GetCrawlingResponseDto> joinCrawling(int crawlingId, int chatRoomId) {
   );
 }
 
-Future<void> leaveCrawling(int crawlingId, int chatRoomId) {
+Future<void> leaveCrawlingChatRoom(int crawlingId, int chatRoomId) {
   return queryPost<void>('api/crawlings/$crawlingId/chats/$chatRoomId/leave');
 }

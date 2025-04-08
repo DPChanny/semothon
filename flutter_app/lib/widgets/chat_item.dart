@@ -4,14 +4,14 @@ import 'package:flutter_app/routes/chat_page_routes.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ChatItem extends StatelessWidget {
-  final ChatRoomInfoDTO room;
+class ChatRoomItem extends StatelessWidget {
+  final ChatRoomInfoDTO chatRoom;
   final int unreadCount;
   final VoidCallback? onLeave;
 
-  const ChatItem({
+  const ChatRoomItem({
     super.key,
-    required this.room,
+    required this.chatRoom,
     this.unreadCount = 0,
     this.onLeave,
   });
@@ -19,7 +19,7 @@ class ChatItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      key: ValueKey(room.roomId),
+      key: ValueKey(chatRoom.roomId),
       endActionPane:
           onLeave != null
               ? ActionPane(
@@ -52,18 +52,18 @@ class ChatItem extends StatelessWidget {
           Navigator.pushNamed(
             context,
             ChatPageRouteNames.chattingPage,
-            arguments: room,
+            arguments: chatRoom,
           );
         },
         contentPadding: const EdgeInsets.symmetric(vertical: 8),
         leading: CircleAvatar(
           radius: 24,
-          backgroundImage: NetworkImage(room.profileImageUrl),
+          backgroundImage: NetworkImage(chatRoom.profileImageUrl),
         ),
         title: Row(
           children: [
             Text(
-              room.title,
+              chatRoom.title,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colors.black,
@@ -81,13 +81,13 @@ class ChatItem extends StatelessWidget {
             ),
             const SizedBox(width: 2),
             Text(
-              '${room.currentMemberCount}',
+              '${chatRoom.currentMemberCount}',
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],
         ),
         subtitle: Text(
-          room.lastMessage?.message ?? room.description,
+          chatRoom.lastMessage?.message ?? chatRoom.description,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
@@ -103,7 +103,7 @@ class ChatItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              _formatTime(room.createdAt),
+              _formatTime(chatRoom.createdAt),
               style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
             const SizedBox(height: 4),

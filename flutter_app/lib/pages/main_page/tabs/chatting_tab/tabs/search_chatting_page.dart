@@ -117,8 +117,8 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
                     itemCount: _roomResults.length,
                     itemBuilder: (context, index) {
                       final room = _roomResults[index];
-                      return ChatItem(
-                        room: room,
+                      return ChatRoomItem(
+                        chatRoom: room,
                         unreadCount: _getUnreadCount(room.chatRoomId),
                       );
                     },
@@ -137,8 +137,8 @@ class _SearchChattingPageState extends State<SearchChattingPage> {
                     itemCount: _crawlingResults.length,
                     itemBuilder: (context, index) {
                       final room = _crawlingResults[index];
-                      return ChatItem(
-                        room: room,
+                      return ChatRoomItem(
+                        chatRoom: room,
                         unreadCount: _getUnreadCount(room.chatRoomId),
                       );
                     },

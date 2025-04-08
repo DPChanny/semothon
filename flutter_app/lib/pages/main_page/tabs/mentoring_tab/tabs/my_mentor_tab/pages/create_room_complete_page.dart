@@ -10,11 +10,10 @@ class CreateRoomCompletePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
-          // ✅ 전체를 수직/수평 가운데 정렬
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
-              mainAxisSize: MainAxisSize.min, // ✅ 내용만큼만 차지해서 가운데 정렬됨
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -33,7 +32,7 @@ class CreateRoomCompletePage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 80), // 버튼과 간격
+                const SizedBox(height: 80),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

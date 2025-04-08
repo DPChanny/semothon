@@ -80,7 +80,7 @@ class _GenderInputPageState extends State<GenderInputPage> {
                             );
 
                             try {
-                              await updateUser(); // 성공 시 예외 없음
+                              await updateUser();
                               if (context.mounted) {
                                 Navigator.pushNamedAndRemoveUntil(
                                   context,

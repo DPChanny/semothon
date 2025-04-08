@@ -3,7 +3,7 @@ import 'package:flutter_app/dto/wrapper/user/get_user_list_response_dto.dart';
 import 'package:flutter_app/dto/wrapper/user/get_user_response_dto.dart';
 import 'package:flutter_app/dto/user/update_user_dto.dart';
 import 'package:flutter_app/dto/user/update_user_interest_dto.dart';
-import 'package:flutter_app/services/queries/query.dart';
+import 'package:flutter_app/services/query.dart';
 
 Future<UserInfoDto> loginUser() {
   return queryPost<UserInfoDto>(
