@@ -41,13 +41,13 @@ SC3 파일 구조 및 컨트롤러, 서비스, 리포지토리 간 책임 분리
 **박경찬 (컴퓨터공학과)**  
 프로젝트 초기에 팀원들의 개발 수준을 파악하고 역할을 분담했으며, 전체 프로젝트의 기술 구조를 정의하고 프레임워크 기반을 구축했습니다.  
 AI 추천 모델과 FastAPI 서버 구현을 맡았고, Flutter 페이지의 계층 구조와 라우팅 설계를 담당했습니다.  
-Spring 서버와의 통신 흐름 구현 및 주요 기능들의 쿼리문 개발을 수행했으며, GitHub Actions를 활용한 CI/CD 파이프라인 구성, Spring/FastAPI 서버의 EC2 기반 자동 배포 환경도 구축했습니다.
-![FastAPI 기술 문서](https://dpchanny.tistory.com/3)   
-![추천 AI 기술 문서](https://dpchanny.tistory.com/2)
+Spring 서버와의 통신 흐름 구현 및 주요 기능들의 쿼리문 개발을 수행했으며, GitHub Actions를 활용한 CI/CD 파이프라인 구성, Spring/FastAPI 서버의 EC2 기반 자동 배포 환경도 구축했습니다.   
+[FastAPI 기술 문서](https://dpchanny.tistory.com/3)   
+[추천 AI 기술 문서](https://dpchanny.tistory.com/2)
 
 ---
 
-![프로젝트 통합 개발 및 배포 환경 기술 문서](https://dpchanny.tistory.com/11)
+[프로젝트 통합 개발 및 배포 환경 기술 문서](https://dpchanny.tistory.com/11)
 
 ---
 
