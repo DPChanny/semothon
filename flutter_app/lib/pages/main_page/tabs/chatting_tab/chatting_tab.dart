@@ -20,8 +20,8 @@ class _ChattingTabState extends State<ChattingTab>
   late TabController _tabController;
   late Future<void> _loadFuture;
 
-  List<ChatRoomInfoDTO> roomChattingRooms = [];
-  List<ChatRoomInfoDTO> crawlingChattingRooms = [];
+  List<ChatRoomInfoDTO> roomChatRooms = [];
+  List<ChatRoomInfoDTO> crawlingChatRooms = [];
   List<UnreadMessageCountDTO> unreadCounts = [];
 
   final labels = ['멘토링 방', '활동 방'];
@@ -30,28 +30,28 @@ class _ChattingTabState extends State<ChattingTab>
   void initState() {
     super.initState();
     _tabController = TabController(length: labels.length, vsync: this);
-    _loadFuture = loadData();
+    _loadFuture = _loadData();
   }
 
-  Future<void> loadData() async {
+  Future<void> _loadData() async {
     final user = await getUser();
     final unread = await getUnreadMessageCount();
 
-    final rooms = user.chatRooms;
-    final crawls = <ChatRoomInfoDTO>[];
-    final mentos = <ChatRoomInfoDTO>[];
+    final chatRooms = user.chatRooms;
+    final crawlingChatRoomsBuffer = <ChatRoomInfoDTO>[];
+    final roomChatRoomsBuffer = <ChatRoomInfoDTO>[];
 
-    for (var room in rooms) {
+    for (var room in chatRooms) {
       if (room.type == 'CRAWLING') {
-        crawls.add(room);
+        crawlingChatRoomsBuffer.add(room);
       } else if (room.type == 'ROOM') {
-        mentos.add(room);
+        roomChatRoomsBuffer.add(room);
       }
     }
 
     setState(() {
-      roomChattingRooms = mentos;
-      crawlingChattingRooms = crawls;
+      roomChatRooms = roomChatRoomsBuffer;
+      crawlingChatRooms = crawlingChatRoomsBuffer;
       unreadCounts = unread.unreadCounts;
     });
   }
@@ -137,12 +137,12 @@ class _ChattingTabState extends State<ChattingTab>
                   physics: const BouncingScrollPhysics(),
                   children: [
                     RoomChatRoomTab(
-                      chatRoomInfos: roomChattingRooms,
+                      chatRoomInfos: roomChatRooms,
                       unreadInfos: unreadCounts,
                       onTabChange: widget.onTabChange,
                     ),
                     CrawlingChatRoomTab(
-                      chatRoomInfos: crawlingChattingRooms,
+                      chatRoomInfos: crawlingChatRooms,
                       unreadInfos: unreadCounts,
                       onTabChange: widget.onTabChange,
                     ),
