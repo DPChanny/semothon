@@ -34,9 +34,19 @@ jobs:
             set -e
             cd ~/semothon
 
-            echo "[+] Pull latest code"
-            git pull --recurse-submodules origin master
-
+            echo "[+] Pull latest code (main repo)"
+            git pull origin master
+          
+            echo "[+] Pull latest code (fastapi submodule)"
+            cd fastapi
+            git pull origin master
+            cd ..
+          
+            echo "[+] Pull latest code (spring submodule)"
+            cd spring
+            git pull origin master
+            cd ..
+            
             echo "[+] Rewriting .env file"
             printf "%s\n" \
               "ENV=${{ vars.ENV }}" \
