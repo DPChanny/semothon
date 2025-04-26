@@ -35,7 +35,7 @@ jobs:
             cd ~/semothon
 
             echo "[+] Pull latest code"
-            git pull origin master
+            git pull --recurse-submodules origin master
 
             echo "[+] Rewriting .env file"
             printf "%s\n" \
