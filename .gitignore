@@ -448,6 +448,7 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter,python,java,gradle,dart,intellij,visualstudiocode
 .DS_Store
+
 flutter_app/android/app/google-services.json
 
 !flutter_app/assets/env/

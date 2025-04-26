@@ -1,0 +1,3 @@
+[submodule "fastapi_server"]
+	path = fastapi_server
+	url = https://github.com/DPChanny/unus-fastapi-server
