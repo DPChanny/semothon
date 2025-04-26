@@ -1,3 +1,6 @@
 [submodule "fastapi"]
 	path = fastapi
 	url = https://github.com/DPChanny/unus-fastapi-server
+[submodule "flutter"]
+	path = flutter
+	url = https://github.com/DPChanny/unus-flutter-app
