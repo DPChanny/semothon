@@ -32,7 +32,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             set -e
-            cd ~/semothon
+            cd ~/unus
 
             echo "[+] Pull latest code (main repo)"
             git pull origin master
