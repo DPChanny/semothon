@@ -67,12 +67,11 @@ jobs:
               > .env
 
             echo "[+] Restoring firebase-service-account.json"
-            mkdir -p spring_server
-            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}" | base64 -d > spring_server/src/main/resources/firebase-service-account.json
+            mkdir -p spring
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}" | base64 -d > spring/src/main/resources/firebase-service-account.json
 
             echo "[+] Cleaning unnecessary directories"
-            rm -rf flutter_app
-            rm -rf test
+            rm -rf flutter
 
             echo "[+] Docker Compose build & restart"
             docker compose down
