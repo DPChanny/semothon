@@ -21,11 +21,11 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
-  spring_server:
+  spring:
     build:
-      context: ./spring_server
+      context: ./spring
       dockerfile: Dockerfile
-    container_name: spring_server
+    container_name: spring
     restart: unless-stopped
     depends_on:
       mysql:
@@ -35,11 +35,11 @@ services:
     env_file:
       - .env
 
-  fastapi_server:
+  fastapi:
     build:
-      context: ./fastapi_server
+      context: ./fastapi
       dockerfile: Dockerfile
-    container_name: fastapi_server
+    container_name: fastapi
     restart: unless-stopped
     depends_on:
       mysql:
@@ -47,7 +47,7 @@ services:
     ports:
       - "${FASTAPI_PORT}:${FASTAPI_PORT}"
     volumes:
-      - ./fastapi_server/app:/app
+      - ./fastapi/app:/app
     command: uvicorn main:app --host 0.0.0.0 --port ${FASTAPI_PORT} --reload
     env_file:
       - .env
