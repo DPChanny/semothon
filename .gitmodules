@@ -4,3 +4,6 @@
 [submodule "flutter"]
 	path = flutter
 	url = https://github.com/DPChanny/unus-flutter-app
+[submodule "spring"]
+	path = spring
+	url = https://github.com/DPChanny/unus-spring-server
