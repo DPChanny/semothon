@@ -1,0 +1,10412 @@
+[
+  {
+    "user_id": "49",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "38",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "0",
+    "score": 0.0
+  },
+  {
+    "user_id": "0",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "34",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "23",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "17",
+    "score": 1.0
+  },
+  {
+    "user_id": "11",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "13",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "27",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "30",
+    "score": 0.25
+  },
+  {
+    "user_id": "38",
+    "room_id": "34",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "13",
+    "score": 1.0
+  },
+  {
+    "user_id": "15",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "19",
+    "score": 0.0
+  },
+  {
+    "user_id": "34",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "2",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "48",
+    "score": 1.0
+  },
+  {
+    "user_id": "21",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "16",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "42",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "30",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "39",
+    "score": 1.0
+  },
+  {
+    "user_id": "17",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "13",
+    "score": 1.0
+  },
+  {
+    "user_id": "18",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "9",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "42",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "42",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "17",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "32",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "49",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "42",
+    "score": 0.0
+  },
+  {
+    "user_id": "32",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "39",
+    "score": 0.25
+  },
+  {
+    "user_id": "43",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "40",
+    "score": 1.0
+  },
+  {
+    "user_id": "27",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "14",
+    "score": 1.0
+  },
+  {
+    "user_id": "22",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "27",
+    "score": 0.0
+  },
+  {
+    "user_id": "31",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "28",
+    "score": 1.0
+  },
+  {
+    "user_id": "0",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "17",
+    "score": 1.0
+  },
+  {
+    "user_id": "7",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "42",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "39",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "17",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "8",
+    "score": 0.0
+  },
+  {
+    "user_id": "10",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "42",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "46",
+    "score": 1.0
+  },
+  {
+    "user_id": "9",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "49",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "48",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "43",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "42",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "39",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "43",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "6",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "48",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "17",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "6",
+    "score": 0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "39",
+    "score": 0.25
+  },
+  {
+    "user_id": "49",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "14",
+    "score": 1.0
+  },
+  {
+    "user_id": "38",
+    "room_id": "42",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "11",
+    "room_id": "49",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "32",
+    "score": -0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "9",
+    "score": 1.0
+  },
+  {
+    "user_id": "20",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "32",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "33",
+    "score": 1.0
+  },
+  {
+    "user_id": "41",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "37",
+    "score": 0.25
+  },
+  {
+    "user_id": "17",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "48",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "27",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "12",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "49",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "22",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "9",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "45",
+    "score": 1.0
+  },
+  {
+    "user_id": "14",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "5",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "25",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "12",
+    "room_id": "28",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "45",
+    "score": 1.0
+  },
+  {
+    "user_id": "43",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "12",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "23",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "31",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "24",
+    "score": 1.0
+  },
+  {
+    "user_id": "5",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "31",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "20",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "0",
+    "score": 1.0
+  },
+  {
+    "user_id": "14",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "31",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "11",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "29",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "44",
+    "score": 1.0
+  },
+  {
+    "user_id": "44",
+    "room_id": "23",
+    "score": 1.0
+  },
+  {
+    "user_id": "15",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "14",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "29",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "3",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "16",
+    "score": 1.0
+  },
+  {
+    "user_id": "44",
+    "room_id": "28",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "35",
+    "score": 1.0
+  },
+  {
+    "user_id": "5",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "37",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "39",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "31",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "15",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "17",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "48",
+    "score": 1.0
+  },
+  {
+    "user_id": "29",
+    "room_id": "22",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "48",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "49",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "12",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "38",
+    "score": 1.0
+  },
+  {
+    "user_id": "25",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "4",
+    "score": 1.0
+  },
+  {
+    "user_id": "17",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "31",
+    "score": 1.0
+  },
+  {
+    "user_id": "44",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "23",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "14",
+    "room_id": "48",
+    "score": 1.0
+  },
+  {
+    "user_id": "37",
+    "room_id": "36",
+    "score": 1.0
+  },
+  {
+    "user_id": "33",
+    "room_id": "28",
+    "score": 1.0
+  },
+  {
+    "user_id": "2",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "5",
+    "score": 1.0
+  },
+  {
+    "user_id": "37",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "20",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "20",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "36",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "22",
+    "score": 1.0
+  },
+  {
+    "user_id": "37",
+    "room_id": "20",
+    "score": 1.0
+  },
+  {
+    "user_id": "25",
+    "room_id": "22",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "31",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "48",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "15",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "11",
+    "score": 1.0
+  },
+  {
+    "user_id": "29",
+    "room_id": "9",
+    "score": 1.0
+  },
+  {
+    "user_id": "39",
+    "room_id": "34",
+    "score": 1.0
+  },
+  {
+    "user_id": "25",
+    "room_id": "44",
+    "score": 1.0
+  },
+  {
+    "user_id": "32",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "9",
+    "score": 1.0
+  },
+  {
+    "user_id": "26",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "31",
+    "room_id": "38",
+    "score": 1.0
+  },
+  {
+    "user_id": "5",
+    "room_id": "9",
+    "score": 1.0
+  },
+  {
+    "user_id": "22",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "37",
+    "room_id": "10",
+    "score": 1.0
+  },
+  {
+    "user_id": "35",
+    "room_id": "24",
+    "score": 1.0
+  },
+  {
+    "user_id": "44",
+    "room_id": "9",
+    "score": 1.0
+  },
+  {
+    "user_id": "44",
+    "room_id": "48",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "12",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "11",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "29",
+    "score": 1.0
+  },
+  {
+    "user_id": "19",
+    "room_id": "11",
+    "score": 1.0
+  },
+  {
+    "user_id": "24",
+    "room_id": "21",
+    "score": 1.0
+  },
+  {
+    "user_id": "14",
+    "room_id": "17",
+    "score": 1.0
+  },
+  {
+    "user_id": "42",
+    "room_id": "22",
+    "score": 1.0
+  },
+  {
+    "user_id": "29",
+    "room_id": "49",
+    "score": 1.0
+  },
+  {
+    "user_id": "25",
+    "room_id": "13",
+    "score": 1.0
+  },
+  {
+    "user_id": "48",
+    "room_id": "1",
+    "score": 1.0
+  },
+  {
+    "user_id": "14",
+    "room_id": "11",
+    "score": 1.0
+  },
+  {
+    "user_id": "12",
+    "room_id": "17",
+    "score": 1.0
+  },
+  {
+    "user_id": "39",
+    "room_id": "43",
+    "score": 1.0
+  },
+  {
+    "user_id": "37",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "30",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "6",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "18",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "30",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "24",
+    "room_id": "8",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "30",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "30",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "8",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "48",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "34",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "28",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "30",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "6",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "43",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "27",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "6",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "20",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "47",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "22",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "12",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "6",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "9",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "45",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "16",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "30",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "38",
+    "score": 0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "37",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "8",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "11",
+    "score": 0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "6",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "24",
+    "score": 0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "18",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "14",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "44",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "10",
+    "score": 0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "33",
+    "score": 0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "17",
+    "score": 0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "13",
+    "score": 0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "3",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "36",
+    "score": 0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "40",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "0",
+    "score": 0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "23",
+    "score": 0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "32",
+    "score": 0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "1",
+    "score": 0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "5",
+    "score": 0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "31",
+    "score": 0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "4",
+    "score": 0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "26",
+    "score": 0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "29",
+    "score": 0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "41",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "49",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "46",
+    "score": 0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "15",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "35",
+    "score": 0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "7",
+    "score": 0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "25",
+    "score": 0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "21",
+    "score": 0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "2",
+    "score": 0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "8",
+    "score": 0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "34",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "13",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "13",
+    "score": -0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "17",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "38",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "20",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "17",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "9",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "22",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "11",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "17",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "13",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "32",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "9",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "9",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "34",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "11",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "16",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "32",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "11",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "29",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "20",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "9",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "9",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "16",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "29",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "38",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "37",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "16",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "17",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "43",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "35",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "28",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "13",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "3",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "44",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "7",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "16",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "11",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "47",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "41",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "10",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "22",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "36",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "31",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "25",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "15",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "44",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "10",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "25",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "49",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "48",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "19",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "12",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "29",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "34",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "32",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "23",
+    "room_id": "47",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "18",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "5",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "31",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "45",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "43",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "39",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "5",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "42",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "28",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "23",
+    "score": -0.5
+  },
+  {
+    "user_id": "14",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "1",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "27",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "45",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "12",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "9",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "26",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "20",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "34",
+    "score": -0.5
+  },
+  {
+    "user_id": "0",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "17",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "2",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "1",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "6",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "13",
+    "score": -0.5
+  },
+  {
+    "user_id": "33",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "48",
+    "room_id": "19",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "20",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "6",
+    "score": -0.5
+  },
+  {
+    "user_id": "30",
+    "room_id": "34",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "27",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "38",
+    "room_id": "24",
+    "score": -0.5
+  },
+  {
+    "user_id": "13",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "30",
+    "score": -0.5
+  },
+  {
+    "user_id": "22",
+    "room_id": "18",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "46",
+    "score": -0.5
+  },
+  {
+    "user_id": "40",
+    "room_id": "2",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "14",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "37",
+    "score": -0.5
+  },
+  {
+    "user_id": "29",
+    "room_id": "8",
+    "score": -0.5
+  },
+  {
+    "user_id": "11",
+    "room_id": "35",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "0",
+    "score": -0.5
+  },
+  {
+    "user_id": "15",
+    "room_id": "7",
+    "score": -0.5
+  },
+  {
+    "user_id": "4",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "8",
+    "room_id": "22",
+    "score": -0.5
+  },
+  {
+    "user_id": "21",
+    "room_id": "26",
+    "score": -0.5
+  },
+  {
+    "user_id": "3",
+    "room_id": "40",
+    "score": -0.5
+  },
+  {
+    "user_id": "46",
+    "room_id": "39",
+    "score": -0.5
+  },
+  {
+    "user_id": "41",
+    "room_id": "4",
+    "score": -0.5
+  },
+  {
+    "user_id": "49",
+    "room_id": "21",
+    "score": -0.5
+  },
+  {
+    "user_id": "16",
+    "room_id": "33",
+    "score": -0.5
+  },
+  {
+    "user_id": "36",
+    "room_id": "2",
+    "score": -0.5
+  }
+]

@@ -1,0 +1,53 @@
+server:
+  address: ${SPRING_HOST}
+  port: ${SPRING_PORT}
+
+spring:
+  config:
+    import: optional:file:.env
+  profiles:
+    active: ${ENV}
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        timezone:
+          default_storage: NORMALIZE
+        jdbc:
+          time_zone: UTC
+        dialect: org.hibernate.dialect.MySQLDialect
+        default_batch_fetch_size: 300
+
+external:
+  fastapi:
+    host: ${FASTAPI_HOST}
+    port: ${FASTAPI_PORT}
+    url: http://${FASTAPI_HOST}:${FASTAPI_PORT}
+
+logging:
+  level:
+    root: INFO
+    com.zaxxer.hikari: INFO
+    org.hibernate.engine.jdbc.connections: INFO
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ${AWS_REGION}
+    stack:
+      auto: false
+    s3:
+      bucket: ${AWS_BUCKET_NAME}

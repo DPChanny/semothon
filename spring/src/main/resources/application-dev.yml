@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+logging:
+  level:
+    root: DEBUG
+    com.zaxxer.hikari: DEBUG
+    org.hibernate.engine.jdbc.connections: DEBUG
