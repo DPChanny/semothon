@@ -235,5 +235,4 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/firebase,androidstudio,flutter,dart
 
-!assets/env/
-!assets/env/.env.*
+!assets/env/.env*
