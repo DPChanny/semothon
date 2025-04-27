@@ -24,24 +24,6 @@
       "type": "shell",
       "command": "docker compose down ; docker compose up --build -d",
       "problemMatcher": []
-    },
-    {
-      "label": "Flutter Run (dev)",
-      "type": "shell",
-      "command": "flutter run -d chrome --web-port=3000 --dart-define=ENV=dev",
-      "options": {
-        "cwd": "${workspaceFolder}/flutter_app"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Flutter Build (prod)",
-      "type": "shell",
-      "command": "flutter build web --dart-define=ENV=prod",
-      "options": {
-        "cwd": "${workspaceFolder}/flutter_app"
-      },
-      "problemMatcher": []
     }
   ]
 }
