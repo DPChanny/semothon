@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "254852353422",
+    "project_id": "semothon-97e9d",
+    "storage_bucket": "semothon-97e9d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254852353422:android:e67224c358d83709a128df",
+        "android_client_info": {
+          "package_name": "com.unus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2b5rRd5D3_5NeLycg37fs91UoOSdGVp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254852353422-kcl2cd2d287plmqrr2vdui80coh9koq3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254852353422-3m3rojh796cp57fv02i6fd7tistmj0ea.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.semothon.careerpath"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

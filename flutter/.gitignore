@@ -1,5 +1,3 @@
-firebase_options.dart
-
 # Created by https://www.toptal.com/developers/gitignore/api/firebase,androidstudio,flutter,dart
 # Edit at https://www.toptal.com/developers/gitignore?templates=firebase,androidstudio,flutter,dart
 
@@ -156,7 +154,7 @@ captures/
 *.keystore
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+# google-services.json
 
 # Android Patch
 gen-external-apklibs
