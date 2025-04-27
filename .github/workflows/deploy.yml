@@ -36,16 +36,6 @@ jobs:
 
             echo "[+] Pull latest code (main repo)"
             git pull origin master
-          
-            echo "[+] Pull latest code (fastapi submodule)"
-            cd fastapi
-            git pull origin master
-            cd ..
-          
-            echo "[+] Pull latest code (spring submodule)"
-            cd spring
-            git pull origin master
-            cd ..
             
             echo "[+] Rewriting .env file"
             printf "%s\n" \
@@ -79,9 +69,6 @@ jobs:
             echo "[+] Restoring firebase-service-account.json"
             mkdir -p spring
             echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}" | base64 -d > spring/src/main/resources/firebase-service-account.json
-
-            echo "[+] Cleaning unnecessary directories"
-            rm -rf flutter
 
             echo "[+] Docker Compose build & restart"
             docker compose down
